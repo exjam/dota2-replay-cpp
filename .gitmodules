@@ -1,0 +1,6 @@
+[submodule "lib/protobuf"]
+	path = lib/protobuf
+	url = https://github.com/google/protobuf.git
+[submodule "lib/snappy"]
+	path = lib/snappy
+	url = https://github.com/google/snappy.git
