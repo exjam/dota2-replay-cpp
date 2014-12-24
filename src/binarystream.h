@@ -46,16 +46,25 @@ public:
    std::vector<uint8_t> readBytes(std::size_t length)
    {
       std::vector<uint8_t> value;
-      value.resize(length);
-      mStream.read(reinterpret_cast<char*>(value.data()), length);
+
+      if (length) {
+         value.resize(length);
+         mStream.read(reinterpret_cast<char*>(value.data()), length);
+      }
+
       return value;
    }
 
    std::string readString(std::size_t length)
    {
-      char buffer[length];
-      mStream.read(buffer, length);
-      return std::string { buffer };
+      std::string value;
+
+      if (length) {
+         value.resize(length);
+         mStream.read(&value[0], length);
+      }
+
+      return value;
    }
 
 private:

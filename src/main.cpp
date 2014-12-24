@@ -4,18 +4,18 @@
 #include <functional>
 #include <sstream>
 #include <map>
+
+#include "proto/ai_activity.pb.h"
+#include "proto/demo.pb.h"
+#include "proto/dota_commonmessages.pb.h"
+#include "proto/dota_modifiers.pb.h"
+#include "proto/dota_usermessages.pb.h"
+#include "proto/netmessages.pb.h"
+#include "proto/network_connection.pb.h"
+#include "proto/networkbasetypes.pb.h"
+#include "proto/usermessages.pb.h"
+
 #include "binarystream.h"
-
-#include "proto/cpp/ai_activity.pb.h"
-#include "proto/cpp/demo.pb.h"
-#include "proto/cpp/dota_commonmessages.pb.h"
-#include "proto/cpp/dota_modifiers.pb.h"
-#include "proto/cpp/dota_usermessages.pb.h"
-#include "proto/cpp/netmessages.pb.h"
-#include "proto/cpp/network_connection.pb.h"
-#include "proto/cpp/networkbasetypes.pb.h"
-#include "proto/cpp/usermessages.pb.h"
-
 #include "bitstream.h"
 unsigned char BitStream::sBitMask[9] = {
    0x00,
@@ -29,6 +29,7 @@ class DemoParser {
 public:
    bool parse(BinaryStream &in) {
       auto header = in.readString(8);
+      header.resize(7);
 
       if (header.compare("PBUFDEM") != 0) {
          return 0;
@@ -125,6 +126,8 @@ protected:
       auto size = in.readVarint<std::size_t>();
       auto data = in.readBytes(size);
 
+      std::cout << "Kind: " << kind << " Size: " << size << std::endl;
+
       switch (kind) {
       case svc_SendTable:
          handleMessage<CSVCMsg_SendTable>(data, &DemoParser::handleSendTable);
@@ -181,6 +184,8 @@ protected:
    bool parseUserMessage(const CSVCMsg_UserMessage &message) {
       auto kind = message.msg_type();
       auto data = message.msg_data();
+
+      std::cout << "Kind: " << kind << std::endl;
 
       switch (kind) {
       // usermessages.pb.h
@@ -412,13 +417,14 @@ protected:
 
    bool parseStringTable(StringTable &table, BitStream &in) {
       in.readBit(); // Unknown
+      return false;
    }
 
    bool handleCreateStringTable(const CSVCMsg_CreateStringTable &msg) {
       auto name = msg.name();
       auto itr = mStringTables.find(name);
 
-      if (itr != mSendTables.end()) {
+      if (itr != mStringTables.end()) {
          // TODO: Throw error
          return false;
       }
