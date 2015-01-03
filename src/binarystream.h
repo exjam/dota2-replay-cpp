@@ -22,6 +22,11 @@ public:
       return mStream.tellg();
    }
 
+   bool eof()
+   {
+      return mStream.peek() == EOF;
+   }
+
    template<typename T>
    T read()
    {
