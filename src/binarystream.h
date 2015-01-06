@@ -1,6 +1,5 @@
 #pragma once
-
-#include <stdint.h>
+#include <cstdint>
 #include <istream>
 #include <string>
 #include <vector>
