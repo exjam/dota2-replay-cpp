@@ -20,7 +20,7 @@ public:
          return false;
       }
 
-      if (!buildHeirarchy(sendTable, recvTable)) {
+      if (!buildHeirarchy(sendTable, recvTable, "")) {
          return false;
       }
 

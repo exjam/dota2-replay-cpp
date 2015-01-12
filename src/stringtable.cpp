@@ -3,6 +3,7 @@
 #include "bitstream.h"
 #include "util.h"
 
+static const unsigned MAX_STRING_SIZE = 0x400;
 static const unsigned STRING_HISTORY_SIZE = 32;
 
 bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t entries)
@@ -24,15 +25,23 @@ bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t
 
       // Read str_data
       if (in.readBit()) {
-         assert(!(format && in.readBit()));
+         if (format) {
+            assert(!in.readBit());
+         }
 
          if (in.readBit()) {
-            auto strIndex = in.read<std::size_t>(5);
-            auto strLength = in.read<std::size_t>(5);
-            entry.strData = history[strIndex].substr(0, strLength);
-            entry.strData += in.readNullTerminatedString();
+            auto historyIndex = in.read<std::size_t>(5);
+            auto length = in.read<std::size_t>(5);
+
+            if (historyIndex > history.size()) {
+               entry.strData = in.readNullTerminatedString(MAX_STRING_SIZE);
+            } else {
+               assert(length <= history[historyIndex].size());
+               entry.strData = history[historyIndex].substr(0, length);
+               entry.strData += in.readNullTerminatedString(MAX_STRING_SIZE);
+            }
          } else {
-            entry.strData = in.readNullTerminatedString();
+            entry.strData = in.readNullTerminatedString(MAX_STRING_SIZE);
          }
 
          if (history.size() >= STRING_HISTORY_SIZE) {

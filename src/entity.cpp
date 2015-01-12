@@ -63,11 +63,10 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
       switch(in.read<unsigned>(2)) {
       case EntityPVS::Preserve:
       {
-         std::cout << "Preserve Entity " << index << std::endl;
-         assert(mEntities.find(index) != mEntities.end());
-
+         //std::cout << "Preserve Entity " << index << std::endl;
          Entity &entity = mEntities[index];
          entity.pvs = EntityPVS::Preserve;
+         assert(entity.classInfo);
 
          auto &recvTable = mReceiveTables[entity.classInfo->tableName];
          auto entityPropList = parseEntityPropList(in);
@@ -84,16 +83,14 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
       break;
       case EntityPVS::Leave:
       {
-         std::cout << "Leave Entity " << index << std::endl;
-         assert(mEntities.find(index) != mEntities.end());
-
+         //std::cout << "Leave Entity " << index << std::endl;
          Entity &entity = mEntities[index];
          entity.pvs = EntityPVS::Leave;
          break;
       }
       case EntityPVS::Enter:
       {
-         std::cout << "Enter Entity " << index << std::endl;
+         //std::cout << "Enter Entity " << index << std::endl;
 
          auto classId = in.read<std::size_t>(classBits);
          auto classIdStr = std::to_string(classId);
@@ -101,36 +98,36 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
          auto &classInfo = mClassInfo[classId];
          auto &recvTable = mReceiveTables[classInfo.tableName];
          auto &baselineTable = mStringTables["instancebaseline"];
-
-         auto baselineItr = baselineTable.keyMap.find(classIdStr);
-         assert(baselineItr != baselineTable.keyMap.end());
-
-         auto baseline = baselineItr->second;
-         auto baselineStream = std::istringstream { baseline->userData };
-         auto baselineBinary = BinaryStream { baselineStream };
-         auto baselineIn = BitStream { baselineBinary };
-
-         auto isNew = (mEntities.find(index) == mEntities.end());
          auto &entity = mEntities[index];
 
-         if (!isNew && entity.serial != serial) {
+         if (entity.serial != serial) {
             entity = Entity { };
          }
 
-         entity.id = index;
          entity.serial = serial;
          entity.classInfo = &classInfo;
          entity.pvs = EntityPVS::Enter;
          entity.state.properties.resize(recvTable.properties.size());
 
-         //std::cout << "Baseline Properties" << std::endl;
-         auto baselinePropList = parseEntityPropList(baselineIn);
 
-         for (auto &&propID : baselinePropList) {
-            auto &prop = recvTable.properties[propID];
-            auto &value = entity.state.properties[propID];
-            parsePropertyVariant(baselineIn, *prop.sendProp, value);
-            //std::cout << (baselineIn.mOffset - 8 + 8 * (unsigned)baselineStream.tellg()) << " " << prop.varName << " = " << value << std::endl;
+         auto baselineItr = baselineTable.keyMap.find(classIdStr);
+         if (baselineItr != baselineTable.keyMap.end()) {
+            auto baseline = baselineItr->second;
+            auto baselineStream = std::istringstream { baseline->userData };
+            auto baselineBinary = BinaryStream { baselineStream };
+            auto baselineIn = BitStream { baselineBinary };
+
+            //std::cout << "Baseline Properties" << std::endl;
+            auto baselinePropList = parseEntityPropList(baselineIn);
+
+            for (auto &&propID : baselinePropList) {
+               auto &prop = recvTable.properties[propID];
+               auto &value = entity.state.properties[propID];
+               parsePropertyVariant(baselineIn, *prop.sendProp, value);
+               //std::cout << (baselineIn.mOffset - 8 + 8 * (unsigned)baselineStream.tellg()) << " " << prop.varName << " = " << value << std::endl;
+            }
+         } else {
+            std::cout << "Warning: no baseline properties found for " << classInfo.tableName << std::endl;
          }
 
          //std::cout << "Entity Properties" << std::endl;
@@ -145,9 +142,9 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
          break;
       }
       case EntityPVS::Delete:
-         std::cout << "Delete Entity " << index << std::endl;
-         assert(mEntities.find(index) != mEntities.end());
-         mEntities.erase(index);
+         //std::cout << "Delete Entity " << index << std::endl;
+         mEntities[index] = { };
+         mEntities[index].pvs = EntityPVS::Delete;
          break;
       }
    }

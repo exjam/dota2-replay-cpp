@@ -19,7 +19,7 @@ bool DemoParser::parse(BinaryStream &in)
    // Read game messages
    in.seek(pos);
 
-   for (unsigned i = 0; i < 1000; ++i) {
+   while (!in.eof()) {
       parseMessage(in);
    }
 

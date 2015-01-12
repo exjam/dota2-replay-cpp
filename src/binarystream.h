@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <cstdint>
 #include <istream>
 #include <string>
@@ -29,7 +30,8 @@ public:
    template<typename T>
    T read()
    {
-      T value;
+      assert(!eof());
+      T value = 0;
       mStream.read(reinterpret_cast<char*>(&value), sizeof(value));
       return value;
    }

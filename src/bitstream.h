@@ -64,11 +64,12 @@ public:
       return value;
    }
 
-   std::string readNullTerminatedString()
+   std::string readNullTerminatedString(std::size_t max_length = 999999)
    {
       std::string value;
+      char ch;
 
-      while (char ch = read<char>(8)) {
+      while ((ch = read<char>(8)) && value.size() < max_length) {
          value.push_back(ch);
       }
 

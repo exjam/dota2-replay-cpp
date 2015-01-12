@@ -18,9 +18,8 @@ struct EntityState {
 
 struct Entity
 {
-   std::size_t id;
-   uint32_t serial;
+   uint32_t serial = 0;
    EntityPVS pvs;
-   ClassInfo *classInfo;
    EntityState state;
+   ClassInfo *classInfo = nullptr;
 };

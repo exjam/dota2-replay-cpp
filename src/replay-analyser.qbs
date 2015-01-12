@@ -31,6 +31,8 @@ CppApplication {
         "demoparser.h",
         "entity.cpp",
         "entity.h",
+        "gameevent.cpp",
+        "gameevent.h",
         "main.cpp",
         "bitstream.h",
         "binarystream.h",
@@ -51,15 +53,8 @@ CppApplication {
       name: "proto"
       prefix: "proto/"
       files: [
-         "ai_activity.pb.cc",
-         "demo.pb.cc",
-         "dota_commonmessages.pb.cc",
-         "dota_modifiers.pb.cc",
-         "dota_usermessages.pb.cc",
-         "netmessages.pb.cc",
-         "network_connection.pb.cc",
-         "networkbasetypes.pb.cc",
-         "usermessages.pb.cc"
+         "*.cc",
+         "*.h"
       ]
    }
 }

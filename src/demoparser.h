@@ -7,6 +7,7 @@
 #include "propertyvariant.h"
 
 #include "entity.h"
+#include "gameevent.h"
 #include "sendtable.h"
 #include "receivetable.h"
 #include "stringtable.h"
@@ -28,6 +29,7 @@ class BinaryStream;
 class BitStream;
 
 class CDemoClassInfo;
+class CDemoConsoleCmd;
 class CDemoFileHeader;
 class CDemoFileInfo;
 class CDemoFullPacket;
@@ -43,6 +45,8 @@ class CSVCMsg_ServerInfo;
 class CSVCMsg_SendTable;
 class CSVCMsg_UserMessage;
 class CSVCMsg_ClassInfo;
+class CSVCMsg_GameEvent;
+class CSVCMsg_GameEventList;
 
 using ReceiveTableMap = std::map<std::string, ReceiveTable>;
 using SendTableMap = std::map<std::string, SendTable>;
@@ -52,10 +56,12 @@ class DemoParser
 {
    ServerInfo mServerInfo;
    std::vector<ClassInfo> mClassInfo;
-   std::map<unsigned, Entity> mEntities;
+   std::vector<Entity> mEntities = std::vector<Entity>(2048);
    SendTableMap mSendTables;
    ReceiveTableMap mReceiveTables;
    StringTableMap mStringTables;
+   std::map<int, GameEventDescriptor> mGameEventDescriptors;
+   CombatLogEventDescriptor mCombatLogEventDescriptor;
 
 public:
    bool parse(BinaryStream &in);
@@ -95,6 +101,7 @@ protected:
    bool parseStringTable(StringTable &table, BitStream &in, std::size_t entries);
 
    bool handleDemoClassInfo(const CDemoClassInfo &info);
+   bool handleDemoConsoleCmd(const CDemoConsoleCmd &cmd);
    bool handleDemoFileInfo(const CDemoFileInfo &info);
    bool handleDemoSyncTick(const CDemoSyncTick &msg);
    bool handleDemoFileHeader(const CDemoFileHeader &header);
@@ -109,4 +116,7 @@ protected:
    bool handleDemoSendTables(const CDemoSendTables &sendTables);
    bool handleDemoStringTables(const CDemoStringTables &stringTables);
    bool handleCourierKilledAlert(const CDOTAUserMsg_CourierKilledAlert &msg);
+   bool handleGameEvent(const CSVCMsg_GameEvent &event);
+   bool handleCombatLog(const CSVCMsg_GameEvent &event);
+   bool handleGameEventList(const CSVCMsg_GameEventList &list);
 };

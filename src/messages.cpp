@@ -47,9 +47,10 @@ bool DemoParser::parseMessage(BinaryStream &in)
    // Trim any flags
    kind &= ~DEM_IsCompressed;
 
-   std::cout << "Kind: " << kind << " Tick: " << tick << " Size: " << size << std::endl;
-
    switch (kind) {
+   case DEM_ConsoleCmd:
+      decodeMessage<CDemoConsoleCmd>(data, &DemoParser::handleDemoConsoleCmd);
+      break;
    case DEM_FileHeader:
       decodeMessage<CDemoFileHeader>(data, &DemoParser::handleDemoFileHeader);
       break;
@@ -77,7 +78,6 @@ bool DemoParser::parseMessage(BinaryStream &in)
       break;
    case DEM_Error:
    case DEM_Stop:
-   case DEM_ConsoleCmd:
    case DEM_CustomData:
    case DEM_CustomDataCallbacks:
    case DEM_UserCmd:
@@ -96,8 +96,6 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
       auto kind = in.readVarint<int>();
       auto size = in.readVarint<std::size_t>();
       auto data = in.readBytes(size);
-
-      std::cout << "Kind: " << kind << " Size: " << size << std::endl;
 
       switch (kind) {
       case svc_SendTable:
@@ -121,12 +119,19 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
       case svc_PacketEntities:
          decodeMessage<CSVCMsg_PacketEntities>(data, &DemoParser::parsePacketEntities);
          break;
+      case svc_GameEventList:
+         decodeMessage<CSVCMsg_GameEventList>(data, &DemoParser::handleGameEventList);
+         break;
+      case svc_GameEvent:
+         decodeMessage<CSVCMsg_GameEvent>(data, &DemoParser::handleGameEvent);
+         break;
+      case net_Tick:
+         break;
       // networkbasetypes.pb.h
       case net_NOP:
       case net_Disconnect:
       case net_File:
       case net_SplitScreenUser:
-      case net_Tick:
       case net_StringCmd:
       case net_SetConVar:
       case net_SignonState:
@@ -142,16 +147,15 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
       case svc_BSPDecal:
       case svc_SplitScreen:
       case svc_EntityMessage:
-      case svc_GameEvent:
       case svc_TempEntities:
       case svc_Prefetch:
       case svc_Menu:
-      case svc_GameEventList:
       case svc_GetCvarValue:
       case svc_PacketReliable:
       case svc_FullFrameSplit:
       default:
-         std::cout << "Unhandled sub-message type " << kind << std::endl;
+         //std::cout << "Unhandled sub-message type " << kind << std::endl;
+         return false;
       };
    }
 
@@ -162,8 +166,6 @@ bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
 {
    auto kind = message.msg_type();
    auto data = message.msg_data();
-
-   std::cout << "Kind: " << kind << std::endl;
 
    switch (kind) {
    case DOTA_UM_CourierKilledAlert:
@@ -273,7 +275,7 @@ bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
    case DOTA_UM_StatsHeroDetails:
    case DOTA_UM_PredictionResult:
    default:
-      std::cout << "Unhandled user-message type " << kind << std::endl;
+      //std::cout << "Unhandled user-message type " << kind << std::endl;
       return false;
    }
 
@@ -337,12 +339,14 @@ bool DemoParser::handleDemoSyncTick(const CDemoSyncTick &/*msg*/)
    return true;
 }
 
-bool DemoParser::handleDemoFileHeader(const CDemoFileHeader &header)
+bool DemoParser::handleDemoConsoleCmd(const CDemoConsoleCmd &cmd)
 {
+   auto str = cmd.cmdstring();
+   std::cout << str << std::endl;
    return true;
 }
 
-bool DemoParser::handleStringTables(const CDemoStringTables &tables)
+bool DemoParser::handleDemoFileHeader(const CDemoFileHeader &header)
 {
    return true;
 }
@@ -387,13 +391,33 @@ bool DemoParser::handleSendTable(const CSVCMsg_SendTable &msg)
    return true;
 }
 
+bool DemoParser::handleStringTables(const CDemoStringTables &tables)
+{
+   for (auto i = 0; i < tables.tables_size(); ++i) {
+      auto &table = tables.tables(i);
+      auto name = table.table_name();
+
+      assert(mStringTables.find(name) != mStringTables.end());
+      auto &stringTable =  mStringTables[name];
+
+      for (auto j = 0; j < table.items_size(); ++j) {
+         auto &item = table.items(j);
+         auto &entry = stringTable.entries[j];
+         entry.strData = item.str();
+         entry.userData = item.data();
+      }
+   }
+
+   return true;
+}
+
 bool DemoParser::handleCreateStringTable(const CSVCMsg_CreateStringTable &msg)
 {
    auto name = msg.name();
    assert(mStringTables.find(name) == mStringTables.end());
 
    auto &table = mStringTables[name];
-   table.id = mStringTables.size();
+   table.id = mStringTables.size() - 1;
    table.name = name;
    table.maxEntries = msg.max_entries();
    table.userDataFixedSize = msg.user_data_fixed_size();
@@ -402,16 +426,19 @@ bool DemoParser::handleCreateStringTable(const CSVCMsg_CreateStringTable &msg)
    table.flags = msg.flags();
    table.entries.resize(table.maxEntries);
 
+   auto length = msg.string_data().size();
    auto stream = std::istringstream { msg.string_data() };
    auto binary = BinaryStream { stream };
    auto in = BitStream { binary };
-   return parseStringTable(table, in, msg.num_entries());
+   auto result = parseStringTable(table, in, msg.num_entries());
+   auto pos = binary.tell();
+   assert(binary.eof());
+   return result;
 }
 
 bool DemoParser::handleUpdateStringTable(const CSVCMsg_UpdateStringTable &msg)
 {
    auto id = msg.table_id();
-   auto table = static_cast<StringTable*>(nullptr);
    auto itr = mStringTables.begin();
 
    while (itr != mStringTables.end()) {
@@ -424,10 +451,14 @@ bool DemoParser::handleUpdateStringTable(const CSVCMsg_UpdateStringTable &msg)
 
    assert(itr != mStringTables.end());
 
+   auto length = msg.string_data().size();
    auto stream = std::istringstream { msg.string_data() };
    auto binary = BinaryStream { stream };
    auto in = BitStream { binary };
-   return parseStringTable(itr->second, in, msg.num_changed_entries());
+   auto result = parseStringTable(itr->second, in, msg.num_changed_entries());
+   auto pos = binary.tell();
+   assert(binary.eof());
+   return result;
 }
 
 bool DemoParser::handleServerInfo(const CSVCMsg_ServerInfo &info)
