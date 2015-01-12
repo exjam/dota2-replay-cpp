@@ -1,32 +1,35 @@
-REM Make some empty files to stop QBS crying
-mkdir src\proto
-copy /y NUL src\proto\ai_activity.pb.cc >NUL
-copy /y NUL src\proto\demo.pb.cc >NUL
-copy /y NUL src\proto\dota_commonmessages.pb.cc >NUL
-copy /y NUL src\proto\dota_modifiers.pb.cc >NUL
-copy /y NUL src\proto\dota_usermessages.pb.cc >NUL
-copy /y NUL src\proto\netmessages.pb.cc >NUL
-copy /y NUL src\proto\network_connection.pb.cc >NUL
-copy /y NUL src\proto\networkbasetypes.pb.cc >NUL
-copy /y NUL src\proto\usermessages.pb.cc >NUL
+@echo off
 
-REM Download latest dota protobuf message formats
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/ai_activity.proto', 'src\proto\ai_activity.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/demo.proto', 'src\proto\demo.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/dota_commonmessages.proto', 'src\proto\dota_commonmessages.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/dota_modifiers.proto', 'src\proto\dota_modifiers.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/dota_usermessages.proto', 'src\proto\dota_usermessages.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/netmessages.proto', 'src\proto\netmessages.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/networkbasetypes.proto', 'src\proto\networkbasetypes.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/usermessages.proto', 'src\proto\usermessages.proto')"
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/network_connection.proto', 'src\proto\network_connection.proto')"
+REM Read proto file list
+set file=src\proto\list.txt
+set file_list=
+set /A i=0
+
+for /F "usebackq delims=" %%a in ("%file%") do (
+  set /A i+=1
+  call set file_list=%%file_list%% %%a.proto
+  call set proto_files[%%i%%]=%%a
+  call set num_proto_files=%%i%%
+)
+
+REM Download proto files
+call echo Downloading latest dota protobuf files
+
+for /L %%i in (1, 1, %num_proto_files%) do (
+  call set file=%%proto_files[%%i]%%
+  call echo - src\proto\%%file%%.proto
+  call powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/%%file%%.proto', 'src\proto\%%file%%.proto')"
+  REM Make fake c files so QBS does not complain when building protoc
+  call copy /y NUL src\proto\%%file%%.pb.cc >NUL
+  call copy /y NUL src\proto\%%file%%.pb.h >NUL
+)
 
 REM Copy protobuf descriptor
-mkdir src\proto\google
-mkdir src\proto\google\protobuf
-copy /y lib\protobuf\src\google\protobuf\descriptor.proto src\proto\google\protobuf
+if not exist src\proto\google call mkdir src\proto\google
+if not exist src\proto\google\protobuf call mkdir src\proto\google\protobuf
+call copy /y lib\protobuf\src\google\protobuf\descriptor.proto src\proto\google\protobuf
 
 REM Execute protobuf compiler
 cd src\proto
-qbs run -p protoc -f ../.. -d ../../build --install-root ../../build -- --cpp_out=. ai_activity.proto demo.proto dota_commonmessages.proto dota_modifiers.proto dota_usermessages.proto netmessages.proto network_connection.proto networkbasetypes.proto usermessages.proto
+call qbs run -p protoc -f ../.. -d ../../build --install-root ../../build -- --cpp_out=. %%file_list%%
 cd ..\..

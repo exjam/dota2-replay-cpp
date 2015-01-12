@@ -1,3 +1,6 @@
 build/
-src/proto
 *.qbs.user
+src/proto/*.cc
+src/proto/*.h
+src/proto/*.proto
+src/proto/google
