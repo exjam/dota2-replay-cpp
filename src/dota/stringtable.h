@@ -1,7 +1,10 @@
 #pragma once
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
+
+namespace dota
+{
 
 struct StringTable
 {
@@ -21,3 +24,5 @@ struct StringTable
    std::vector<Entry> entries;
    std::map<std::string, Entry*> keyMap;
 };
+
+}

@@ -7,6 +7,9 @@
 #include "demoparser.h"
 #include "util.h"
 
+namespace dota
+{
+
 using EntityPropList = std::vector<std::size_t>;
 
 static EntityPropList parseEntityPropList(BitStream &in)
@@ -150,4 +153,6 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
    }
 
    return true;
+}
+
 }

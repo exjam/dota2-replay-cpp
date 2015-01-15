@@ -1,6 +1,9 @@
 #include <set>
 #include "demoparser.h"
 
+namespace dota
+{
+
 using ReceiveTableProperties = std::vector<ReceiveTable::ReceiveProperty>;
 using SendTableExclusions = std::vector<SendTable::ExcludeProperty>;
 
@@ -133,4 +136,6 @@ bool DemoParser::flattenSendTable(SendTable &sendTable)
    auto &recvTable = mReceiveTables[sendTable.name];
    auto flattener = SendTableFlattener { mSendTables };
    return flattener.flattenSendTable(sendTable, recvTable);
+}
+
 }

@@ -1,29 +1,14 @@
 #pragma once
-
-#include <vector>
 #include <map>
-
-#include "property.h"
-#include "propertyvariant.h"
+#include <vector>
 
 #include "entity.h"
 #include "gameevent.h"
-#include "sendtable.h"
+#include "property.h"
+#include "propertyvariant.h"
 #include "receivetable.h"
+#include "sendtable.h"
 #include "stringtable.h"
-
-struct ClassInfo
-{
-   std::size_t id;
-   std::string name;
-   std::string tableName;
-};
-
-struct ServerInfo
-{
-   std::size_t maxClasses;
-   float tickInterval;
-};
 
 class BinaryStream;
 class BitStream;
@@ -38,6 +23,7 @@ class CDemoSendTables;
 class CDemoStringTables;
 class CDemoSyncTick;
 class CDOTAUserMsg_CourierKilledAlert;
+class CDOTAUserMsg_AbilitySteal;
 class CSVCMsg_CreateStringTable;
 class CSVCMsg_UpdateStringTable;
 class CSVCMsg_PacketEntities;
@@ -47,6 +33,22 @@ class CSVCMsg_UserMessage;
 class CSVCMsg_ClassInfo;
 class CSVCMsg_GameEvent;
 class CSVCMsg_GameEventList;
+
+namespace dota
+{
+
+struct ClassInfo
+{
+   std::size_t id;
+   std::string name;
+   std::string tableName;
+};
+
+struct ServerInfo
+{
+   std::size_t maxClasses;
+   float tickInterval;
+};
 
 using ReceiveTableMap = std::map<std::string, ReceiveTable>;
 using SendTableMap = std::map<std::string, SendTable>;
@@ -65,6 +67,16 @@ class DemoParser
 
 public:
    bool parse(BinaryStream &in);
+
+   const std::vector<ClassInfo> &getClasses() const
+   {
+      return mClassInfo;
+   }
+
+   const SendTableMap &getSendTables() const
+   {
+      return mSendTables;
+   }
 
 protected:
    bool parseMessage(BinaryStream &in);
@@ -115,8 +127,12 @@ protected:
    bool handleDemoFullPacket(const CDemoFullPacket &packet);
    bool handleDemoSendTables(const CDemoSendTables &sendTables);
    bool handleDemoStringTables(const CDemoStringTables &stringTables);
-   bool handleCourierKilledAlert(const CDOTAUserMsg_CourierKilledAlert &msg);
    bool handleGameEvent(const CSVCMsg_GameEvent &event);
    bool handleCombatLog(const CSVCMsg_GameEvent &event);
    bool handleGameEventList(const CSVCMsg_GameEventList &list);
+
+   bool handleAbilitySteal(const CDOTAUserMsg_AbilitySteal &msg);
+   bool handleCourierKilledAlert(const CDOTAUserMsg_CourierKilledAlert &msg);
 };
+
+}

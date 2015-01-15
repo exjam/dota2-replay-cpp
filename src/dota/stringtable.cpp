@@ -1,7 +1,11 @@
-#include "demoparser.h"
 #include <deque>
+
 #include "bitstream.h"
+#include "demoparser.h"
 #include "util.h"
+
+namespace dota
+{
 
 static const unsigned MAX_STRING_SIZE = 0x400;
 static const unsigned STRING_HISTORY_SIZE = 32;
@@ -68,4 +72,6 @@ bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t
    }
 
    return true;
+}
+
 }

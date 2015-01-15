@@ -1,6 +1,9 @@
 #include "binarystream.h"
 #include "demoparser.h"
 
+namespace dota
+{
+
 bool DemoParser::parse(BinaryStream &in)
 {
    auto header = in.readString(8);
@@ -19,9 +22,12 @@ bool DemoParser::parse(BinaryStream &in)
    // Read game messages
    in.seek(pos);
 
-   while (!in.eof()) {
+   for (auto i = 0; i < 1000; ++i) {
+   //while (!in.eof()) {
       parseMessage(in);
    }
 
    return true;
+}
+
 }

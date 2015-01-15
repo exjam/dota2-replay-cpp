@@ -1,8 +1,11 @@
 #pragma once
 #include <cstdint>
 #include <cassert>
-#include <vector>
 #include <string>
+#include <vector>
+
+namespace dota
+{
 
 enum class PropertyType
 {
@@ -104,3 +107,5 @@ struct Property
       return type == PropertyType::DataTable;
    }
 };
+
+}

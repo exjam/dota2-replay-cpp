@@ -2,6 +2,9 @@
 #include <vector>
 #include "propertyvariant.h"
 
+namespace dota
+{
+
 struct ClassInfo;
 
 enum class EntityPVS
@@ -23,3 +26,5 @@ struct Entity
    EntityState state;
    ClassInfo *classInfo = nullptr;
 };
+
+}

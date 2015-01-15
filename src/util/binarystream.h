@@ -5,7 +5,8 @@
 #include <string>
 #include <vector>
 
-class BinaryStream {
+class BinaryStream
+{
 public:
    BinaryStream(std::istream &stream) :
       mStream(stream)

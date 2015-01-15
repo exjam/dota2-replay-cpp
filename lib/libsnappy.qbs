@@ -13,6 +13,11 @@ StaticLibrary {
       qbs.install: true
    }
 
+   Export {
+      Depends { name: "cpp" }
+      cpp.includePaths: ["snappy/", "."]
+   }
+
    cpp.includePaths: [
       "."
    ]

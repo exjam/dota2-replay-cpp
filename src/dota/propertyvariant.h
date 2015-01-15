@@ -4,6 +4,9 @@
 #include <vector>
 #include "property.h"
 
+namespace dota
+{
+
 struct Vector2f
 {
    float x, y;
@@ -230,4 +233,6 @@ private:
    std::vector<uint8_t> mBuffer;
 };
 
-std::ostream& operator<<(std::ostream& os, const PropertyVariant& var);
+}
+
+std::ostream& operator<<(std::ostream& os, const dota::PropertyVariant& var);

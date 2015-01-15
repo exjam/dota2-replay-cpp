@@ -1,5 +1,5 @@
-#include <snappy.h>
 #include <iostream>
+#include <snappy.h>
 #include <sstream>
 
 #include "proto/ai_activity.pb.h"
@@ -15,6 +15,9 @@
 #include "binarystream.h"
 #include "bitstream.h"
 #include "demoparser.h"
+
+namespace dota
+{
 
 bool DemoParser::parseMessage(BinaryStream &in)
 {
@@ -171,6 +174,9 @@ bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
    case DOTA_UM_CourierKilledAlert:
       decodeMessage<CDOTAUserMsg_CourierKilledAlert>(data, &DemoParser::handleCourierKilledAlert);
       break;
+   case DOTA_UM_AbilitySteal:
+      decodeMessage<CDOTAUserMsg_AbilitySteal>(data, &DemoParser::handleAbilitySteal);
+      break;
    // usermessages.pb.h
    case UM_AchievementEvent:
    case UM_CloseCaption:
@@ -204,76 +210,75 @@ bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
    case UM_SendAudio:
    case UM_CameraTransition:
    // dota_usermessages.pb.h
+   case DOTA_UM_AbilityPing:
+   case DOTA_UM_AddQuestLogEntry:
    case DOTA_UM_AddUnitToSelection:
    case DOTA_UM_AIDebugLine:
+   case DOTA_UM_BoosterState:
+   case DOTA_UM_BotChat:
+   case DOTA_UM_BuyBackStateAlert:
+   case DOTA_UM_CharacterSpeakConcept:
    case DOTA_UM_ChatEvent:
+   case DOTA_UM_ChatWheel:
+   case DOTA_UM_ClientLoadGridNav:
+   case DOTA_UM_CoachHUDPing:
    case DOTA_UM_CombatHeroPositions:
    case DOTA_UM_CombatLogData:
    case DOTA_UM_CombatLogShowDeath:
    case DOTA_UM_CreateLinearProjectile:
+   case DOTA_UM_CustomMsg:
    case DOTA_UM_DestroyLinearProjectile:
    case DOTA_UM_DodgeTrackingProjectiles:
+   case DOTA_UM_EnemyItemAlert:
+   case DOTA_UM_GamerulesStateChanged:
    case DOTA_UM_GlobalLightColor:
    case DOTA_UM_GlobalLightDirection:
+   case DOTA_UM_HalloweenDrops:
+   case DOTA_UM_HudError:
    case DOTA_UM_InvalidCommand:
+   case DOTA_UM_ItemAlert:
+   case DOTA_UM_ItemFound:
+   case DOTA_UM_ItemPurchased:
    case DOTA_UM_LocationPing:
    case DOTA_UM_MapLine:
    case DOTA_UM_MiniKillCamInfo:
    case DOTA_UM_MinimapDebugPoint:
    case DOTA_UM_MinimapEvent:
+   case DOTA_UM_MiniTaunt:
    case DOTA_UM_NevermoreRequiem:
    case DOTA_UM_OverheadEvent:
+   case DOTA_UM_ParticleManager:
+   case DOTA_UM_Ping:
+   case DOTA_UM_PlayerMMR:
+   case DOTA_UM_PredictionResult:
+   case DOTA_UM_QuickBuyAlert:
+   case DOTA_UM_ReceivedXmasGift:
+   case DOTA_UM_SendFinalGold:
+   case DOTA_UM_SendGenericToolTip:
+   case DOTA_UM_SendRoshanPopup:
+   case DOTA_UM_SendStatPopup:
    case DOTA_UM_SetNextAutobuyItem:
    case DOTA_UM_SharedCooldown:
+   case DOTA_UM_ShowGenericPopup:
+   case DOTA_UM_ShowSurvey:
    case DOTA_UM_SpectatorPlayerClick:
+   case DOTA_UM_StatsHeroDetails:
+   case DOTA_UM_StatsMatchDetails:
+   case DOTA_UM_SwapVerify:
+   case DOTA_UM_TournamentDrop:
+   case DOTA_UM_TutorialFade:
+   case DOTA_UM_TutorialFinish:
+   case DOTA_UM_TutorialMinimapPosition:
+   case DOTA_UM_TutorialPingMinimap:
+   case DOTA_UM_TutorialRequestExp:
    case DOTA_UM_TutorialTipInfo:
    case DOTA_UM_UnitEvent:
-   case DOTA_UM_ParticleManager:
-   case DOTA_UM_BotChat:
-   case DOTA_UM_HudError:
-   case DOTA_UM_ItemPurchased:
-   case DOTA_UM_Ping:
-   case DOTA_UM_ItemFound:
-   case DOTA_UM_CharacterSpeakConcept:
-   case DOTA_UM_SwapVerify:
-   case DOTA_UM_WorldLine:
-   case DOTA_UM_TournamentDrop:
-   case DOTA_UM_ItemAlert:
-   case DOTA_UM_HalloweenDrops:
-   case DOTA_UM_ChatWheel:
-   case DOTA_UM_ReceivedXmasGift:
    case DOTA_UM_UpdateSharedContent:
-   case DOTA_UM_TutorialRequestExp:
-   case DOTA_UM_TutorialPingMinimap:
-   case DOTA_UM_GamerulesStateChanged:
-   case DOTA_UM_ShowSurvey:
-   case DOTA_UM_TutorialFade:
-   case DOTA_UM_AddQuestLogEntry:
-   case DOTA_UM_SendStatPopup:
-   case DOTA_UM_TutorialFinish:
-   case DOTA_UM_SendRoshanPopup:
-   case DOTA_UM_SendGenericToolTip:
-   case DOTA_UM_SendFinalGold:
-   case DOTA_UM_CustomMsg:
-   case DOTA_UM_CoachHUDPing:
-   case DOTA_UM_ClientLoadGridNav:
-   case DOTA_UM_AbilityPing:
-   case DOTA_UM_ShowGenericPopup:
+   case DOTA_UM_VoteEnd:
    case DOTA_UM_VoteStart:
    case DOTA_UM_VoteUpdate:
-   case DOTA_UM_VoteEnd:
-   case DOTA_UM_BoosterState:
    case DOTA_UM_WillPurchaseAlert:
-   case DOTA_UM_TutorialMinimapPosition:
-   case DOTA_UM_PlayerMMR:
-   case DOTA_UM_AbilitySteal:
-   case DOTA_UM_EnemyItemAlert:
-   case DOTA_UM_StatsMatchDetails:
-   case DOTA_UM_MiniTaunt:
-   case DOTA_UM_BuyBackStateAlert:
-   case DOTA_UM_QuickBuyAlert:
-   case DOTA_UM_StatsHeroDetails:
-   case DOTA_UM_PredictionResult:
+   case DOTA_UM_WorldLine:
    default:
       //std::cout << "Unhandled user-message type " << kind << std::endl;
       return false;
@@ -529,5 +534,19 @@ bool DemoParser::handleDemoStringTables(const CDemoStringTables &stringTables)
 
 bool DemoParser::handleCourierKilledAlert(const CDOTAUserMsg_CourierKilledAlert &msg)
 {
+   auto entity = msg.entity_handle();
+   auto value = msg.gold_value();
+   auto team = msg.team();
+   auto timestamp = msg.timestamp();
    return true;
+}
+
+bool DemoParser::handleAbilitySteal(const CDOTAUserMsg_AbilitySteal &msg)
+{
+   auto id = msg.ability_id();
+   auto level = msg.ability_level();
+   auto player = msg.player_id();
+   return true;
+}
+
 }

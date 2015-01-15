@@ -140,7 +140,7 @@ public:
       return value;
    }
 
-public:
+private:
    std::size_t mOffset;
    uint8_t mCurrentByte;
    BinaryStream mStream;

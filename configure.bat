@@ -1,8 +1,10 @@
 @echo off
 
 REM Read proto file list
-set file=src\proto\list.txt
-set file_list=
+call set root_dir="%cd%"
+call set proto_dir=src\dota\proto
+call set file=%%proto_dir%%\list.txt
+call set file_list=
 set /A i=0
 
 for /F "usebackq delims=" %%a in ("%file%") do (
@@ -17,19 +19,16 @@ call echo Downloading latest dota protobuf files
 
 for /L %%i in (1, 1, %num_proto_files%) do (
   call set file=%%proto_files[%%i]%%
-  call echo - src\proto\%%file%%.proto
-  call powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/%%file%%.proto', 'src\proto\%%file%%.proto')"
-  REM Make fake c files so QBS does not complain when building protoc
-  call copy /y NUL src\proto\%%file%%.pb.cc >NUL
-  call copy /y NUL src\proto\%%file%%.pb.h >NUL
+  call echo - %%proto_dir%%\%%file%%.proto
+  call powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/SteamRE/SteamKit/master/Resources/Protobufs/dota/%%file%%.proto', '%%proto_dir%%\%%file%%.proto')"
 )
 
 REM Copy protobuf descriptor
-if not exist src\proto\google call mkdir src\proto\google
-if not exist src\proto\google\protobuf call mkdir src\proto\google\protobuf
-call copy /y lib\protobuf\src\google\protobuf\descriptor.proto src\proto\google\protobuf
+if not exist %%proto_dir%%\google call mkdir %%proto_dir%%\google
+if not exist %%proto_dir%%\google\protobuf call mkdir %%proto_dir%%\google\protobuf
+call copy /y lib\protobuf\src\google\protobuf\descriptor.proto %%proto_dir%%\google\protobuf
 
 REM Execute protobuf compiler
-cd src\proto
-call qbs run -p protoc -f ../.. -d ../../build --install-root ../../build -- --cpp_out=. %%file_list%%
-cd ..\..
+call cd %%proto_dir%%
+call qbs run -p protoc -f %%root_dir%% -d %%root_dir%%\build --install-root %%root_dir%%/build -- --cpp_out=. %%file_list%%
+call cd %%root_dir%%

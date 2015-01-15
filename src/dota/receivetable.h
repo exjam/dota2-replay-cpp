@@ -1,7 +1,10 @@
 #pragma once
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
+
+namespace dota
+{
 
 struct ReceiveTable
 {
@@ -15,3 +18,5 @@ struct ReceiveTable
    std::vector<ReceiveProperty> properties;
    std::map<std::string, ReceiveProperty*> propertyMap;
 };
+
+}

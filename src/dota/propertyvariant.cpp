@@ -3,6 +3,53 @@
 #include "propertyvariant.h"
 #include "util.h"
 
+std::ostream& operator<<(std::ostream& os, const dota::PropertyVariant& var)
+{
+   switch (var.type()) {
+   case dota::PropertyType::Int:
+      os << var.get<dota::PropertyInt>();
+      break;
+   case dota::PropertyType::Float:
+      os << var.get<dota::PropertyFloat>();
+      break;
+   case dota::PropertyType::Vector:
+   {
+      auto &value = var.get<dota::PropertyVector>();
+      os << "{ x: " << value.x << ", y: " << value.y << ", z:" << value.z << " }";
+      break;
+   }
+   case dota::PropertyType::VectorXY:
+   {
+      auto &value = var.get<dota::PropertyVectorXY>();
+      os << "{ x: " << value.x << ", y: " << value.y << " }";
+      break;
+   }
+   case dota::PropertyType::String:
+      os << var.get<dota::PropertyString>();
+      break;
+   case dota::PropertyType::Array:
+   {
+      auto &value = var.get<dota::PropertyArray>();
+      os << "[";
+      for (auto &&elem : value) {
+         os << elem << ", ";
+      }
+      os << "]";
+      break;
+   }
+   case dota::PropertyType::Int64:
+      os << var.get<dota::PropertyInt64>();
+      break;
+   default:
+      os << "{InvalidPropertyVariant}";
+   }
+
+   return os;
+}
+
+namespace dota
+{
+
 static const auto COORD_INTEGER_BITS = 14;
 static const auto COORD_FRACTIONAL_BITS = 5;
 static const auto COORD_DENOMINATOR = (1 << COORD_FRACTIONAL_BITS);
@@ -20,27 +67,27 @@ static const auto NORMAL_RESOLUTION = (1.0f / NORMAL_DENOMINATOR);
 static const auto DT_MAX_STRING_BITS = 9;
 static const auto DT_MAX_STRING_BUFFERSIZE = 1 << DT_MAX_STRING_BITS;
 
-bool parsePropertyVariant(BitStream &in, Property &prop, PropertyVariant &variant);
-PropertyInt parsePropertyInt(BitStream &in, Property &prop);
-PropertyInt64 parsePropertyInt64(BitStream &in, Property &prop);
-PropertyArray parsePropertyArray(BitStream &in, Property &prop);
-PropertyString parsePropertyString(BitStream &in, Property &prop);
-PropertyVector parsePropertyVector(BitStream &in, Property &prop);
-PropertyVectorXY parsePropertyVectorXY(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloat(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatDefault(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCellCoordIntegral(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCellCoord(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatNormal(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatNoScale(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCoordMpIntegral(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCoordMp(BitStream &in, Property &prop);
-PropertyFloat parsePropertyFloatCoord(BitStream &in, Property &prop);
+static bool parsePropertyVariant(BitStream &in, Property &prop, PropertyVariant &variant);
+static PropertyInt parsePropertyInt(BitStream &in, Property &prop);
+static PropertyInt64 parsePropertyInt64(BitStream &in, Property &prop);
+static PropertyArray parsePropertyArray(BitStream &in, Property &prop);
+static PropertyString parsePropertyString(BitStream &in, Property &prop);
+static PropertyVector parsePropertyVector(BitStream &in, Property &prop);
+static PropertyVectorXY parsePropertyVectorXY(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloat(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatDefault(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCellCoordIntegral(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCellCoord(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatNormal(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatNoScale(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCoordMpIntegral(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCoordMp(BitStream &in, Property &prop);
+static PropertyFloat parsePropertyFloatCoord(BitStream &in, Property &prop);
 
 bool DemoParser::parsePropertyVariant(BitStream &in, Property &prop, PropertyVariant &variant)
 {
-   return ::parsePropertyVariant(in, prop, variant);
+   return dota::parsePropertyVariant(in, prop, variant);
 }
 
 static PropertyInt parsePropertyInt(BitStream &in, Property &prop)
@@ -321,46 +368,4 @@ static bool parsePropertyVariant(BitStream &in, Property &prop, PropertyVariant 
    return true;
 }
 
-std::ostream& operator<<(std::ostream& os, const PropertyVariant& var)
-{
-   switch (var.type()) {
-   case PropertyType::Int:
-      os << var.get<PropertyInt>();
-      break;
-   case PropertyType::Float:
-      os << var.get<PropertyFloat>();
-      break;
-   case PropertyType::Vector:
-   {
-      auto &value = var.get<PropertyVector>();
-      os << "{ x: " << value.x << ", y: " << value.y << ", z:" << value.z << " }";
-      break;
-   }
-   case PropertyType::VectorXY:
-   {
-      auto &value = var.get<PropertyVectorXY>();
-      os << "{ x: " << value.x << ", y: " << value.y << " }";
-      break;
-   }
-   case PropertyType::String:
-      os << var.get<PropertyString>();
-      break;
-   case PropertyType::Array:
-   {
-      auto &value = var.get<PropertyArray>();
-      os << "[";
-      for (auto &&elem : value) {
-         os << elem << ", ";
-      }
-      os << "]";
-      break;
-   }
-   case PropertyType::Int64:
-      os << var.get<PropertyInt64>();
-      break;
-   default:
-      os << "{InvalidPropertyVariant}";
-   }
-
-   return os;
 }
