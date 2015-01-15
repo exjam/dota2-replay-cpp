@@ -65,30 +65,31 @@ struct CombatLogEventDescriptor
 
    void setCombatLogNames(StringTable *stringTable);
    void setDescription(GameEventDescriptor &desc);
-   int type(const CSVCMsg_GameEvent &event);
-   int sourceNameID(const CSVCMsg_GameEvent &event);
-   std::string sourceName(const CSVCMsg_GameEvent &event);
-   int targetNameID(const CSVCMsg_GameEvent &event);
-   std::string targetName(const CSVCMsg_GameEvent &event);
-   int attackerNameID(const CSVCMsg_GameEvent &event);
-   std::string attackerName(const CSVCMsg_GameEvent &event);
-   int inflictorNameID(const CSVCMsg_GameEvent &event);
-   std::string inflictorName(const CSVCMsg_GameEvent &event);
-   bool isAttackerIllusion(const CSVCMsg_GameEvent &event);
-   bool isTargetIllusion(const CSVCMsg_GameEvent &event);
-   int value(const CSVCMsg_GameEvent &event);
-   int health(const CSVCMsg_GameEvent &event);
-   float timestamp(const CSVCMsg_GameEvent &event);
-   int targetSourceNameID(const CSVCMsg_GameEvent &event);
-   std::string targetSourceName(const CSVCMsg_GameEvent &event);
-   float timestampRaw(const CSVCMsg_GameEvent &event);
-   bool isAttackerHero(const CSVCMsg_GameEvent &event);
-   bool isTargetHero(const CSVCMsg_GameEvent &event);
-   bool isAbilityToggleOn(const CSVCMsg_GameEvent &event);
-   bool isAbilityToggleOff(const CSVCMsg_GameEvent &event);
-   int abilityLevel(const CSVCMsg_GameEvent &event);
-   int goldReason(const CSVCMsg_GameEvent &event);
-   int xpReason(const CSVCMsg_GameEvent &event);
+
+   int type(const CSVCMsg_GameEvent &event) const;
+   int sourceNameID(const CSVCMsg_GameEvent &event) const;
+   std::string sourceName(const CSVCMsg_GameEvent &event) const;
+   int targetNameID(const CSVCMsg_GameEvent &event) const;
+   std::string targetName(const CSVCMsg_GameEvent &event) const;
+   int attackerNameID(const CSVCMsg_GameEvent &event) const;
+   std::string attackerName(const CSVCMsg_GameEvent &event) const;
+   int inflictorNameID(const CSVCMsg_GameEvent &event) const;
+   std::string inflictorName(const CSVCMsg_GameEvent &event) const;
+   bool isAttackerIllusion(const CSVCMsg_GameEvent &event) const;
+   bool isTargetIllusion(const CSVCMsg_GameEvent &event) const;
+   int value(const CSVCMsg_GameEvent &event) const;
+   int health(const CSVCMsg_GameEvent &event) const;
+   float timestamp(const CSVCMsg_GameEvent &event) const;
+   int targetSourceNameID(const CSVCMsg_GameEvent &event) const;
+   std::string targetSourceName(const CSVCMsg_GameEvent &event) const;
+   float timestampRaw(const CSVCMsg_GameEvent &event) const;
+   bool isAttackerHero(const CSVCMsg_GameEvent &event) const;
+   bool isTargetHero(const CSVCMsg_GameEvent &event) const;
+   bool isAbilityToggleOn(const CSVCMsg_GameEvent &event) const;
+   bool isAbilityToggleOff(const CSVCMsg_GameEvent &event) const;
+   int abilityLevel(const CSVCMsg_GameEvent &event) const;
+   int goldReason(const CSVCMsg_GameEvent &event) const;
+   int xpReason(const CSVCMsg_GameEvent &event) const;
 };
 
 }

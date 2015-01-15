@@ -131,9 +131,8 @@ public:
    }
 };
 
-bool DemoParser::flattenSendTable(SendTable &sendTable)
+bool DemoParser::flattenSendTable(SendTable &sendTable, ReceiveTable &recvTable)
 {
-   auto &recvTable = mReceiveTables[sendTable.name];
    auto flattener = SendTableFlattener { mSendTables };
    return flattener.flattenSendTable(sendTable, recvTable);
 }

@@ -63,7 +63,7 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
 
       index += indexOffset + 1;
 
-      switch(in.read<unsigned>(2)) {
+      switch(static_cast<EntityPVS>(in.read<unsigned>(2))) {
       case EntityPVS::Preserve:
       {
          //std::cout << "Preserve Entity " << index << std::endl;
@@ -71,7 +71,7 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
          entity.pvs = EntityPVS::Preserve;
          assert(entity.classInfo);
 
-         auto &recvTable = mReceiveTables[entity.classInfo->tableName];
+         auto &recvTable = entity.classInfo->receiveTable;
          auto entityPropList = parseEntityPropList(in);
 
          //std::cout << "Entity Properties" << std::endl;
@@ -99,7 +99,7 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
          auto classIdStr = std::to_string(classId);
          auto serial = in.read<unsigned>(10);
          auto &classInfo = mClassInfo[classId];
-         auto &recvTable = mReceiveTables[classInfo.tableName];
+         auto &recvTable = classInfo.receiveTable;
          auto &baselineTable = mStringTables["instancebaseline"];
          auto &entity = mEntities[index];
 

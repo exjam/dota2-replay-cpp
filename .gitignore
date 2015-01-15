@@ -1,6 +1,6 @@
 build/
 *.qbs.user
-src/proto/*.cc
-src/proto/*.h
-src/proto/*.proto
-src/proto/google
+src/dota/proto/*.cc
+src/dota/proto/*.h
+src/dota/proto/*.proto
+src/dota/proto/google

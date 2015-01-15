@@ -3,19 +3,11 @@
 #include <string>
 #include <vector>
 #include "property.h"
+#include "vector2f.h"
+#include "vector3f.h"
 
 namespace dota
 {
-
-struct Vector2f
-{
-   float x, y;
-};
-
-struct Vector3f
-{
-   float x, y, z;
-};
 
 class PropertyVariant;
 using PropertyInt = int32_t;

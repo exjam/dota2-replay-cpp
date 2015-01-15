@@ -3,10 +3,11 @@
 #include <vector>
 
 #include "entity.h"
+#include "entityclass.h"
 #include "gameevent.h"
 #include "property.h"
 #include "propertyvariant.h"
-#include "receivetable.h"
+#include "entityclass.h"
 #include "sendtable.h"
 #include "stringtable.h"
 
@@ -37,46 +38,30 @@ class CSVCMsg_GameEventList;
 namespace dota
 {
 
-struct ClassInfo
-{
-   std::size_t id;
-   std::string name;
-   std::string tableName;
-};
-
 struct ServerInfo
 {
    std::size_t maxClasses;
    float tickInterval;
 };
 
-using ReceiveTableMap = std::map<std::string, ReceiveTable>;
 using SendTableMap = std::map<std::string, SendTable>;
+using ClassTableMap = std::map<std::string, EntityClass*>;
 using StringTableMap = std::map<std::string, StringTable>;
 
 class DemoParser
 {
+public:
    ServerInfo mServerInfo;
-   std::vector<ClassInfo> mClassInfo;
+   std::vector<EntityClass> mClassInfo;
+   ClassTableMap mClassMap;
    std::vector<Entity> mEntities = std::vector<Entity>(2048);
    SendTableMap mSendTables;
-   ReceiveTableMap mReceiveTables;
    StringTableMap mStringTables;
    std::map<int, GameEventDescriptor> mGameEventDescriptors;
    CombatLogEventDescriptor mCombatLogEventDescriptor;
 
 public:
    bool parse(BinaryStream &in);
-
-   const std::vector<ClassInfo> &getClasses() const
-   {
-      return mClassInfo;
-   }
-
-   const SendTableMap &getSendTables() const
-   {
-      return mSendTables;
-   }
 
 protected:
    bool parseMessage(BinaryStream &in);
@@ -107,7 +92,7 @@ protected:
       return (this->*handler)(message);
    }
 
-   bool flattenSendTable(SendTable &sendTable);
+   bool flattenSendTable(SendTable &sendTable, ReceiveTable &receiveTable);
    bool parsePacketEntities(const CSVCMsg_PacketEntities &msg);
    bool parsePropertyVariant(BitStream &in, Property &prop, PropertyVariant &variant);
    bool parseStringTable(StringTable &table, BitStream &in, std::size_t entries);

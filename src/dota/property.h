@@ -22,6 +22,7 @@ enum class PropertyType
 
 enum class PropertyFlag
 {
+   None                    = 0,
    Unsigned                = 1 <<  0,
    Coord                   = 1 <<  1,
    NoScale                 = 1 <<  2,
@@ -62,47 +63,52 @@ struct Property
    float highValue;
    Property *arrayElementType;
 
-   bool isExcluded()
+   bool isExcluded() const
    {
       return flags & PropertyFlag::Exclude;
    }
 
-   bool isCollapsible()
+   bool isCollapsible() const
    {
       return flags & PropertyFlag::Collapsible;
    }
 
-   bool isChangedOften()
+   bool isChangedOften() const
    {
       return flags & PropertyFlag::ChangesOften;
    }
 
-   bool isEncodedAgainstTickCount()
+   bool isEncodedAgainstTickCount() const
    {
       return flags & PropertyFlag::EncodedAgainstTickCount;
    }
 
-   bool isUnsigned()
+   bool isUnsigned() const
    {
       return flags & PropertyFlag::Unsigned;
    }
 
-   bool isNormal()
+   bool isNormal() const
    {
       return flags & PropertyFlag::Normal;
    }
 
-   bool isInsideArray()
+   bool isInsideArray() const
    {
       return flags & PropertyFlag::InsideArray;
    }
 
-   bool isArray()
+   bool isVectorElement() const
+   {
+      return flags & PropertyFlag::VectorElem;
+   }
+
+   bool isArray() const
    {
       return type == PropertyType::Array;
    }
 
-   bool isDataTable()
+   bool isDataTable() const
    {
       return type == PropertyType::DataTable;
    }

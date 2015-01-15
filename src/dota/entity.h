@@ -5,7 +5,7 @@
 namespace dota
 {
 
-struct ClassInfo;
+struct EntityClass;
 
 enum class EntityPVS
 {
@@ -24,7 +24,6 @@ struct Entity
    uint32_t serial = 0;
    EntityPVS pvs;
    EntityState state;
-   ClassInfo *classInfo = nullptr;
+   EntityClass *classInfo = nullptr;
 };
-
 }

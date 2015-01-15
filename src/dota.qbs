@@ -5,7 +5,8 @@ Project {
       "dota/libdota.qbs",
       "util/libutil.qbs",
       "replay/replay.qbs",
-      "inspector/inspector.qbs"
+      "inspector/inspector.qbs",
+      "classdumper/classdumper.qbs"
    ]
 }
 

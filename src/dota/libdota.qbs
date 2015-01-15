@@ -25,18 +25,29 @@ StaticLibrary {
       qbs.install: true
    }
 
+   cpp.includePaths: ["."]
+
    files: [
       "*.cpp",
       "*.h"
    ]
 
    Group {
+      name: "entity"
+      prefix: "entity/"
+      files: [
+           "*.cpp",
+           "*.h"
+      ]
+   }
+
+   Group {
       name: "proto"
       prefix: "proto/"
       files: [
-         "*.cc",
-         "*.h"
-      ]
+           "*.cc",
+           "*.h"
+       ]
    }
 
    Export {

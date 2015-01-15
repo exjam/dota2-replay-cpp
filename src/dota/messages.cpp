@@ -291,11 +291,20 @@ bool DemoParser::handleDemoClassInfo(const CDemoClassInfo &msg)
 {
    for (int i = 0; i < msg.classes_size(); ++i) {
       auto &cls = msg.classes(i);
-      auto info = ClassInfo { };
-      info.id = cls.class_id();
+      auto id = cls.class_id();
+      auto &info = mClassInfo[id];
+      info.id = id;
       info.name = cls.network_name();
       info.tableName = cls.table_name();
-      mClassInfo[info.id] = info;
+
+      auto itr = mSendTables.find(info.tableName);
+      if (itr == mSendTables.end()) {
+         info.sendTable = nullptr;
+      } else {
+         info.sendTable = &itr->second;
+      }
+
+      mClassMap[info.tableName] = &info;
    }
 
    return true;
@@ -305,11 +314,20 @@ bool DemoParser::handleClassInfo(const CSVCMsg_ClassInfo &msg)
 {
    for (int i = 0; i < msg.classes_size(); ++i) {
       auto &cls = msg.classes(i);
-      auto info = ClassInfo { };
-      info.id = cls.class_id();
+      auto id = cls.class_id();
+      auto &info = mClassInfo[id];
+      info.id = id;
       info.name = cls.class_name();
       info.tableName = cls.data_table_name();
-      mClassInfo[info.id] = info;
+
+      auto itr = mSendTables.find(info.tableName);
+      if (itr == mSendTables.end()) {
+         info.sendTable = nullptr;
+      } else {
+         info.sendTable = &itr->second;
+      }
+
+      mClassMap[info.tableName] = &info;
    }
 
    return true;
@@ -332,12 +350,10 @@ bool DemoParser::handleDemoFileInfo(const CDemoFileInfo &info)
 
 bool DemoParser::handleDemoSyncTick(const CDemoSyncTick &/*msg*/)
 {
-   for (auto &&kvpair : mSendTables) {
-      auto &table = kvpair.second;
-
-      if (table.needsDecode) {
-         flattenSendTable(table);
-         table.needsDecode = false;
+   for (auto &&entityClass : mClassInfo) {
+      if (entityClass.sendTable && entityClass.sendTable->needsDecode) {
+         flattenSendTable(*entityClass.sendTable, entityClass.receiveTable);
+         entityClass.sendTable->needsDecode = false;
       }
    }
 

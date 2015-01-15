@@ -19,17 +19,6 @@ struct SendTable
       std::string table;
       std::string prop;
    };
-
-   std::string getBaseClass() const
-   {
-      for (auto &&prop : properties) {
-         if (prop.varName.compare("baseclass") == 0) {
-            return prop.dtName;
-         }
-      }
-
-      return {};
-   }
 };
 
 }

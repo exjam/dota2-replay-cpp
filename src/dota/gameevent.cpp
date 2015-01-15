@@ -39,122 +39,122 @@ void CombatLogEventDescriptor::setDescription(GameEventDescriptor &desc)
    mIndex.xpReason = desc.keyIndexMap["xp_reason"];
 }
 
-int CombatLogEventDescriptor::type(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::type(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.type).val_byte();
 }
 
-int CombatLogEventDescriptor::sourceNameID(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::sourceNameID(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.sourceName).val_short();
 }
 
-std::string CombatLogEventDescriptor::sourceName(const CSVCMsg_GameEvent &event)
+std::string CombatLogEventDescriptor::sourceName(const CSVCMsg_GameEvent &event) const
 {
    return combatLogNames->entries[sourceNameID(event)].strData;
 }
 
-int CombatLogEventDescriptor::targetNameID(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::targetNameID(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.targetName).val_short();
 }
 
-std::string CombatLogEventDescriptor::targetName(const CSVCMsg_GameEvent &event)
+std::string CombatLogEventDescriptor::targetName(const CSVCMsg_GameEvent &event) const
 {
    return combatLogNames->entries[targetNameID(event)].strData;
 }
 
-int CombatLogEventDescriptor::attackerNameID(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::attackerNameID(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.attackerName).val_short();
 }
 
-std::string CombatLogEventDescriptor::attackerName(const CSVCMsg_GameEvent &event)
+std::string CombatLogEventDescriptor::attackerName(const CSVCMsg_GameEvent &event) const
 {
    return combatLogNames->entries[attackerNameID(event)].strData;
 }
 
-int CombatLogEventDescriptor::inflictorNameID(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::inflictorNameID(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.inflictorName).val_short();
 }
 
-std::string CombatLogEventDescriptor::inflictorName(const CSVCMsg_GameEvent &event)
+std::string CombatLogEventDescriptor::inflictorName(const CSVCMsg_GameEvent &event) const
 {
    return combatLogNames->entries[inflictorNameID(event)].strData;
 }
 
-bool CombatLogEventDescriptor::isAttackerIllusion(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isAttackerIllusion(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.attackerIllusion).val_bool();
 }
 
-bool CombatLogEventDescriptor::isTargetIllusion(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isTargetIllusion(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.targetIllusion).val_bool();
 }
 
-int CombatLogEventDescriptor::value(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::value(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.value).val_short();
 }
 
-int CombatLogEventDescriptor::health(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::health(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.health).val_short();
 }
 
-float CombatLogEventDescriptor::timestamp(const CSVCMsg_GameEvent &event)
+float CombatLogEventDescriptor::timestamp(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.timestamp).val_float();
 }
 
-int CombatLogEventDescriptor::targetSourceNameID(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::targetSourceNameID(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.targetSourceName).val_short();
 }
 
-std::string CombatLogEventDescriptor::targetSourceName(const CSVCMsg_GameEvent &event)
+std::string CombatLogEventDescriptor::targetSourceName(const CSVCMsg_GameEvent &event) const
 {
    return combatLogNames->entries[targetSourceNameID(event)].strData;
 }
 
-float CombatLogEventDescriptor::timestampRaw(const CSVCMsg_GameEvent &event)
+float CombatLogEventDescriptor::timestampRaw(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.timestampRaw).val_float();
 }
 
-bool CombatLogEventDescriptor::isAttackerHero(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isAttackerHero(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.attackerHero).val_bool();
 }
 
-bool CombatLogEventDescriptor::isTargetHero(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isTargetHero(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.targetHero).val_bool();
 }
 
-bool CombatLogEventDescriptor::isAbilityToggleOn(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isAbilityToggleOn(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.abilityToggleOn).val_bool();
 }
 
-bool CombatLogEventDescriptor::isAbilityToggleOff(const CSVCMsg_GameEvent &event)
+bool CombatLogEventDescriptor::isAbilityToggleOff(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.abilityToggleOff).val_bool();
 }
 
-int CombatLogEventDescriptor::abilityLevel(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::abilityLevel(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.abilityLevel).val_short();
 }
 
-int CombatLogEventDescriptor::goldReason(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::goldReason(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.goldReason).val_short();
 }
 
-int CombatLogEventDescriptor::xpReason(const CSVCMsg_GameEvent &event)
+int CombatLogEventDescriptor::xpReason(const CSVCMsg_GameEvent &event) const
 {
    return event.keys(mIndex.xpReason).val_short();
 }
