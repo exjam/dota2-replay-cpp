@@ -36,8 +36,17 @@ StaticLibrary {
       name: "entity"
       prefix: "entity/"
       files: [
-           "*.cpp",
-           "*.h"
+          "*.cpp",
+          "*.h"
+      ]
+   }
+
+   Group {
+      name: "event"
+      prefix: "event/"
+      files: [
+          "*.cpp",
+          "*.h"
       ]
    }
 
