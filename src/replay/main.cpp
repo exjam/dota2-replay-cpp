@@ -1,15 +1,114 @@
 #include <iostream>
 #include <fstream>
+#include <chrono>
+
+#include "entity/CDOTA_PlayerResource.h"
+#include "entity/CDOTAGamerulesProxy.h"
 
 #include "binarystream.h"
 #include "demoparser.h"
+#include "clientclass.h"
 
+class ReplayAnalyser
+{
+public:
+   ReplayAnalyser()
+   {
+      mDemo.setOnTickEventListener(std::bind(&ReplayAnalyser::onDemoTick, this, std::placeholders::_1));
+      mDemo.setOnGameEventListener(std::bind(&ReplayAnalyser::onGameEvent, this, std::placeholders::_1, std::placeholders::_2));
+      mDemo.setOnEntityEnterListener(std::bind(&ReplayAnalyser::onEntityEnter, this, std::placeholders::_1));
+      mDemo.setOnEntityLeaveListener(std::bind(&ReplayAnalyser::onEntityLeave, this, std::placeholders::_1));
+      mDemo.setOnEntityPreserveListener(std::bind(&ReplayAnalyser::onEntityPreserve, this, std::placeholders::_1));
+      mDemo.setOnEntityDeleteListener(std::bind(&ReplayAnalyser::onEntityDelete, this, std::placeholders::_1));
+   }
+
+   void analyse(std::string filename)
+   {
+      auto file = std::ifstream { filename, std::ifstream::binary };
+      auto in = BinaryStream { file };
+      mInGameTime = std::chrono::seconds(0);
+      mTick = 0;
+      mDemo.parse(in, dota::ParseProfile::FullReplay);
+   }
+
+   void onDemoTick(dota::Tick tick)
+   {
+      if (mGameRules && mGameRules->dota_gamerules_data.m_flGameStartTime > 0.0f) {
+         auto dt = mGameRules->dota_gamerules_data.m_fGameTime - mGameRules->dota_gamerules_data.m_flGameStartTime;
+         auto time = std::chrono::seconds(static_cast<long long>(dt));
+
+         if (time != mInGameTime) {
+            if (mPlayerResource) {
+               for (auto i = 0; i < mPlayerSamples.size(); ++i) {
+                  SampleData &sample = mPlayerSamples[i];
+                  sample.lastHits.push_back(mPlayerResource->m_iLastHitCount[i]);
+                  sample.denies.push_back(mPlayerResource->m_iDenyCount[i]);
+               }
+            }
+
+            mInGameTime = time;
+         }
+      }
+
+      mTick = tick;
+   }
+
+   void onGameEvent(dota::GameEventID type, const dota::GameEvent *event)
+   {
+   }
+
+   void onEntityEnter(const dota::Entity *entity)
+   {
+      if (entity->classInfo->clientClassID == dota::ClientClass<dota::CDOTA_PlayerResource>::ClassID) {
+         mPlayerResource = reinterpret_cast<dota::CDOTA_PlayerResource*>(entity->clientEntity);
+      }
+
+      if (entity->classInfo->clientClassID == dota::ClientClass<dota::CDOTAGamerulesProxy>::ClassID) {
+         mGameRules = reinterpret_cast<dota::CDOTAGamerulesProxy*>(entity->clientEntity);
+      }
+   }
+
+   void onEntityLeave(const dota::Entity *entity)
+   {
+   }
+
+   void onEntityPreserve(const dota::Entity *entity)
+   {
+   }
+
+   void onEntityDelete(const dota::Entity *entity)
+   {
+   }
+
+private:
+   struct SampleData {
+      std::vector<std::size_t> lastHits;
+      std::vector<std::size_t> denies;
+   };
+
+   std::array<SampleData, 10> mPlayerSamples;
+
+   std::chrono::seconds mInGameTime;
+   dota::Tick mTick;
+   dota::DemoParser mDemo;
+   dota::CDOTA_PlayerResource *mPlayerResource;
+   dota::CDOTAGamerulesProxy *mGameRules;
+};
+
+// TODO: Find the HUGE memory leaks!!
 int main()
 {
-   auto file = std::ifstream { "1151921935.dem", std::ifstream::binary };
-   auto in = BinaryStream { file };
-   auto demo = dota::DemoParser {};
-   demo.parse(in);
-   std::cout << "Finished parse, destructor takes years!" << std::endl;
+   std::chrono::time_point<std::chrono::system_clock> start, end, destruct;
+   start = std::chrono::system_clock::now();
+   {
+      ReplayAnalyser analyser;
+      analyser.analyse("1151921935.dem");
+      end = std::chrono::system_clock::now();
+   }
+   destruct = std::chrono::system_clock::now();
+
+   std::chrono::duration<double> elapsed1 = end - start;
+   std::chrono::duration<double> elapsed2 = destruct - end;
+   std::cout << "Finished analysis! Time1: " << elapsed1.count() << " Time2: " << elapsed2.count() << std::endl;
    return 0;
 }
