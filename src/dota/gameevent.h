@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 #include "stringtable.h"
 
@@ -10,7 +11,10 @@ class CSVCMsg_GameEvent;
 namespace dota
 {
 
-enum class GameEventKeyType
+using GameEventID = std::size_t;
+struct GameEventBase;
+
+enum class GameEventType
 {
    Invalid,
    String,
@@ -24,72 +28,161 @@ enum class GameEventKeyType
 
 struct GameEventDescriptor
 {
-   struct Key
+   struct Property
    {
-      int type;
+      std::size_t type;
       std::string name;
+      std::ptrdiff_t offset;
    };
 
-   int id;
+   std::size_t id;
    std::string name;
-   std::vector<Key> keys;
-   std::map<std::string, int> keyIndexMap;
+   std::vector<Property> properties;
+   const GameEventBase *gameEventClass;
 };
 
-struct CombatLogEventDescriptor
+struct GameEvent
 {
-   struct {
-      int type;
-      int sourceName;
-      int targetName;
-      int attackerName;
-      int inflictorName;
-      int attackerIllusion;
-      int targetIllusion;
-      int value;
-      int health;
-      int timestamp;
-      int targetSourceName;
-      int timestampRaw;
-      int attackerHero;
-      int targetHero;
-      int abilityToggleOn;
-      int abilityToggleOff;
-      int abilityLevel;
-      int goldReason;
-      int xpReason;
-   } mIndex;
-
-   int mID;
-   StringTable *combatLogNames;
-
-   void setCombatLogNames(StringTable *stringTable);
-   void setDescription(GameEventDescriptor &desc);
-
-   int type(const CSVCMsg_GameEvent &event) const;
-   int sourceNameID(const CSVCMsg_GameEvent &event) const;
-   std::string sourceName(const CSVCMsg_GameEvent &event) const;
-   int targetNameID(const CSVCMsg_GameEvent &event) const;
-   std::string targetName(const CSVCMsg_GameEvent &event) const;
-   int attackerNameID(const CSVCMsg_GameEvent &event) const;
-   std::string attackerName(const CSVCMsg_GameEvent &event) const;
-   int inflictorNameID(const CSVCMsg_GameEvent &event) const;
-   std::string inflictorName(const CSVCMsg_GameEvent &event) const;
-   bool isAttackerIllusion(const CSVCMsg_GameEvent &event) const;
-   bool isTargetIllusion(const CSVCMsg_GameEvent &event) const;
-   int value(const CSVCMsg_GameEvent &event) const;
-   int health(const CSVCMsg_GameEvent &event) const;
-   float timestamp(const CSVCMsg_GameEvent &event) const;
-   int targetSourceNameID(const CSVCMsg_GameEvent &event) const;
-   std::string targetSourceName(const CSVCMsg_GameEvent &event) const;
-   float timestampRaw(const CSVCMsg_GameEvent &event) const;
-   bool isAttackerHero(const CSVCMsg_GameEvent &event) const;
-   bool isTargetHero(const CSVCMsg_GameEvent &event) const;
-   bool isAbilityToggleOn(const CSVCMsg_GameEvent &event) const;
-   bool isAbilityToggleOff(const CSVCMsg_GameEvent &event) const;
-   int abilityLevel(const CSVCMsg_GameEvent &event) const;
-   int goldReason(const CSVCMsg_GameEvent &event) const;
-   int xpReason(const CSVCMsg_GameEvent &event) const;
+   GameEvent() = delete;
+   GameEvent(const GameEvent&) = delete;
+   GameEvent& operator=(const GameEvent&) = delete;
+   ~GameEvent() = delete;
 };
+
+struct GameEventProperty
+{
+   std::size_t id;
+   GameEventType type;
+   std::ptrdiff_t offset;
+};
+
+class GameEventBase
+{
+public:
+   virtual GameEvent *create() const = 0;
+   virtual void destroy(GameEvent *event) const = 0;
+
+   const GameEventProperty *findProperty(const std::string &name) const
+   {
+      auto itr = properties.find(name);
+
+      if (itr != properties.end()) {
+         return &itr->second;
+      } else {
+         return nullptr;
+      }
+   }
+
+   std::string name;
+   std::map<std::string, GameEventProperty> properties;
+};
+
+class GameEventList
+{
+public:
+   static const GameEventBase* get(const std::string &name)
+   {
+      auto itr = mGameEventMap.find(name);
+
+      if (itr != mGameEventMap.end()) {
+         return itr->second;
+      } else {
+         return nullptr;
+      }
+   }
+
+   static std::map<std::string, const GameEventBase*> mGameEventMap;
+};
+
+template<typename Type>
+struct GameEventClass
+{
+};
+
+template<typename Type>
+struct get_game_event_property_type
+{
+   static const auto value = GameEventType::Invalid;
+   static_assert(get_game_event_property_type<Type>::value != GameEventType::Invalid,
+                 "Invalid game event property type.");
+};
+
+template<>
+struct get_game_event_property_type<std::string>
+{
+   static const auto value = GameEventType::String;
+};
+
+template<>
+struct get_game_event_property_type<float>
+{
+   static const auto value = GameEventType::Float;
+};
+
+template<>
+struct get_game_event_property_type<int32_t>
+{
+   static const auto value = GameEventType::Long;
+};
+
+template<>
+struct get_game_event_property_type<int16_t>
+{
+   static const auto value = GameEventType::Short;
+};
+
+template<>
+struct get_game_event_property_type<uint8_t>
+{
+   static const auto value = GameEventType::Byte;
+};
+
+template<>
+struct get_game_event_property_type<bool>
+{
+   static const auto value = GameEventType::Bool;
+};
+
+template<>
+struct get_game_event_property_type<uint64_t>
+{
+   static const auto value = GameEventType::Uint64;
+};
+
+#define DeclareGameEvent(ClassName) \
+   template<> \
+   struct GameEventClass<event::ClassName> : public GameEventBase { \
+      static GameEventClass<event::ClassName> Instance; \
+      static const GameEventBase *InstancePtr; \
+      using WrappedClass = event::ClassName; \
+      GameEventClass(); \
+      virtual GameEvent *create() const override; \
+      virtual void destroy(GameEvent *event) const override; \
+   };
+
+#define BeginGameEvent(ClassName) \
+   GameEventClass<event::ClassName> GameEventClass<event::ClassName>::Instance; \
+   const GameEventBase *GameEventClass<event::ClassName>::InstancePtr = reinterpret_cast<GameEventBase*>(&GameEventClass<event::ClassName>::Instance); \
+   GameEvent *GameEventClass<event::ClassName>::create() const { \
+      return reinterpret_cast<GameEvent*>(new event::ClassName());\
+   } \
+   void GameEventClass<event::ClassName>::destroy(GameEvent *event) const { \
+      delete reinterpret_cast<event::ClassName*>(event); \
+   } \
+   GameEventClass<event::ClassName>::GameEventClass() \
+   { \
+      name = #ClassName;
+
+#define GameEventProperty(ValueName) \
+   { \
+      using value_type = decltype(((WrappedClass*)0)->ValueName); \
+      auto &prop = properties[#ValueName]; \
+      prop.id = properties.size() - 1; \
+      prop.offset = offsetof(WrappedClass, ValueName); \
+      prop.type = get_game_event_property_type<value_type>::value; \
+   }
+
+#define EndGameEvent() \
+   }
 
 }
