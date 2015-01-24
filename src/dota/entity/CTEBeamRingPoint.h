@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CTEBaseBeam.h"
 
@@ -14,6 +14,6 @@ struct CTEBeamRingPoint : public CTEBaseBeam
    float m_flEndRadius;
 };
 
-DeclareNetworkClass(CTEBeamRingPoint);
+DeclareClientClass(CTEBeamRingPoint);
 
 }

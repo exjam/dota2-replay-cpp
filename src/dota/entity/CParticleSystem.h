@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 
@@ -25,6 +25,6 @@ struct CParticleSystem
    uint32_t m_iControlPointParents[64];
 };
 
-DeclareNetworkClass(CParticleSystem);
+DeclareClientClass(CParticleSystem);
 
 }

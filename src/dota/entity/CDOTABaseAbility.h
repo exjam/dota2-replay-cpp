@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -24,6 +24,6 @@ struct CDOTABaseAbility : public CBaseEntity
    uint32_t m_bInIndefiniteCooldown;
 };
 
-DeclareNetworkClass(CDOTABaseAbility);
+DeclareClientClass(CDOTABaseAbility);
 
 }

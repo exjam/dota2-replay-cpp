@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct MovieExplosion : public CBaseParticleEntity
 {
 };
 
-DeclareNetworkClass(MovieExplosion);
+DeclareClientClass(MovieExplosion);
 
 }

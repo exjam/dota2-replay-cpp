@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
 
@@ -20,6 +20,6 @@ struct CBreakableSurface : public CBaseEntity
    uint32_t m_RawPanelBitVec[256];
 };
 
-DeclareNetworkClass(CBreakableSurface);
+DeclareClientClass(CBreakableSurface);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -20,6 +20,6 @@ struct CTEDOTAProjectileLoc : public CBaseTempEntity
    float m_flExpireTime;
 };
 
-DeclareNetworkClass(CTEDOTAProjectileLoc);
+DeclareClientClass(CTEDOTAProjectileLoc);
 
 }

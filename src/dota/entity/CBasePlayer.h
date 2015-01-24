@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include <string>
@@ -116,9 +116,9 @@ struct CBasePlayer : public CBaseCombatCharacter
    DT_LocalPlayerExclusive localdata;
 };
 
-DeclareNetworkStruct(DT_PlayerState);
-DeclareNetworkStruct(DT_Local);
-DeclareNetworkStruct(DT_LocalPlayerExclusive);
-DeclareNetworkClass(CBasePlayer);
+DeclareClientStruct(DT_PlayerState);
+DeclareClientStruct(DT_Local);
+DeclareClientStruct(DT_LocalPlayerExclusive);
+DeclareClientClass(CBasePlayer);
 
 }

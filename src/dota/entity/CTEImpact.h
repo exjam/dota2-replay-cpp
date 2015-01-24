@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -14,6 +14,6 @@ struct CTEImpact : public CBaseTempEntity
    uint32_t m_iType;
 };
 
-DeclareNetworkClass(CTEImpact);
+DeclareClientClass(CTEImpact);
 
 }

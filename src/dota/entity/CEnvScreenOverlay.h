@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include <vector>
 #include "CBaseEntity.h"
@@ -17,6 +17,6 @@ struct CEnvScreenOverlay : public CBaseEntity
    uint32_t m_bIsActive;
 };
 
-DeclareNetworkClass(CEnvScreenOverlay);
+DeclareClientClass(CEnvScreenOverlay);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -94,9 +94,9 @@ struct CDOTA_PlayerResource
    DT_DireData DireOnlyData;
 };
 
-DeclareNetworkStruct(DT_RadiantData);
-DeclareNetworkStruct(DT_EndScoreAndSpectatorStats);
-DeclareNetworkStruct(DT_DireData);
-DeclareNetworkClass(CDOTA_PlayerResource);
+DeclareClientStruct(DT_RadiantData);
+DeclareClientStruct(DT_EndScoreAndSpectatorStats);
+DeclareClientStruct(DT_DireData);
+DeclareClientClass(CDOTA_PlayerResource);
 
 }

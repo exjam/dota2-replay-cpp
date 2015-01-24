@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseTempEntity.h"
 
 namespace dota
@@ -14,6 +14,6 @@ struct CTEFizz : public CBaseTempEntity
    int32_t m_nCurrent;
 };
 
-DeclareNetworkClass(CTEFizz);
+DeclareClientClass(CTEFizz);
 
 }

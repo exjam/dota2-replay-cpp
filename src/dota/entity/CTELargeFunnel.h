@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CTEParticleSystem.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CTELargeFunnel : public CTEParticleSystem
    uint32_t m_nReversed;
 };
 
-DeclareNetworkClass(CTELargeFunnel);
+DeclareClientClass(CTELargeFunnel);
 
 }

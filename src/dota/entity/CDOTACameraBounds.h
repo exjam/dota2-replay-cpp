@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
 
@@ -13,6 +13,6 @@ struct CDOTACameraBounds : public CBaseEntity
    Vector3f m_vecBoundsMax;
 };
 
-DeclareNetworkClass(CDOTACameraBounds);
+DeclareClientClass(CDOTACameraBounds);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -18,7 +18,7 @@ struct CDOTAGameManagerProxy : public CBaseEntity
    DT_DOTA_GameManager dota_gamemanager_data;
 };
 
-DeclareNetworkStruct(DT_DOTA_GameManager);
-DeclareNetworkClass(CDOTAGameManagerProxy);
+DeclareClientStruct(DT_DOTA_GameManager);
+DeclareClientClass(CDOTAGameManagerProxy);
 
 }

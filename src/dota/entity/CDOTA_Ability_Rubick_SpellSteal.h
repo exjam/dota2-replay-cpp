@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CDOTABaseAbility.h"
 
@@ -13,6 +13,6 @@ struct CDOTA_Ability_Rubick_SpellSteal : public CDOTABaseAbility
    float m_fStolenCastPoint;
 };
 
-DeclareNetworkClass(CDOTA_Ability_Rubick_SpellSteal);
+DeclareClientClass(CDOTA_Ability_Rubick_SpellSteal);
 
 }

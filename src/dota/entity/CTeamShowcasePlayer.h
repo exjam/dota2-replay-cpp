@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -14,6 +14,6 @@ struct CTeamShowcasePlayer : public CBaseEntity
    float m_flTransitionTime;
 };
 
-DeclareNetworkClass(CTeamShowcasePlayer);
+DeclareClientClass(CTeamShowcasePlayer);
 
 }

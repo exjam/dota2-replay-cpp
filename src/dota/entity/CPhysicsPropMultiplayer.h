@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CPhysicsProp.h"
 
@@ -15,6 +15,6 @@ struct CPhysicsPropMultiplayer : public CPhysicsProp
    Vector3f m_collisionMaxs;
 };
 
-DeclareNetworkClass(CPhysicsPropMultiplayer);
+DeclareClientClass(CPhysicsPropMultiplayer);
 
 }

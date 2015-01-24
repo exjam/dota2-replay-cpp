@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -16,6 +16,6 @@ struct CPlasma : public CBaseEntity
    int32_t m_nGlowModelIndex;
 };
 
-DeclareNetworkClass(CPlasma);
+DeclareClientClass(CPlasma);
 
 }

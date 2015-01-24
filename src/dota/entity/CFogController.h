@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -30,6 +30,6 @@ struct CFogController
    } m_fog;
 };
 
-DeclareNetworkClass(CFogController);
+DeclareClientClass(CFogController);
 
 }

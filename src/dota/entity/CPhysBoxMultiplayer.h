@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CPhysBox.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CPhysBoxMultiplayer : public CPhysBox
    float m_fMass;
 };
 
-DeclareNetworkClass(CPhysBoxMultiplayer);
+DeclareClientClass(CPhysBoxMultiplayer);
 
 }

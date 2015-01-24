@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -15,6 +15,6 @@ struct CShadowControl
    uint32_t m_bEnableLocalLightShadows;
 };
 
-DeclareNetworkClass(CShadowControl);
+DeclareClientClass(CShadowControl);
 
 }

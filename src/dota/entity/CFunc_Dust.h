@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
 
@@ -23,6 +23,6 @@ struct CFunc_Dust
    DT_CollisionProperty m_Collision;
 };
 
-DeclareNetworkClass(CFunc_Dust);
+DeclareClientClass(CFunc_Dust);
 
 }

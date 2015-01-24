@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -9,6 +9,6 @@ struct CDotaQuestBase
 {
 };
 
-DeclareNetworkClass(CDotaQuestBase);
+DeclareClientClass(CDotaQuestBase);
 
 }

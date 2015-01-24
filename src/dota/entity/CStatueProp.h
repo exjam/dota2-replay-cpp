@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CPhysicsProp.h"
 
@@ -16,6 +16,6 @@ struct CStatueProp : public CPhysicsProp
    Vector3f m_vShatterForce;
 };
 
-DeclareNetworkClass(CStatueProp);
+DeclareClientClass(CStatueProp);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -15,6 +15,6 @@ struct CSpatialEntity
    uint32_t m_bEnabled;
 };
 
-DeclareNetworkClass(CSpatialEntity);
+DeclareClientClass(CSpatialEntity);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
 
@@ -15,6 +15,6 @@ struct CEnvQuadraticBeam : public CBaseEntity
    float m_flWidth;
 };
 
-DeclareNetworkClass(CEnvQuadraticBeam);
+DeclareClientClass(CEnvQuadraticBeam);
 
 }

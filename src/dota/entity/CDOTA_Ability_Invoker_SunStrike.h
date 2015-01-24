@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_Ability_Invoker_InvokedBase.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Ability_Invoker_SunStrike : public CDOTA_Ability_Invoker_InvokedBas
 {
 };
 
-DeclareNetworkClass(CDOTA_Ability_Invoker_SunStrike);
+DeclareClientClass(CDOTA_Ability_Invoker_SunStrike);
 
 }

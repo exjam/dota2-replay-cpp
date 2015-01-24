@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -19,6 +19,6 @@ struct CEnvTonemapController : public CBaseEntity
    float m_flBloomSaturation;
 };
 
-DeclareNetworkClass(CEnvTonemapController);
+DeclareClientClass(CEnvTonemapController);
 
 }

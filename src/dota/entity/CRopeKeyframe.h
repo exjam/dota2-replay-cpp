@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -33,6 +33,6 @@ struct CRopeKeyframe
    uint32_t m_nMaxGPULevel;
 };
 
-DeclareNetworkClass(CRopeKeyframe);
+DeclareClientClass(CRopeKeyframe);
 
 }

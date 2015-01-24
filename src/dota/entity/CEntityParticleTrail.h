@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -20,7 +20,7 @@ struct CEntityParticleTrail : public CBaseParticleEntity
    uint32_t m_hConstraintEntity;
 };
 
-DeclareNetworkStruct(DT_EntityParticleTrailInfo);
-DeclareNetworkClass(CEntityParticleTrail);
+DeclareClientStruct(DT_EntityParticleTrailInfo);
+DeclareClientClass(CEntityParticleTrail);
 
 }

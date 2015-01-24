@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_BaseNPC_Hero.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CDOTA_Unit_Hero_Meepo : public CDOTA_BaseNPC_Hero
    uint32_t m_bIsIllusion;
 };
 
-DeclareNetworkClass(CDOTA_Unit_Hero_Meepo);
+DeclareClientClass(CDOTA_Unit_Hero_Meepo);
 
 }

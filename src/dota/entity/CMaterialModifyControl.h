@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -23,6 +23,6 @@ struct CMaterialModifyControl : public CBaseEntity
    uint32_t m_nModifyMode;
 };
 
-DeclareNetworkClass(CMaterialModifyControl);
+DeclareClientClass(CMaterialModifyControl);
 
 }

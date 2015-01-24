@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CPostProcessController : public CBaseEntity
    uint32_t m_bMaster;
 };
 
-DeclareNetworkClass(CPostProcessController);
+DeclareClientClass(CPostProcessController);
 
 }

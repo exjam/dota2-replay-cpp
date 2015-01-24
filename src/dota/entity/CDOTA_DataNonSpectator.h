@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -12,6 +12,6 @@ struct CDOTA_DataNonSpectator
    int32_t m_iStartingPositions[30];
 };
 
-DeclareNetworkClass(CDOTA_DataNonSpectator);
+DeclareClientClass(CDOTA_DataNonSpectator);
 
 }

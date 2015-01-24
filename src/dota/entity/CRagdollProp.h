@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <vector>
 #include "CBaseAnimating.h"
@@ -17,6 +17,6 @@ struct CRagdollProp : public CBaseAnimating
    int32_t m_nOverlaySequence;
 };
 
-DeclareNetworkClass(CRagdollProp);
+DeclareClientClass(CRagdollProp);
 
 }

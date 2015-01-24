@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CTEParticleSystem.h"
 
@@ -17,6 +17,6 @@ struct CTEBloodStream : public CTEParticleSystem
    uint32_t m_nAmount;
 };
 
-DeclareNetworkClass(CTEBloodStream);
+DeclareClientClass(CTEBloodStream);
 
 }

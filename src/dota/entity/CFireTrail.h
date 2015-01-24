@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CFireTrail : public CBaseParticleEntity
    float m_flLifetime;
 };
 
-DeclareNetworkClass(CFireTrail);
+DeclareClientClass(CFireTrail);
 
 }

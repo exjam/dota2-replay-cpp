@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
@@ -13,6 +13,6 @@ struct CTEParticleSystem : public CBaseTempEntity
    Vector3f m_vecOrigin;
 };
 
-DeclareNetworkClass(CTEParticleSystem);
+DeclareClientClass(CTEParticleSystem);
 
 }

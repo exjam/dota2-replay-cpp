@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 #include "CBaseEntity.h"
@@ -21,6 +21,6 @@ struct CEnvDeferredLight : public CBaseEntity
    std::string m_ProjectedTextureName;
 };
 
-DeclareNetworkClass(CEnvDeferredLight);
+DeclareClientClass(CEnvDeferredLight);
 
 }

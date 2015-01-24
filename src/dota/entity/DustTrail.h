@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseParticleEntity.h"
 
@@ -24,6 +24,6 @@ struct DustTrail : public CBaseParticleEntity
    float m_Opacity;
 };
 
-DeclareNetworkClass(DustTrail);
+DeclareClientClass(DustTrail);
 
 }

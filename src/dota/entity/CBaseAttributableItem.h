@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseAnimating.h"
 
 namespace dota
@@ -42,10 +42,10 @@ struct CBaseAttributableItem : public CBaseAnimating
    DT_AttributeContainer m_AttributeManager;
 };
 
-DeclareNetworkStruct(DT_ScriptCreatedAttribute);
-DeclareNetworkStruct(DT_AttributeList);
-DeclareNetworkStruct(DT_ScriptCreatedItem);
-DeclareNetworkStruct(DT_AttributeContainer);
-DeclareNetworkClass(CBaseAttributableItem);
+DeclareClientStruct(DT_ScriptCreatedAttribute);
+DeclareClientStruct(DT_AttributeList);
+DeclareClientStruct(DT_ScriptCreatedItem);
+DeclareClientStruct(DT_AttributeContainer);
+DeclareClientClass(CBaseAttributableItem);
 
 }

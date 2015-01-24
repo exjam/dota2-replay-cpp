@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseAnimating.h"
 
@@ -25,6 +25,6 @@ struct CPropVehicleDriveable : public CBaseAnimating
    Vector3f m_vecGunCrosshair;
 };
 
-DeclareNetworkClass(CPropVehicleDriveable);
+DeclareClientClass(CPropVehicleDriveable);
 
 }

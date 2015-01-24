@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include <vector>
 
@@ -16,6 +16,6 @@ struct CTeam
    std::vector<uint32_t> player_array;
 };
 
-DeclareNetworkClass(CTeam);
+DeclareClientClass(CTeam);
 
 }

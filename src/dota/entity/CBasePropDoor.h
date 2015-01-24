@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDynamicProp.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CBasePropDoor : public CDynamicProp
 {
 };
 
-DeclareNetworkClass(CBasePropDoor);
+DeclareClientClass(CBasePropDoor);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -24,6 +24,6 @@ struct CTEBaseBeam
    uint32_t m_nFlags;
 };
 
-DeclareNetworkClass(CTEBaseBeam);
+DeclareClientClass(CTEBaseBeam);
 
 }

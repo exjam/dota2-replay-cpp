@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CTEBaseBeam.h"
 
@@ -13,6 +13,6 @@ struct CTEBeamPoints : public CTEBaseBeam
    Vector3f m_vecEndPoint;
 };
 
-DeclareNetworkClass(CTEBeamPoints);
+DeclareClientClass(CTEBeamPoints);
 
 }

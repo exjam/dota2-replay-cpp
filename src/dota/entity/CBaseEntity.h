@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 
@@ -66,8 +66,8 @@ struct CBaseEntity
    uint32_t m_nMaxGPULevel;
 };
 
-DeclareNetworkStruct(DT_CollisionProperty);
-DeclareNetworkStruct(DT_AnimTimeMustBeFirst);
-DeclareNetworkClass(CBaseEntity);
+DeclareClientStruct(DT_CollisionProperty);
+DeclareClientStruct(DT_AnimTimeMustBeFirst);
+DeclareClientClass(CBaseEntity);
 
 }

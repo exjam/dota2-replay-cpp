@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseTempEntity.h"
 
 namespace dota
@@ -19,6 +19,6 @@ struct CTEDOTAProjectile : public CBaseTempEntity
    float m_flExpireTime;
 };
 
-DeclareNetworkClass(CTEDOTAProjectile);
+DeclareClientClass(CTEDOTAProjectile);
 
 }

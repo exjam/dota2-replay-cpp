@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseCombatCharacter.h"
 
 namespace dota
@@ -21,6 +21,6 @@ struct CAI_BaseNPC : public CBaseCombatCharacter
    float m_flTimePingEffect;
 };
 
-DeclareNetworkClass(CAI_BaseNPC);
+DeclareClientClass(CAI_BaseNPC);
 
 }

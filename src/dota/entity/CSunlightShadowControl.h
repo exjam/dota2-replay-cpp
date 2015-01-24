@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 
@@ -21,6 +21,6 @@ struct CSunlightShadowControl
    uint32_t m_bEnableShadows;
 };
 
-DeclareNetworkClass(CSunlightShadowControl);
+DeclareClientClass(CSunlightShadowControl);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 
@@ -26,7 +26,7 @@ struct CDotaTutorialNetworker
    uint32_t m_nLocationID;
 };
 
-DeclareNetworkStruct(DT_SpeechBubbleInfo);
-DeclareNetworkClass(CDotaTutorialNetworker);
+DeclareClientStruct(DT_SpeechBubbleInfo);
+DeclareClientClass(CDotaTutorialNetworker);
 
 }

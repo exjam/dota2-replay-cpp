@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 #include "CBaseEntity.h"
@@ -32,8 +32,8 @@ struct CTeamShowcaseEditorManager : public CBaseEntity
    DT_ShowcaseData m_Data;
 };
 
-DeclareNetworkStruct(DT_ShowcaseSlot);
-DeclareNetworkStruct(DT_ShowcaseData);
-DeclareNetworkClass(CTeamShowcaseEditorManager);
+DeclareClientStruct(DT_ShowcaseSlot);
+DeclareClientStruct(DT_ShowcaseData);
+DeclareClientClass(CTeamShowcaseEditorManager);
 
 }

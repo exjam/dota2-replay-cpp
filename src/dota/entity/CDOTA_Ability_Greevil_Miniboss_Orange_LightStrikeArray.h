@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray : public CDOTABase
 {
 };
 
-DeclareNetworkClass(CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray);
+DeclareClientClass(CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray);
 
 }

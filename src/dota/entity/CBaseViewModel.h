@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -22,6 +22,6 @@ struct CBaseViewModel
    uint32_t m_nMuzzleFlashParity;
 };
 
-DeclareNetworkClass(CBaseViewModel);
+DeclareClientClass(CBaseViewModel);
 
 }

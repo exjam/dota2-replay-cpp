@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -15,6 +15,6 @@ struct CSceneEntity
    uint32_t m_hActorList[16];
 };
 
-DeclareNetworkClass(CSceneEntity);
+DeclareClientClass(CSceneEntity);
 
 }

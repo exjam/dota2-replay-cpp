@@ -695,4383 +695,5079 @@
 namespace dota
 {
 
-BeginNetworkClass(CAI_BaseNPC, DT_AI_BaseNPC);
-   NetworkBaseClass(CBaseCombatCharacter);
-   NetworkProperty(m_lifeState);
-   NetworkProperty(m_bPerformAvoidance);
-   NetworkProperty(m_bIsMoving);
-   NetworkProperty(m_bFadeCorpse);
-   NetworkProperty(m_iDeathPose);
-   NetworkProperty(m_iDeathFrame);
-   NetworkProperty(m_bSpeedModActive);
-   NetworkProperty(m_iSpeedModRadius);
-   NetworkProperty(m_iSpeedModSpeed);
-   NetworkProperty(m_bImportanRagdoll);
-   NetworkProperty(m_flTimePingEffect);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_ServerAnimationData);
-   NetworkProperty(m_flCycle);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseAnimating, DT_BaseAnimating);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nForceBone);
-   NetworkProperty(m_vecForce);
-   NetworkProperty(m_nSkin);
-   NetworkProperty(m_nBody);
-   NetworkProperty(m_nHitboxSet);
-   NetworkProperty(m_flModelScale);
-   NetworkProperty(m_flPoseParameter);
-   NetworkProperty(m_nSequence);
-   NetworkProperty(m_flPlaybackRate);
-   NetworkProperty(m_flEncodedController);
-   NetworkProperty(m_bClientSideAnimation);
-   NetworkProperty(m_bClientSideFrameReset);
-   NetworkProperty(m_bClientSideRagdoll);
-   NetworkProperty(m_nNewSequenceParity);
-   NetworkProperty(m_nResetEventsParity);
-   NetworkProperty(m_nMuzzleFlashParity);
-   NetworkProperty(m_hLightingOrigin);
-   NetworkProperty(serveranimdata);
-   NetworkProperty(m_flFrozen);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_Animationlayer);
-   NetworkProperty(m_nSequence);
-   NetworkProperty(m_flCycle);
-   NetworkProperty(m_flPrevCycle);
-   NetworkProperty(m_flWeight);
-   NetworkProperty(m_nOrder);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_OverlayVars);
-   NetworkProperty(m_AnimOverlay);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseAnimatingOverlay, DT_BaseAnimatingOverlay);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(overlay_vars);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_AttributeContainer);
-   NetworkProperty(m_hOuter);
-   NetworkProperty(m_ProviderType);
-   NetworkProperty(m_iReapplyProvisionParity);
-   NetworkProperty(m_Item);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_AttributeList);
-   NetworkProperty(m_Attributes);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_ScriptCreatedAttribute);
-   NetworkProperty(m_iAttributeDefinitionIndex);
-   NetworkProperty(m_iRawValue32);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_ScriptCreatedItem);
-   NetworkProperty(m_iItemDefinitionIndex);
-   NetworkProperty(m_iEntityLevel);
-   NetworkProperty(m_iItemIDHigh);
-   NetworkProperty(m_iItemIDLow);
-   NetworkProperty(m_iAccountID);
-   NetworkProperty(m_iEntityQuality);
-   NetworkProperty(m_bInitialized);
-   NetworkProperty(m_AttributeList);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseAttributableItem, DT_BaseAttributableItem);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_AttributeManager);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseButton, DT_BaseButton);
-   NetworkBaseClass(CBaseToggle);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_BCCLocalPlayerExclusive);
-   NetworkProperty(m_flNextAttack);
-   NetworkProperty(m_hMyWeapons);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseCombatCharacter, DT_BaseCombatCharacter);
-   NetworkBaseClass(CBaseFlex);
-   NetworkProperty(bcc_localdata);
-   NetworkProperty(m_hActiveWeapon);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_LocalActiveWeaponData);
-   NetworkProperty(m_flNextPrimaryAttack);
-   NetworkProperty(m_flNextSecondaryAttack);
-   NetworkProperty(m_nNextThinkTick);
-   NetworkProperty(m_flTimeWeaponIdle);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_LocalWeaponData);
-   NetworkProperty(m_iClip1);
-   NetworkProperty(m_iClip2);
-   NetworkProperty(m_iPrimaryAmmoType);
-   NetworkProperty(m_iSecondaryAmmoType);
-   NetworkProperty(m_nViewModelIndex);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseCombatWeapon, DT_BaseCombatWeapon);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(LocalWeaponData);
-   NetworkProperty(LocalActiveWeaponData);
-   NetworkProperty(m_iViewModelIndex);
-   NetworkProperty(m_iWorldModelIndex);
-   NetworkProperty(m_iState);
-   NetworkProperty(m_hOwner);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseDoor, DT_BaseDoor);
-   NetworkBaseClass(CBaseToggle);
-   NetworkProperty(m_flWaveHeight);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_AnimTimeMustBeFirst);
-   NetworkProperty(m_flAnimTime);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_CollisionProperty);
-   NetworkProperty(m_vecMins);
-   NetworkProperty(m_vecMaxs);
-   NetworkProperty(m_nSolidType);
-   NetworkProperty(m_usSolidFlags);
-   NetworkProperty(m_nSurroundType);
-   NetworkProperty(m_triggerBloat);
-   NetworkProperty(m_vecSpecifiedSurroundingMins);
-   NetworkProperty(m_vecSpecifiedSurroundingMaxs);
-EndNetworkStruct();
-
-BeginNetworkClass(CBaseEntity, DT_BaseEntity);
-   NetworkProperty(AnimTimeMustBeFirst);
-   NetworkProperty(m_flSimulationTime);
-   NetworkProperty(m_flCreateTime);
-   NetworkProperty(m_ubInterpolationFrame);
-   NetworkProperty(m_cellbits);
-   NetworkProperty(m_cellX);
-   NetworkProperty(m_cellY);
-   NetworkProperty(m_cellZ);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_Collision);
-   NetworkProperty(m_nRenderFX);
-   NetworkProperty(m_nRenderMode);
-   NetworkProperty(m_fEffects);
-   NetworkProperty(m_clrRender);
-   NetworkProperty(m_iTeamNum);
-   NetworkProperty(m_CollisionGroup);
-   NetworkProperty(m_flElasticity);
-   NetworkProperty(m_flShadowCastDistance);
-   NetworkProperty(m_hOwnerEntity);
-   NetworkProperty(m_hEffectEntity);
-   NetworkProperty(moveparent);
-   NetworkProperty(m_iParentAttachment);
-   NetworkProperty(m_iName);
-   NetworkProperty(movetype);
-   NetworkProperty(movecollide);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_iTextureFrameIndex);
-   NetworkProperty(m_bSimulatedEveryTick);
-   NetworkProperty(m_bAnimatedEveryTick);
-   NetworkProperty(m_bAlternateSorting);
-   NetworkProperty(m_fadeMinDist);
-   NetworkProperty(m_fadeMaxDist);
-   NetworkProperty(m_flFadeScale);
-   NetworkProperty(m_nMinCPULevel);
-   NetworkProperty(m_nMaxCPULevel);
-   NetworkProperty(m_nMinGPULevel);
-   NetworkProperty(m_nMaxGPULevel);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseFlex, DT_BaseFlex);
-   NetworkBaseClass(CBaseAnimatingOverlay);
-   NetworkProperty(m_flexWeight);
-   NetworkProperty(m_blinktoggle);
-   NetworkProperty(m_viewtarget);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseGrenade, DT_BaseGrenade);
-   NetworkBaseClass(CBaseCombatCharacter);
-   NetworkProperty(m_flDamage);
-   NetworkProperty(m_DmgRadius);
-   NetworkProperty(m_bIsLive);
-   NetworkProperty(m_hThrower);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_fFlags);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseParticleEntity, DT_BaseParticleEntity);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_Local);
-   NetworkProperty(m_chAreaBits);
-   NetworkProperty(m_chAreaPortalBits);
-   NetworkProperty(m_iHideHUD);
-   NetworkProperty(m_flFOVRate);
-   NetworkProperty(m_bDucked);
-   NetworkProperty(m_bDucking);
-   NetworkProperty(m_bInDuckJump);
-   NetworkProperty(m_nDuckTimeMsecs);
-   NetworkProperty(m_nDuckJumpTimeMsecs);
-   NetworkProperty(m_nJumpTimeMsecs);
-   NetworkProperty(m_flFallVelocity);
-   NetworkProperty(m_vecPunchAngle);
-   NetworkProperty(m_vecPunchAngleVel);
-   NetworkProperty(m_bDrawViewmodel);
-   NetworkProperty(m_bWearingSuit);
-   NetworkProperty(m_bPoisoned);
-   NetworkProperty(m_flStepSize);
-   NetworkProperty(m_bAllowAutoMovement);
-   NetworkProperty(m_skybox3d.scale);
-   NetworkProperty(m_skybox3d.origin);
-   NetworkProperty(m_skybox3d.area);
-   NetworkProperty(m_skybox3d.fog.enable);
-   NetworkProperty(m_skybox3d.fog.blend);
-   NetworkProperty(m_skybox3d.fog.dirPrimary);
-   NetworkProperty(m_skybox3d.fog.colorPrimary);
-   NetworkProperty(m_skybox3d.fog.colorSecondary);
-   NetworkProperty(m_skybox3d.fog.start);
-   NetworkProperty(m_skybox3d.fog.end);
-   NetworkProperty(m_skybox3d.fog.maxdensity);
-   NetworkProperty(m_skybox3d.fog.HDRColorScale);
-   NetworkProperty(m_audio.localSound);
-   NetworkProperty(m_audio.soundscapeIndex);
-   NetworkProperty(m_audio.localBits);
-   NetworkProperty(m_audio.entIndex);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_LocalPlayerExclusive);
-   NetworkProperty(m_Local);
-   NetworkProperty(m_vecViewOffset);
-   NetworkProperty(m_flFriction);
-   NetworkProperty(m_iAmmo);
-   NetworkProperty(m_fOnTarget);
-   NetworkProperty(m_nTickBase);
-   NetworkProperty(m_nNextThinkTick);
-   NetworkProperty(m_hLastWeapon);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_vecBaseVelocity);
-   NetworkProperty(m_hConstraintEntity);
-   NetworkProperty(m_vecConstraintCenter);
-   NetworkProperty(m_flConstraintRadius);
-   NetworkProperty(m_flConstraintWidth);
-   NetworkProperty(m_flConstraintSpeedFactor);
-   NetworkProperty(m_bConstraintPastRadius);
-   NetworkProperty(m_flDeathTime);
-   NetworkProperty(m_nWaterLevel);
-   NetworkProperty(m_flLaggedMovementValue);
-   NetworkProperty(m_hTonemapController);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_PlayerState);
-   NetworkProperty(deadflag);
-EndNetworkStruct();
-
-BeginNetworkClass(CBasePlayer, DT_BasePlayer);
-   NetworkBaseClass(CBaseCombatCharacter);
-   NetworkProperty(pl);
-   NetworkProperty(m_hVehicle);
-   NetworkProperty(m_hUseEntity);
-   NetworkProperty(m_hGroundEntity);
-   NetworkProperty(m_iHealth);
-   NetworkProperty(m_lifeState);
-   NetworkProperty(m_iBonusProgress);
-   NetworkProperty(m_iBonusChallenge);
-   NetworkProperty(m_flMaxspeed);
-   NetworkProperty(m_fFlags);
-   NetworkProperty(m_iObserverMode);
-   NetworkProperty(m_hObserverTarget);
-   NetworkProperty(m_iFOV);
-   NetworkProperty(m_iFOVStart);
-   NetworkProperty(m_flFOVTime);
-   NetworkProperty(m_iDefaultFOV);
-   NetworkProperty(m_hZoomOwner);
-   NetworkProperty(m_hViewModel);
-   NetworkProperty(m_szLastPlaceName);
-   NetworkProperty(m_vecLadderNormal);
-   NetworkProperty(m_ladderSurfaceProps);
-   NetworkProperty(m_hPostProcessCtrl);
-   NetworkProperty(m_hColorCorrectionCtrl);
-   NetworkProperty(m_PlayerFog.m_hCtrl);
-   NetworkProperty(m_currentSCLPacked);
-   NetworkProperty(m_hViewEntity);
-   NetworkProperty(localdata);
-EndNetworkClass();
-
-BeginNetworkClass(CBasePropDoor, DT_BasePropDoor);
-   NetworkBaseClass(CDynamicProp);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseTempEntity, DT_BaseTempEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseToggle, DT_BaseToggle);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseTrigger, DT_BaseTrigger);
-   NetworkBaseClass(CBaseToggle);
-   NetworkProperty(m_bClientSidePredicted);
-   NetworkProperty(m_spawnflags);
-EndNetworkClass();
-
-BeginNetworkClass(CBaseViewModel, DT_BaseViewModel);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_hWeapon);
-   NetworkProperty(m_nBody);
-   NetworkProperty(m_nSkin);
-   NetworkProperty(m_nSequence);
-   NetworkProperty(m_nViewModelIndex);
-   NetworkProperty(m_flPlaybackRate);
-   NetworkProperty(m_fEffects);
-   NetworkProperty(m_nAnimationParity);
-   NetworkProperty(m_hOwner);
-   NetworkProperty(m_nNewSequenceParity);
-   NetworkProperty(m_nResetEventsParity);
-   NetworkProperty(m_nMuzzleFlashParity);
-EndNetworkClass();
-
-BeginNetworkClass(CBeam, DT_Beam);
-   NetworkProperty(m_nBeamType);
-   NetworkProperty(m_nBeamFlags);
-   NetworkProperty(m_nNumBeamEnts);
-   NetworkProperty(m_hAttachEntity);
-   NetworkProperty(m_nAttachIndex);
-   NetworkProperty(m_nHaloIndex);
-   NetworkProperty(m_fHaloScale);
-   NetworkProperty(m_fWidth);
-   NetworkProperty(m_fEndWidth);
-   NetworkProperty(m_fFadeLength);
-   NetworkProperty(m_fAmplitude);
-   NetworkProperty(m_fStartFrame);
-   NetworkProperty(m_fSpeed);
-   NetworkProperty(m_nRenderFX);
-   NetworkProperty(m_nRenderMode);
-   NetworkProperty(m_flFrameRate);
-   NetworkProperty(m_flHDRColorScale);
-   NetworkProperty(m_flFrame);
-   NetworkProperty(m_clrRender);
-   NetworkProperty(m_nClipStyle);
-   NetworkProperty(m_vecEndPos);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(moveparent);
-EndNetworkClass();
-
-BeginNetworkClass(CBeamSpotlight, DT_BeamSpotlight);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nHaloIndex);
-   NetworkProperty(m_bSpotlightOn);
-   NetworkProperty(m_bHasDynamicLight);
-   NetworkProperty(m_flSpotlightMaxLength);
-   NetworkProperty(m_flSpotlightGoalWidth);
-   NetworkProperty(m_flHDRColorScale);
-   NetworkProperty(m_flRotationSpeed);
-   NetworkProperty(m_nRotationAxis);
-EndNetworkClass();
-
-BeginNetworkClass(CBoneFollower, DT_BoneFollower);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_modelIndex);
-   NetworkProperty(m_solidIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CBreakableProp, DT_BreakableProp);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_bClientPhysics);
-EndNetworkClass();
-
-BeginNetworkClass(CBreakableSurface, DT_BreakableSurface);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nNumWide);
-   NetworkProperty(m_nNumHigh);
-   NetworkProperty(m_flPanelWidth);
-   NetworkProperty(m_flPanelHeight);
-   NetworkProperty(m_vNormal);
-   NetworkProperty(m_vCorner);
-   NetworkProperty(m_bIsBroken);
-   NetworkProperty(m_nSurfaceType);
-   NetworkProperty(m_RawPanelBitVec);
-EndNetworkClass();
-
-BeginNetworkClass(CColorCorrection, DT_ColorCorrection);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_MinFalloff);
-   NetworkProperty(m_MaxFalloff);
-   NetworkProperty(m_flCurWeight);
-   NetworkProperty(m_flMaxWeight);
-   NetworkProperty(m_flFadeInDuration);
-   NetworkProperty(m_flFadeOutDuration);
-   NetworkProperty(m_netlookupFilename);
-   NetworkProperty(m_bEnabled);
-   NetworkProperty(m_bMaster);
-   NetworkProperty(m_bClientSide);
-   NetworkProperty(m_bExclusive);
-EndNetworkClass();
-
-BeginNetworkClass(CColorCorrectionVolume, DT_ColorCorrectionVolume);
-   NetworkProperty(m_Weight);
-   NetworkProperty(m_lookupFilename);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AbyssalUnderlord_DarkRift, DT_DOTA_Ability_AbyssalUnderlord_DarkRift);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AbyssalUnderlord_Firestorm, DT_DOTA_Ability_AbyssalUnderlord_Firestorm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AbyssalUnderlord_PitOfMalice, DT_DOTA_Ability_AbyssalUnderlord_PitOfMalice);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Alchemist_AcidSpray, DT_DOTA_Ability_Alchemist_AcidSpray);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AncientApparition_ChillingTouch, DT_DOTA_Ability_AncientApparition_ChillingTouch);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AncientApparition_ColdFeet, DT_DOTA_Ability_AncientApparition_ColdFeet);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AncientApparition_IceBlast, DT_DOTA_Ability_AncientApparition_RocketFlare);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AncientApparition_IceVortex, DT_DOTA_Ability_AncientApparition_IceVortex);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AntiMage_Blink, DT_DOTA_Ability_AntiMage_Blink);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AntiMage_ManaVoid, DT_DOTA_Ability_AntiMage_ManaVoid);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_AttributeBonus, DT_DOTA_Ability_AttributeBonus);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Axe_BerserkersCall, DT_DOTA_Ability_Axe_BerserkersCall);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Axe_CounterHelix, DT_DOTA_Ability_Axe_CounterHelix);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Axe_CullingBlade, DT_DOTA_Ability_Axe_CullingBlade);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Bane_FiendsGrip, DT_DOTA_Ability_Bane_FiendsGrip);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Batrider_Flamebreak, DT_DOTA_Ability_Batrider_Flamebreak);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Batrider_StickyNapalm, DT_DOTA_Ability_Batrider_StickyNapalm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Beastmaster_PrimalRoar, DT_DOTA_Ability_Beastmaster_PrimalRoar);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Bloodseeker_Bloodbath, DT_DOTA_Ability_Bloodseeker_Bloodbath);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_BountyHunter_ShurikenToss, DT_DOTA_Ability_BountyHunter_ShurikenToss);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Brewmaster_DispelMagic, DT_DOTA_Ability_Brewmaster_DispelMagic);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Brewmaster_DrunkenBrawler, DT_DOTA_Ability_Brewmaster_DrunkenBrawler);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_iBrawlActive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Brewmaster_DrunkenHaze, DT_DOTA_Ability_Brewmaster_DrunkenHaze);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Brewmaster_PrimalSplit, DT_DOTA_Ability_Brewmaster_PrimalSplit);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_hPrimary);
-   NetworkProperty(m_hSecondary);
-   NetworkProperty(m_hTertiary);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Bristleback_QuillSpray, DT_DOTA_Ability_Bristleback_QuillSpray);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Broodmother_SpinWeb, DT_DOTA_Ability_Broodmother_SpinWeb);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Centaur_Stampede, DT_DOTA_Ability_Centaur_Stampede);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_ChaosKnight_Phantasm, DT_DOTA_Ability_ChaosKnight_Phantasm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Chen_HandOfGod, DT_DOTA_Ability_Chen_HandOfGod);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Chen_HolyPersuasion, DT_DOTA_Ability_Chen_HolyPersuasion);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Chen_TestOfFaithTeleport, DT_DOTA_Ability_Chen_TestOfFaithTeleport);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Courier_TakeStashItems, DT_DOTA_Ability_Courier_TakeStashItems);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Courier_TransferItems, DT_DOTA_Ability_Courier_TransferItems);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_CrystalMaiden_CrystalNova, DT_DOTA_Ability_CrystalMaiden_CrystalNova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_CrystalMaiden_FreezingField, DT_DOTA_Ability_CrystalMaiden_FreezingField);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DarkSeer_Vacuum, DT_DOTA_Ability_DarkSeer_Vacuum);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DataDriven, DT_DOTA_Ability_DataDriven);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Dazzle_Weave, DT_DOTA_Ability_Dazzle_Weave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DeathProphet_CarrionSwarm, DT_DOTA_Ability_DeathProphet_CarrionSwarm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DeathProphet_Silence, DT_DOTA_Ability_DeathProphet_Silence);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Disruptor_KineticField, DT_DOTA_Ability_Disruptor_KineticField);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Disruptor_StaticStorm, DT_DOTA_Ability_Disruptor_StaticStorm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DoomBringer_Devour, DT_DOTA_Ability_DoomBringer_Devour);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DragonKnight_BreatheFire, DT_DOTA_Unit_Ability_DragonKnight_BreatheFire);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DrowRanger_Silence, DT_DOTA_Ability_DrowRanger_Silence);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_DrowRanger_WaveOfSilence, DT_DOTA_Unit_Ability_DrowRanger_WaveOfSilence);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EarthSpirit_BoulderSmash, DT_DOTA_Ability_EarthSpirit_BoulderSmash);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EarthSpirit_GeomagneticGrip, DT_DOTA_Ability_EarthSpirit_GeomagneticGrip);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EarthSpirit_Petrify, DT_DOTA_Ability_EarthSpirit_Petrify);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EarthSpirit_RollingBoulder, DT_DOTA_Ability_EarthSpirit_RollingBoulder);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EarthSpirit_StoneCaller, DT_DOTA_Ability_EarthSpirit_StoneCaller);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Elder_Titan_EarthSplitter, DT_DOTA_Unit_Ability_Elder_Titan_EarthSplitter);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EmberSpirit_Activate_FireRemnant, DT_DOTA_Ability_EmberSpirit_Activate_FireRemnant);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EmberSpirit_FireRemnant, DT_DOTA_Ability_EmberSpirit_FireRemnant);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EmberSpirit_SearingChains, DT_DOTA_Ability_EmberSpirit_SearingChains);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_EmberSpirit_SleightOfFist, DT_DOTA_Ability_EmberSpirit_SleightOfFist);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enchantress_Impetus, DT_DOTA_Ability_Enchantress_Impetus);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enchantress_NaturesAttendants, DT_DOTA_Ability_Enchantress_NaturesAttendants);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enchantress_Untouchable, DT_DOTA_Ability_Enchantress_Untouchable);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enigma_BlackHole, DT_DOTA_Ability_Enigma_BlackHole);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enigma_DemonicConversion, DT_DOTA_Ability_Enigma_DemonicConversion);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Enigma_MidnightPulse, DT_DOTA_Ability_Enigma_MidnightPulse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_FacelessVoid_Chronosphere, DT_DOTA_Ability_FacelessVoid_Chronosphere);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_FacelessVoid_TimeWalk, DT_DOTA_Unit_Ability_FacelessVoid_TimeWalk);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Furion_ForceOfNature, DT_DOTA_Ability_Furion_ForceOfNature);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Furion_Teleportation, DT_DOTA_Ability_Furion_Teleportation);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_BlackHole, DT_DOTA_Ability_Greevil_BlackHole);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_BladeFury, DT_DOTA_Ability_Greevil_BladeFury);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Bloodlust, DT_DOTA_Ability_Greevil_Bloodlust);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_ColdSnap, DT_DOTA_Ability_Greevil_ColdSnap);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Decrepify, DT_DOTA_Ability_Greevil_Decrepify);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Diabolic_Edict, DT_DOTA_Ability_Greevil_Diabolic_Edict);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_EchoSlam, DT_DOTA_Ability_Greevil_EchoSlam);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Fatal_Bonds, DT_DOTA_Ability_Greevil_Fatal_Bonds);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_FleshGolem, DT_DOTA_Ability_Greevil_FleshGolem);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_IceWall, DT_DOTA_Ability_Greevil_IceWall);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_LagunaBlade, DT_DOTA_Ability_Greevil_LagunaBlade);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_LeechSeed, DT_DOTA_Ability_Greevil_LeechSeed);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Magic_Missile, DT_DOTA_Ability_Greevil_Magic_Missile);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Maledict, DT_DOTA_Ability_Greevil_Maledict);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_MeatHook, DT_DOTA_Ability_Greevil_MeatHook);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Black_BrainSap, DT_DOTA_Ability_Greevil_Miniboss_Black_BrainSap);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Black_Nightmare, DT_DOTA_Ability_Greevil_Miniboss_Black_Nightmare);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Blue_ColdFeet, DT_DOTA_Ability_Greevil_Miniboss_White_ColdFeet);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Blue_IceVortex, DT_DOTA_Ability_Greevil_Miniboss_White_IceVortex);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Green_LivingArmor, DT_DOTA_Ability_Greevil_Miniboss_Green_LivingArmor);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Green_Overgrowth, DT_DOTA_Ability_Greevil_Miniboss_Green_Overgrowth);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Orange_DragonSlave, DT_DOTA_Ability_Greevil_Miniboss_Orange_DragonSlave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray, DT_DOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Purple_PlagueWard, DT_DOTA_Ability_Greevil_Miniboss_Purple_PlagueWard);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Purple_VenomousGale, DT_DOTA_Ability_Greevil_Miniboss_Purple_VenomousGale);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Red_Earthshock, DT_DOTA_Ability_Greevil_Miniboss_Red_Earthshock);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Red_Overpower, DT_DOTA_Ability_Greevil_Miniboss_Red_Overpower);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Sight, DT_DOTA_Ability_Greevil_Miniboss_Sight);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_White_Degen_Aura, DT_DOTA_Ability_Greevil_Miniboss_White_Degen_Aura);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_White_Purification, DT_DOTA_Ability_Greevil_Miniboss_White_Purification);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Yellow_IonShell, DT_DOTA_Ability_Greevil_Miniboss_Yellow_IonShell);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Miniboss_Yellow_Surge, DT_DOTA_Ability_Greevil_Miniboss_Yellow_Surge);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_NaturesAttendants, DT_DOTA_Ability_Greevil_NaturesAttendants);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_PhantomStrike, DT_DOTA_Ability_Greevil_PhantomStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_PoisonNova, DT_DOTA_Ability_Greevil_PoisonNova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Purification, DT_DOTA_Ability_Greevil_Purification);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_Rot, DT_DOTA_Ability_Greevil_Rot);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_ShadowStrike, DT_DOTA_Ability_Greevil_ShadowStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_ShadowWave, DT_DOTA_Ability_Greevil_ShadowWave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Greevil_TimeLock, DT_DOTA_Ability_Greevil_TimeLock);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Gyrocopter_Call_Down, DT_DOTA_Ability_Gyrocopter_Call_Down);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Healing_Campfire, DT_DOTA_Ability_Healing_Campfire);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Holdout_CullingBlade, DT_DOTA_Ability_Holdout_CullingBlade);
-   NetworkBaseClass(CDOTA_Ability_Axe_CullingBlade);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Holdout_GladiatorsUnite, DT_DOTA_Ability_Holdout_GladiatorsUnite);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Holdout_Multishot, DT_DOTA_Ability_Holdout_Multishot);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Holdout_Omnislash, DT_DOTA_Ability_Holdout_Omnislash);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Huskar_Life_Break, DT_DOTA_Ability_Huskar_Life_Break);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_DeafeningBlast, DT_DOTA_Unit_Ability_Invoker_DeafeningBlast);
-   NetworkBaseClass(CDOTA_Ability_Invoker_InvokedBase);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_EMP, DT_DOTA_Ability_Invoker_EMP);
-   NetworkBaseClass(CDOTA_Ability_Invoker_InvokedBase);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_Invoke, DT_DOTA_Ability_Invoker_Invoke);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_InvokedBase, DT_DOTA_Ability_Invoker_InvokedBase);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_nQuasLevel);
-   NetworkProperty(m_nWexLevel);
-   NetworkProperty(m_nExortLevel);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_SunStrike, DT_DOTA_Ability_Invoker_SunStrike);
-   NetworkBaseClass(CDOTA_Ability_Invoker_InvokedBase);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Invoker_Tornado, DT_DOTA_Unit_Ability_Invoker_Tornado);
-   NetworkBaseClass(CDOTA_Ability_Invoker_InvokedBase);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Jakiro_DualBreath, DT_DOTA_Unit_Ability_Jakiro_DualBreath);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Jakiro_IcePath, DT_DOTA_Unit_Ability_Jakiro_IcePath);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Jakiro_Macropyre, DT_DOTA_Unit_Ability_Jakiro_Macropyre);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Juggernaut_HealingWard, DT_DOTA_Ability_Juggernaut_HealingWard);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Juggernaut_Omnislash, DT_DOTA_Ability_Juggernaut_Omnislash);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_KeeperOfTheLight_BlindingLight, DT_DOTA_Ability_KeeperOfTheLight_BlindingLight);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_KeeperOfTheLight_Illuminate, DT_DOTA_Unit_Ability_KeeperOfTheLight_Illuminate);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_KeeperOfTheLight_Recall, DT_DOTA_Ability_KeeperOfTheLight_Recall);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Kunkka_GhostShip, DT_DOTA_Unit_Ability_Kunkka_GhostShip);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Kunkka_Tidebringer, DT_DOTA_Ability_Kunkka_Tidebringer);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Kunkka_Torrent, DT_DOTA_Ability_Kunkka_Torrent);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Legion_Commander_MomentOfCourage, DT_DOTA_Ability_Legion_Commander_MomentOfCourage);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Legion_Commander_OverwhelmingOdds, DT_DOTA_Ability_Legion_Commander_OverwhelmingOdds);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Leshrac_Diabolic_Edict, DT_DOTA_Ability_Leshrac_Diabolic_Edict);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Leshrac_Pulse_Nova, DT_DOTA_Ability_Leshrac_Pulse_Nova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Leshrac_Split_Earth, DT_DOTA_Ability_Leshrac_Split_Earth);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lich_ChainFrost, DT_DOTA_Ability_Lich_ChainFrost);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lich_FrostNova, DT_DOTA_Ability_Lich_FrostNova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Life_Stealer_Infest, DT_DOTA_Ability_Life_Stealer_Infest);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lina_DragonSlave, DT_DOTA_Unit_Ability_Lina_DragonSlave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lina_LagunaBlade, DT_DOTA_Ability_Lina_LagunaBlade);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lina_LightStrikeArray, DT_DOTA_Ability_Lina_LightStrikeArray);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lion_FingerOfDeath, DT_DOTA_Ability_Lion_FingerOfDeath);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lion_Impale, DT_DOTA_Unit_Ability_Lion_Impale);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lion_ManaDrain, DT_DOTA_Ability_Lion_ManaDrain);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_LoneDruid_Rabid, DT_DOTA_Ability_LoneDruid_Rabid);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_LoneDruid_SpiritBear, DT_DOTA_Ability_LoneDruid_SpiritBear);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_hBear);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_LoneDruid_SpiritBear_Return, DT_DOTA_Ability_LoneDruid_SpiritBear_Return);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_LoneDruid_TrueForm_BattleCry, DT_DOTA_Ability_LoneDruid_TrueForm_BattleCry);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_LoneDruid_TrueForm_Druid, DT_DOTA_Ability_LoneDruid_TrueForm_Druid);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Luna_Eclipse, DT_DOTA_Ability_Luna_Eclipse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Luna_LunarBlessing, DT_DOTA_Ability_Luna_LunarBlessing);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lycan_Howl, DT_DOTA_Ability_Lycan_Howl);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Lycan_SummonWolves, DT_DOTA_Ability_Lycan_SummonWolves);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Magnataur_ReversePolarity, DT_DOTA_Ability_Magnataur_ReversePolarity);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Magnataur_Shockwave, DT_DOTA_Unit_Ability_Magnataur_Shockwave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Meepo_DividedWeStand, DT_DOTA_Ability_Meepo_DividedWeStand);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_entPrimeDividedWeStand);
-   NetworkProperty(m_entNextDividedWeStand);
-   NetworkProperty(m_nWhichDividedWeStand);
-   NetworkProperty(m_nNumDividedWeStand);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Meepo_Earthbind, DT_DOTA_Ability_Meepo_Earthbind);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Meepo_Poof, DT_DOTA_Ability_Meepo_Poof);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Morphling_Replicate, DT_DOTA_Ability_Morphling_Replicate);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Morphling_Waveform, DT_DOTA_Unit_Ability_Morphling_Waveform);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_NagaSiren_MirrorImage, DT_DOTA_Ability_NagaSiren_MirrorImage);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_NagaSiren_RipTide, DT_DOTA_Ability_NagaSiren_RipTide);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Necrolyte_Death_Pulse, DT_DOTA_Ability_Necrolyte_Death_Pulse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Necrolyte_ReapersScythe, DT_DOTA_Ability_Necrolyte_ReapersScythe);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nevermore_Requiem, DT_Ability_Nevermore_Requiem);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Apocalypse, DT_DOTA_Ability_Nian_Apocalypse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Eruption, DT_DOTA_Ability_Nian_Eruption);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Frenzy, DT_DOTA_Ability_Nian_Frenzy);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Hurricane, DT_DOTA_Ability_Nian_Hurricane);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Roar, DT_DOTA_Ability_Nian_Roar);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Sigils, DT_DOTA_Ability_Nian_Sigils);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Tail_Swipe, DT_DOTA_Ability_Nian_Tail_Swipe);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Waterball, DT_DOTA_Ability_Nian_Waterball);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nian_Whirlpool, DT_DOTA_Ability_Nian_Whirlpool);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Nyx_Assassin_Impale, DT_DOTA_Unit_Ability_Nyx_Assassin_Impale);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Obsidian_Destroyer_ArcaneOrb, DT_DOTA_Ability_Obsidian_Destroyer_ArcaneOrb);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Obsidian_Destroyer_AstralImprisonment, DT_DOTA_Ability_Obsidian_Destroyer_AstralImprisonment);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Obsidian_Destroyer_SanityEclipse, DT_Ability_Obsidian_Destroyer_SanityEclipse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Ogre_Magi_Bloodlust, DT_DOTA_Ability_Ogre_Magi_Bloodlust);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Ogre_Magi_Fireblast, DT_DOTA_Ability_Ogre_Magi_Fireblast);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Ogre_Magi_Multicast, DT_DOTA_Ability_Ogre_Magi_Multicast);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Ogre_Magi_Unrefined_Fireblast, DT_DOTA_Ability_Ogre_Magi_Unrefined_Fireblast);
-   NetworkBaseClass(CDOTA_Ability_Ogre_Magi_Fireblast);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Oracle_FortunesEnd, DT_DOTA_Ability_Oracle_FortunesEnd);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_PhantomAssassin_PhantomStrike, DT_DOTA_Ability_PhantomAssassin_PhantomStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_PhantomLancer_Doppelwalk, DT_DOTA_Ability_PhantomLancer_Doppelwalk);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Phoenix_LaunchFireSpirit, DT_DOTA_Unit_Ability_Phoenix_LaunchFireSpirit);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Phoenix_Supernova, DT_DOTA_Ability_Phoenix_Supernova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Puck_DreamCoil, DT_DOTA_Ability_Puck_DreamCoil);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Puck_IllusoryOrb, DT_DOTA_Unit_Ability_Puck_IllusoryOrb);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Puck_WaningRift, DT_DOTA_Ability_Puck_WaningRift);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Pudge_Dismember, DT_DOTA_Ability_Pudge_Dismember);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_hVictim);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Pudge_MeatHook, DT_DOTA_Unit_Ability_Pudge_MeatHook);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Pugna_Decrepify, DT_DOTA_Ability_Pugna_Decrepify);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Pugna_LifeDrain, DT_DOTA_Ability_Pugna_LifeDrain);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Pugna_NetherBlast, DT_DOTA_Ability_Pugna_NetherBlast);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_QueenOfPain_Blink, DT_DOTA_Ability_QueenOfPain_Blink);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_QueenOfPain_SonicWave, DT_DOTA_Unit_Ability_QueenOfPain_SonicWave);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Rattletrap_BatteryAssault, DT_DOTA_Ability_Rattletrap_BatteryAssault);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Rattletrap_Hookshot, DT_DOTA_Ability_Rattletrap_Hookshot);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Rattletrap_RocketFlare, DT_DOTA_Ability_Rattletrap_RocketFlare);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Razor_PlasmaField, DT_DOTA_Ability_Razor_PlasmaField);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Riki_BlinkStrike, DT_DOTA_Ability_Riki_BlinkStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Riki_SmokeScreen, DT_DOTA_Ability_Riki_SmokeScreen);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Roshan_Halloween_Apocalypse, DT_DOTA_Ability_Roshan_Halloween_Apocalypse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Roshan_Halloween_Burn, DT_DOTA_Ability_Roshan_Halloween_Burn);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Roshan_Halloween_Fireball, DT_DOTA_Ability_Roshan_Halloween_Fireball);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Roshan_Toss, DT_DOTA_Ability_Roshan_Toss);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Roshan_WaveOfForce, DT_DOTA_Ability_Roshan_WaveOfForce);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Rubick_SpellSteal, DT_DOTA_Ability_Rubick_SpellSteal);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_ActivityModifier);
-   NetworkProperty(m_fStolenCastPoint);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Rubick_TelekinesisLand, DT_DOTA_Ability_Rubick_TelekinesisLand);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_SandKing_BurrowStrike, DT_DOTA_Unit_Ability_SandKing_BurrowStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_SandKing_Epicenter, DT_DOTA_Ability_SandKing_Epicenter);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_SatyrTrickster_Purge, DT_DOTA_Ability_SatyrTrickster_Purge);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Shadow_Demon_Disruption, DT_DOTA_Ability_Shadow_Demon_Disruption);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Shadow_Demon_Shadow_Poison, DT_DOTA_Unit_Ability_Shadow_Demon_Shadow_Poison);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Shadow_Demon_Soul_Catcher, DT_DOTA_Ability_Shadow_Demon_Soul_Catcher);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Shredder_Chakram, DT_DOTA_Ability_Shredder_Chakram);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Shredder_TimberChain, DT_DOTA_Ability_Shredder_TimberChain);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Silencer_CurseOfTheSilent, DT_DOTA_Ability_Silencer_CurseOfTheSilent);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Silencer_GlaivesOfWisdom, DT_DOTA_Ability_Silencer_GlaivesOfWisdom);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Skywrath_Mage_Mystic_Flare, DT_DOTA_Ability_Skywrath_Mage_Mystic_Flare);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Slardar_Slithereen_Crush, DT_DOTA_Ability_Slardar_Slithereen_Crush);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Slark_EssenceShift, DT_DOTA_Ability_Slark_EssenceShift);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Sniper_Shrapnel, DT_DOTA_Ability_Sniper_Shrapnel);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_SpiritBreaker_NetherStrike, DT_DOTA_Ability_SpiritBreaker_NetherStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_StormSpirit_BallLightning, DT_DOTA_Ability_StormSpirit_BallLightning);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Sven_StormBolt, DT_DOTA_Ability_Sven_StormBolt);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_FocusedDetonate, DT_DOTA_Ability_Techies_FocusedDetonate);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_LandMines, DT_DOTA_Ability_Techies_LandMines);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_Minefield_Sign, DT_DOTA_Ability_Techies_Minefield_Sign);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_RemoteMines, DT_DOTA_Ability_Techies_RemoteMines);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_RemoteMines_SelfDetonate, DT_DOTA_Ability_Techies_RemoteMines_SelfDetonate);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Techies_StasisTrap, DT_DOTA_Ability_Techies_StasisTrap);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Terrorblade_Sunder, DT_DOTA_Ability_Terrorblade_Sunder);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Throw_Coal, DT_DOTA_Ability_Throw_Coal);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Throw_Snowball, DT_DOTA_Ability_Throw_Snowball);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tidehunter_AnchorSmash, DT_DOTA_Ability_Tidehunter_AnchorSmash);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tidehunter_Ravage, DT_DOTA_Ability_Tidehunter_Ravage);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tiny_Avalanche, DT_DOTA_Ability_Tiny_Avalanche);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tiny_CraggyExterior, DT_DOTA_Ability_Tiny_CraggyExterior);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tiny_Toss, DT_DOTA_Ability_Tiny_Toss);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Treant_EyesInTheForest, DT_DOTA_Ability_Treant_EyesInTheForest);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Treant_Overgrowth, DT_DOTA_Ability_Treant_Overgrowth);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_TrollWarlord_BerserkersRage, DT_DOTA_Ability_TrollWarlord_BerserkersRage);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_TrollWarlord_WhirlingAxes_Ranged, DT_DOTA_Unit_Ability_TrollWarlord_WhirlingAxes_Ranged);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Tusk_FrozenSigil, DT_DOTA_Ability_Tusk_FrozenSigil);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Undying_Decay, DT_DOTA_Ability_Undying_Decay);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Undying_SoulRip, DT_DOTA_Ability_Undying_SoulRip);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_VengefulSpirit_Nether_Swap, DT_DOTA_Ability_VengefulSpirit_Nether_Swap);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_VengefulSpirit_WaveOfTerror, DT_DOTA_Unit_Ability_VengefulSpirit_WaveOfTerror);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Venomancer_PoisonNova, DT_DOTA_Ability_Venomancer_PoisonNova);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Venomancer_VenomousGale, DT_DOTA_Unit_Ability_Venomancer_VenomousGale);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Viper_ViperStrike, DT_DOTA_Ability_Viper_ViperStrike);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Visage_SummonFamiliars, DT_DOTA_Ability_Visage_SummonFamiliars);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Visage_SummonFamiliars_StoneForm, DT_DOTA_Ability_Visage_SummonFamiliars_StoneForm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Warlock_RainOfChaos, DT_DOTA_Ability_Warlock_RainOfChaos);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Warlock_Shadow_Word, DT_DOTA_Ability_Warlock_Shadow_Word);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Warlock_Upheaval, DT_DOTA_Ability_Warlock_Upheaval);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Weaver_TheSwarm, DT_DOTA_Unit_Ability_Weaver_TheSwarm);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Windrunner_FocusFire, DT_DOTA_Ability_Windrunner_FocusFire);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Windrunner_Powershot, DT_DOTA_Unit_Ability_Windrunner_Powershot);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Winter_Wyvern_Arctic_Burn, DT_DOTA_Unit_Ability_Winter_Wyvern_Arctic_Burn);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Winter_Wyvern_Cold_Embrace, DT_DOTA_Unit_Ability_Winter_Wyvern_Cold_Embrace);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Winter_Wyvern_Winters_Curse, DT_DOTA_Unit_Ability_Winter_Wyvern_Winters_Curse);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Wisp_Overcharge, DT_DOTA_Ability_Wisp_Overcharge);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Wisp_Relocate, DT_DOTA_Ability_Wisp_Relocate);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Wisp_Spirits, DT_DOTA_Ability_Wisp_Spirits);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_Wisp_Tether, DT_DOTA_Ability_Wisp_Tether);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_WitchDoctor_Maledict, DT_DOTA_Ability_WitchDoctor_Maledict);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_WitchDoctor_ParalyzingCask, DT_DOTA_Ability_WitchDoctor_ParalyzingCask);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Ability_WitchDoctor_VoodooRestoration, DT_DOTA_Ability_WitchDoctor_VoodooRestoration);
-   NetworkBaseClass(CDOTABaseAbility);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_DOTA_ModifierManager);
-   NetworkProperty(m_hModifierParent);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTA_UnitInventory);
-   NetworkProperty(m_hItems);
-   NetworkProperty(m_iParity);
-   NetworkProperty(m_hInventoryParent);
-   NetworkProperty(m_bStashEnabled);
-   NetworkProperty(m_hTransientCastItem);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTA_BaseNPC, DT_DOTA_BaseNPC);
-   NetworkBaseClass(NextBotCombatCharacter);
-   NetworkProperty(m_iCurrentLevel);
-   NetworkProperty(m_iCustomXPValue);
-   NetworkProperty(m_iIsControllableByPlayer);
-   NetworkProperty(m_bIsPhantom);
-   NetworkProperty(m_bIsAncient);
-   NetworkProperty(m_bStolenScepter);
-   NetworkProperty(m_bIsNeutralUnitType);
-   NetworkProperty(m_bIsSummoned);
-   NetworkProperty(m_bCanBeDominated);
-   NetworkProperty(m_bHasUpgradeableAbilities);
-   NetworkProperty(m_iBKBChargesUsed);
-   NetworkProperty(m_iHealth);
-   NetworkProperty(m_flHealthThinkRegen);
-   NetworkProperty(m_iMaxHealth);
-   NetworkProperty(m_iAttackCapabilities);
-   NetworkProperty(m_iDayTimeVisionRange);
-   NetworkProperty(m_iNightTimeVisionRange);
-   NetworkProperty(m_flMana);
-   NetworkProperty(m_flMaxMana);
-   NetworkProperty(m_flManaThinkRegen);
-   NetworkProperty(m_hAbilities);
-   NetworkProperty(m_iUnitNameIndex);
-   NetworkProperty(m_iDamageMin);
-   NetworkProperty(m_iDamageMax);
-   NetworkProperty(m_iDamageBonus);
-   NetworkProperty(m_lifeState);
-   NetworkProperty(m_ModifierManager);
-   NetworkProperty(m_Inventory);
-   NetworkProperty(m_nUnitState);
-   NetworkProperty(m_iTaggedAsVisibleByTeam);
-   NetworkProperty(m_iCurShop);
-   NetworkProperty(m_anglediff);
-   NetworkProperty(m_fFlags);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_cellX);
-   NetworkProperty(m_cellY);
-   NetworkProperty(m_cellZ);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_NetworkActivity);
-   NetworkProperty(m_NetworkSequenceIndex);
-   NetworkProperty(m_iBotDebugData);
-   NetworkProperty(m_hMyWearables);
-   NetworkProperty(m_bShouldDoFlyHeightVisual);
-   NetworkProperty(m_nTotalDamageTaken);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Additive, DT_DOTA_BaseNPC_Additive);
-   NetworkBaseClass(CDOTA_BaseNPC);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Barracks, DT_DOTA_BaseNPC_Barracks);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Building, DT_DOTA_BaseNPC_Building);
-   NetworkBaseClass(CDOTA_BaseNPC);
-   NetworkProperty(m_nFXIndex);
-   NetworkProperty(m_nFXIndexDestruction);
-   NetworkProperty(m_angInitialAngles);
-   NetworkProperty(m_hHeroStatueSequence);
-   NetworkProperty(m_fHeroStatueCycle);
-   NetworkProperty(m_iHeroStatueStatusEffectIndex);
-   NetworkProperty(m_bHeroStatue);
-   NetworkProperty(m_HeroStatueInscription);
-   NetworkProperty(m_iHeroStatueOwnerPlayerID);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creature, DT_DOTA_BaseNPC_Creature);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep, DT_DOTA_BaseNPC_Creep);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_bIsWaitingToSpawn);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_Diretide, DT_DOTA_BaseNPC_Creep_Diretide);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep_Lane);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_Lane, DT_DOTA_BaseNPC_Creep_Lane);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-   NetworkProperty(m_iHealthPercentage);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_LootGreevil, DT_DOTA_BaseNPC_Creep_LootGreevil);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-   NetworkProperty(m_bIsRareLootGreevil);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_Neutral, DT_DOTA_BaseNPC_Creep_Neutral);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_Siege, DT_DOTA_BaseNPC_Creep_Siege);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep_Lane);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Creep_Talking, DT_DOTA_BaseNPC_Creep_Talking);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Fort, DT_DOTA_BaseNPC_Fort);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_HallofFame, DT_DOTA_BaseNPC_HallofFame);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Hero, DT_DOTA_BaseNPC_Hero);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_iCurrentXP);
-   NetworkProperty(m_flRespawnTime);
-   NetworkProperty(m_flRespawnTimePenalty);
-   NetworkProperty(m_iAbilityPoints);
-   NetworkProperty(m_flStrength);
-   NetworkProperty(m_flAgility);
-   NetworkProperty(m_flIntellect);
-   NetworkProperty(m_flStrengthTotal);
-   NetworkProperty(m_flAgilityTotal);
-   NetworkProperty(m_flIntellectTotal);
-   NetworkProperty(m_iRecentDamage);
-   NetworkProperty(m_iPlayerID);
-   NetworkProperty(m_bReincarnating);
-   NetworkProperty(m_flSpawnedAt);
-   NetworkProperty(m_hReplicatingOtherHeroModel);
-   NetworkProperty(m_hEconConsumableAbility);
-   NetworkProperty(m_bCustomKillEffect);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_HoldoutTower, DT_DOTA_BaseNPC_HoldoutTower);
-   NetworkBaseClass(CDOTA_BaseNPC_Tower);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_HoldoutTower_HeavySlow, DT_DOTA_BaseNPC_HoldoutTower_HeavySlow);
-   NetworkBaseClass(CDOTA_BaseNPC_HoldoutTower);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_HoldoutTower_LightFast, DT_DOTA_BaseNPC_HoldoutTower_LightFast);
-   NetworkBaseClass(CDOTA_BaseNPC_HoldoutTower);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_HoldoutTower_ReduceSpeed, DT_DOTA_BaseNPC_HoldoutTower_ReduceSpeed);
-   NetworkBaseClass(CDOTA_BaseNPC_HoldoutTower);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Invoker_Forged_Spirit, DT_DOTA_BaseNPC_Invoker_Forged_Spirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_ShadowShaman_SerpentWard, DT_DOTA_BaseNPC_ShadowShaman_SerpentWard);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Shop, DT_DOTA_BaseNPC_Shop);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-   NetworkProperty(m_ShopType);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Tower, DT_DOTA_BaseNPC_Tower);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Tusk_Sigil, DT_DOTA_BaseNPC_Tusk_Sigil);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Venomancer_PlagueWard, DT_DOTA_BaseNPC_Venomancer_PlagueWard);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_BaseNPC_Warlock_Golem, DT_DOTA_BaseNPC_Warlock_Golem);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Beastmaster_Axe, DT_DOTA_Beastmaster_Axe);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_vecOrigin);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DataDire, DT_DOTA_DataDire);
-   NetworkBaseClass(CDOTA_DataNonSpectator);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DataNonSpectator, DT_DOTA_DataNonSpectator);
-   NetworkProperty(m_iReliableGold);
-   NetworkProperty(m_iUnreliableGold);
-   NetworkProperty(m_iStartingPositions);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DataRadiant, DT_DOTA_DataRadiant);
-   NetworkBaseClass(CDOTA_DataNonSpectator);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DataSpectator, DT_DOTA_DataSpectator);
-   NetworkProperty(m_hPrimaryRune);
-   NetworkProperty(m_hSecondaryRune);
-   NetworkProperty(m_iNetWorth);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DeathProphet_Exorcism_Spirit, DT_DOTA_DeathProphet_Exorcism_Spirit);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_DisplacementVisibility, DT_DOTA_DisplacementVisibility);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_HiddenDisplacement);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Halloween_CandyBucket, DT_DOTA_Halloween_CandyBucket);
-   NetworkBaseClass(CDOTA_BaseNPC);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Halloween_CandyBucketDire, DT_DOTA_Halloween_CandyBucketDire);
-   NetworkBaseClass(CDOTA_Halloween_CandyBucket);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Halloween_CandyBucketRadiant, DT_DOTA_Halloween_CandyBucketRadiant);
-   NetworkBaseClass(CDOTA_Halloween_CandyBucket);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Hero_Recorder, DT_DOTA_Hero_Recorder);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bStartRecording);
-   NetworkProperty(m_hHero);
-   NetworkProperty(m_hPlayer);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item, DT_DOTA_Item);
-   NetworkBaseClass(CDOTABaseAbility);
-   NetworkProperty(m_bCombinable);
-   NetworkProperty(m_bPermanent);
-   NetworkProperty(m_bStackable);
-   NetworkProperty(m_bRecipe);
-   NetworkProperty(m_iSharability);
-   NetworkProperty(m_bDroppable);
-   NetworkProperty(m_bPurchasable);
-   NetworkProperty(m_bSellable);
-   NetworkProperty(m_bRequiresCharges);
-   NetworkProperty(m_bKillable);
-   NetworkProperty(m_bDisassemblable);
-   NetworkProperty(m_bAlertable);
-   NetworkProperty(m_iCurrentCharges);
-   NetworkProperty(m_flPurchaseTime);
-   NetworkProperty(m_iInitialCharges);
-   NetworkProperty(m_hPurchaser);
-   NetworkProperty(m_flAssembledTime);
-   NetworkProperty(m_bPurchasedWhileDead);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Ancient_Janggo, DT_DOTA_Item_Ancient_Janggo);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Armlet, DT_DOTA_Item_Armlet);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Battlefury, DT_DOTA_Item_Battlefury);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_BlinkDagger, DT_DOTA_Item_BlinkDagger);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Bloodstone, DT_DOTA_Item_Bloodstone);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_BootsOfTravel, DT_DOTA_Item_BootsOfTravel);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Cyclone, DT_DOTA_Item_Cyclone);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Cyclone_2, DT_DOTA_Item_Cyclone_2);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_DataDriven, DT_DOTA_Item_DataDriven);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Diffusal_Blade, DT_DOTA_Item_Diffusal_Blade);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Diffusal_Blade_Level2, DT_DOTA_Item_Diffusal_Blade_Level2);
-   NetworkBaseClass(CDOTA_Item_Diffusal_Blade);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_EmptyBottle, DT_DOTA_Item_EmptyBottle);
-   NetworkBaseClass(CDOTA_Item);
-   NetworkProperty(m_iStoredRuneType);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Ethereal_Blade, DT_DOTA_Item_Ethereal_Blade);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_ForceStaff, DT_DOTA_Item_ForceStaff);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Greevil_Blink, DT_DOTA_Item_Greevil_Blink);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Greevil_Whistle, DT_DOTA_Item_Greevil_Whistle);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Greevil_WhistleToggle, DT_DOTA_Item_Greevil_WhistleToggle);
-   NetworkBaseClass(CDOTA_Item);
-   NetworkProperty(m_hGreevil);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_MantaStyle, DT_DOTA_Item_MantaStyle);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Medallion_Of_Courage, DT_DOTA_Item_Medallion_Of_Courage);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Mystery_Toss, DT_DOTA_Item_Mystery_Toss);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Mystery_Vacuum, DT_DOTA_Item_Mystery_Vacuum);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Necronomicon, DT_DOTA_Item_Necronomicon);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Necronomicon_Level2, DT_DOTA_Item_Necronomicon_Level2);
-   NetworkBaseClass(CDOTA_Item_Necronomicon);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Necronomicon_Level3, DT_DOTA_Item_Necronomicon_Level3);
-   NetworkBaseClass(CDOTA_Item_Necronomicon);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Nian_Flag_Trap, DT_DOTA_Item_Nian_Flag_Trap);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_ObserverWard, DT_DOTA_Item_ObserverWard);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Physical, DT_DOTA_Item_Physical);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_hItem);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_PlaceBuilding, DT_DOTA_Item_PlaceBuilding);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_PlaceBuilding_Free, DT_DOTA_Item_PlaceBuilding_Free);
-   NetworkBaseClass(CDOTA_Item_PlaceBuilding);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_PlaceBuilding_Grid, DT_DOTA_Item_PlaceBuilding_Grid);
-   NetworkBaseClass(CDOTA_Item_PlaceBuilding);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_PowerTreads, DT_DOTA_Item_PowerTreads);
-   NetworkBaseClass(CDOTA_Item);
-   NetworkProperty(m_iStat);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_QuellingBlade, DT_DOTA_Item_QuellingBlade);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Radiance, DT_DOTA_Item_Radiance);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Recipe_Veil_Of_Discord, DT_DOTA_Item_Recipe_Veil_Of_Discord);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Ring_Of_Basilius, DT_DOTA_Item_Ring_Of_Basilius);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_RingOfAquila, DT_DOTA_Item_RingOfAquila);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Rune, DT_DOTA_Item_Rune);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_iRuneType);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_SentryWard, DT_DOTA_Item_SentryWard);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Tango, DT_DOTA_Item_Tango);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_TeleportScroll, DT_DOTA_Item_TeleportScroll);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_TranquilBoots, DT_DOTA_Item_TranquilBoots);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Urn_Of_Shadows, DT_DOTA_Item_Urn_Of_Shadows);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Item_Veil_Of_Discord, DT_DOTA_Item_Veil_Of_Discord);
-   NetworkBaseClass(CDOTA_Item);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NeutralSpawner, DT_DOTA_NeutralSpawner);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_Type);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_DataDriven, DT_DOTA_NPC_DataDriven);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_Observer_Ward, DT_DOTA_NPC_Observer_Ward);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_Observer_Ward_TrueSight, DT_DOTA_NPC_Observer_Ward_TrueSight);
-   NetworkBaseClass(CDOTA_NPC_Observer_Ward);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_Techies_Minefield_Sign, DT_DOTA_NPC_Techies_Minefield_Sign);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_TechiesMines, DT_DOTA_NPC_TechiesMines);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_Treant_EyesInTheForest, DT_DOTA_NPC_Treant_EyesInTheForest);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_NPC_WitchDoctor_Ward, DT_DOTA_NPC_WitchDoctor_Ward);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_nTargetType);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_PhantomAssassin_Gravestone, DT_DOTA_PhantomAssassin_Gravestone);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_DireData);
-   NetworkProperty(m_iReliableGoldDire);
-   NetworkProperty(m_iUnreliableGoldDire);
-   NetworkProperty(m_bWorldTreeStateDire);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_EndScoreAndSpectatorStats);
-   NetworkProperty(m_iTotalEarnedGold);
-   NetworkProperty(m_iTotalEarnedXP);
-   NetworkProperty(m_bWorldTreeStateSpectator);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_RadiantData);
-   NetworkProperty(m_iReliableGoldRadiant);
-   NetworkProperty(m_iUnreliableGoldRadiant);
-   NetworkProperty(m_bWorldTreeStateRadiant);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTA_PlayerResource, DT_DOTA_PlayerResource);
-   NetworkProperty(m_iszPlayerNames);
-   NetworkProperty(m_iszSelectedHero);
-   NetworkProperty(m_nSelectedHeroID);
-   NetworkProperty(m_iPlayerTeams);
-   NetworkProperty(m_iKills);
-   NetworkProperty(m_iAssists);
-   NetworkProperty(m_iDeaths);
-   NetworkProperty(m_iStreak);
-   NetworkProperty(m_iRespawnSeconds);
-   NetworkProperty(m_iLastBuybackTime);
-   NetworkProperty(m_iLevel);
-   NetworkProperty(m_iDenyCount);
-   NetworkProperty(m_iLastHitCount);
-   NetworkProperty(m_iLastHitStreak);
-   NetworkProperty(m_iLastHitMultikill);
-   NetworkProperty(m_iNearbyCreepDeathCount);
-   NetworkProperty(m_hSelectedHero);
-   NetworkProperty(m_bFullyJoinedServer);
-   NetworkProperty(m_bFakeClient);
-   NetworkProperty(m_iPlayerSteamIDs);
-   NetworkProperty(m_bIsBroadcaster);
-   NetworkProperty(m_iBroadcasterChannel);
-   NetworkProperty(m_iBroadcasterChannelSlot);
-   NetworkProperty(m_iszBroadcasterChannelDescription);
-   NetworkProperty(m_iszBroadcasterChannelCountryCode);
-   NetworkProperty(m_iszBroadcasterChannelLanguageCode);
-   NetworkProperty(m_iConnectionState);
-   NetworkProperty(m_bAFK);
-   NetworkProperty(m_bVoiceChatBanned);
-   NetworkProperty(m_iTimedRewardDrops);
-   NetworkProperty(m_iTimedRewardCrates);
-   NetworkProperty(m_nPossibleHeroSelection);
-   NetworkProperty(m_nSuggestedHeroes);
-   NetworkProperty(m_iMetaLevel);
-   NetworkProperty(m_iMetaExperience);
-   NetworkProperty(m_iMetaExperienceAwarded);
-   NetworkProperty(m_bHasRepicked);
-   NetworkProperty(m_bHasRandomed);
-   NetworkProperty(m_UnitShareMasks);
-   NetworkProperty(m_bBattleBonusActive);
-   NetworkProperty(m_iBattleBonusRate);
-   NetworkProperty(m_flBuybackCooldownTime);
-   NetworkProperty(m_flBuybackGoldLimitTime);
-   NetworkProperty(m_flBuybackCostTime);
-   NetworkProperty(m_iCustomBuybackCost);
-   NetworkProperty(m_flCustomBuybackCooldown);
-   NetworkProperty(m_iGoldBagsCollected);
-   NetworkProperty(m_fStuns);
-   NetworkProperty(m_fHealing);
-   NetworkProperty(m_iTowerKills);
-   NetworkProperty(m_iRoshanKills);
-   NetworkProperty(m_iEventPoints);
-   NetworkProperty(m_iEventPremiumPoints);
-   NetworkProperty(m_hCameraTarget);
-   NetworkProperty(m_iEventRanks);
-   NetworkProperty(m_unCompendiumLevel);
-   NetworkProperty(m_bIsBroadcasterChannelCameraman);
-   NetworkProperty(m_bHasPredictedVictory);
-   NetworkProperty(m_bReservedHeroOnly);
-   NetworkProperty(m_bQualifiesForPAContractReward);
-   NetworkProperty(m_iTimedRewardEvents);
-   NetworkProperty(EndScoreAndSpectatorStats);
-   NetworkProperty(RadiantOnlyData);
-   NetworkProperty(DireOnlyData);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_RoshanSpawner, DT_DOTA_RoshanSpawner);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_TempTree, DT_DOTA_TempTree);
-   NetworkBaseClass(CBaseAnimating);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Tiny_ScepterTree, DT_DOTA_Tiny_ScepterTree);
-   NetworkBaseClass(CDOTAWearableItem);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Announcer, DT_DOTA_Unit_Announcer);
-   NetworkBaseClass(CDOTA_BaseNPC);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Announcer_Killing_Spree, DT_DOTA_Unit_Announcer_Killing_Spree);
-   NetworkBaseClass(CDOTA_BaseNPC);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Brewmaster_PrimalEarth, DT_DOTA_Unit_Brewmaster_PrimalEarth);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Brewmaster_PrimalFire, DT_DOTA_Unit_Brewmaster_PrimalFire);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Brewmaster_PrimalStorm, DT_DOTA_Unit_Brewmaster_PrimalStorm);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Broodmother_Spiderling, DT_DOTA_Unit_Broodmother_Spiderling);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep_Talking);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Broodmother_Web, DT_DOTA_Unit_Broodmother_Web);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Courier, DT_DOTA_Unit_Courier);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_flRespawnTime);
-   NetworkProperty(m_nCourierState);
-   NetworkProperty(m_hCourierStateEntity);
-   NetworkProperty(m_bFlyingCourier);
-   NetworkProperty(m_iUnusualColor);
-   NetworkProperty(m_iUnusualParticleSystem);
-   NetworkProperty(m_hCourierWearable);
-   NetworkProperty(m_bMorphEnabled);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Earth_Spirit_Stone, DT_DOTA_Unit_Earth_Spirit_Stone);
-   NetworkBaseClass(CDOTA_BaseNPC);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Elder_Titan_AncestralSpirit, DT_DOTA_Unit_Elder_Titan_AncestralSpirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Fountain, DT_DOTA_Unit_Fountain);
-   NetworkBaseClass(CDOTA_BaseNPC_Building);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Greevil, DT_DOTA_Unit_Greevil);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_flRespawnTime);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Abaddon, DT_DOTA_Unit_Hero_Abaddon);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_AbyssalUnderlord, DT_DOTA_Unit_Hero_AbyssalUnderlord);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Alchemist, DT_DOTA_Unit_Hero_Alchemist);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_AncientApparition, DT_DOTA_Unit_Hero_AncientApparition);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_AntiMage, DT_DOTA_Unit_Hero_AntiMage);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Axe, DT_DOTA_Unit_Hero_Axe);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Bane, DT_DOTA_Unit_Hero_Bane);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Batrider, DT_DOTA_Unit_Hero_Batrider);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Beastmaster, DT_DOTA_Unit_Hero_Beastmaster);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Beastmaster_Beasts, DT_DOTA_Unit_Hero_Beastmaster_Beasts);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Beastmaster_Boar, DT_DOTA_Unit_Hero_Beastmaster_Boar);
-   NetworkBaseClass(CDOTA_Unit_Hero_Beastmaster_Beasts);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Beastmaster_Hawk, DT_DOTA_Unit_Hero_Beastmaster_Hawk);
-   NetworkBaseClass(CDOTA_Unit_Hero_Beastmaster_Beasts);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Bloodseeker, DT_DOTA_Unit_Hero_Bloodseeker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_BountyHunter, DT_DOTA_Unit_Hero_BountyHunter);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Brewmaster, DT_DOTA_Unit_Hero_Brewmaster);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Bristleback, DT_DOTA_Unit_Hero_Bristleback);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Broodmother, DT_DOTA_Unit_Hero_Broodmother);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Centaur, DT_DOTA_Unit_Hero_Centaur);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_ChaosKnight, DT_DOTA_Unit_Hero_ChaosKnight);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Chen, DT_DOTA_Unit_Hero_Chen);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Clinkz, DT_DOTA_Unit_Hero_Clinkz);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_CrystalMaiden, DT_DOTA_Unit_Hero_CrystalMaiden);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_DarkSeer, DT_DOTA_Unit_Hero_DarkSeer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Dazzle, DT_DOTA_Unit_Hero_Dazzle);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_DeathProphet, DT_DOTA_Unit_Hero_DeathProphet);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Disruptor, DT_DOTA_Unit_Hero_Disruptor);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_DoomBringer, DT_DOTA_Unit_Hero_DoomBringer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_DragonKnight, DT_DOTA_Unit_Hero_DragonKnight);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_DrowRanger, DT_DOTA_Unit_Hero_DrowRanger);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Earthshaker, DT_DOTA_Unit_Hero_Earthshaker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_EarthSpirit, DT_DOTA_Unit_Hero_EarthSpirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Elder_Titan, DT_DOTA_Unit_Hero_Elder_Titan);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_EmberSpirit, DT_DOTA_Unit_Hero_EmberSpirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Enchantress, DT_DOTA_Unit_Hero_Enchantress);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Enigma, DT_DOTA_Unit_Hero_Enigma);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_FacelessVoid, DT_DOTA_Unit_Hero_FacelessVoid);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Furion, DT_DOTA_Unit_Hero_Furion);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Gyrocopter, DT_DOTA_Unit_Hero_Gyrocopter);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Huskar, DT_DOTA_Unit_Hero_Huskar);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Invoker, DT_DOTA_Unit_Hero_Invoker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Jakiro, DT_DOTA_Unit_Hero_Jakiro);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Juggernaut, DT_DOTA_Unit_Hero_Juggernaut);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_KeeperOfTheLight, DT_DOTA_Unit_Hero_KeeperOfTheLight);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Kunkka, DT_DOTA_Unit_Hero_Kunkka);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Legion_Commander, DT_DOTA_Unit_Hero_Legion_Commander);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Leshrac, DT_DOTA_Unit_Hero_Leshrac);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Lich, DT_DOTA_Unit_Hero_Lich);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Life_Stealer, DT_DOTA_Unit_Hero_Life_Stealer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Lina, DT_DOTA_Unit_Hero_Lina);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Lion, DT_DOTA_Unit_Hero_Lion);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_LoneDruid, DT_DOTA_Unit_Hero_LoneDruid);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Luna, DT_DOTA_Unit_Hero_Luna);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Lycan, DT_DOTA_Unit_Hero_Lycan);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Magnataur, DT_DOTA_Unit_Hero_Magnataur);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Medusa, DT_DOTA_Unit_Hero_Medusa);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Meepo, DT_DOTA_Unit_Hero_Meepo);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-   NetworkProperty(m_nWhichMeepo);
-   NetworkProperty(m_bIsIllusion);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Mirana, DT_DOTA_Unit_Hero_Mirana);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Morphling, DT_DOTA_Unit_Hero_Morphling);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Naga_Siren, DT_DOTA_Unit_Hero_Naga_Siren);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Necrolyte, DT_DOTA_Unit_Hero_Necrolyte);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Nevermore, DT_DOTA_Unit_Hero_Nevermore);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_NightStalker, DT_DOTA_Unit_Hero_NightStalker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Nyx_Assassin, DT_DOTA_Unit_Hero_Nyx_Assassin);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Obsidian_Destroyer, DT_DOTA_Unit_Hero_Obsidian_Destroyer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Ogre_Magi, DT_DOTA_Unit_Hero_Ogre_Magi);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Omniknight, DT_DOTA_Unit_Hero_Omniknight);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Oracle, DT_DOTA_Unit_Hero_Oracle);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_PhantomAssassin, DT_DOTA_Unit_Hero_PhantomAssassin);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-   NetworkProperty(m_nArcanaLevel);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_PhantomLancer, DT_DOTA_Unit_Hero_PhantomLancer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Phoenix, DT_DOTA_Unit_Hero_Phoenix);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Puck, DT_DOTA_Unit_Hero_Puck);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Pudge, DT_DOTA_Unit_Hero_Pudge);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Pugna, DT_DOTA_Unit_Hero_Pugna);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_QueenOfPain, DT_DOTA_Unit_Hero_QueenOfPain);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Rattletrap, DT_DOTA_Unit_Hero_Rattletrap);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Razor, DT_DOTA_Unit_Hero_Razor);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Riki, DT_DOTA_Unit_Hero_Riki);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Rubick, DT_DOTA_Unit_Hero_Rubick);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_SandKing, DT_DOTA_Unit_Hero_SandKing);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Shadow_Demon, DT_DOTA_Unit_Hero_Shadow_Demon);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_ShadowShaman, DT_DOTA_Unit_Hero_ShadowShaman);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Shredder, DT_DOTA_Unit_Hero_Shredder);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Silencer, DT_DOTA_Unit_Hero_Silencer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_SkeletonKing, DT_DOTA_Unit_Hero_SkeletonKing);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Skywrath_Mage, DT_DOTA_Unit_Hero_Skywrath_Mage);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Slardar, DT_DOTA_Unit_Hero_Slardar);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Slark, DT_DOTA_Unit_Hero_Slark);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Sniper, DT_DOTA_Unit_Hero_Sniper);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Spectre, DT_DOTA_Unit_Hero_Spectre);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_SpiritBreaker, DT_DOTA_Unit_Hero_SpiritBreaker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_StormSpirit, DT_DOTA_Unit_Hero_StormSpirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Sven, DT_DOTA_Unit_Hero_Sven);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Techies, DT_DOTA_Unit_Hero_Techies);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-   NetworkProperty(m_bHasArcana);
-   NetworkProperty(m_nArcanaColor);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_TemplarAssassin, DT_DOTA_Unit_Hero_TemplarAssassin);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Terrorblade, DT_DOTA_Unit_Hero_Terrorblade);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-   NetworkProperty(m_nArcanaColor);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Tidehunter, DT_DOTA_Unit_Hero_Tidehunter);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Tinker, DT_DOTA_Unit_Hero_Tinker);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Tiny, DT_DOTA_Unit_Hero_Tiny);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Treant, DT_DOTA_Unit_Hero_Treant);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_TrollWarlord, DT_DOTA_Unit_Hero_TrollWarlord);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Tusk, DT_DOTA_Unit_Hero_Tusk);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Undying, DT_DOTA_Unit_Hero_Undying);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Ursa, DT_DOTA_Unit_Hero_Ursa);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_VengefulSpirit, DT_DOTA_Unit_Hero_VengefulSpirit);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Venomancer, DT_DOTA_Unit_Hero_Venomancer);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Viper, DT_DOTA_Unit_Hero_Viper);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Visage, DT_DOTA_Unit_Hero_Visage);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Warlock, DT_DOTA_Unit_Hero_Warlock);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Weaver, DT_DOTA_Unit_Hero_Weaver);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Windrunner, DT_DOTA_Unit_Hero_Windrunner);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Winter_Wyvern, DT_DOTA_Unit_Hero_Winter_Wyvern);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Wisp, DT_DOTA_Unit_Hero_Wisp);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_WitchDoctor, DT_DOTA_Unit_Hero_WitchDoctor);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Hero_Zuus, DT_DOTA_Unit_Hero_Zuus);
-   NetworkBaseClass(CDOTA_BaseNPC_Hero);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_LoopingSound, DT_DOTA_Unit_LoopingSound);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_pszNetworkedSoundLoop);
-   NetworkProperty(m_nLoopingSoundParity);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Nian, DT_DOTA_Unit_Nian);
-   NetworkBaseClass(CDOTA_BaseNPC_Creature);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Roquelaire, DT_DOTA_Unit_Roquelaire);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep_Talking);
-   NetworkProperty(m_flFlyHeight);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Roshan, DT_DOTA_Unit_Roshan);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Roshan_Halloween, DT_DOTA_Unit_Roshan_Halloween);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_hChosenTarget);
-   NetworkProperty(m_iHealth);
-   NetworkProperty(m_iMaxHealth);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_SpiritBear, DT_DOTA_Unit_SpiritBear);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_TargetDummy, DT_DOTA_Unit_TargetDummy);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-   NetworkProperty(m_flDamageTaken);
-   NetworkProperty(m_flStartDamageTime);
-   NetworkProperty(m_flLastDamageTime);
-   NetworkProperty(m_flLastHit);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Undying_Tombstone, DT_DOTA_Unit_Undying_Tombstone);
-   NetworkBaseClass(CDOTA_BaseNPC_Additive);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_Undying_Zombie, DT_DOTA_Unit_Undying_Zombie);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Unit_VisageFamiliar, DT_DOTA_Unit_VisageFamiliar);
-   NetworkBaseClass(CDOTA_BaseNPC_Creep);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTA_Wisp_Spirit, DT_DOTA_Wisp_Spirit);
-   NetworkBaseClass(CDOTA_BaseNPC);
-   NetworkProperty(m_vecOrigin);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTABaseAbility, DT_DOTABaseAbility);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bHidden);
-   NetworkProperty(m_bActivated);
-   NetworkProperty(m_iDirtyButtons);
-   NetworkProperty(m_iLevel);
-   NetworkProperty(m_bToggleState);
-   NetworkProperty(m_bInAbilityPhase);
-   NetworkProperty(m_fCooldown);
-   NetworkProperty(m_iCastRange);
-   NetworkProperty(m_flCooldownLength);
-   NetworkProperty(m_iManaCost);
-   NetworkProperty(m_bAutoCastState);
-   NetworkProperty(m_flChannelStartTime);
-   NetworkProperty(m_flOverrideCastPoint);
-   NetworkProperty(m_bInIndefiniteCooldown);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTABaseGameMode, DT_DOTABaseGameMode);
-   NetworkProperty(m_bAlwaysShowPlayerInventory);
-   NetworkProperty(m_bGoldSoundDisabled);
-   NetworkProperty(m_bRecommendedItemsDisabled);
-   NetworkProperty(m_bFogOfWarDisabled);
-   NetworkProperty(m_bUseCustomBuybackCost);
-   NetworkProperty(m_bUseCustomBuybackCooldown);
-   NetworkProperty(m_bBuybackEnabled);
-   NetworkProperty(m_flCameraDistanceOverride);
-   NetworkProperty(m_hOverrideSelectionEntity);
-   NetworkProperty(m_bTopBarTeamValuesOverride);
-   NetworkProperty(m_bTopBarTeamValuesVisible);
-   NetworkProperty(m_nTeamGoodGuysTopBarValue);
-   NetworkProperty(m_nTeamBadGuysTopBarValue);
-   NetworkProperty(m_bUseCustomHeroLevels);
-   NetworkProperty(m_nCustomHeroMaxLevel);
-   NetworkProperty(m_nCustomXPRequiredToReachNextLevel);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTACameraBounds, DT_DOTACameraBounds);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_vecBoundsMin);
-   NetworkProperty(m_vecBoundsMax);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAFogOfWarTempViewers, DT_DOTAFogOfWarTempViewers);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bTempViewers);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAFogOfWarWasVisible, DT_DOTAFogOfWarWasVisible);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bWasVisible);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_DOTA_GameManager);
-   NetworkProperty(m_StableHeroAvailable);
-   NetworkProperty(m_CurrentHeroAvailable);
-   NetworkProperty(m_CulledHeroes);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTAGameManagerProxy, DT_DOTAGameManagerProxy);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(dota_gamemanager_data);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_DOTAGamerules);
-   NetworkProperty(m_iNetTimeOfDay);
-   NetworkProperty(m_fGameTime);
-   NetworkProperty(m_bGamePaused);
-   NetworkProperty(m_ItemStockInfoGood);
-   NetworkProperty(m_ItemStockInfoBad);
-   NetworkProperty(m_AssassinMiniGameNetData);
-   NetworkProperty(m_hGoodGuyFountain);
-   NetworkProperty(m_hBadGuyFountain);
-   NetworkProperty(m_hGoodGuyShop);
-   NetworkProperty(m_hBadGuyShop);
-   NetworkProperty(m_hSideShop1);
-   NetworkProperty(m_hSideShop2);
-   NetworkProperty(m_hSecretShop1);
-   NetworkProperty(m_hSecretShop2);
-   NetworkProperty(m_hGoodGuyFort);
-   NetworkProperty(m_hBadGuyFort);
-   NetworkProperty(m_hAnnouncerGood);
-   NetworkProperty(m_hAnnouncerBad);
-   NetworkProperty(m_hAnnouncerSpectator);
-   NetworkProperty(m_hAnnouncerGood_KillingSpree);
-   NetworkProperty(m_hAnnouncerBad_KillingSpree);
-   NetworkProperty(m_hAnnouncerSpectator_KillingSpree);
-   NetworkProperty(m_nGameState);
-   NetworkProperty(m_flStateTransitionTime);
-   NetworkProperty(m_iGameMode);
-   NetworkProperty(m_nHeroPickState);
-   NetworkProperty(m_iCMModePickBanOrder);
-   NetworkProperty(m_iCDModePickBanOrder);
-   NetworkProperty(m_flHeroPickStateTransitionTime);
-   NetworkProperty(m_fExtraTimeRemaining);
-   NetworkProperty(m_iPlayerIDsInControl);
-   NetworkProperty(m_bSuggestedGoodHeroes);
-   NetworkProperty(m_bSuggestedBadHeroes);
-   NetworkProperty(m_iCaptainPlayerIDs);
-   NetworkProperty(m_BannedHeroes);
-   NetworkProperty(m_SelectedHeroes);
-   NetworkProperty(m_AvailableHerosPerPlayer);
-   NetworkProperty(m_UnlockedHeroesPerPlayer);
-   NetworkProperty(m_LockedHeroesPerPlayer);
-   NetworkProperty(m_iActiveTeam);
-   NetworkProperty(m_iStartingTeam);
-   NetworkProperty(m_iMiscHeroPickCounter);
-   NetworkProperty(m_flPreGameStartTime);
-   NetworkProperty(m_flGameStartTime);
-   NetworkProperty(m_flGameEndTime);
-   NetworkProperty(m_flGameLoadTime);
-   NetworkProperty(m_fGoodGlyphCooldown);
-   NetworkProperty(m_fBadGlyphCooldown);
-   NetworkProperty(m_bIsNightstalkerNight);
-   NetworkProperty(m_bIsTemporaryNight);
-   NetworkProperty(m_nGameWinner);
-   NetworkProperty(m_nLoadedPlayers);
-   NetworkProperty(m_nExpectedPlayers);
-   NetworkProperty(m_iMinimapDebugGridState);
-   NetworkProperty(m_iFoWFrameNumber);
-   NetworkProperty(m_bIsInItemTestingMode);
-   NetworkProperty(m_bIsInCinematicMode);
-   NetworkProperty(m_bItemWhiteList);
-   NetworkProperty(m_hEndGameCinematicEntity);
-   NetworkProperty(m_bIsStableMode);
-   NetworkProperty(m_unMatchID64);
-   NetworkProperty(m_BotDebugPushLane);
-   NetworkProperty(m_BotDebugDefendLane);
-   NetworkProperty(m_BotDebugFarmLane);
-   NetworkProperty(m_BotDebugRoam);
-   NetworkProperty(m_hBotDebugRoamTarget);
-   NetworkProperty(m_BotDebugRoshan);
-   NetworkProperty(m_lobbyLeagueID);
-   NetworkProperty(m_lobbyGameName);
-   NetworkProperty(m_bMatchSignoutComplete);
-   NetworkProperty(m_bWhiteListEnabled);
-   NetworkProperty(m_bHeroRespawnEnabled);
-   NetworkProperty(m_nLastHitUIMode);
-   NetworkProperty(m_bHUDTimerTutorialMode);
-   NetworkProperty(m_unFanfareGoodGuys);
-   NetworkProperty(m_unFanfareBadGuys);
-   NetworkProperty(m_nSeriesType);
-   NetworkProperty(m_nRadiantSeriesWins);
-   NetworkProperty(m_nDireSeriesWins);
-   NetworkProperty(m_nHalloweenTransitionState);
-   NetworkProperty(m_flHalloweenRoshanLifetime);
-   NetworkProperty(m_bTier3TowerDestroyed);
-   NetworkProperty(m_iCustomGameScore);
-   NetworkProperty(m_iPauseTeam);
-   NetworkProperty(m_nGGTeam);
-   NetworkProperty(m_flGGEndsAtTime);
-   NetworkProperty(m_hGameModeEntity);
-   NetworkProperty(m_nHalloweenRoshanLevel);
-   NetworkProperty(m_flHalloweenRoshanRoundStartTime);
-   NetworkProperty(m_nHalloweenRoshanRemainingHealth);
-   NetworkProperty(m_nCustomGameDifficulty);
-   NetworkProperty(m_hOverlayHealthBarUnit);
-   NetworkProperty(m_nOverlayHealthBarType);
-   NetworkProperty(m_bUseUniversalShopMode);
-   NetworkProperty(m_bUseCustomHeroXPValue);
-   NetworkProperty(m_bUseBaseGoldBountyOnHeroes);
-   NetworkProperty(m_bSameHeroSelectionEnabled);
-   NetworkProperty(m_nHeroMinimapIconSize);
-   NetworkProperty(m_flCreepMinimapIconScale);
-   NetworkProperty(m_flRuneMinimapIconScale);
-   NetworkProperty(m_AbilityDraftAbilities);
-   NetworkProperty(m_nAbilityDraftPlayerTracker);
-   NetworkProperty(m_nAbilityDraftRoundNumber);
-   NetworkProperty(m_nAbilityDraftAdvanceSteps);
-   NetworkProperty(m_nAbilityDraftPhase);
-   NetworkProperty(m_nAbilityDraftHeroesChosen);
-   NetworkProperty(m_nARDMHeroesRemaining);
-   NetworkProperty(m_nARDMHeroesPrecachedPercent);
-   NetworkProperty(m_nAllDraftPhase);
-   NetworkProperty(m_bAllDraftRadiantFirst);
-   NetworkProperty(m_bHasHeroStatueLiked);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTA_AbilityDraftAbilityState);
-   NetworkProperty(m_unAbilityIndex);
-   NetworkProperty(m_unPlayerID);
-   NetworkProperty(m_unAbilityPlayerSlot);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTA_AssassinMinigameNetworkState);
-   NetworkProperty(nAssassinState);
-   NetworkProperty(nVictimHeroID);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTA_ItemStockInfo);
-   NetworkProperty(usItemIndex);
-   NetworkProperty(fStockDuration);
-   NetworkProperty(fStockTime);
-   NetworkProperty(iStockCount);
-   NetworkProperty(iMaxCount);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTAGamerulesProxy, DT_DOTAGamerulesProxy);
-   NetworkBaseClass(CGameRulesProxy);
-   NetworkProperty(dota_gamerules_data);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAHoldoutNetworker, DT_DOTA_HoldoutNetworker);
-   NetworkProperty(m_flPrepTimeLeft);
-   NetworkProperty(m_nWaveEnemyCount);
-   NetworkProperty(m_nCurrentEnemyCount);
-   NetworkProperty(m_nNumberOfRounds);
-   NetworkProperty(m_nRoundNumber);
-   NetworkProperty(m_bIsHeroRespawnEnabled);
-   NetworkProperty(m_nGoldBagsExpired);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAMinimapBoundary, DT_DOTAMinimapBoundary);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_ClientQuickBuyItemState);
-   NetworkProperty(nItemType);
-   NetworkProperty(bPurchasable);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTACommentatorTable);
-   NetworkProperty(m_cellbits);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_cellX);
-   NetworkProperty(m_cellY);
-   NetworkProperty(m_cellZ);
-   NetworkProperty(m_iSpectatorClickBehavior);
-   NetworkProperty(m_iCursor);
-   NetworkProperty(m_flAspectRatio);
-   NetworkProperty(m_hSpectatorQueryUnit);
-   NetworkProperty(m_iStatsPanel);
-   NetworkProperty(m_iShopPanel);
-   NetworkProperty(m_iShopViewMode);
-   NetworkProperty(m_iStatsDropdownCategory);
-   NetworkProperty(m_iStatsDropdownSort);
-   NetworkProperty(m_szShopString);
-   NetworkProperty(m_vecClientQuickBuyState);
-   NetworkProperty(m_iQuickBuyParity);
-   NetworkProperty(m_bInShowCaseMode);
-   NetworkProperty(m_flCameraZoomAmount);
-   NetworkProperty(m_iHighPriorityScore);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_DOTACompendiumData);
-   NetworkProperty(m_iTotalEarnedGold);
-   NetworkProperty(m_iTotalEarnedXP);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTAPlayer, DT_DOTAPlayer);
-   NetworkBaseClass(CBasePlayer);
-   NetworkProperty(m_nTickBase);
-   NetworkProperty(m_iPlayerID);
-   NetworkProperty(m_nCachedCoachedTeam);
-   NetworkProperty(m_vecStartingPosition);
-   NetworkProperty(m_hAssignedHero);
-   NetworkProperty(m_iMusicStatus);
-   NetworkProperty(m_flMusicOperatorVals);
-   NetworkProperty(m_iMusicOperatorVals);
-   NetworkProperty(m_hKillCamUnit);
-   NetworkProperty(dota_commentator_table);
-   NetworkProperty(dota_compendium_data);
-   NetworkProperty(m_bUsingCameraMan);
-   NetworkProperty(m_bUsingAssistedCameraOperator);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAPropCustomTexture, DT_DOTAPropCustomTexture);
-   NetworkBaseClass(CDynamicProp);
-EndNetworkClass();
-
-BeginNetworkClass(CDotaQuest, DT_DotaQuest);
-   NetworkProperty(m_pszQuestTitle);
-   NetworkProperty(m_pszQuestText);
-   NetworkProperty(m_nQuestType);
-   NetworkProperty(m_hSubquests);
-   NetworkProperty(m_bHidden);
-   NetworkProperty(m_bCompleted);
-   NetworkProperty(m_bWinIfCompleted);
-   NetworkProperty(m_bLoseIfCompleted);
-   NetworkProperty(m_pszGameEndText);
-   NetworkProperty(m_pnTextReplaceValuesCDotaQuest);
-   NetworkProperty(m_pszTextReplaceString);
-   NetworkProperty(m_nTextReplaceValueVersion);
-EndNetworkClass();
-
-BeginNetworkClass(CDotaQuestBase, DT_DotaQuestBase);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTASpecGraphPlayerData, DT_DotaSpecGraphPlayerData);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_rgGoldPerMinute);
-   NetworkProperty(m_rgXPPerMinute);
-   NetworkProperty(m_nCreatedByPlayerID);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_DOTASpectatorGraphManager);
-   NetworkProperty(m_rgPlayerGraphData);
-   NetworkProperty(m_rgRadiantTotalEarnedGold);
-   NetworkProperty(m_rgDireTotalEarnedGold);
-   NetworkProperty(m_rgRadiantTotalEarnedXP);
-   NetworkProperty(m_rgDireTotalEarnedXP);
-   NetworkProperty(m_rgRadiantNetWorth);
-   NetworkProperty(m_rgDireNetWorth);
-   NetworkProperty(m_flTotalEarnedGoldStartTime);
-   NetworkProperty(m_flTotalEarnedGoldEndTime);
-   NetworkProperty(m_nGoldGraphVersion);
-EndNetworkStruct();
-
-BeginNetworkClass(CDOTASpectatorGraphManagerProxy, DT_DOTASpectatorGraphManagerProxy);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(dota_spectator_graph_manager_data);
-EndNetworkClass();
-
-BeginNetworkClass(CDotaSubquestBase, DT_DotaSubquestBase);
-   NetworkProperty(m_pszSubquestText);
-   NetworkProperty(m_bHidden);
-   NetworkProperty(m_bCompleted);
-   NetworkProperty(m_bShowProgressBar);
-   NetworkProperty(m_nProgressBarHueShift);
-   NetworkProperty(m_pnTextReplaceValuesCDotaSubquestBase);
-   NetworkProperty(m_pszTextReplaceString);
-   NetworkProperty(m_nTextReplaceValueVersion);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTATeam, DT_DOTATeam);
-   NetworkBaseClass(CTeam);
-   NetworkProperty(m_iHeroKills);
-   NetworkProperty(m_iTowerKills);
-   NetworkProperty(m_iBarracksKills);
-   NetworkProperty(m_unTournamentTeamID);
-   NetworkProperty(m_ulTeamLogo);
-   NetworkProperty(m_ulTeamBaseLogo);
-   NetworkProperty(m_ulTeamBannerLogo);
-   NetworkProperty(m_szTag);
-   NetworkProperty(m_bTeamComplete);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_SpeechBubbleInfo);
-   NetworkProperty(m_LocalizationStr);
-   NetworkProperty(m_hNPC);
-   NetworkProperty(m_flLifetime);
-EndNetworkStruct();
-
-BeginNetworkClass(CDotaTutorialNetworker, DT_DotaTutorialNetworker);
-   NetworkProperty(m_nTutorialState);
-   NetworkProperty(m_nTaskProgress);
-   NetworkProperty(m_nTaskSteps);
-   NetworkProperty(m_nTaskSecondsRemianing);
-   NetworkProperty(m_nUIState);
-   NetworkProperty(m_TargetLocation);
-   NetworkProperty(m_SpeechBubbles);
-   NetworkProperty(m_nLocationID);
-EndNetworkClass();
-
-BeginNetworkClass(CDOTAWearableItem, DT_DOTAWearableItem);
-   NetworkBaseClass(CEconWearable);
-   NetworkProperty(m_bOwnerModelChanged);
-EndNetworkClass();
-
-BeginNetworkClass(CDynamicLight, DT_DynamicLight);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_Flags);
-   NetworkProperty(m_LightStyle);
-   NetworkProperty(m_Radius);
-   NetworkProperty(m_Exponent);
-   NetworkProperty(m_InnerAngle);
-   NetworkProperty(m_OuterAngle);
-   NetworkProperty(m_SpotRadius);
-EndNetworkClass();
-
-BeginNetworkClass(CDynamicProp, DT_DynamicProp);
-   NetworkBaseClass(CBreakableProp);
-   NetworkProperty(m_bUseHitboxesForRenderBox);
-EndNetworkClass();
-
-BeginNetworkClass(CEconEntity, DT_EconEntity);
-   NetworkBaseClass(CBaseFlex);
-   NetworkProperty(m_AttributeManager);
-EndNetworkClass();
-
-BeginNetworkClass(CEconWearable, DT_WearableItem);
-   NetworkBaseClass(CEconEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CEntityDissolve, DT_EntityDissolve);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flStartTime);
-   NetworkProperty(m_flFadeInStart);
-   NetworkProperty(m_flFadeInLength);
-   NetworkProperty(m_flFadeOutModelStart);
-   NetworkProperty(m_flFadeOutModelLength);
-   NetworkProperty(m_flFadeOutStart);
-   NetworkProperty(m_flFadeOutLength);
-   NetworkProperty(m_nDissolveType);
-   NetworkProperty(m_vDissolverOrigin);
-   NetworkProperty(m_nMagnitude);
-EndNetworkClass();
-
-BeginNetworkClass(CEntityFlame, DT_EntityFlame);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_hEntAttached);
-   NetworkProperty(m_bCheapEffect);
-EndNetworkClass();
-
-BeginNetworkClass(CEntityFreezing, DT_EntityFreezing);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_vFreezingOrigin);
-   NetworkProperty(m_flFrozenPerHitbox);
-   NetworkProperty(m_flFrozen);
-   NetworkProperty(m_bFinishFreezing);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_EntityParticleTrailInfo);
-   NetworkProperty(m_flLifetime);
-   NetworkProperty(m_flStartSize);
-   NetworkProperty(m_flEndSize);
-EndNetworkStruct();
-
-BeginNetworkClass(CEntityParticleTrail, DT_EntityParticleTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_iMaterialName);
-   NetworkProperty(m_Info);
-   NetworkProperty(m_hConstraintEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvAmbientLight, DT_EnvAmbientLight);
-   NetworkBaseClass(CSpatialEntity);
-   NetworkProperty(m_vecColor);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvDeferredLight, DT_EnvDeferredLight);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_LightColor);
-   NetworkProperty(m_flIntensity);
-   NetworkProperty(m_flLightSize);
-   NetworkProperty(m_flSpotFoV);
-   NetworkProperty(m_vLightDirection);
-   NetworkProperty(m_flStartFalloff);
-   NetworkProperty(m_flDistanceFalloff);
-   NetworkProperty(m_nFlags);
-   NetworkProperty(m_ProjectedTextureName);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvDetailController, DT_DetailController);
-   NetworkProperty(m_flFadeStartDist);
-   NetworkProperty(m_flFadeEndDist);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvDOFController, DT_EnvDOFController);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bDOFEnabled);
-   NetworkProperty(m_flNearBlurDepth);
-   NetworkProperty(m_flNearFocusDepth);
-   NetworkProperty(m_flFarFocusDepth);
-   NetworkProperty(m_flFarBlurDepth);
-   NetworkProperty(m_flNearBlurRadius);
-   NetworkProperty(m_flFarBlurRadius);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvParticleScript, DT_EnvParticleScript);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_flSequenceScale);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvProjectedTexture, DT_EnvProjectedTexture);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_hTargetEntity);
-   NetworkProperty(m_bState);
-   NetworkProperty(m_bAlwaysUpdate);
-   NetworkProperty(m_flLightFOV);
-   NetworkProperty(m_bEnableShadows);
-   NetworkProperty(m_bSimpleProjection);
-   NetworkProperty(m_bLightOnlyTarget);
-   NetworkProperty(m_bLightWorld);
-   NetworkProperty(m_bCameraSpace);
-   NetworkProperty(m_flBrightnessScale);
-   NetworkProperty(m_LightColor);
-   NetworkProperty(m_flFarZ);
-   NetworkProperty(m_flColorTransitionTime);
-   NetworkProperty(m_flAmbient);
-   NetworkProperty(m_SpotlightTextureName);
-   NetworkProperty(m_nSpotlightTextureFrame);
-   NetworkProperty(m_flNearZ);
-   NetworkProperty(m_nShadowQuality);
-   NetworkProperty(m_flProjectionSize);
-   NetworkProperty(m_flRotation);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvQuadraticBeam, DT_QuadraticBeam);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_targetPosition);
-   NetworkProperty(m_controlPosition);
-   NetworkProperty(m_scrollRate);
-   NetworkProperty(m_flWidth);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvScreenEffect, DT_EnvScreenEffect);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flDuration);
-   NetworkProperty(m_nType);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvScreenOverlay, DT_EnvScreenOverlay);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_iszOverlayNames);
-   NetworkProperty(m_flOverlayTimes);
-   NetworkProperty(m_flStartTime);
-   NetworkProperty(m_iDesiredOverlay);
-   NetworkProperty(m_bIsActive);
-EndNetworkClass();
-
-BeginNetworkClass(CEnvTonemapController, DT_EnvTonemapController);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bUseCustomAutoExposureMin);
-   NetworkProperty(m_bUseCustomAutoExposureMax);
-   NetworkProperty(m_bUseCustomBloomScale);
-   NetworkProperty(m_flCustomAutoExposureMin);
-   NetworkProperty(m_flCustomAutoExposureMax);
-   NetworkProperty(m_flCustomBloomScale);
-   NetworkProperty(m_flCustomBloomScaleMinimum);
-   NetworkProperty(m_flBloomExponent);
-   NetworkProperty(m_flBloomSaturation);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_EnvWindShared);
-   NetworkProperty(m_iMinWind);
-   NetworkProperty(m_iMaxWind);
-   NetworkProperty(m_iMinGust);
-   NetworkProperty(m_iMaxGust);
-   NetworkProperty(m_windRadius);
-   NetworkProperty(m_flMinGustDelay);
-   NetworkProperty(m_flMaxGustDelay);
-   NetworkProperty(m_iGustDirChange);
-   NetworkProperty(m_iWindSeed);
-   NetworkProperty(m_iInitialWindDir);
-   NetworkProperty(m_flInitialWindSpeed);
-   NetworkProperty(m_flStartTime);
-   NetworkProperty(m_flGustDuration);
-EndNetworkStruct();
-
-BeginNetworkClass(CEnvWind, DT_EnvWind);
-   NetworkProperty(m_EnvWindShared);
-EndNetworkClass();
-
-BeginNetworkClass(CFireSmoke, DT_FireSmoke);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flStartScale);
-   NetworkProperty(m_flScale);
-   NetworkProperty(m_flScaleTime);
-   NetworkProperty(m_nFlags);
-   NetworkProperty(m_nFlameModelIndex);
-   NetworkProperty(m_nFlameFromAboveModelIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CFireTrail, DT_FireTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_nAttachment);
-   NetworkProperty(m_flLifetime);
-EndNetworkClass();
-
-BeginNetworkClass(CFish, DT_CFish);
-   NetworkProperty(m_poolOrigin);
-   NetworkProperty(m_angle);
-   NetworkProperty(m_x);
-   NetworkProperty(m_y);
-   NetworkProperty(m_z);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_lifeState);
-   NetworkProperty(m_waterLevel);
-EndNetworkClass();
-
-BeginNetworkClass(CFogController, DT_FogController);
-   NetworkProperty(m_fog.enable);
-   NetworkProperty(m_fog.blend);
-   NetworkProperty(m_fog.dirPrimary);
-   NetworkProperty(m_fog.colorPrimary);
-   NetworkProperty(m_fog.colorSecondary);
-   NetworkProperty(m_fog.start);
-   NetworkProperty(m_fog.end);
-   NetworkProperty(m_fog.maxdensity);
-   NetworkProperty(m_fog.farz);
-   NetworkProperty(m_fog.colorPrimaryLerpTo);
-   NetworkProperty(m_fog.colorSecondaryLerpTo);
-   NetworkProperty(m_fog.startLerpTo);
-   NetworkProperty(m_fog.endLerpTo);
-   NetworkProperty(m_fog.maxdensityLerpTo);
-   NetworkProperty(m_fog.lerptime);
-   NetworkProperty(m_fog.duration);
-   NetworkProperty(m_fog.HDRColorScale);
-   NetworkProperty(m_fog.m_bNoReflectionFog);
-EndNetworkClass();
-
-BeginNetworkClass(CFunc_Dust, DT_Func_Dust);
-   NetworkProperty(m_Color);
-   NetworkProperty(m_SpawnRate);
-   NetworkProperty(m_SpeedMax);
-   NetworkProperty(m_flSizeMin);
-   NetworkProperty(m_flSizeMax);
-   NetworkProperty(m_DistMax);
-   NetworkProperty(m_LifetimeMin);
-   NetworkProperty(m_LifetimeMax);
-   NetworkProperty(m_DustFlags);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_FallSpeed);
-   NetworkProperty(m_Collision);
-EndNetworkClass();
-
-BeginNetworkClass(CFunc_LOD, DT_Func_LOD);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nDisappearMinDist);
-   NetworkProperty(m_nDisappearMaxDist);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncAreaPortalWindow, DT_FuncAreaPortalWindow);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flFadeDist);
-   NetworkProperty(m_flFadeStartDist);
-   NetworkProperty(m_flTranslucencyLimit);
-   NetworkProperty(m_iBackgroundModelIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncBrush, DT_FuncBrush);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncConveyor, DT_FuncConveyor);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flConveyorSpeed);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncLadder, DT_FuncLadder);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_vecPlayerMountPositionTop);
-   NetworkProperty(m_vecPlayerMountPositionBottom);
-   NetworkProperty(m_vecLadderDir);
-   NetworkProperty(m_bFakeLadder);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncMoveLinear, DT_FuncMoveLinear);
-   NetworkBaseClass(CBaseToggle);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_fFlags);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncOccluder, DT_FuncOccluder);
-   NetworkProperty(m_bActive);
-   NetworkProperty(m_nOccluderIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncReflectiveGlass, DT_FuncReflectiveGlass);
-   NetworkBaseClass(CFuncBrush);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncRotating, DT_FuncRotating);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_flSimulationTime);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncSmokeVolume, DT_FuncSmokeVolume);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_Color1);
-   NetworkProperty(m_Color2);
-   NetworkProperty(m_MaterialName);
-   NetworkProperty(m_ParticleDrawWidth);
-   NetworkProperty(m_ParticleSpacingDistance);
-   NetworkProperty(m_DensityRampSpeed);
-   NetworkProperty(m_RotationSpeed);
-   NetworkProperty(m_MovementSpeed);
-   NetworkProperty(m_Density);
-   NetworkProperty(m_maxDrawDistance);
-   NetworkProperty(m_spawnflags);
-EndNetworkClass();
-
-BeginNetworkClass(CFuncTrackTrain, DT_FuncTrackTrain);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CGameRulesProxy, DT_GameRulesProxy);
-EndNetworkClass();
-
-BeginNetworkClass(CHandleTest, DT_HandleTest);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_Handle);
-   NetworkProperty(m_bSendHandle);
-EndNetworkClass();
-
-BeginNetworkClass(CInfoLadderDismount, DT_InfoLadderDismount);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CInfoOverlayAccessor, DT_InfoOverlayAccessor);
-   NetworkProperty(m_iTextureFrameIndex);
-   NetworkProperty(m_iOverlayID);
-EndNetworkClass();
-
-BeginNetworkClass(CLightGlow, DT_LightGlow);
-   NetworkProperty(m_clrRender);
-   NetworkProperty(m_nHorizontalSize);
-   NetworkProperty(m_nVerticalSize);
-   NetworkProperty(m_nMinDist);
-   NetworkProperty(m_nMaxDist);
-   NetworkProperty(m_nOuterMaxDist);
-   NetworkProperty(m_spawnflags);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(moveparent);
-   NetworkProperty(m_flGlowProxySize);
-   NetworkProperty(HDRColorScale);
-EndNetworkClass();
-
-BeginNetworkClass(CMaterialModifyControl, DT_MaterialModifyControl);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_szMaterialName);
-   NetworkProperty(m_szMaterialVar);
-   NetworkProperty(m_szMaterialVarValue);
-   NetworkProperty(m_iFrameStart);
-   NetworkProperty(m_iFrameEnd);
-   NetworkProperty(m_bWrap);
-   NetworkProperty(m_flFramerate);
-   NetworkProperty(m_bNewAnimCommandsSemaphore);
-   NetworkProperty(m_flFloatLerpStartValue);
-   NetworkProperty(m_flFloatLerpEndValue);
-   NetworkProperty(m_flFloatLerpTransitionTime);
-   NetworkProperty(m_nModifyMode);
-EndNetworkClass();
-
-BeginNetworkClass(CMovieDisplay, DT_MovieDisplay);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bEnabled);
-   NetworkProperty(m_bLooping);
-   NetworkProperty(m_szMovieFilename);
-   NetworkProperty(m_szGroupName);
-EndNetworkClass();
-
-BeginNetworkClass(CParticleFire, DT_ParticleFire);
-   NetworkProperty(m_vOrigin);
-   NetworkProperty(m_vDirection);
-EndNetworkClass();
-
-BeginNetworkClass(CParticlePerformanceMonitor, DT_ParticlePerformanceMonitor);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bDisplayPerf);
-   NetworkProperty(m_bMeasurePerf);
-EndNetworkClass();
-
-BeginNetworkClass(CParticleSystem, DT_ParticleSystem);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_flStartTime);
-   NetworkProperty(m_iEffectIndex);
-   NetworkProperty(m_bActive);
-   NetworkProperty(m_hOwnerEntity);
-   NetworkProperty(moveparent);
-   NetworkProperty(m_iParentAttachment);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_nStopType);
-   NetworkProperty(m_szSnapshotFileName);
-   NetworkProperty(m_vServerControlPoints);
-   NetworkProperty(m_iServerControlPointAssignments);
-   NetworkProperty(m_hControlPointEnts);
-   NetworkProperty(m_iControlPointParents);
-EndNetworkClass();
-
-BeginNetworkClass(CPhysBox, DT_PhysBox);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CPhysBoxMultiplayer, DT_PhysBoxMultiplayer);
-   NetworkBaseClass(CPhysBox);
-   NetworkProperty(m_iPhysicsMode);
-   NetworkProperty(m_fMass);
-EndNetworkClass();
-
-BeginNetworkClass(CPhysicsProp, DT_PhysicsProp);
-   NetworkBaseClass(CBreakableProp);
-   NetworkProperty(m_bAwake);
-EndNetworkClass();
-
-BeginNetworkClass(CPhysicsPropMultiplayer, DT_PhysicsPropMultiplayer);
-   NetworkBaseClass(CPhysicsProp);
-   NetworkProperty(m_iPhysicsMode);
-   NetworkProperty(m_fMass);
-   NetworkProperty(m_collisionMins);
-   NetworkProperty(m_collisionMaxs);
-EndNetworkClass();
-
-BeginNetworkClass(CPhysMagnet, DT_PhysMagnet);
-   NetworkBaseClass(CBaseAnimating);
-EndNetworkClass();
-
-BeginNetworkClass(CPlasma, DT_Plasma);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flScale);
-   NetworkProperty(m_flScaleTime);
-   NetworkProperty(m_nFlags);
-   NetworkProperty(m_nPlasmaModelIndex);
-   NetworkProperty(m_nPlasmaModelIndex2);
-   NetworkProperty(m_nGlowModelIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CPointCamera, DT_PointCamera);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_FOV);
-   NetworkProperty(m_Resolution);
-   NetworkProperty(m_bFogEnable);
-   NetworkProperty(m_FogColor);
-   NetworkProperty(m_flFogStart);
-   NetworkProperty(m_flFogEnd);
-   NetworkProperty(m_flFogMaxDensity);
-   NetworkProperty(m_bActive);
-   NetworkProperty(m_bUseScreenAspectRatio);
-   NetworkProperty(m_bNoSky);
-   NetworkProperty(m_fBrightness);
-EndNetworkClass();
-
-BeginNetworkClass(CPointCommentaryNode, DT_PointCommentaryNode);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_bActive);
-   NetworkProperty(m_iszCommentaryFile);
-   NetworkProperty(m_iszCommentaryFileNoHDR);
-   NetworkProperty(m_flStartTime);
-   NetworkProperty(m_iszSpeakers);
-   NetworkProperty(m_iNodeNumber);
-   NetworkProperty(m_iNodeNumberMax);
-   NetworkProperty(m_hViewPosition);
-EndNetworkClass();
-
-BeginNetworkClass(CPoseController, DT_PoseController);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_hProps);
-   NetworkProperty(m_chPoseIndex);
-   NetworkProperty(m_bPoseValueParity);
-   NetworkProperty(m_fPoseValue);
-   NetworkProperty(m_fInterpolationTime);
-   NetworkProperty(m_bInterpolationWrap);
-   NetworkProperty(m_fCycleFrequency);
-   NetworkProperty(m_nFModType);
-   NetworkProperty(m_fFModTimeOffset);
-   NetworkProperty(m_fFModRate);
-   NetworkProperty(m_fFModAmplitude);
-EndNetworkClass();
-
-BeginNetworkClass(CPostProcessController, DT_PostProcessController);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flPostProcessParameters);
-   NetworkProperty(m_bMaster);
-EndNetworkClass();
-
-BeginNetworkClass(CPrecipitation, DT_Precipitation);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nPrecipType);
-EndNetworkClass();
-
-BeginNetworkClass(CPrecipitationBlocker, DT_PrecipitationBlocker);
-   NetworkBaseClass(CBaseEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CProp_Hallucination, DT_Prop_Hallucination);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_bEnabled);
-   NetworkProperty(m_fVisibleTime);
-   NetworkProperty(m_fRechargeTime);
-EndNetworkClass();
-
-BeginNetworkClass(CPropDoorRotating, DT_PropDoorRotating);
-   NetworkBaseClass(CBasePropDoor);
-EndNetworkClass();
-
-BeginNetworkClass(CPropVehicleDriveable, DT_PropVehicleDriveable);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_hPlayer);
-   NetworkProperty(m_nSpeed);
-   NetworkProperty(m_nRPM);
-   NetworkProperty(m_flThrottle);
-   NetworkProperty(m_nBoostTimeLeft);
-   NetworkProperty(m_nHasBoost);
-   NetworkProperty(m_nScannerDisabledWeapons);
-   NetworkProperty(m_nScannerDisabledVehicle);
-   NetworkProperty(m_bEnterAnimOn);
-   NetworkProperty(m_bExitAnimOn);
-   NetworkProperty(m_bUnableToFire);
-   NetworkProperty(m_vecEyeExitEndpoint);
-   NetworkProperty(m_bHasGun);
-   NetworkProperty(m_vecGunCrosshair);
-EndNetworkClass();
-
-BeginNetworkClass(CRagdollManager, DT_RagdollManager);
-   NetworkProperty(m_iCurrentMaxRagdollCount);
-EndNetworkClass();
-
-BeginNetworkClass(CRagdollProp, DT_Ragdoll);
-   NetworkBaseClass(CBaseAnimating);
-   NetworkProperty(m_ragAngles);
-   NetworkProperty(m_ragPos);
-   NetworkProperty(m_hUnragdoll);
-   NetworkProperty(m_flBlendWeight);
-   NetworkProperty(m_nOverlaySequence);
-EndNetworkClass();
-
-BeginNetworkClass(CRagdollPropAttached, DT_Ragdoll_Attached);
-   NetworkBaseClass(CRagdollProp);
-   NetworkProperty(m_boneIndexAttached);
-   NetworkProperty(m_ragdollAttachedObjectIndex);
-   NetworkProperty(m_attachmentPointBoneSpace);
-   NetworkProperty(m_attachmentPointRagdollSpace);
-EndNetworkClass();
-
-BeginNetworkClass(CRopeKeyframe, DT_RopeKeyframe);
-   NetworkProperty(m_hStartPoint);
-   NetworkProperty(m_hEndPoint);
-   NetworkProperty(m_iStartAttachment);
-   NetworkProperty(m_iEndAttachment);
-   NetworkProperty(m_Slack);
-   NetworkProperty(m_RopeLength);
-   NetworkProperty(m_fLockedPoints);
-   NetworkProperty(m_nChangeCount);
-   NetworkProperty(m_RopeFlags);
-   NetworkProperty(m_nSegments);
-   NetworkProperty(m_bConstrainBetweenEndpoints);
-   NetworkProperty(m_iRopeMaterialModelIndex);
-   NetworkProperty(m_Subdiv);
-   NetworkProperty(m_TextureScale);
-   NetworkProperty(m_Width);
-   NetworkProperty(m_flScrollSpeed);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(moveparent);
-   NetworkProperty(m_iParentAttachment);
-   NetworkProperty(m_nMinCPULevel);
-   NetworkProperty(m_nMaxCPULevel);
-   NetworkProperty(m_nMinGPULevel);
-   NetworkProperty(m_nMaxGPULevel);
-EndNetworkClass();
-
-BeginNetworkClass(CSceneEntity, DT_SceneEntity);
-   NetworkProperty(m_nSceneStringIndex);
-   NetworkProperty(m_bIsPlayingBack);
-   NetworkProperty(m_bPaused);
-   NetworkProperty(m_bMultiplayer);
-   NetworkProperty(m_flForceClientTime);
-   NetworkProperty(m_hActorList);
-EndNetworkClass();
-
-BeginNetworkClass(CShadowControl, DT_ShadowControl);
-   NetworkProperty(m_shadowDirection);
-   NetworkProperty(m_shadowColor);
-   NetworkProperty(m_flShadowMaxDist);
-   NetworkProperty(m_bDisableShadows);
-   NetworkProperty(m_bEnableLocalLightShadows);
-EndNetworkClass();
-
-BeginNetworkClass(CSlideshowDisplay, DT_SlideshowDisplay);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_bEnabled);
-   NetworkProperty(m_szDisplayText);
-   NetworkProperty(m_szSlideshowDirectory);
-   NetworkProperty(m_chCurrentSlideLists);
-   NetworkProperty(m_fMinSlideTime);
-   NetworkProperty(m_fMaxSlideTime);
-   NetworkProperty(m_iCycleType);
-   NetworkProperty(m_bNoListRepeats);
-EndNetworkClass();
-
-BeginNetworkClass(CSmokeStack, DT_SmokeStack);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_SpreadSpeed);
-   NetworkProperty(m_Speed);
-   NetworkProperty(m_StartSize);
-   NetworkProperty(m_EndSize);
-   NetworkProperty(m_Rate);
-   NetworkProperty(m_JetLength);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_flBaseSpread);
-   NetworkProperty(m_flRollSpeed);
-   NetworkProperty(m_DirLight.m_vPos);
-   NetworkProperty(m_DirLight.m_vColor);
-   NetworkProperty(m_DirLight.m_flIntensity);
-   NetworkProperty(m_AmbientLight.m_vPos);
-   NetworkProperty(m_AmbientLight.m_vColor);
-   NetworkProperty(m_AmbientLight.m_flIntensity);
-   NetworkProperty(m_vWind);
-   NetworkProperty(m_flTwist);
-   NetworkProperty(m_iMaterialModel);
-EndNetworkClass();
-
-BeginNetworkClass(CSpatialEntity, DT_SpatialEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_MinFalloff);
-   NetworkProperty(m_MaxFalloff);
-   NetworkProperty(m_flCurWeight);
-   NetworkProperty(m_bEnabled);
-EndNetworkClass();
-
-BeginNetworkClass(CSpotlightEnd, DT_SpotlightEnd);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flLightScale);
-   NetworkProperty(m_Radius);
-EndNetworkClass();
-
-BeginNetworkClass(CSprite, DT_Sprite);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_hAttachedToEntity);
-   NetworkProperty(m_nAttachment);
-   NetworkProperty(m_flScaleTime);
-   NetworkProperty(m_flSpriteScale);
-   NetworkProperty(m_flGlowProxySize);
-   NetworkProperty(m_flHDRColorScale);
-   NetworkProperty(m_flSpriteFramerate);
-   NetworkProperty(m_flFrame);
-   NetworkProperty(m_flBrightnessTime);
-   NetworkProperty(m_nBrightness);
-   NetworkProperty(m_bWorldSpaceScale);
-EndNetworkClass();
-
-BeginNetworkClass(CSpriteOriented, DT_SpriteOriented);
-   NetworkBaseClass(CSprite);
-EndNetworkClass();
-
-BeginNetworkClass(CSpriteTrail, DT_SpriteTrail);
-   NetworkBaseClass(CSprite);
-   NetworkProperty(m_flLifeTime);
-   NetworkProperty(m_flStartWidth);
-   NetworkProperty(m_flEndWidth);
-   NetworkProperty(m_flStartWidthVariance);
-   NetworkProperty(m_flTextureRes);
-   NetworkProperty(m_flMinFadeLength);
-   NetworkProperty(m_vecSkyboxOrigin);
-   NetworkProperty(m_flSkyboxScale);
-EndNetworkClass();
-
-BeginNetworkClass(CStatueProp, DT_StatueProp);
-   NetworkBaseClass(CPhysicsProp);
-   NetworkProperty(m_hInitBaseAnimating);
-   NetworkProperty(m_bShatter);
-   NetworkProperty(m_nShatterFlags);
-   NetworkProperty(m_vShatterPosition);
-   NetworkProperty(m_vShatterForce);
-EndNetworkClass();
-
-BeginNetworkClass(CSteamJet, DT_SteamJet);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_SpreadSpeed);
-   NetworkProperty(m_Speed);
-   NetworkProperty(m_StartSize);
-   NetworkProperty(m_EndSize);
-   NetworkProperty(m_Rate);
-   NetworkProperty(m_JetLength);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_bFaceLeft);
-   NetworkProperty(m_nType);
-   NetworkProperty(m_spawnflags);
-   NetworkProperty(m_flRollSpeed);
-EndNetworkClass();
-
-BeginNetworkClass(CSun, DT_Sun);
-   NetworkProperty(m_clrRender);
-   NetworkProperty(m_clrOverlay);
-   NetworkProperty(m_vDirection);
-   NetworkProperty(m_bOn);
-   NetworkProperty(m_nSize);
-   NetworkProperty(m_nOverlaySize);
-   NetworkProperty(m_nMaterial);
-   NetworkProperty(m_nOverlayMaterial);
-   NetworkProperty(HDRColorScale);
-EndNetworkClass();
-
-BeginNetworkClass(CSunlightShadowControl, DT_SunlightShadowControl);
-   NetworkProperty(m_shadowDirection);
-   NetworkProperty(m_bEnabled);
-   NetworkProperty(m_TextureName);
-   NetworkProperty(m_LightColor);
-   NetworkProperty(m_flColorTransitionTime);
-   NetworkProperty(m_flSunDistance);
-   NetworkProperty(m_flFOV);
-   NetworkProperty(m_flNearZ);
-   NetworkProperty(m_flNorthOffset);
-   NetworkProperty(m_bEnableShadows);
-EndNetworkClass();
-
-BeginNetworkClass(CTeam, DT_Team);
-   NetworkProperty(m_iTeamNum);
-   NetworkProperty(m_iScore);
-   NetworkProperty(m_iRoundsWon);
-   NetworkProperty(m_szTeamname);
-   NetworkProperty(player_array);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_ShowcaseData);
-   NetworkProperty(m_hRootEntity);
-   NetworkProperty(m_Slots);
-EndNetworkStruct();
-
-BeginNetworkStruct(DT_ShowcaseSlot);
-   NetworkProperty(nType);
-   NetworkProperty(szName);
-   NetworkProperty(vecLocalOrigin);
-   NetworkProperty(angLocalAngles);
-   NetworkProperty(hEntity);
-   NetworkProperty(ulItemID);
-   NetworkProperty(bIsOnlySlotOfThisType);
-EndNetworkStruct();
-
-BeginNetworkClass(CTeamShowcaseEditorManager, DT_TeamShowcaseEditorManager);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_nEditorMode);
-   NetworkProperty(m_nCurEditingSlot);
-   NetworkProperty(m_Data);
-EndNetworkClass();
-
-BeginNetworkClass(CTeamShowcasePlayer, DT_TeamShowcasePlayer);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_hPlayerEntity);
-   NetworkProperty(m_szCameraAnim);
-   NetworkProperty(m_flTransitionTime);
-EndNetworkClass();
-
-BeginNetworkClass(CTEArmorRicochet, DT_TEArmorRicochet);
-   NetworkBaseClass(CTEMetalSparks);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBaseBeam, DT_BaseBeam);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nHaloIndex);
-   NetworkProperty(m_nStartFrame);
-   NetworkProperty(m_nFrameRate);
-   NetworkProperty(m_fLife);
-   NetworkProperty(m_fWidth);
-   NetworkProperty(m_fEndWidth);
-   NetworkProperty(m_nFadeLength);
-   NetworkProperty(m_fAmplitude);
-   NetworkProperty(m_nSpeed);
-   NetworkProperty(r);
-   NetworkProperty(g);
-   NetworkProperty(b);
-   NetworkProperty(a);
-   NetworkProperty(m_nFlags);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamEntPoint, DT_TEBeamEntPoint);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_nStartEntity);
-   NetworkProperty(m_nEndEntity);
-   NetworkProperty(m_vecStartPoint);
-   NetworkProperty(m_vecEndPoint);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamEnts, DT_TEBeamEnts);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_nStartEntity);
-   NetworkProperty(m_nEndEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamFollow, DT_TEBeamFollow);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_iEntIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamLaser, DT_TEBeamLaser);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_nStartEntity);
-   NetworkProperty(m_nEndEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamPoints, DT_TEBeamPoints);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_vecStartPoint);
-   NetworkProperty(m_vecEndPoint);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamRing, DT_TEBeamRing);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_nStartEntity);
-   NetworkProperty(m_nEndEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamRingPoint, DT_TEBeamRingPoint);
-   NetworkBaseClass(CTEBaseBeam);
-   NetworkProperty(m_vecCenter);
-   NetworkProperty(m_flStartRadius);
-   NetworkProperty(m_flEndRadius);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBeamSpline, DT_TEBeamSpline);
-   NetworkProperty(m_nPoints);
-   NetworkProperty(m_vecPoints);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBloodSprite, DT_TEBloodSprite);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecDirection);
-   NetworkProperty(r);
-   NetworkProperty(g);
-   NetworkProperty(b);
-   NetworkProperty(a);
-   NetworkProperty(m_nSprayModel);
-   NetworkProperty(m_nDropModel);
-   NetworkProperty(m_nSize);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBloodStream, DT_TEBloodStream);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_vecDirection);
-   NetworkProperty(r);
-   NetworkProperty(g);
-   NetworkProperty(b);
-   NetworkProperty(a);
-   NetworkProperty(m_nAmount);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBreakModel, DT_TEBreakModel);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_vecSize);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nRandomization);
-   NetworkProperty(m_nCount);
-   NetworkProperty(m_fTime);
-   NetworkProperty(m_nFlags);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBSPDecal, DT_TEBSPDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nEntity);
-   NetworkProperty(m_nIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBubbles, DT_TEBubbles);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecMins);
-   NetworkProperty(m_vecMaxs);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fHeight);
-   NetworkProperty(m_nCount);
-   NetworkProperty(m_fSpeed);
-EndNetworkClass();
-
-BeginNetworkClass(CTEBubbleTrail, DT_TEBubbleTrail);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecMins);
-   NetworkProperty(m_vecMaxs);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_flWaterZ);
-   NetworkProperty(m_nCount);
-   NetworkProperty(m_fSpeed);
-EndNetworkClass();
-
-BeginNetworkClass(CTEClientProjectile, DT_TEClientProjectile);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nLifeTime);
-   NetworkProperty(m_hOwner);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDecal, DT_TEDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecStart);
-   NetworkProperty(m_nEntity);
-   NetworkProperty(m_nHitbox);
-   NetworkProperty(m_nIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDotaBloodImpact, DT_TEDotaBloodImpact);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_hEntity);
-   NetworkProperty(m_flScale);
-   NetworkProperty(m_flXNormal);
-   NetworkProperty(m_flYNormal);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDOTAProjectile, DT_TEDOTAProjectile);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_iMoveSpeed);
-   NetworkProperty(m_hSource);
-   NetworkProperty(m_hTarget);
-   NetworkProperty(m_iSourceAttachment);
-   NetworkProperty(m_iParticleSystem);
-   NetworkProperty(m_bDodgeable);
-   NetworkProperty(m_bIsAttack);
-   NetworkProperty(m_bIsEvaded);
-   NetworkProperty(m_flExpireTime);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDOTAProjectileLoc, DT_TEDOTAProjectileLoc);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_iMoveSpeed);
-   NetworkProperty(m_vSourceLoc);
-   NetworkProperty(m_vTargetLoc);
-   NetworkProperty(m_hTarget);
-   NetworkProperty(m_iParticleSystem);
-   NetworkProperty(m_bDodgeable);
-   NetworkProperty(m_bIsAttack);
-   NetworkProperty(m_bIsEvaded);
-   NetworkProperty(m_flExpireTime);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDust, DT_TEDust);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_flSize);
-   NetworkProperty(m_flSpeed);
-   NetworkProperty(m_vecDirection);
-EndNetworkClass();
-
-BeginNetworkClass(CTEDynamicLight, DT_TEDynamicLight);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(r);
-   NetworkProperty(g);
-   NetworkProperty(b);
-   NetworkProperty(exponent);
-   NetworkProperty(m_fRadius);
-   NetworkProperty(m_fTime);
-   NetworkProperty(m_fDecay);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_EffectData);
-   NetworkProperty(m_vOrigin.x);
-   NetworkProperty(m_vOrigin.y);
-   NetworkProperty(m_vOrigin.z);
-   NetworkProperty(m_vStart.x);
-   NetworkProperty(m_vStart.y);
-   NetworkProperty(m_vStart.z);
-   NetworkProperty(m_vAngles);
-   NetworkProperty(m_vNormal);
-   NetworkProperty(m_fFlags);
-   NetworkProperty(m_flMagnitude);
-   NetworkProperty(m_flScale);
-   NetworkProperty(m_nAttachmentIndex);
-   NetworkProperty(m_nSurfaceProp);
-   NetworkProperty(m_iEffectName);
-   NetworkProperty(m_nMaterial);
-   NetworkProperty(m_nDamageType);
-   NetworkProperty(m_nHitBox);
-   NetworkProperty(entindex);
-   NetworkProperty(m_nOtherEntIndex);
-   NetworkProperty(m_nColor);
-   NetworkProperty(m_flRadius);
-EndNetworkStruct();
-
-BeginNetworkClass(CTEEffectDispatch, DT_TEEffectDispatch);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_EffectData);
-EndNetworkClass();
-
-BeginNetworkClass(CTEEnergySplash, DT_TEEnergySplash);
-   NetworkProperty(m_vecPos);
-   NetworkProperty(m_vecDir);
-   NetworkProperty(m_bExplosive);
-EndNetworkClass();
-
-BeginNetworkClass(CTEExplosion, DT_TEExplosion);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fScale);
-   NetworkProperty(m_nFrameRate);
-   NetworkProperty(m_nFlags);
-   NetworkProperty(m_vecNormal);
-   NetworkProperty(m_chMaterialType);
-   NetworkProperty(m_nRadius);
-   NetworkProperty(m_nMagnitude);
-EndNetworkClass();
-
-BeginNetworkClass(CTEFizz, DT_TEFizz);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_nEntity);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nDensity);
-   NetworkProperty(m_nCurrent);
-EndNetworkClass();
-
-BeginNetworkClass(CTEFootprintDecal, DT_TEFootprintDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecDirection);
-   NetworkProperty(m_nEntity);
-   NetworkProperty(m_nIndex);
-   NetworkProperty(m_chMaterialType);
-EndNetworkClass();
-
-BeginNetworkClass(CTEFoundryHelpers, DT_TEFoundryHelpers);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_iEntity);
-EndNetworkClass();
-
-BeginNetworkClass(CTEGaussExplosion, DT_TEGaussExplosion);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_nType);
-   NetworkProperty(m_vecDirection);
-EndNetworkClass();
-
-BeginNetworkClass(CTEGlowSprite, DT_TEGlowSprite);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fScale);
-   NetworkProperty(m_fLife);
-   NetworkProperty(m_nBrightness);
-EndNetworkClass();
-
-BeginNetworkClass(CTEImpact, DT_TEImpact);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecNormal);
-   NetworkProperty(m_iType);
-EndNetworkClass();
-
-BeginNetworkClass(CTEKillPlayerAttachments, DT_TEKillPlayerAttachments);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_nPlayer);
-EndNetworkClass();
-
-BeginNetworkClass(CTELargeFunnel, DT_TELargeFunnel);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nReversed);
-EndNetworkClass();
-
-BeginNetworkClass(CTEMetalSparks, DT_TEMetalSparks);
-   NetworkProperty(m_vecPos);
-   NetworkProperty(m_vecDir);
-EndNetworkClass();
-
-BeginNetworkClass(CTEMuzzleFlash, DT_TEMuzzleFlash);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecAngles);
-   NetworkProperty(m_flScale);
-   NetworkProperty(m_nType);
-EndNetworkClass();
-
-BeginNetworkClass(CTEParticleSystem, DT_TEParticleSystem);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-EndNetworkClass();
-
-BeginNetworkClass(CTEPhysicsProp, DT_TEPhysicsProp);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_vecVelocity);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_nSkin);
-   NetworkProperty(m_nFlags);
-   NetworkProperty(m_nEffects);
-EndNetworkClass();
-
-BeginNetworkClass(CTEPlayerDecal, DT_TEPlayerDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nEntity);
-   NetworkProperty(m_nPlayer);
-EndNetworkClass();
-
-BeginNetworkClass(CTEProjectedDecal, DT_TEProjectedDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(m_flDistance);
-   NetworkProperty(m_nIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CTEShatterSurface, DT_TEShatterSurface);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecAngles);
-   NetworkProperty(m_vecForce);
-   NetworkProperty(m_vecForcePos);
-   NetworkProperty(m_flWidth);
-   NetworkProperty(m_flHeight);
-   NetworkProperty(m_flShardSize);
-   NetworkProperty(m_nSurfaceType);
-   NetworkProperty(m_uchFrontColor);
-   NetworkProperty(m_uchBackColor);
-EndNetworkClass();
-
-BeginNetworkClass(CTEShowLine, DT_TEShowLine);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_vecEnd);
-EndNetworkClass();
-
-BeginNetworkClass(CTesla, DT_Tesla);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_SoundName);
-   NetworkProperty(m_iszSpriteName);
-EndNetworkClass();
-
-BeginNetworkClass(CTESmoke, DT_TESmoke);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fScale);
-   NetworkProperty(m_nFrameRate);
-EndNetworkClass();
-
-BeginNetworkClass(CTESparks, DT_TESparks);
-   NetworkBaseClass(CTEParticleSystem);
-   NetworkProperty(m_nMagnitude);
-   NetworkProperty(m_nTrailLength);
-   NetworkProperty(m_vecDir);
-EndNetworkClass();
-
-BeginNetworkClass(CTESprite, DT_TESprite);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fScale);
-   NetworkProperty(m_nBrightness);
-EndNetworkClass();
-
-BeginNetworkClass(CTESpriteSpray, DT_TESpriteSpray);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_vecDirection);
-   NetworkProperty(m_nModelIndex);
-   NetworkProperty(m_fNoise);
-   NetworkProperty(m_nSpeed);
-   NetworkProperty(m_nCount);
-EndNetworkClass();
-
-BeginNetworkStruct(DT_ProxyToggle_ProxiedData);
-   NetworkProperty(m_WithProxy);
-EndNetworkStruct();
-
-BeginNetworkClass(CTest_ProxyToggle_Networkable, DT_ProxyToggle);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(blah);
-EndNetworkClass();
-
-BeginNetworkClass(CTestTraceline, DT_TestTraceline);
-   NetworkProperty(m_clrRender);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-   NetworkProperty(moveparent);
-EndNetworkClass();
-
-BeginNetworkClass(CTEUnitAnimation, DT_TEUnitAnimation);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_flCastPoint);
-   NetworkProperty(m_hEntity);
-   NetworkProperty(m_flPlaybackRate);
-   NetworkProperty(m_iSequenceIndex);
-   NetworkProperty(m_iType);
-   NetworkProperty(m_Activity);
-EndNetworkClass();
-
-BeginNetworkClass(CTEUnitAnimationEnd, DT_TEUnitAnimationEnd);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_hEntity);
-   NetworkProperty(m_bSnap);
-EndNetworkClass();
-
-BeginNetworkClass(CTEWorldDecal, DT_TEWorldDecal);
-   NetworkBaseClass(CBaseTempEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_nIndex);
-EndNetworkClass();
-
-BeginNetworkClass(CTFWearableItem, DT_TFWearableItem);
-   NetworkBaseClass(CEconWearable);
-EndNetworkClass();
-
-BeginNetworkClass(CTriggerCamera, DT_TriggerCamera);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_vecOrigin);
-   NetworkProperty(m_angRotation);
-EndNetworkClass();
-
-BeginNetworkClass(CTriggerPlayerMovement, DT_TriggerPlayerMovement);
-   NetworkBaseClass(CBaseTrigger);
-EndNetworkClass();
-
-BeginNetworkClass(CVGuiScreen, DT_VGuiScreen);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flWidth);
-   NetworkProperty(m_flHeight);
-   NetworkProperty(m_nAttachmentIndex);
-   NetworkProperty(m_nPanelName);
-   NetworkProperty(m_fScreenFlags);
-   NetworkProperty(m_nOverlayMaterial);
-   NetworkProperty(m_hPlayerOwner);
-EndNetworkClass();
-
-BeginNetworkClass(CWaterBullet, DT_WaterBullet);
-   NetworkBaseClass(CBaseAnimating);
-EndNetworkClass();
-
-BeginNetworkClass(CWaterLODControl, DT_WaterLODControl);
-   NetworkProperty(m_flCheapWaterStartDistance);
-   NetworkProperty(m_flCheapWaterEndDistance);
-EndNetworkClass();
-
-BeginNetworkClass(CWorld, DT_WORLD);
-   NetworkBaseClass(CBaseEntity);
-   NetworkProperty(m_flWaveHeight);
-   NetworkProperty(m_WorldMins);
-   NetworkProperty(m_WorldMaxs);
-   NetworkProperty(m_bStartDark);
-   NetworkProperty(m_flMaxOccludeeArea);
-   NetworkProperty(m_flMinOccluderArea);
-   NetworkProperty(m_flMaxPropScreenSpaceWidth);
-   NetworkProperty(m_flMinPropScreenSpaceWidth);
-   NetworkProperty(m_iszDetailSpriteMaterial);
-   NetworkProperty(m_bColdWorld);
-EndNetworkClass();
-
-BeginNetworkClass(DustTrail, DT_DustTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_SpawnRate);
-   NetworkProperty(m_Color);
-   NetworkProperty(m_ParticleLifetime);
-   NetworkProperty(m_StopEmitTime);
-   NetworkProperty(m_MinSpeed);
-   NetworkProperty(m_MaxSpeed);
-   NetworkProperty(m_MinDirectedSpeed);
-   NetworkProperty(m_MaxDirectedSpeed);
-   NetworkProperty(m_StartSize);
-   NetworkProperty(m_EndSize);
-   NetworkProperty(m_SpawnRadius);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_Opacity);
-EndNetworkClass();
-
-BeginNetworkClass(MovieExplosion, DT_MovieExplosion);
-   NetworkBaseClass(CBaseParticleEntity);
-EndNetworkClass();
-
-BeginNetworkClass(NextBotCombatCharacter, DT_NextBot);
-   NetworkBaseClass(CBaseCombatCharacter);
-EndNetworkClass();
-
-BeginNetworkClass(ParticleSmokeGrenade, DT_ParticleSmokeGrenade);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_flSpawnTime);
-   NetworkProperty(m_FadeStartTime);
-   NetworkProperty(m_FadeEndTime);
-   NetworkProperty(m_CurrentStage);
-EndNetworkClass();
-
-BeginNetworkClass(RocketTrail, DT_RocketTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_SpawnRate);
-   NetworkProperty(m_StartColor);
-   NetworkProperty(m_EndColor);
-   NetworkProperty(m_ParticleLifetime);
-   NetworkProperty(m_StopEmitTime);
-   NetworkProperty(m_MinSpeed);
-   NetworkProperty(m_MaxSpeed);
-   NetworkProperty(m_StartSize);
-   NetworkProperty(m_EndSize);
-   NetworkProperty(m_SpawnRadius);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_nAttachment);
-   NetworkProperty(m_Opacity);
-   NetworkProperty(m_bDamaged);
-   NetworkProperty(m_flFlareScale);
-EndNetworkClass();
-
-BeginNetworkClass(SmokeTrail, DT_SmokeTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_SpawnRate);
-   NetworkProperty(m_StartColor);
-   NetworkProperty(m_EndColor);
-   NetworkProperty(m_ParticleLifetime);
-   NetworkProperty(m_StopEmitTime);
-   NetworkProperty(m_MinSpeed);
-   NetworkProperty(m_MaxSpeed);
-   NetworkProperty(m_MinDirectedSpeed);
-   NetworkProperty(m_MaxDirectedSpeed);
-   NetworkProperty(m_StartSize);
-   NetworkProperty(m_EndSize);
-   NetworkProperty(m_SpawnRadius);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_nAttachment);
-   NetworkProperty(m_Opacity);
-EndNetworkClass();
-
-BeginNetworkClass(SporeExplosion, DT_SporeExplosion);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_flSpawnRate);
-   NetworkProperty(m_flParticleLifetime);
-   NetworkProperty(m_flStartSize);
-   NetworkProperty(m_flEndSize);
-   NetworkProperty(m_flSpawnRadius);
-   NetworkProperty(m_bEmit);
-   NetworkProperty(m_bDontRemove);
-EndNetworkClass();
-
-BeginNetworkClass(SporeTrail, DT_SporeTrail);
-   NetworkBaseClass(CBaseParticleEntity);
-   NetworkProperty(m_flSpawnRate);
-   NetworkProperty(m_vecEndColor);
-   NetworkProperty(m_flParticleLifetime);
-   NetworkProperty(m_flStartSize);
-   NetworkProperty(m_flEndSize);
-   NetworkProperty(m_flSpawnRadius);
-   NetworkProperty(m_bEmit);
-EndNetworkClass();
+BeginClientClass(CAI_BaseNPC, DT_AI_BaseNPC);
+   ClientBaseClass(CBaseCombatCharacter);
+   AddClientProperty(m_lifeState);
+   AddClientProperty(m_bPerformAvoidance);
+   AddClientProperty(m_bIsMoving);
+   AddClientProperty(m_bFadeCorpse);
+   AddClientProperty(m_iDeathPose);
+   AddClientProperty(m_iDeathFrame);
+   AddClientProperty(m_bSpeedModActive);
+   AddClientProperty(m_iSpeedModRadius);
+   AddClientProperty(m_iSpeedModSpeed);
+   AddClientProperty(m_bImportanRagdoll);
+   AddClientProperty(m_flTimePingEffect);
+EndClientClass();
+
+BeginClientStruct(DT_ServerAnimationData);
+   AddClientProperty(m_flCycle);
+EndClientStruct();
+
+BeginClientClass(CBaseAnimating, DT_BaseAnimating);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nForceBone);
+   AddClientProperty(m_vecForce);
+   AddClientProperty(m_nSkin);
+   AddClientProperty(m_nBody);
+   AddClientProperty(m_nHitboxSet);
+   AddClientProperty(m_flModelScale);
+   AddClientProperty(m_flPoseParameter);
+   AddClientProperty(m_nSequence);
+   AddClientProperty(m_flPlaybackRate);
+   AddClientProperty(m_flEncodedController);
+   AddClientProperty(m_bClientSideAnimation);
+   AddClientProperty(m_bClientSideFrameReset);
+   AddClientProperty(m_bClientSideRagdoll);
+   AddClientProperty(m_nNewSequenceParity);
+   AddClientProperty(m_nResetEventsParity);
+   AddClientProperty(m_nMuzzleFlashParity);
+   AddClientProperty(m_hLightingOrigin);
+   AddClientProperty(serveranimdata);
+   AddClientProperty(m_flFrozen);
+EndClientClass();
+
+BeginClientStruct(DT_Animationlayer);
+   AddClientProperty(m_nSequence);
+   AddClientProperty(m_flCycle);
+   AddClientProperty(m_flPrevCycle);
+   AddClientProperty(m_flWeight);
+   AddClientProperty(m_nOrder);
+EndClientStruct();
+
+BeginClientStruct(DT_OverlayVars);
+   AddClientProperty(m_AnimOverlay);
+EndClientStruct();
+
+BeginClientClass(CBaseAnimatingOverlay, DT_BaseAnimatingOverlay);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(overlay_vars);
+EndClientClass();
+
+BeginClientStruct(DT_AttributeContainer);
+   AddClientProperty(m_hOuter);
+   AddClientProperty(m_ProviderType);
+   AddClientProperty(m_iReapplyProvisionParity);
+   AddClientProperty(m_Item);
+EndClientStruct();
+
+BeginClientStruct(DT_AttributeList);
+   AddClientProperty(m_Attributes);
+EndClientStruct();
+
+BeginClientStruct(DT_ScriptCreatedAttribute);
+   AddClientProperty(m_iAttributeDefinitionIndex);
+   AddClientProperty(m_iRawValue32);
+EndClientStruct();
+
+BeginClientStruct(DT_ScriptCreatedItem);
+   AddClientProperty(m_iItemDefinitionIndex);
+   AddClientProperty(m_iEntityLevel);
+   AddClientProperty(m_iItemIDHigh);
+   AddClientProperty(m_iItemIDLow);
+   AddClientProperty(m_iAccountID);
+   AddClientProperty(m_iEntityQuality);
+   AddClientProperty(m_bInitialized);
+   AddClientProperty(m_AttributeList);
+EndClientStruct();
+
+BeginClientClass(CBaseAttributableItem, DT_BaseAttributableItem);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_AttributeManager);
+EndClientClass();
+
+BeginClientClass(CBaseButton, DT_BaseButton);
+   ClientBaseClass(CBaseToggle);
+EndClientClass();
+
+BeginClientStruct(DT_BCCLocalPlayerExclusive);
+   AddClientProperty(m_flNextAttack);
+   AddClientProperty(m_hMyWeapons);
+EndClientStruct();
+
+BeginClientClass(CBaseCombatCharacter, DT_BaseCombatCharacter);
+   ClientBaseClass(CBaseFlex);
+   AddClientProperty(bcc_localdata);
+   AddClientProperty(m_hActiveWeapon);
+EndClientClass();
+
+BeginClientStruct(DT_LocalActiveWeaponData);
+   AddClientProperty(m_flNextPrimaryAttack);
+   AddClientProperty(m_flNextSecondaryAttack);
+   AddClientProperty(m_nNextThinkTick);
+   AddClientProperty(m_flTimeWeaponIdle);
+EndClientStruct();
+
+BeginClientStruct(DT_LocalWeaponData);
+   AddClientProperty(m_iClip1);
+   AddClientProperty(m_iClip2);
+   AddClientProperty(m_iPrimaryAmmoType);
+   AddClientProperty(m_iSecondaryAmmoType);
+   AddClientProperty(m_nViewModelIndex);
+EndClientStruct();
+
+BeginClientClass(CBaseCombatWeapon, DT_BaseCombatWeapon);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(LocalWeaponData);
+   AddClientProperty(LocalActiveWeaponData);
+   AddClientProperty(m_iViewModelIndex);
+   AddClientProperty(m_iWorldModelIndex);
+   AddClientProperty(m_iState);
+   AddClientProperty(m_hOwner);
+EndClientClass();
+
+BeginClientClass(CBaseDoor, DT_BaseDoor);
+   ClientBaseClass(CBaseToggle);
+   AddClientProperty(m_flWaveHeight);
+EndClientClass();
+
+BeginClientStruct(DT_AnimTimeMustBeFirst);
+   AddClientProperty(m_flAnimTime);
+EndClientStruct();
+
+BeginClientStruct(DT_CollisionProperty);
+   AddClientProperty(m_vecMins);
+   AddClientProperty(m_vecMaxs);
+   AddClientProperty(m_nSolidType);
+   AddClientProperty(m_usSolidFlags);
+   AddClientProperty(m_nSurroundType);
+   AddClientProperty(m_triggerBloat);
+   AddClientProperty(m_vecSpecifiedSurroundingMins);
+   AddClientProperty(m_vecSpecifiedSurroundingMaxs);
+EndClientStruct();
+
+BeginClientClass(CBaseEntity, DT_BaseEntity);
+   AddClientProperty(AnimTimeMustBeFirst);
+   AddClientProperty(m_flSimulationTime);
+   AddClientProperty(m_flCreateTime);
+   AddClientProperty(m_ubInterpolationFrame);
+   AddClientProperty(m_cellbits);
+   AddClientProperty(m_cellX);
+   AddClientProperty(m_cellY);
+   AddClientProperty(m_cellZ);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_Collision);
+   AddClientProperty(m_nRenderFX);
+   AddClientProperty(m_nRenderMode);
+   AddClientProperty(m_fEffects);
+   AddClientProperty(m_clrRender);
+   AddClientProperty(m_iTeamNum);
+   AddClientProperty(m_CollisionGroup);
+   AddClientProperty(m_flElasticity);
+   AddClientProperty(m_flShadowCastDistance);
+   AddClientProperty(m_hOwnerEntity);
+   AddClientProperty(m_hEffectEntity);
+   AddClientProperty(moveparent);
+   AddClientProperty(m_iParentAttachment);
+   AddClientProperty(m_iName);
+   AddClientProperty(movetype);
+   AddClientProperty(movecollide);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_iTextureFrameIndex);
+   AddClientProperty(m_bSimulatedEveryTick);
+   AddClientProperty(m_bAnimatedEveryTick);
+   AddClientProperty(m_bAlternateSorting);
+   AddClientProperty(m_fadeMinDist);
+   AddClientProperty(m_fadeMaxDist);
+   AddClientProperty(m_flFadeScale);
+   AddClientProperty(m_nMinCPULevel);
+   AddClientProperty(m_nMaxCPULevel);
+   AddClientProperty(m_nMinGPULevel);
+   AddClientProperty(m_nMaxGPULevel);
+EndClientClass();
+
+BeginClientClass(CBaseFlex, DT_BaseFlex);
+   ClientBaseClass(CBaseAnimatingOverlay);
+   AddClientProperty(m_flexWeight);
+   AddClientProperty(m_blinktoggle);
+   AddClientProperty(m_viewtarget);
+EndClientClass();
+
+BeginClientClass(CBaseGrenade, DT_BaseGrenade);
+   ClientBaseClass(CBaseCombatCharacter);
+   AddClientProperty(m_flDamage);
+   AddClientProperty(m_DmgRadius);
+   AddClientProperty(m_bIsLive);
+   AddClientProperty(m_hThrower);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_fFlags);
+EndClientClass();
+
+BeginClientClass(CBaseParticleEntity, DT_BaseParticleEntity);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientStruct(DT_Local);
+   AddClientProperty(m_chAreaBits);
+   AddClientProperty(m_chAreaPortalBits);
+   AddClientProperty(m_iHideHUD);
+   AddClientProperty(m_flFOVRate);
+   AddClientProperty(m_bDucked);
+   AddClientProperty(m_bDucking);
+   AddClientProperty(m_bInDuckJump);
+   AddClientProperty(m_nDuckTimeMsecs);
+   AddClientProperty(m_nDuckJumpTimeMsecs);
+   AddClientProperty(m_nJumpTimeMsecs);
+   AddClientProperty(m_flFallVelocity);
+   AddClientProperty(m_vecPunchAngle);
+   AddClientProperty(m_vecPunchAngleVel);
+   AddClientProperty(m_bDrawViewmodel);
+   AddClientProperty(m_bWearingSuit);
+   AddClientProperty(m_bPoisoned);
+   AddClientProperty(m_flStepSize);
+   AddClientProperty(m_bAllowAutoMovement);
+   AddClientProperty(m_skybox3d.scale);
+   AddClientProperty(m_skybox3d.origin);
+   AddClientProperty(m_skybox3d.area);
+   AddClientProperty(m_skybox3d.fog.enable);
+   AddClientProperty(m_skybox3d.fog.blend);
+   AddClientProperty(m_skybox3d.fog.dirPrimary);
+   AddClientProperty(m_skybox3d.fog.colorPrimary);
+   AddClientProperty(m_skybox3d.fog.colorSecondary);
+   AddClientProperty(m_skybox3d.fog.start);
+   AddClientProperty(m_skybox3d.fog.end);
+   AddClientProperty(m_skybox3d.fog.maxdensity);
+   AddClientProperty(m_skybox3d.fog.HDRColorScale);
+   AddClientProperty(m_audio.localSound);
+   AddClientProperty(m_audio.soundscapeIndex);
+   AddClientProperty(m_audio.localBits);
+   AddClientProperty(m_audio.entIndex);
+EndClientStruct();
+
+BeginClientStruct(DT_LocalPlayerExclusive);
+   AddClientProperty(m_Local);
+   AddClientProperty(m_vecViewOffset);
+   AddClientProperty(m_flFriction);
+   AddClientProperty(m_iAmmo);
+   AddClientProperty(m_fOnTarget);
+   AddClientProperty(m_nTickBase);
+   AddClientProperty(m_nNextThinkTick);
+   AddClientProperty(m_hLastWeapon);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_vecBaseVelocity);
+   AddClientProperty(m_hConstraintEntity);
+   AddClientProperty(m_vecConstraintCenter);
+   AddClientProperty(m_flConstraintRadius);
+   AddClientProperty(m_flConstraintWidth);
+   AddClientProperty(m_flConstraintSpeedFactor);
+   AddClientProperty(m_bConstraintPastRadius);
+   AddClientProperty(m_flDeathTime);
+   AddClientProperty(m_nWaterLevel);
+   AddClientProperty(m_flLaggedMovementValue);
+   AddClientProperty(m_hTonemapController);
+EndClientStruct();
+
+BeginClientStruct(DT_PlayerState);
+   AddClientProperty(deadflag);
+EndClientStruct();
+
+BeginClientClass(CBasePlayer, DT_BasePlayer);
+   ClientBaseClass(CBaseCombatCharacter);
+   AddClientProperty(pl);
+   AddClientProperty(m_hVehicle);
+   AddClientProperty(m_hUseEntity);
+   AddClientProperty(m_hGroundEntity);
+   AddClientProperty(m_iHealth);
+   AddClientProperty(m_lifeState);
+   AddClientProperty(m_iBonusProgress);
+   AddClientProperty(m_iBonusChallenge);
+   AddClientProperty(m_flMaxspeed);
+   AddClientProperty(m_fFlags);
+   AddClientProperty(m_iObserverMode);
+   AddClientProperty(m_hObserverTarget);
+   AddClientProperty(m_iFOV);
+   AddClientProperty(m_iFOVStart);
+   AddClientProperty(m_flFOVTime);
+   AddClientProperty(m_iDefaultFOV);
+   AddClientProperty(m_hZoomOwner);
+   AddClientProperty(m_hViewModel);
+   AddClientProperty(m_szLastPlaceName);
+   AddClientProperty(m_vecLadderNormal);
+   AddClientProperty(m_ladderSurfaceProps);
+   AddClientProperty(m_hPostProcessCtrl);
+   AddClientProperty(m_hColorCorrectionCtrl);
+   AddClientProperty(m_PlayerFog.m_hCtrl);
+   AddClientProperty(m_currentSCLPacked);
+   AddClientProperty(m_hViewEntity);
+   AddClientProperty(localdata);
+EndClientClass();
+
+BeginClientClass(CBasePropDoor, DT_BasePropDoor);
+   ClientBaseClass(CDynamicProp);
+EndClientClass();
+
+BeginClientClass(CBaseTempEntity, DT_BaseTempEntity);
+EndClientClass();
+
+BeginClientClass(CBaseToggle, DT_BaseToggle);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CBaseTrigger, DT_BaseTrigger);
+   ClientBaseClass(CBaseToggle);
+   AddClientProperty(m_bClientSidePredicted);
+   AddClientProperty(m_spawnflags);
+EndClientClass();
+
+BeginClientClass(CBaseViewModel, DT_BaseViewModel);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_hWeapon);
+   AddClientProperty(m_nBody);
+   AddClientProperty(m_nSkin);
+   AddClientProperty(m_nSequence);
+   AddClientProperty(m_nViewModelIndex);
+   AddClientProperty(m_flPlaybackRate);
+   AddClientProperty(m_fEffects);
+   AddClientProperty(m_nAnimationParity);
+   AddClientProperty(m_hOwner);
+   AddClientProperty(m_nNewSequenceParity);
+   AddClientProperty(m_nResetEventsParity);
+   AddClientProperty(m_nMuzzleFlashParity);
+EndClientClass();
+
+BeginClientClass(CBeam, DT_Beam);
+   AddClientProperty(m_nBeamType);
+   AddClientProperty(m_nBeamFlags);
+   AddClientProperty(m_nNumBeamEnts);
+   AddClientProperty(m_hAttachEntity);
+   AddClientProperty(m_nAttachIndex);
+   AddClientProperty(m_nHaloIndex);
+   AddClientProperty(m_fHaloScale);
+   AddClientProperty(m_fWidth);
+   AddClientProperty(m_fEndWidth);
+   AddClientProperty(m_fFadeLength);
+   AddClientProperty(m_fAmplitude);
+   AddClientProperty(m_fStartFrame);
+   AddClientProperty(m_fSpeed);
+   AddClientProperty(m_nRenderFX);
+   AddClientProperty(m_nRenderMode);
+   AddClientProperty(m_flFrameRate);
+   AddClientProperty(m_flHDRColorScale);
+   AddClientProperty(m_flFrame);
+   AddClientProperty(m_clrRender);
+   AddClientProperty(m_nClipStyle);
+   AddClientProperty(m_vecEndPos);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(moveparent);
+EndClientClass();
+
+BeginClientClass(CBeamSpotlight, DT_BeamSpotlight);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nHaloIndex);
+   AddClientProperty(m_bSpotlightOn);
+   AddClientProperty(m_bHasDynamicLight);
+   AddClientProperty(m_flSpotlightMaxLength);
+   AddClientProperty(m_flSpotlightGoalWidth);
+   AddClientProperty(m_flHDRColorScale);
+   AddClientProperty(m_flRotationSpeed);
+   AddClientProperty(m_nRotationAxis);
+EndClientClass();
+
+BeginClientClass(CBoneFollower, DT_BoneFollower);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_modelIndex);
+   AddClientProperty(m_solidIndex);
+EndClientClass();
+
+BeginClientClass(CBreakableProp, DT_BreakableProp);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_bClientPhysics);
+EndClientClass();
+
+BeginClientClass(CBreakableSurface, DT_BreakableSurface);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nNumWide);
+   AddClientProperty(m_nNumHigh);
+   AddClientProperty(m_flPanelWidth);
+   AddClientProperty(m_flPanelHeight);
+   AddClientProperty(m_vNormal);
+   AddClientProperty(m_vCorner);
+   AddClientProperty(m_bIsBroken);
+   AddClientProperty(m_nSurfaceType);
+   AddClientProperty(m_RawPanelBitVec);
+EndClientClass();
+
+BeginClientClass(CColorCorrection, DT_ColorCorrection);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_MinFalloff);
+   AddClientProperty(m_MaxFalloff);
+   AddClientProperty(m_flCurWeight);
+   AddClientProperty(m_flMaxWeight);
+   AddClientProperty(m_flFadeInDuration);
+   AddClientProperty(m_flFadeOutDuration);
+   AddClientProperty(m_netlookupFilename);
+   AddClientProperty(m_bEnabled);
+   AddClientProperty(m_bMaster);
+   AddClientProperty(m_bClientSide);
+   AddClientProperty(m_bExclusive);
+EndClientClass();
+
+BeginClientClass(CColorCorrectionVolume, DT_ColorCorrectionVolume);
+   AddClientProperty(m_Weight);
+   AddClientProperty(m_lookupFilename);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AbyssalUnderlord_DarkRift, DT_DOTA_Ability_AbyssalUnderlord_DarkRift);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AbyssalUnderlord_Firestorm, DT_DOTA_Ability_AbyssalUnderlord_Firestorm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AbyssalUnderlord_PitOfMalice, DT_DOTA_Ability_AbyssalUnderlord_PitOfMalice);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Alchemist_AcidSpray, DT_DOTA_Ability_Alchemist_AcidSpray);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AncientApparition_ChillingTouch, DT_DOTA_Ability_AncientApparition_ChillingTouch);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AncientApparition_ColdFeet, DT_DOTA_Ability_AncientApparition_ColdFeet);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AncientApparition_IceBlast, DT_DOTA_Ability_AncientApparition_RocketFlare);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AncientApparition_IceVortex, DT_DOTA_Ability_AncientApparition_IceVortex);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AntiMage_Blink, DT_DOTA_Ability_AntiMage_Blink);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AntiMage_ManaVoid, DT_DOTA_Ability_AntiMage_ManaVoid);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_AttributeBonus, DT_DOTA_Ability_AttributeBonus);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Axe_BerserkersCall, DT_DOTA_Ability_Axe_BerserkersCall);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Axe_CounterHelix, DT_DOTA_Ability_Axe_CounterHelix);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Axe_CullingBlade, DT_DOTA_Ability_Axe_CullingBlade);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Bane_FiendsGrip, DT_DOTA_Ability_Bane_FiendsGrip);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Batrider_Flamebreak, DT_DOTA_Ability_Batrider_Flamebreak);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Batrider_StickyNapalm, DT_DOTA_Ability_Batrider_StickyNapalm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Beastmaster_PrimalRoar, DT_DOTA_Ability_Beastmaster_PrimalRoar);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Bloodseeker_Bloodbath, DT_DOTA_Ability_Bloodseeker_Bloodbath);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_BountyHunter_ShurikenToss, DT_DOTA_Ability_BountyHunter_ShurikenToss);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Brewmaster_DispelMagic, DT_DOTA_Ability_Brewmaster_DispelMagic);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Brewmaster_DrunkenBrawler, DT_DOTA_Ability_Brewmaster_DrunkenBrawler);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_iBrawlActive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Brewmaster_DrunkenHaze, DT_DOTA_Ability_Brewmaster_DrunkenHaze);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Brewmaster_PrimalSplit, DT_DOTA_Ability_Brewmaster_PrimalSplit);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_hPrimary);
+   AddClientProperty(m_hSecondary);
+   AddClientProperty(m_hTertiary);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Bristleback_QuillSpray, DT_DOTA_Ability_Bristleback_QuillSpray);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Broodmother_SpinWeb, DT_DOTA_Ability_Broodmother_SpinWeb);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Centaur_Stampede, DT_DOTA_Ability_Centaur_Stampede);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_ChaosKnight_Phantasm, DT_DOTA_Ability_ChaosKnight_Phantasm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Chen_HandOfGod, DT_DOTA_Ability_Chen_HandOfGod);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Chen_HolyPersuasion, DT_DOTA_Ability_Chen_HolyPersuasion);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Chen_TestOfFaithTeleport, DT_DOTA_Ability_Chen_TestOfFaithTeleport);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Courier_TakeStashItems, DT_DOTA_Ability_Courier_TakeStashItems);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Courier_TransferItems, DT_DOTA_Ability_Courier_TransferItems);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_CrystalMaiden_CrystalNova, DT_DOTA_Ability_CrystalMaiden_CrystalNova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_CrystalMaiden_FreezingField, DT_DOTA_Ability_CrystalMaiden_FreezingField);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DarkSeer_Vacuum, DT_DOTA_Ability_DarkSeer_Vacuum);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DataDriven, DT_DOTA_Ability_DataDriven);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Dazzle_Weave, DT_DOTA_Ability_Dazzle_Weave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DeathProphet_CarrionSwarm, DT_DOTA_Ability_DeathProphet_CarrionSwarm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DeathProphet_Silence, DT_DOTA_Ability_DeathProphet_Silence);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Disruptor_KineticField, DT_DOTA_Ability_Disruptor_KineticField);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Disruptor_StaticStorm, DT_DOTA_Ability_Disruptor_StaticStorm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DoomBringer_Devour, DT_DOTA_Ability_DoomBringer_Devour);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DragonKnight_BreatheFire, DT_DOTA_Unit_Ability_DragonKnight_BreatheFire);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DrowRanger_Silence, DT_DOTA_Ability_DrowRanger_Silence);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_DrowRanger_WaveOfSilence, DT_DOTA_Unit_Ability_DrowRanger_WaveOfSilence);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EarthSpirit_BoulderSmash, DT_DOTA_Ability_EarthSpirit_BoulderSmash);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EarthSpirit_GeomagneticGrip, DT_DOTA_Ability_EarthSpirit_GeomagneticGrip);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EarthSpirit_Petrify, DT_DOTA_Ability_EarthSpirit_Petrify);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EarthSpirit_RollingBoulder, DT_DOTA_Ability_EarthSpirit_RollingBoulder);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EarthSpirit_StoneCaller, DT_DOTA_Ability_EarthSpirit_StoneCaller);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Elder_Titan_EarthSplitter, DT_DOTA_Unit_Ability_Elder_Titan_EarthSplitter);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EmberSpirit_Activate_FireRemnant, DT_DOTA_Ability_EmberSpirit_Activate_FireRemnant);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EmberSpirit_FireRemnant, DT_DOTA_Ability_EmberSpirit_FireRemnant);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EmberSpirit_SearingChains, DT_DOTA_Ability_EmberSpirit_SearingChains);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_EmberSpirit_SleightOfFist, DT_DOTA_Ability_EmberSpirit_SleightOfFist);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enchantress_Impetus, DT_DOTA_Ability_Enchantress_Impetus);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enchantress_NaturesAttendants, DT_DOTA_Ability_Enchantress_NaturesAttendants);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enchantress_Untouchable, DT_DOTA_Ability_Enchantress_Untouchable);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enigma_BlackHole, DT_DOTA_Ability_Enigma_BlackHole);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enigma_DemonicConversion, DT_DOTA_Ability_Enigma_DemonicConversion);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Enigma_MidnightPulse, DT_DOTA_Ability_Enigma_MidnightPulse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_FacelessVoid_Chronosphere, DT_DOTA_Ability_FacelessVoid_Chronosphere);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_FacelessVoid_TimeWalk, DT_DOTA_Unit_Ability_FacelessVoid_TimeWalk);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Furion_ForceOfNature, DT_DOTA_Ability_Furion_ForceOfNature);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Furion_Teleportation, DT_DOTA_Ability_Furion_Teleportation);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_BlackHole, DT_DOTA_Ability_Greevil_BlackHole);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_BladeFury, DT_DOTA_Ability_Greevil_BladeFury);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Bloodlust, DT_DOTA_Ability_Greevil_Bloodlust);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_ColdSnap, DT_DOTA_Ability_Greevil_ColdSnap);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Decrepify, DT_DOTA_Ability_Greevil_Decrepify);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Diabolic_Edict, DT_DOTA_Ability_Greevil_Diabolic_Edict);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_EchoSlam, DT_DOTA_Ability_Greevil_EchoSlam);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Fatal_Bonds, DT_DOTA_Ability_Greevil_Fatal_Bonds);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_FleshGolem, DT_DOTA_Ability_Greevil_FleshGolem);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_IceWall, DT_DOTA_Ability_Greevil_IceWall);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_LagunaBlade, DT_DOTA_Ability_Greevil_LagunaBlade);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_LeechSeed, DT_DOTA_Ability_Greevil_LeechSeed);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Magic_Missile, DT_DOTA_Ability_Greevil_Magic_Missile);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Maledict, DT_DOTA_Ability_Greevil_Maledict);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_MeatHook, DT_DOTA_Ability_Greevil_MeatHook);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Black_BrainSap, DT_DOTA_Ability_Greevil_Miniboss_Black_BrainSap);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Black_Nightmare, DT_DOTA_Ability_Greevil_Miniboss_Black_Nightmare);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Blue_ColdFeet, DT_DOTA_Ability_Greevil_Miniboss_White_ColdFeet);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Blue_IceVortex, DT_DOTA_Ability_Greevil_Miniboss_White_IceVortex);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Green_LivingArmor, DT_DOTA_Ability_Greevil_Miniboss_Green_LivingArmor);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Green_Overgrowth, DT_DOTA_Ability_Greevil_Miniboss_Green_Overgrowth);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Orange_DragonSlave, DT_DOTA_Ability_Greevil_Miniboss_Orange_DragonSlave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray, DT_DOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Purple_PlagueWard, DT_DOTA_Ability_Greevil_Miniboss_Purple_PlagueWard);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Purple_VenomousGale, DT_DOTA_Ability_Greevil_Miniboss_Purple_VenomousGale);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Red_Earthshock, DT_DOTA_Ability_Greevil_Miniboss_Red_Earthshock);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Red_Overpower, DT_DOTA_Ability_Greevil_Miniboss_Red_Overpower);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Sight, DT_DOTA_Ability_Greevil_Miniboss_Sight);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_White_Degen_Aura, DT_DOTA_Ability_Greevil_Miniboss_White_Degen_Aura);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_White_Purification, DT_DOTA_Ability_Greevil_Miniboss_White_Purification);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Yellow_IonShell, DT_DOTA_Ability_Greevil_Miniboss_Yellow_IonShell);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Miniboss_Yellow_Surge, DT_DOTA_Ability_Greevil_Miniboss_Yellow_Surge);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_NaturesAttendants, DT_DOTA_Ability_Greevil_NaturesAttendants);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_PhantomStrike, DT_DOTA_Ability_Greevil_PhantomStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_PoisonNova, DT_DOTA_Ability_Greevil_PoisonNova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Purification, DT_DOTA_Ability_Greevil_Purification);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_Rot, DT_DOTA_Ability_Greevil_Rot);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_ShadowStrike, DT_DOTA_Ability_Greevil_ShadowStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_ShadowWave, DT_DOTA_Ability_Greevil_ShadowWave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Greevil_TimeLock, DT_DOTA_Ability_Greevil_TimeLock);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Gyrocopter_Call_Down, DT_DOTA_Ability_Gyrocopter_Call_Down);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Healing_Campfire, DT_DOTA_Ability_Healing_Campfire);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Holdout_CullingBlade, DT_DOTA_Ability_Holdout_CullingBlade);
+   ClientBaseClass(CDOTA_Ability_Axe_CullingBlade);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Holdout_GladiatorsUnite, DT_DOTA_Ability_Holdout_GladiatorsUnite);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Holdout_Multishot, DT_DOTA_Ability_Holdout_Multishot);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Holdout_Omnislash, DT_DOTA_Ability_Holdout_Omnislash);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Huskar_Life_Break, DT_DOTA_Ability_Huskar_Life_Break);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_DeafeningBlast, DT_DOTA_Unit_Ability_Invoker_DeafeningBlast);
+   ClientBaseClass(CDOTA_Ability_Invoker_InvokedBase);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_EMP, DT_DOTA_Ability_Invoker_EMP);
+   ClientBaseClass(CDOTA_Ability_Invoker_InvokedBase);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_Invoke, DT_DOTA_Ability_Invoker_Invoke);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_InvokedBase, DT_DOTA_Ability_Invoker_InvokedBase);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_nQuasLevel);
+   AddClientProperty(m_nWexLevel);
+   AddClientProperty(m_nExortLevel);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_SunStrike, DT_DOTA_Ability_Invoker_SunStrike);
+   ClientBaseClass(CDOTA_Ability_Invoker_InvokedBase);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Invoker_Tornado, DT_DOTA_Unit_Ability_Invoker_Tornado);
+   ClientBaseClass(CDOTA_Ability_Invoker_InvokedBase);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Jakiro_DualBreath, DT_DOTA_Unit_Ability_Jakiro_DualBreath);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Jakiro_IcePath, DT_DOTA_Unit_Ability_Jakiro_IcePath);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Jakiro_Macropyre, DT_DOTA_Unit_Ability_Jakiro_Macropyre);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Juggernaut_HealingWard, DT_DOTA_Ability_Juggernaut_HealingWard);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Juggernaut_Omnislash, DT_DOTA_Ability_Juggernaut_Omnislash);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_KeeperOfTheLight_BlindingLight, DT_DOTA_Ability_KeeperOfTheLight_BlindingLight);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_KeeperOfTheLight_Illuminate, DT_DOTA_Unit_Ability_KeeperOfTheLight_Illuminate);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_KeeperOfTheLight_Recall, DT_DOTA_Ability_KeeperOfTheLight_Recall);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Kunkka_GhostShip, DT_DOTA_Unit_Ability_Kunkka_GhostShip);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Kunkka_Tidebringer, DT_DOTA_Ability_Kunkka_Tidebringer);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Kunkka_Torrent, DT_DOTA_Ability_Kunkka_Torrent);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Legion_Commander_MomentOfCourage, DT_DOTA_Ability_Legion_Commander_MomentOfCourage);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Legion_Commander_OverwhelmingOdds, DT_DOTA_Ability_Legion_Commander_OverwhelmingOdds);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Leshrac_Diabolic_Edict, DT_DOTA_Ability_Leshrac_Diabolic_Edict);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Leshrac_Pulse_Nova, DT_DOTA_Ability_Leshrac_Pulse_Nova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Leshrac_Split_Earth, DT_DOTA_Ability_Leshrac_Split_Earth);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lich_ChainFrost, DT_DOTA_Ability_Lich_ChainFrost);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lich_FrostNova, DT_DOTA_Ability_Lich_FrostNova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Life_Stealer_Infest, DT_DOTA_Ability_Life_Stealer_Infest);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lina_DragonSlave, DT_DOTA_Unit_Ability_Lina_DragonSlave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lina_LagunaBlade, DT_DOTA_Ability_Lina_LagunaBlade);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lina_LightStrikeArray, DT_DOTA_Ability_Lina_LightStrikeArray);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lion_FingerOfDeath, DT_DOTA_Ability_Lion_FingerOfDeath);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lion_Impale, DT_DOTA_Unit_Ability_Lion_Impale);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lion_ManaDrain, DT_DOTA_Ability_Lion_ManaDrain);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_LoneDruid_Rabid, DT_DOTA_Ability_LoneDruid_Rabid);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_LoneDruid_SpiritBear, DT_DOTA_Ability_LoneDruid_SpiritBear);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_hBear);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_LoneDruid_SpiritBear_Return, DT_DOTA_Ability_LoneDruid_SpiritBear_Return);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_LoneDruid_TrueForm_BattleCry, DT_DOTA_Ability_LoneDruid_TrueForm_BattleCry);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_LoneDruid_TrueForm_Druid, DT_DOTA_Ability_LoneDruid_TrueForm_Druid);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Luna_Eclipse, DT_DOTA_Ability_Luna_Eclipse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Luna_LunarBlessing, DT_DOTA_Ability_Luna_LunarBlessing);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lycan_Howl, DT_DOTA_Ability_Lycan_Howl);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Lycan_SummonWolves, DT_DOTA_Ability_Lycan_SummonWolves);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Magnataur_ReversePolarity, DT_DOTA_Ability_Magnataur_ReversePolarity);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Magnataur_Shockwave, DT_DOTA_Unit_Ability_Magnataur_Shockwave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Meepo_DividedWeStand, DT_DOTA_Ability_Meepo_DividedWeStand);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_entPrimeDividedWeStand);
+   AddClientProperty(m_entNextDividedWeStand);
+   AddClientProperty(m_nWhichDividedWeStand);
+   AddClientProperty(m_nNumDividedWeStand);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Meepo_Earthbind, DT_DOTA_Ability_Meepo_Earthbind);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Meepo_Poof, DT_DOTA_Ability_Meepo_Poof);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Morphling_Replicate, DT_DOTA_Ability_Morphling_Replicate);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Morphling_Waveform, DT_DOTA_Unit_Ability_Morphling_Waveform);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_NagaSiren_MirrorImage, DT_DOTA_Ability_NagaSiren_MirrorImage);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_NagaSiren_RipTide, DT_DOTA_Ability_NagaSiren_RipTide);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Necrolyte_Death_Pulse, DT_DOTA_Ability_Necrolyte_Death_Pulse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Necrolyte_ReapersScythe, DT_DOTA_Ability_Necrolyte_ReapersScythe);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nevermore_Requiem, DT_Ability_Nevermore_Requiem);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Apocalypse, DT_DOTA_Ability_Nian_Apocalypse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Eruption, DT_DOTA_Ability_Nian_Eruption);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Frenzy, DT_DOTA_Ability_Nian_Frenzy);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Hurricane, DT_DOTA_Ability_Nian_Hurricane);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Roar, DT_DOTA_Ability_Nian_Roar);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Sigils, DT_DOTA_Ability_Nian_Sigils);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Tail_Swipe, DT_DOTA_Ability_Nian_Tail_Swipe);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Waterball, DT_DOTA_Ability_Nian_Waterball);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nian_Whirlpool, DT_DOTA_Ability_Nian_Whirlpool);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Nyx_Assassin_Impale, DT_DOTA_Unit_Ability_Nyx_Assassin_Impale);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Obsidian_Destroyer_ArcaneOrb, DT_DOTA_Ability_Obsidian_Destroyer_ArcaneOrb);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Obsidian_Destroyer_AstralImprisonment, DT_DOTA_Ability_Obsidian_Destroyer_AstralImprisonment);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Obsidian_Destroyer_SanityEclipse, DT_Ability_Obsidian_Destroyer_SanityEclipse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Ogre_Magi_Bloodlust, DT_DOTA_Ability_Ogre_Magi_Bloodlust);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Ogre_Magi_Fireblast, DT_DOTA_Ability_Ogre_Magi_Fireblast);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Ogre_Magi_Multicast, DT_DOTA_Ability_Ogre_Magi_Multicast);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Ogre_Magi_Unrefined_Fireblast, DT_DOTA_Ability_Ogre_Magi_Unrefined_Fireblast);
+   ClientBaseClass(CDOTA_Ability_Ogre_Magi_Fireblast);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Oracle_FortunesEnd, DT_DOTA_Ability_Oracle_FortunesEnd);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_PhantomAssassin_PhantomStrike, DT_DOTA_Ability_PhantomAssassin_PhantomStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_PhantomLancer_Doppelwalk, DT_DOTA_Ability_PhantomLancer_Doppelwalk);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Phoenix_LaunchFireSpirit, DT_DOTA_Unit_Ability_Phoenix_LaunchFireSpirit);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Phoenix_Supernova, DT_DOTA_Ability_Phoenix_Supernova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Puck_DreamCoil, DT_DOTA_Ability_Puck_DreamCoil);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Puck_IllusoryOrb, DT_DOTA_Unit_Ability_Puck_IllusoryOrb);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Puck_WaningRift, DT_DOTA_Ability_Puck_WaningRift);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Pudge_Dismember, DT_DOTA_Ability_Pudge_Dismember);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_hVictim);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Pudge_MeatHook, DT_DOTA_Unit_Ability_Pudge_MeatHook);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Pugna_Decrepify, DT_DOTA_Ability_Pugna_Decrepify);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Pugna_LifeDrain, DT_DOTA_Ability_Pugna_LifeDrain);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Pugna_NetherBlast, DT_DOTA_Ability_Pugna_NetherBlast);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_QueenOfPain_Blink, DT_DOTA_Ability_QueenOfPain_Blink);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_QueenOfPain_SonicWave, DT_DOTA_Unit_Ability_QueenOfPain_SonicWave);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Rattletrap_BatteryAssault, DT_DOTA_Ability_Rattletrap_BatteryAssault);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Rattletrap_Hookshot, DT_DOTA_Ability_Rattletrap_Hookshot);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Rattletrap_RocketFlare, DT_DOTA_Ability_Rattletrap_RocketFlare);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Razor_PlasmaField, DT_DOTA_Ability_Razor_PlasmaField);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Riki_BlinkStrike, DT_DOTA_Ability_Riki_BlinkStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Riki_SmokeScreen, DT_DOTA_Ability_Riki_SmokeScreen);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Roshan_Halloween_Apocalypse, DT_DOTA_Ability_Roshan_Halloween_Apocalypse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Roshan_Halloween_Burn, DT_DOTA_Ability_Roshan_Halloween_Burn);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Roshan_Halloween_Fireball, DT_DOTA_Ability_Roshan_Halloween_Fireball);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Roshan_Toss, DT_DOTA_Ability_Roshan_Toss);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Roshan_WaveOfForce, DT_DOTA_Ability_Roshan_WaveOfForce);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Rubick_SpellSteal, DT_DOTA_Ability_Rubick_SpellSteal);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_ActivityModifier);
+   AddClientProperty(m_fStolenCastPoint);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Rubick_TelekinesisLand, DT_DOTA_Ability_Rubick_TelekinesisLand);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_SandKing_BurrowStrike, DT_DOTA_Unit_Ability_SandKing_BurrowStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_SandKing_Epicenter, DT_DOTA_Ability_SandKing_Epicenter);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_SatyrTrickster_Purge, DT_DOTA_Ability_SatyrTrickster_Purge);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Shadow_Demon_Disruption, DT_DOTA_Ability_Shadow_Demon_Disruption);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Shadow_Demon_Shadow_Poison, DT_DOTA_Unit_Ability_Shadow_Demon_Shadow_Poison);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Shadow_Demon_Soul_Catcher, DT_DOTA_Ability_Shadow_Demon_Soul_Catcher);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Shredder_Chakram, DT_DOTA_Ability_Shredder_Chakram);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Shredder_TimberChain, DT_DOTA_Ability_Shredder_TimberChain);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Silencer_CurseOfTheSilent, DT_DOTA_Ability_Silencer_CurseOfTheSilent);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Silencer_GlaivesOfWisdom, DT_DOTA_Ability_Silencer_GlaivesOfWisdom);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Skywrath_Mage_Mystic_Flare, DT_DOTA_Ability_Skywrath_Mage_Mystic_Flare);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Slardar_Slithereen_Crush, DT_DOTA_Ability_Slardar_Slithereen_Crush);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Slark_EssenceShift, DT_DOTA_Ability_Slark_EssenceShift);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Sniper_Shrapnel, DT_DOTA_Ability_Sniper_Shrapnel);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_SpiritBreaker_NetherStrike, DT_DOTA_Ability_SpiritBreaker_NetherStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_StormSpirit_BallLightning, DT_DOTA_Ability_StormSpirit_BallLightning);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Sven_StormBolt, DT_DOTA_Ability_Sven_StormBolt);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_FocusedDetonate, DT_DOTA_Ability_Techies_FocusedDetonate);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_LandMines, DT_DOTA_Ability_Techies_LandMines);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_Minefield_Sign, DT_DOTA_Ability_Techies_Minefield_Sign);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_RemoteMines, DT_DOTA_Ability_Techies_RemoteMines);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_RemoteMines_SelfDetonate, DT_DOTA_Ability_Techies_RemoteMines_SelfDetonate);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Techies_StasisTrap, DT_DOTA_Ability_Techies_StasisTrap);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Terrorblade_Sunder, DT_DOTA_Ability_Terrorblade_Sunder);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Throw_Coal, DT_DOTA_Ability_Throw_Coal);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Throw_Snowball, DT_DOTA_Ability_Throw_Snowball);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tidehunter_AnchorSmash, DT_DOTA_Ability_Tidehunter_AnchorSmash);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tidehunter_Ravage, DT_DOTA_Ability_Tidehunter_Ravage);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tiny_Avalanche, DT_DOTA_Ability_Tiny_Avalanche);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tiny_CraggyExterior, DT_DOTA_Ability_Tiny_CraggyExterior);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tiny_Toss, DT_DOTA_Ability_Tiny_Toss);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Treant_EyesInTheForest, DT_DOTA_Ability_Treant_EyesInTheForest);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Treant_Overgrowth, DT_DOTA_Ability_Treant_Overgrowth);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_TrollWarlord_BerserkersRage, DT_DOTA_Ability_TrollWarlord_BerserkersRage);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_TrollWarlord_WhirlingAxes_Ranged, DT_DOTA_Unit_Ability_TrollWarlord_WhirlingAxes_Ranged);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Tusk_FrozenSigil, DT_DOTA_Ability_Tusk_FrozenSigil);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Undying_Decay, DT_DOTA_Ability_Undying_Decay);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Undying_SoulRip, DT_DOTA_Ability_Undying_SoulRip);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_VengefulSpirit_Nether_Swap, DT_DOTA_Ability_VengefulSpirit_Nether_Swap);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_VengefulSpirit_WaveOfTerror, DT_DOTA_Unit_Ability_VengefulSpirit_WaveOfTerror);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Venomancer_PoisonNova, DT_DOTA_Ability_Venomancer_PoisonNova);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Venomancer_VenomousGale, DT_DOTA_Unit_Ability_Venomancer_VenomousGale);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Viper_ViperStrike, DT_DOTA_Ability_Viper_ViperStrike);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Visage_SummonFamiliars, DT_DOTA_Ability_Visage_SummonFamiliars);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Visage_SummonFamiliars_StoneForm, DT_DOTA_Ability_Visage_SummonFamiliars_StoneForm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Warlock_RainOfChaos, DT_DOTA_Ability_Warlock_RainOfChaos);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Warlock_Shadow_Word, DT_DOTA_Ability_Warlock_Shadow_Word);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Warlock_Upheaval, DT_DOTA_Ability_Warlock_Upheaval);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Weaver_TheSwarm, DT_DOTA_Unit_Ability_Weaver_TheSwarm);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Windrunner_FocusFire, DT_DOTA_Ability_Windrunner_FocusFire);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Windrunner_Powershot, DT_DOTA_Unit_Ability_Windrunner_Powershot);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Winter_Wyvern_Arctic_Burn, DT_DOTA_Unit_Ability_Winter_Wyvern_Arctic_Burn);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Winter_Wyvern_Cold_Embrace, DT_DOTA_Unit_Ability_Winter_Wyvern_Cold_Embrace);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Winter_Wyvern_Winters_Curse, DT_DOTA_Unit_Ability_Winter_Wyvern_Winters_Curse);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Wisp_Overcharge, DT_DOTA_Ability_Wisp_Overcharge);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Wisp_Relocate, DT_DOTA_Ability_Wisp_Relocate);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Wisp_Spirits, DT_DOTA_Ability_Wisp_Spirits);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_Wisp_Tether, DT_DOTA_Ability_Wisp_Tether);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_WitchDoctor_Maledict, DT_DOTA_Ability_WitchDoctor_Maledict);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_WitchDoctor_ParalyzingCask, DT_DOTA_Ability_WitchDoctor_ParalyzingCask);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientClass(CDOTA_Ability_WitchDoctor_VoodooRestoration, DT_DOTA_Ability_WitchDoctor_VoodooRestoration);
+   ClientBaseClass(CDOTABaseAbility);
+EndClientClass();
+
+BeginClientStruct(DT_DOTA_ModifierManager);
+   AddClientProperty(m_hModifierParent);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTA_UnitInventory);
+   AddClientProperty(m_hItems);
+   AddClientProperty(m_iParity);
+   AddClientProperty(m_hInventoryParent);
+   AddClientProperty(m_bStashEnabled);
+   AddClientProperty(m_hTransientCastItem);
+EndClientStruct();
+
+BeginClientClass(CDOTA_BaseNPC, DT_DOTA_BaseNPC);
+   ClientBaseClass(NextBotCombatCharacter);
+   AddClientProperty(m_iCurrentLevel);
+   AddClientProperty(m_iCustomXPValue);
+   AddClientProperty(m_iIsControllableByPlayer);
+   AddClientProperty(m_bIsPhantom);
+   AddClientProperty(m_bIsAncient);
+   AddClientProperty(m_bStolenScepter);
+   AddClientProperty(m_bIsNeutralUnitType);
+   AddClientProperty(m_bIsSummoned);
+   AddClientProperty(m_bCanBeDominated);
+   AddClientProperty(m_bHasUpgradeableAbilities);
+   AddClientProperty(m_iBKBChargesUsed);
+   AddClientProperty(m_iHealth);
+   AddClientProperty(m_flHealthThinkRegen);
+   AddClientProperty(m_iMaxHealth);
+   AddClientProperty(m_iAttackCapabilities);
+   AddClientProperty(m_iDayTimeVisionRange);
+   AddClientProperty(m_iNightTimeVisionRange);
+   AddClientProperty(m_flMana);
+   AddClientProperty(m_flMaxMana);
+   AddClientProperty(m_flManaThinkRegen);
+   AddClientProperty(m_hAbilities);
+   AddClientProperty(m_iUnitNameIndex);
+   AddClientProperty(m_iDamageMin);
+   AddClientProperty(m_iDamageMax);
+   AddClientProperty(m_iDamageBonus);
+   AddClientProperty(m_lifeState);
+   AddClientProperty(m_ModifierManager);
+   AddClientProperty(m_Inventory);
+   AddClientProperty(m_nUnitState);
+   AddClientProperty(m_iTaggedAsVisibleByTeam);
+   AddClientProperty(m_iCurShop);
+   AddClientProperty(m_anglediff);
+   AddClientProperty(m_fFlags);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_cellX);
+   AddClientProperty(m_cellY);
+   AddClientProperty(m_cellZ);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_NetworkActivity);
+   AddClientProperty(m_NetworkSequenceIndex);
+   AddClientProperty(m_iBotDebugData);
+   AddClientProperty(m_hMyWearables);
+   AddClientProperty(m_bShouldDoFlyHeightVisual);
+   AddClientProperty(m_nTotalDamageTaken);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Additive, DT_DOTA_BaseNPC_Additive);
+   ClientBaseClass(CDOTA_BaseNPC);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Barracks, DT_DOTA_BaseNPC_Barracks);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Building, DT_DOTA_BaseNPC_Building);
+   ClientBaseClass(CDOTA_BaseNPC);
+   AddClientProperty(m_nFXIndex);
+   AddClientProperty(m_nFXIndexDestruction);
+   AddClientProperty(m_angInitialAngles);
+   AddClientProperty(m_hHeroStatueSequence);
+   AddClientProperty(m_fHeroStatueCycle);
+   AddClientProperty(m_iHeroStatueStatusEffectIndex);
+   AddClientProperty(m_bHeroStatue);
+   AddClientProperty(m_HeroStatueInscription);
+   AddClientProperty(m_iHeroStatueOwnerPlayerID);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creature, DT_DOTA_BaseNPC_Creature);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep, DT_DOTA_BaseNPC_Creep);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_bIsWaitingToSpawn);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_Diretide, DT_DOTA_BaseNPC_Creep_Diretide);
+   ClientBaseClass(CDOTA_BaseNPC_Creep_Lane);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_Lane, DT_DOTA_BaseNPC_Creep_Lane);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+   AddClientProperty(m_iHealthPercentage);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_LootGreevil, DT_DOTA_BaseNPC_Creep_LootGreevil);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+   AddClientProperty(m_bIsRareLootGreevil);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_Neutral, DT_DOTA_BaseNPC_Creep_Neutral);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_Siege, DT_DOTA_BaseNPC_Creep_Siege);
+   ClientBaseClass(CDOTA_BaseNPC_Creep_Lane);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Creep_Talking, DT_DOTA_BaseNPC_Creep_Talking);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Fort, DT_DOTA_BaseNPC_Fort);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_HallofFame, DT_DOTA_BaseNPC_HallofFame);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Hero, DT_DOTA_BaseNPC_Hero);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_iCurrentXP);
+   AddClientProperty(m_flRespawnTime);
+   AddClientProperty(m_flRespawnTimePenalty);
+   AddClientProperty(m_iAbilityPoints);
+   AddClientProperty(m_flStrength);
+   AddClientProperty(m_flAgility);
+   AddClientProperty(m_flIntellect);
+   AddClientProperty(m_flStrengthTotal);
+   AddClientProperty(m_flAgilityTotal);
+   AddClientProperty(m_flIntellectTotal);
+   AddClientProperty(m_iRecentDamage);
+   AddClientProperty(m_iPlayerID);
+   AddClientProperty(m_bReincarnating);
+   AddClientProperty(m_flSpawnedAt);
+   AddClientProperty(m_hReplicatingOtherHeroModel);
+   AddClientProperty(m_hEconConsumableAbility);
+   AddClientProperty(m_bCustomKillEffect);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_HoldoutTower, DT_DOTA_BaseNPC_HoldoutTower);
+   ClientBaseClass(CDOTA_BaseNPC_Tower);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_HoldoutTower_HeavySlow, DT_DOTA_BaseNPC_HoldoutTower_HeavySlow);
+   ClientBaseClass(CDOTA_BaseNPC_HoldoutTower);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_HoldoutTower_LightFast, DT_DOTA_BaseNPC_HoldoutTower_LightFast);
+   ClientBaseClass(CDOTA_BaseNPC_HoldoutTower);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_HoldoutTower_ReduceSpeed, DT_DOTA_BaseNPC_HoldoutTower_ReduceSpeed);
+   ClientBaseClass(CDOTA_BaseNPC_HoldoutTower);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Invoker_Forged_Spirit, DT_DOTA_BaseNPC_Invoker_Forged_Spirit);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_ShadowShaman_SerpentWard, DT_DOTA_BaseNPC_ShadowShaman_SerpentWard);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Shop, DT_DOTA_BaseNPC_Shop);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+   AddClientProperty(m_ShopType);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Tower, DT_DOTA_BaseNPC_Tower);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Tusk_Sigil, DT_DOTA_BaseNPC_Tusk_Sigil);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Venomancer_PlagueWard, DT_DOTA_BaseNPC_Venomancer_PlagueWard);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_BaseNPC_Warlock_Golem, DT_DOTA_BaseNPC_Warlock_Golem);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Beastmaster_Axe, DT_DOTA_Beastmaster_Axe);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_vecOrigin);
+EndClientClass();
+
+BeginClientClass(CDOTA_DataDire, DT_DOTA_DataDire);
+   ClientBaseClass(CDOTA_DataNonSpectator);
+EndClientClass();
+
+BeginClientClass(CDOTA_DataNonSpectator, DT_DOTA_DataNonSpectator);
+   AddClientProperty(m_iReliableGold);
+   AddClientProperty(m_iUnreliableGold);
+   AddClientProperty(m_iStartingPositions);
+EndClientClass();
+
+BeginClientClass(CDOTA_DataRadiant, DT_DOTA_DataRadiant);
+   ClientBaseClass(CDOTA_DataNonSpectator);
+EndClientClass();
+
+BeginClientClass(CDOTA_DataSpectator, DT_DOTA_DataSpectator);
+   AddClientProperty(m_hPrimaryRune);
+   AddClientProperty(m_hSecondaryRune);
+   AddClientProperty(m_iNetWorth);
+EndClientClass();
+
+BeginClientClass(CDOTA_DeathProphet_Exorcism_Spirit, DT_DOTA_DeathProphet_Exorcism_Spirit);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+EndClientClass();
+
+BeginClientClass(CDOTA_DisplacementVisibility, DT_DOTA_DisplacementVisibility);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_HiddenDisplacement);
+EndClientClass();
+
+BeginClientClass(CDOTA_Halloween_CandyBucket, DT_DOTA_Halloween_CandyBucket);
+   ClientBaseClass(CDOTA_BaseNPC);
+EndClientClass();
+
+BeginClientClass(CDOTA_Halloween_CandyBucketDire, DT_DOTA_Halloween_CandyBucketDire);
+   ClientBaseClass(CDOTA_Halloween_CandyBucket);
+EndClientClass();
+
+BeginClientClass(CDOTA_Halloween_CandyBucketRadiant, DT_DOTA_Halloween_CandyBucketRadiant);
+   ClientBaseClass(CDOTA_Halloween_CandyBucket);
+EndClientClass();
+
+BeginClientClass(CDOTA_Hero_Recorder, DT_DOTA_Hero_Recorder);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bStartRecording);
+   AddClientProperty(m_hHero);
+   AddClientProperty(m_hPlayer);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item, DT_DOTA_Item);
+   ClientBaseClass(CDOTABaseAbility);
+   AddClientProperty(m_bCombinable);
+   AddClientProperty(m_bPermanent);
+   AddClientProperty(m_bStackable);
+   AddClientProperty(m_bRecipe);
+   AddClientProperty(m_iSharability);
+   AddClientProperty(m_bDroppable);
+   AddClientProperty(m_bPurchasable);
+   AddClientProperty(m_bSellable);
+   AddClientProperty(m_bRequiresCharges);
+   AddClientProperty(m_bKillable);
+   AddClientProperty(m_bDisassemblable);
+   AddClientProperty(m_bAlertable);
+   AddClientProperty(m_iCurrentCharges);
+   AddClientProperty(m_flPurchaseTime);
+   AddClientProperty(m_iInitialCharges);
+   AddClientProperty(m_hPurchaser);
+   AddClientProperty(m_flAssembledTime);
+   AddClientProperty(m_bPurchasedWhileDead);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Ancient_Janggo, DT_DOTA_Item_Ancient_Janggo);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Armlet, DT_DOTA_Item_Armlet);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Battlefury, DT_DOTA_Item_Battlefury);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_BlinkDagger, DT_DOTA_Item_BlinkDagger);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Bloodstone, DT_DOTA_Item_Bloodstone);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_BootsOfTravel, DT_DOTA_Item_BootsOfTravel);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Cyclone, DT_DOTA_Item_Cyclone);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Cyclone_2, DT_DOTA_Item_Cyclone_2);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_DataDriven, DT_DOTA_Item_DataDriven);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Diffusal_Blade, DT_DOTA_Item_Diffusal_Blade);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Diffusal_Blade_Level2, DT_DOTA_Item_Diffusal_Blade_Level2);
+   ClientBaseClass(CDOTA_Item_Diffusal_Blade);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_EmptyBottle, DT_DOTA_Item_EmptyBottle);
+   ClientBaseClass(CDOTA_Item);
+   AddClientProperty(m_iStoredRuneType);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Ethereal_Blade, DT_DOTA_Item_Ethereal_Blade);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_ForceStaff, DT_DOTA_Item_ForceStaff);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Greevil_Blink, DT_DOTA_Item_Greevil_Blink);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Greevil_Whistle, DT_DOTA_Item_Greevil_Whistle);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Greevil_WhistleToggle, DT_DOTA_Item_Greevil_WhistleToggle);
+   ClientBaseClass(CDOTA_Item);
+   AddClientProperty(m_hGreevil);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_MantaStyle, DT_DOTA_Item_MantaStyle);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Medallion_Of_Courage, DT_DOTA_Item_Medallion_Of_Courage);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Mystery_Toss, DT_DOTA_Item_Mystery_Toss);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Mystery_Vacuum, DT_DOTA_Item_Mystery_Vacuum);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Necronomicon, DT_DOTA_Item_Necronomicon);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Necronomicon_Level2, DT_DOTA_Item_Necronomicon_Level2);
+   ClientBaseClass(CDOTA_Item_Necronomicon);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Necronomicon_Level3, DT_DOTA_Item_Necronomicon_Level3);
+   ClientBaseClass(CDOTA_Item_Necronomicon);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Nian_Flag_Trap, DT_DOTA_Item_Nian_Flag_Trap);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_ObserverWard, DT_DOTA_Item_ObserverWard);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Physical, DT_DOTA_Item_Physical);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_hItem);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_PlaceBuilding, DT_DOTA_Item_PlaceBuilding);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_PlaceBuilding_Free, DT_DOTA_Item_PlaceBuilding_Free);
+   ClientBaseClass(CDOTA_Item_PlaceBuilding);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_PlaceBuilding_Grid, DT_DOTA_Item_PlaceBuilding_Grid);
+   ClientBaseClass(CDOTA_Item_PlaceBuilding);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_PowerTreads, DT_DOTA_Item_PowerTreads);
+   ClientBaseClass(CDOTA_Item);
+   AddClientProperty(m_iStat);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_QuellingBlade, DT_DOTA_Item_QuellingBlade);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Radiance, DT_DOTA_Item_Radiance);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Recipe_Veil_Of_Discord, DT_DOTA_Item_Recipe_Veil_Of_Discord);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Ring_Of_Basilius, DT_DOTA_Item_Ring_Of_Basilius);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_RingOfAquila, DT_DOTA_Item_RingOfAquila);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Rune, DT_DOTA_Item_Rune);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_iRuneType);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_SentryWard, DT_DOTA_Item_SentryWard);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Tango, DT_DOTA_Item_Tango);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_TeleportScroll, DT_DOTA_Item_TeleportScroll);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_TranquilBoots, DT_DOTA_Item_TranquilBoots);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Urn_Of_Shadows, DT_DOTA_Item_Urn_Of_Shadows);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_Item_Veil_Of_Discord, DT_DOTA_Item_Veil_Of_Discord);
+   ClientBaseClass(CDOTA_Item);
+EndClientClass();
+
+BeginClientClass(CDOTA_NeutralSpawner, DT_DOTA_NeutralSpawner);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_Type);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_DataDriven, DT_DOTA_NPC_DataDriven);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_Observer_Ward, DT_DOTA_NPC_Observer_Ward);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_Observer_Ward_TrueSight, DT_DOTA_NPC_Observer_Ward_TrueSight);
+   ClientBaseClass(CDOTA_NPC_Observer_Ward);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_Techies_Minefield_Sign, DT_DOTA_NPC_Techies_Minefield_Sign);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_TechiesMines, DT_DOTA_NPC_TechiesMines);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_Treant_EyesInTheForest, DT_DOTA_NPC_Treant_EyesInTheForest);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_NPC_WitchDoctor_Ward, DT_DOTA_NPC_WitchDoctor_Ward);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_nTargetType);
+EndClientClass();
+
+BeginClientClass(CDOTA_PhantomAssassin_Gravestone, DT_DOTA_PhantomAssassin_Gravestone);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientStruct(DT_DireData);
+   AddClientProperty(m_iReliableGoldDire);
+   AddClientProperty(m_iUnreliableGoldDire);
+   AddClientProperty(m_bWorldTreeStateDire);
+EndClientStruct();
+
+BeginClientStruct(DT_EndScoreAndSpectatorStats);
+   AddClientProperty(m_iTotalEarnedGold);
+   AddClientProperty(m_iTotalEarnedXP);
+   AddClientProperty(m_bWorldTreeStateSpectator);
+EndClientStruct();
+
+BeginClientStruct(DT_RadiantData);
+   AddClientProperty(m_iReliableGoldRadiant);
+   AddClientProperty(m_iUnreliableGoldRadiant);
+   AddClientProperty(m_bWorldTreeStateRadiant);
+EndClientStruct();
+
+BeginClientClass(CDOTA_PlayerResource, DT_DOTA_PlayerResource);
+   AddClientProperty(m_iszPlayerNames);
+   AddClientProperty(m_iszSelectedHero);
+   AddClientProperty(m_nSelectedHeroID);
+   AddClientProperty(m_iPlayerTeams);
+   AddClientProperty(m_iKills);
+   AddClientProperty(m_iAssists);
+   AddClientProperty(m_iDeaths);
+   AddClientProperty(m_iStreak);
+   AddClientProperty(m_iRespawnSeconds);
+   AddClientProperty(m_iLastBuybackTime);
+   AddClientProperty(m_iLevel);
+   AddClientProperty(m_iDenyCount);
+   AddClientProperty(m_iLastHitCount);
+   AddClientProperty(m_iLastHitStreak);
+   AddClientProperty(m_iLastHitMultikill);
+   AddClientProperty(m_iNearbyCreepDeathCount);
+   AddClientProperty(m_hSelectedHero);
+   AddClientProperty(m_bFullyJoinedServer);
+   AddClientProperty(m_bFakeClient);
+   AddClientProperty(m_iPlayerSteamIDs);
+   AddClientProperty(m_bIsBroadcaster);
+   AddClientProperty(m_iBroadcasterChannel);
+   AddClientProperty(m_iBroadcasterChannelSlot);
+   AddClientProperty(m_iszBroadcasterChannelDescription);
+   AddClientProperty(m_iszBroadcasterChannelCountryCode);
+   AddClientProperty(m_iszBroadcasterChannelLanguageCode);
+   AddClientProperty(m_iConnectionState);
+   AddClientProperty(m_bAFK);
+   AddClientProperty(m_bVoiceChatBanned);
+   AddClientProperty(m_iTimedRewardDrops);
+   AddClientProperty(m_iTimedRewardCrates);
+   AddClientProperty(m_nPossibleHeroSelection);
+   AddClientProperty(m_nSuggestedHeroes);
+   AddClientProperty(m_iMetaLevel);
+   AddClientProperty(m_iMetaExperience);
+   AddClientProperty(m_iMetaExperienceAwarded);
+   AddClientProperty(m_bHasRepicked);
+   AddClientProperty(m_bHasRandomed);
+   AddClientProperty(m_UnitShareMasks);
+   AddClientProperty(m_bBattleBonusActive);
+   AddClientProperty(m_iBattleBonusRate);
+   AddClientProperty(m_flBuybackCooldownTime);
+   AddClientProperty(m_flBuybackGoldLimitTime);
+   AddClientProperty(m_flBuybackCostTime);
+   AddClientProperty(m_iCustomBuybackCost);
+   AddClientProperty(m_flCustomBuybackCooldown);
+   AddClientProperty(m_iGoldBagsCollected);
+   AddClientProperty(m_fStuns);
+   AddClientProperty(m_fHealing);
+   AddClientProperty(m_iTowerKills);
+   AddClientProperty(m_iRoshanKills);
+   AddClientProperty(m_iEventPoints);
+   AddClientProperty(m_iEventPremiumPoints);
+   AddClientProperty(m_hCameraTarget);
+   AddClientProperty(m_iEventRanks);
+   AddClientProperty(m_unCompendiumLevel);
+   AddClientProperty(m_bIsBroadcasterChannelCameraman);
+   AddClientProperty(m_bHasPredictedVictory);
+   AddClientProperty(m_bReservedHeroOnly);
+   AddClientProperty(m_bQualifiesForPAContractReward);
+   AddClientProperty(m_iTimedRewardEvents);
+   AddClientProperty(EndScoreAndSpectatorStats);
+   AddClientProperty(RadiantOnlyData);
+   AddClientProperty(DireOnlyData);
+EndClientClass();
+
+BeginClientClass(CDOTA_RoshanSpawner, DT_DOTA_RoshanSpawner);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CDOTA_TempTree, DT_DOTA_TempTree);
+   ClientBaseClass(CBaseAnimating);
+EndClientClass();
+
+BeginClientClass(CDOTA_Tiny_ScepterTree, DT_DOTA_Tiny_ScepterTree);
+   ClientBaseClass(CDOTAWearableItem);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Announcer, DT_DOTA_Unit_Announcer);
+   ClientBaseClass(CDOTA_BaseNPC);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Announcer_Killing_Spree, DT_DOTA_Unit_Announcer_Killing_Spree);
+   ClientBaseClass(CDOTA_BaseNPC);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Brewmaster_PrimalEarth, DT_DOTA_Unit_Brewmaster_PrimalEarth);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Brewmaster_PrimalFire, DT_DOTA_Unit_Brewmaster_PrimalFire);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Brewmaster_PrimalStorm, DT_DOTA_Unit_Brewmaster_PrimalStorm);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Broodmother_Spiderling, DT_DOTA_Unit_Broodmother_Spiderling);
+   ClientBaseClass(CDOTA_BaseNPC_Creep_Talking);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Broodmother_Web, DT_DOTA_Unit_Broodmother_Web);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Courier, DT_DOTA_Unit_Courier);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_flRespawnTime);
+   AddClientProperty(m_nCourierState);
+   AddClientProperty(m_hCourierStateEntity);
+   AddClientProperty(m_bFlyingCourier);
+   AddClientProperty(m_iUnusualColor);
+   AddClientProperty(m_iUnusualParticleSystem);
+   AddClientProperty(m_hCourierWearable);
+   AddClientProperty(m_bMorphEnabled);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Earth_Spirit_Stone, DT_DOTA_Unit_Earth_Spirit_Stone);
+   ClientBaseClass(CDOTA_BaseNPC);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Elder_Titan_AncestralSpirit, DT_DOTA_Unit_Elder_Titan_AncestralSpirit);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Fountain, DT_DOTA_Unit_Fountain);
+   ClientBaseClass(CDOTA_BaseNPC_Building);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Greevil, DT_DOTA_Unit_Greevil);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_flRespawnTime);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Abaddon, DT_DOTA_Unit_Hero_Abaddon);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_AbyssalUnderlord, DT_DOTA_Unit_Hero_AbyssalUnderlord);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Alchemist, DT_DOTA_Unit_Hero_Alchemist);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_AncientApparition, DT_DOTA_Unit_Hero_AncientApparition);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_AntiMage, DT_DOTA_Unit_Hero_AntiMage);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Axe, DT_DOTA_Unit_Hero_Axe);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Bane, DT_DOTA_Unit_Hero_Bane);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Batrider, DT_DOTA_Unit_Hero_Batrider);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Beastmaster, DT_DOTA_Unit_Hero_Beastmaster);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Beastmaster_Beasts, DT_DOTA_Unit_Hero_Beastmaster_Beasts);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Beastmaster_Boar, DT_DOTA_Unit_Hero_Beastmaster_Boar);
+   ClientBaseClass(CDOTA_Unit_Hero_Beastmaster_Beasts);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Beastmaster_Hawk, DT_DOTA_Unit_Hero_Beastmaster_Hawk);
+   ClientBaseClass(CDOTA_Unit_Hero_Beastmaster_Beasts);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Bloodseeker, DT_DOTA_Unit_Hero_Bloodseeker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_BountyHunter, DT_DOTA_Unit_Hero_BountyHunter);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Brewmaster, DT_DOTA_Unit_Hero_Brewmaster);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Bristleback, DT_DOTA_Unit_Hero_Bristleback);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Broodmother, DT_DOTA_Unit_Hero_Broodmother);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Centaur, DT_DOTA_Unit_Hero_Centaur);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_ChaosKnight, DT_DOTA_Unit_Hero_ChaosKnight);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Chen, DT_DOTA_Unit_Hero_Chen);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Clinkz, DT_DOTA_Unit_Hero_Clinkz);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_CrystalMaiden, DT_DOTA_Unit_Hero_CrystalMaiden);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_DarkSeer, DT_DOTA_Unit_Hero_DarkSeer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Dazzle, DT_DOTA_Unit_Hero_Dazzle);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_DeathProphet, DT_DOTA_Unit_Hero_DeathProphet);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Disruptor, DT_DOTA_Unit_Hero_Disruptor);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_DoomBringer, DT_DOTA_Unit_Hero_DoomBringer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_DragonKnight, DT_DOTA_Unit_Hero_DragonKnight);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_DrowRanger, DT_DOTA_Unit_Hero_DrowRanger);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Earthshaker, DT_DOTA_Unit_Hero_Earthshaker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_EarthSpirit, DT_DOTA_Unit_Hero_EarthSpirit);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Elder_Titan, DT_DOTA_Unit_Hero_Elder_Titan);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_EmberSpirit, DT_DOTA_Unit_Hero_EmberSpirit);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Enchantress, DT_DOTA_Unit_Hero_Enchantress);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Enigma, DT_DOTA_Unit_Hero_Enigma);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_FacelessVoid, DT_DOTA_Unit_Hero_FacelessVoid);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Furion, DT_DOTA_Unit_Hero_Furion);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Gyrocopter, DT_DOTA_Unit_Hero_Gyrocopter);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Huskar, DT_DOTA_Unit_Hero_Huskar);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Invoker, DT_DOTA_Unit_Hero_Invoker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Jakiro, DT_DOTA_Unit_Hero_Jakiro);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Juggernaut, DT_DOTA_Unit_Hero_Juggernaut);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_KeeperOfTheLight, DT_DOTA_Unit_Hero_KeeperOfTheLight);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Kunkka, DT_DOTA_Unit_Hero_Kunkka);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Legion_Commander, DT_DOTA_Unit_Hero_Legion_Commander);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Leshrac, DT_DOTA_Unit_Hero_Leshrac);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Lich, DT_DOTA_Unit_Hero_Lich);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Life_Stealer, DT_DOTA_Unit_Hero_Life_Stealer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Lina, DT_DOTA_Unit_Hero_Lina);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Lion, DT_DOTA_Unit_Hero_Lion);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_LoneDruid, DT_DOTA_Unit_Hero_LoneDruid);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Luna, DT_DOTA_Unit_Hero_Luna);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Lycan, DT_DOTA_Unit_Hero_Lycan);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Magnataur, DT_DOTA_Unit_Hero_Magnataur);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Medusa, DT_DOTA_Unit_Hero_Medusa);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Meepo, DT_DOTA_Unit_Hero_Meepo);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+   AddClientProperty(m_nWhichMeepo);
+   AddClientProperty(m_bIsIllusion);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Mirana, DT_DOTA_Unit_Hero_Mirana);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Morphling, DT_DOTA_Unit_Hero_Morphling);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Naga_Siren, DT_DOTA_Unit_Hero_Naga_Siren);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Necrolyte, DT_DOTA_Unit_Hero_Necrolyte);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Nevermore, DT_DOTA_Unit_Hero_Nevermore);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_NightStalker, DT_DOTA_Unit_Hero_NightStalker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Nyx_Assassin, DT_DOTA_Unit_Hero_Nyx_Assassin);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Obsidian_Destroyer, DT_DOTA_Unit_Hero_Obsidian_Destroyer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Ogre_Magi, DT_DOTA_Unit_Hero_Ogre_Magi);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Omniknight, DT_DOTA_Unit_Hero_Omniknight);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Oracle, DT_DOTA_Unit_Hero_Oracle);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_PhantomAssassin, DT_DOTA_Unit_Hero_PhantomAssassin);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+   AddClientProperty(m_nArcanaLevel);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_PhantomLancer, DT_DOTA_Unit_Hero_PhantomLancer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Phoenix, DT_DOTA_Unit_Hero_Phoenix);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Puck, DT_DOTA_Unit_Hero_Puck);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Pudge, DT_DOTA_Unit_Hero_Pudge);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Pugna, DT_DOTA_Unit_Hero_Pugna);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_QueenOfPain, DT_DOTA_Unit_Hero_QueenOfPain);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Rattletrap, DT_DOTA_Unit_Hero_Rattletrap);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Razor, DT_DOTA_Unit_Hero_Razor);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Riki, DT_DOTA_Unit_Hero_Riki);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Rubick, DT_DOTA_Unit_Hero_Rubick);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_SandKing, DT_DOTA_Unit_Hero_SandKing);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Shadow_Demon, DT_DOTA_Unit_Hero_Shadow_Demon);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_ShadowShaman, DT_DOTA_Unit_Hero_ShadowShaman);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Shredder, DT_DOTA_Unit_Hero_Shredder);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Silencer, DT_DOTA_Unit_Hero_Silencer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_SkeletonKing, DT_DOTA_Unit_Hero_SkeletonKing);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Skywrath_Mage, DT_DOTA_Unit_Hero_Skywrath_Mage);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Slardar, DT_DOTA_Unit_Hero_Slardar);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Slark, DT_DOTA_Unit_Hero_Slark);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Sniper, DT_DOTA_Unit_Hero_Sniper);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Spectre, DT_DOTA_Unit_Hero_Spectre);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_SpiritBreaker, DT_DOTA_Unit_Hero_SpiritBreaker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_StormSpirit, DT_DOTA_Unit_Hero_StormSpirit);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Sven, DT_DOTA_Unit_Hero_Sven);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Techies, DT_DOTA_Unit_Hero_Techies);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+   AddClientProperty(m_bHasArcana);
+   AddClientProperty(m_nArcanaColor);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_TemplarAssassin, DT_DOTA_Unit_Hero_TemplarAssassin);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Terrorblade, DT_DOTA_Unit_Hero_Terrorblade);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+   AddClientProperty(m_nArcanaColor);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Tidehunter, DT_DOTA_Unit_Hero_Tidehunter);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Tinker, DT_DOTA_Unit_Hero_Tinker);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Tiny, DT_DOTA_Unit_Hero_Tiny);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Treant, DT_DOTA_Unit_Hero_Treant);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_TrollWarlord, DT_DOTA_Unit_Hero_TrollWarlord);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Tusk, DT_DOTA_Unit_Hero_Tusk);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Undying, DT_DOTA_Unit_Hero_Undying);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Ursa, DT_DOTA_Unit_Hero_Ursa);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_VengefulSpirit, DT_DOTA_Unit_Hero_VengefulSpirit);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Venomancer, DT_DOTA_Unit_Hero_Venomancer);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Viper, DT_DOTA_Unit_Hero_Viper);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Visage, DT_DOTA_Unit_Hero_Visage);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Warlock, DT_DOTA_Unit_Hero_Warlock);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Weaver, DT_DOTA_Unit_Hero_Weaver);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Windrunner, DT_DOTA_Unit_Hero_Windrunner);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Winter_Wyvern, DT_DOTA_Unit_Hero_Winter_Wyvern);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Wisp, DT_DOTA_Unit_Hero_Wisp);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_WitchDoctor, DT_DOTA_Unit_Hero_WitchDoctor);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Hero_Zuus, DT_DOTA_Unit_Hero_Zuus);
+   ClientBaseClass(CDOTA_BaseNPC_Hero);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_LoopingSound, DT_DOTA_Unit_LoopingSound);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_pszNetworkedSoundLoop);
+   AddClientProperty(m_nLoopingSoundParity);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Nian, DT_DOTA_Unit_Nian);
+   ClientBaseClass(CDOTA_BaseNPC_Creature);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Roquelaire, DT_DOTA_Unit_Roquelaire);
+   ClientBaseClass(CDOTA_BaseNPC_Creep_Talking);
+   AddClientProperty(m_flFlyHeight);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Roshan, DT_DOTA_Unit_Roshan);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Roshan_Halloween, DT_DOTA_Unit_Roshan_Halloween);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_hChosenTarget);
+   AddClientProperty(m_iHealth);
+   AddClientProperty(m_iMaxHealth);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_SpiritBear, DT_DOTA_Unit_SpiritBear);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_TargetDummy, DT_DOTA_Unit_TargetDummy);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+   AddClientProperty(m_flDamageTaken);
+   AddClientProperty(m_flStartDamageTime);
+   AddClientProperty(m_flLastDamageTime);
+   AddClientProperty(m_flLastHit);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Undying_Tombstone, DT_DOTA_Unit_Undying_Tombstone);
+   ClientBaseClass(CDOTA_BaseNPC_Additive);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_Undying_Zombie, DT_DOTA_Unit_Undying_Zombie);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Unit_VisageFamiliar, DT_DOTA_Unit_VisageFamiliar);
+   ClientBaseClass(CDOTA_BaseNPC_Creep);
+EndClientClass();
+
+BeginClientClass(CDOTA_Wisp_Spirit, DT_DOTA_Wisp_Spirit);
+   ClientBaseClass(CDOTA_BaseNPC);
+   AddClientProperty(m_vecOrigin);
+EndClientClass();
+
+BeginClientClass(CDOTABaseAbility, DT_DOTABaseAbility);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bHidden);
+   AddClientProperty(m_bActivated);
+   AddClientProperty(m_iDirtyButtons);
+   AddClientProperty(m_iLevel);
+   AddClientProperty(m_bToggleState);
+   AddClientProperty(m_bInAbilityPhase);
+   AddClientProperty(m_fCooldown);
+   AddClientProperty(m_iCastRange);
+   AddClientProperty(m_flCooldownLength);
+   AddClientProperty(m_iManaCost);
+   AddClientProperty(m_bAutoCastState);
+   AddClientProperty(m_flChannelStartTime);
+   AddClientProperty(m_flOverrideCastPoint);
+   AddClientProperty(m_bInIndefiniteCooldown);
+EndClientClass();
+
+BeginClientClass(CDOTABaseGameMode, DT_DOTABaseGameMode);
+   AddClientProperty(m_bAlwaysShowPlayerInventory);
+   AddClientProperty(m_bGoldSoundDisabled);
+   AddClientProperty(m_bRecommendedItemsDisabled);
+   AddClientProperty(m_bFogOfWarDisabled);
+   AddClientProperty(m_bUseCustomBuybackCost);
+   AddClientProperty(m_bUseCustomBuybackCooldown);
+   AddClientProperty(m_bBuybackEnabled);
+   AddClientProperty(m_flCameraDistanceOverride);
+   AddClientProperty(m_hOverrideSelectionEntity);
+   AddClientProperty(m_bTopBarTeamValuesOverride);
+   AddClientProperty(m_bTopBarTeamValuesVisible);
+   AddClientProperty(m_nTeamGoodGuysTopBarValue);
+   AddClientProperty(m_nTeamBadGuysTopBarValue);
+   AddClientProperty(m_bUseCustomHeroLevels);
+   AddClientProperty(m_nCustomHeroMaxLevel);
+   AddClientProperty(m_nCustomXPRequiredToReachNextLevel);
+EndClientClass();
+
+BeginClientClass(CDOTACameraBounds, DT_DOTACameraBounds);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_vecBoundsMin);
+   AddClientProperty(m_vecBoundsMax);
+EndClientClass();
+
+BeginClientClass(CDOTAFogOfWarTempViewers, DT_DOTAFogOfWarTempViewers);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bTempViewers);
+EndClientClass();
+
+BeginClientClass(CDOTAFogOfWarWasVisible, DT_DOTAFogOfWarWasVisible);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bWasVisible);
+EndClientClass();
+
+BeginClientStruct(DT_DOTA_GameManager);
+   AddClientProperty(m_StableHeroAvailable);
+   AddClientProperty(m_CurrentHeroAvailable);
+   AddClientProperty(m_CulledHeroes);
+EndClientStruct();
+
+BeginClientClass(CDOTAGameManagerProxy, DT_DOTAGameManagerProxy);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(dota_gamemanager_data);
+EndClientClass();
+
+BeginClientStruct(DT_DOTAGamerules);
+   AddClientProperty(m_iNetTimeOfDay);
+   AddClientProperty(m_fGameTime);
+   AddClientProperty(m_bGamePaused);
+   AddClientProperty(m_ItemStockInfoGood);
+   AddClientProperty(m_ItemStockInfoBad);
+   AddClientProperty(m_AssassinMiniGameNetData);
+   AddClientProperty(m_hGoodGuyFountain);
+   AddClientProperty(m_hBadGuyFountain);
+   AddClientProperty(m_hGoodGuyShop);
+   AddClientProperty(m_hBadGuyShop);
+   AddClientProperty(m_hSideShop1);
+   AddClientProperty(m_hSideShop2);
+   AddClientProperty(m_hSecretShop1);
+   AddClientProperty(m_hSecretShop2);
+   AddClientProperty(m_hGoodGuyFort);
+   AddClientProperty(m_hBadGuyFort);
+   AddClientProperty(m_hAnnouncerGood);
+   AddClientProperty(m_hAnnouncerBad);
+   AddClientProperty(m_hAnnouncerSpectator);
+   AddClientProperty(m_hAnnouncerGood_KillingSpree);
+   AddClientProperty(m_hAnnouncerBad_KillingSpree);
+   AddClientProperty(m_hAnnouncerSpectator_KillingSpree);
+   AddClientProperty(m_nGameState);
+   AddClientProperty(m_flStateTransitionTime);
+   AddClientProperty(m_iGameMode);
+   AddClientProperty(m_nHeroPickState);
+   AddClientProperty(m_iCMModePickBanOrder);
+   AddClientProperty(m_iCDModePickBanOrder);
+   AddClientProperty(m_flHeroPickStateTransitionTime);
+   AddClientProperty(m_fExtraTimeRemaining);
+   AddClientProperty(m_iPlayerIDsInControl);
+   AddClientProperty(m_bSuggestedGoodHeroes);
+   AddClientProperty(m_bSuggestedBadHeroes);
+   AddClientProperty(m_iCaptainPlayerIDs);
+   AddClientProperty(m_BannedHeroes);
+   AddClientProperty(m_SelectedHeroes);
+   AddClientProperty(m_AvailableHerosPerPlayer);
+   AddClientProperty(m_UnlockedHeroesPerPlayer);
+   AddClientProperty(m_LockedHeroesPerPlayer);
+   AddClientProperty(m_iActiveTeam);
+   AddClientProperty(m_iStartingTeam);
+   AddClientProperty(m_iMiscHeroPickCounter);
+   AddClientProperty(m_flPreGameStartTime);
+   AddClientProperty(m_flGameStartTime);
+   AddClientProperty(m_flGameEndTime);
+   AddClientProperty(m_flGameLoadTime);
+   AddClientProperty(m_fGoodGlyphCooldown);
+   AddClientProperty(m_fBadGlyphCooldown);
+   AddClientProperty(m_bIsNightstalkerNight);
+   AddClientProperty(m_bIsTemporaryNight);
+   AddClientProperty(m_nGameWinner);
+   AddClientProperty(m_nLoadedPlayers);
+   AddClientProperty(m_nExpectedPlayers);
+   AddClientProperty(m_iMinimapDebugGridState);
+   AddClientProperty(m_iFoWFrameNumber);
+   AddClientProperty(m_bIsInItemTestingMode);
+   AddClientProperty(m_bIsInCinematicMode);
+   AddClientProperty(m_bItemWhiteList);
+   AddClientProperty(m_hEndGameCinematicEntity);
+   AddClientProperty(m_bIsStableMode);
+   AddClientProperty(m_unMatchID64);
+   AddClientProperty(m_BotDebugPushLane);
+   AddClientProperty(m_BotDebugDefendLane);
+   AddClientProperty(m_BotDebugFarmLane);
+   AddClientProperty(m_BotDebugRoam);
+   AddClientProperty(m_hBotDebugRoamTarget);
+   AddClientProperty(m_BotDebugRoshan);
+   AddClientProperty(m_lobbyLeagueID);
+   AddClientProperty(m_lobbyGameName);
+   AddClientProperty(m_bMatchSignoutComplete);
+   AddClientProperty(m_bWhiteListEnabled);
+   AddClientProperty(m_bHeroRespawnEnabled);
+   AddClientProperty(m_nLastHitUIMode);
+   AddClientProperty(m_bHUDTimerTutorialMode);
+   AddClientProperty(m_unFanfareGoodGuys);
+   AddClientProperty(m_unFanfareBadGuys);
+   AddClientProperty(m_nSeriesType);
+   AddClientProperty(m_nRadiantSeriesWins);
+   AddClientProperty(m_nDireSeriesWins);
+   AddClientProperty(m_nHalloweenTransitionState);
+   AddClientProperty(m_flHalloweenRoshanLifetime);
+   AddClientProperty(m_bTier3TowerDestroyed);
+   AddClientProperty(m_iCustomGameScore);
+   AddClientProperty(m_iPauseTeam);
+   AddClientProperty(m_nGGTeam);
+   AddClientProperty(m_flGGEndsAtTime);
+   AddClientProperty(m_hGameModeEntity);
+   AddClientProperty(m_nHalloweenRoshanLevel);
+   AddClientProperty(m_flHalloweenRoshanRoundStartTime);
+   AddClientProperty(m_nHalloweenRoshanRemainingHealth);
+   AddClientProperty(m_nCustomGameDifficulty);
+   AddClientProperty(m_hOverlayHealthBarUnit);
+   AddClientProperty(m_nOverlayHealthBarType);
+   AddClientProperty(m_bUseUniversalShopMode);
+   AddClientProperty(m_bUseCustomHeroXPValue);
+   AddClientProperty(m_bUseBaseGoldBountyOnHeroes);
+   AddClientProperty(m_bSameHeroSelectionEnabled);
+   AddClientProperty(m_nHeroMinimapIconSize);
+   AddClientProperty(m_flCreepMinimapIconScale);
+   AddClientProperty(m_flRuneMinimapIconScale);
+   AddClientProperty(m_AbilityDraftAbilities);
+   AddClientProperty(m_nAbilityDraftPlayerTracker);
+   AddClientProperty(m_nAbilityDraftRoundNumber);
+   AddClientProperty(m_nAbilityDraftAdvanceSteps);
+   AddClientProperty(m_nAbilityDraftPhase);
+   AddClientProperty(m_nAbilityDraftHeroesChosen);
+   AddClientProperty(m_nARDMHeroesRemaining);
+   AddClientProperty(m_nARDMHeroesPrecachedPercent);
+   AddClientProperty(m_nAllDraftPhase);
+   AddClientProperty(m_bAllDraftRadiantFirst);
+   AddClientProperty(m_bHasHeroStatueLiked);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTA_AbilityDraftAbilityState);
+   AddClientProperty(m_unAbilityIndex);
+   AddClientProperty(m_unPlayerID);
+   AddClientProperty(m_unAbilityPlayerSlot);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTA_AssassinMinigameNetworkState);
+   AddClientProperty(nAssassinState);
+   AddClientProperty(nVictimHeroID);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTA_ItemStockInfo);
+   AddClientProperty(usItemIndex);
+   AddClientProperty(fStockDuration);
+   AddClientProperty(fStockTime);
+   AddClientProperty(iStockCount);
+   AddClientProperty(iMaxCount);
+EndClientStruct();
+
+BeginClientClass(CDOTAGamerulesProxy, DT_DOTAGamerulesProxy);
+   ClientBaseClass(CGameRulesProxy);
+   AddClientProperty(dota_gamerules_data);
+EndClientClass();
+
+BeginClientClass(CDOTAHoldoutNetworker, DT_DOTA_HoldoutNetworker);
+   AddClientProperty(m_flPrepTimeLeft);
+   AddClientProperty(m_nWaveEnemyCount);
+   AddClientProperty(m_nCurrentEnemyCount);
+   AddClientProperty(m_nNumberOfRounds);
+   AddClientProperty(m_nRoundNumber);
+   AddClientProperty(m_bIsHeroRespawnEnabled);
+   AddClientProperty(m_nGoldBagsExpired);
+EndClientClass();
+
+BeginClientClass(CDOTAMinimapBoundary, DT_DOTAMinimapBoundary);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientStruct(DT_ClientQuickBuyItemState);
+   AddClientProperty(nItemType);
+   AddClientProperty(bPurchasable);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTACommentatorTable);
+   AddClientProperty(m_cellbits);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_cellX);
+   AddClientProperty(m_cellY);
+   AddClientProperty(m_cellZ);
+   AddClientProperty(m_iSpectatorClickBehavior);
+   AddClientProperty(m_iCursor);
+   AddClientProperty(m_flAspectRatio);
+   AddClientProperty(m_hSpectatorQueryUnit);
+   AddClientProperty(m_iStatsPanel);
+   AddClientProperty(m_iShopPanel);
+   AddClientProperty(m_iShopViewMode);
+   AddClientProperty(m_iStatsDropdownCategory);
+   AddClientProperty(m_iStatsDropdownSort);
+   AddClientProperty(m_szShopString);
+   AddClientProperty(m_vecClientQuickBuyState);
+   AddClientProperty(m_iQuickBuyParity);
+   AddClientProperty(m_bInShowCaseMode);
+   AddClientProperty(m_flCameraZoomAmount);
+   AddClientProperty(m_iHighPriorityScore);
+EndClientStruct();
+
+BeginClientStruct(DT_DOTACompendiumData);
+   AddClientProperty(m_iTotalEarnedGold);
+   AddClientProperty(m_iTotalEarnedXP);
+EndClientStruct();
+
+BeginClientClass(CDOTAPlayer, DT_DOTAPlayer);
+   ClientBaseClass(CBasePlayer);
+   AddClientProperty(m_nTickBase);
+   AddClientProperty(m_iPlayerID);
+   AddClientProperty(m_nCachedCoachedTeam);
+   AddClientProperty(m_vecStartingPosition);
+   AddClientProperty(m_hAssignedHero);
+   AddClientProperty(m_iMusicStatus);
+   AddClientProperty(m_flMusicOperatorVals);
+   AddClientProperty(m_iMusicOperatorVals);
+   AddClientProperty(m_hKillCamUnit);
+   AddClientProperty(dota_commentator_table);
+   AddClientProperty(dota_compendium_data);
+   AddClientProperty(m_bUsingCameraMan);
+   AddClientProperty(m_bUsingAssistedCameraOperator);
+EndClientClass();
+
+BeginClientClass(CDOTAPropCustomTexture, DT_DOTAPropCustomTexture);
+   ClientBaseClass(CDynamicProp);
+EndClientClass();
+
+BeginClientClass(CDotaQuest, DT_DotaQuest);
+   AddClientProperty(m_pszQuestTitle);
+   AddClientProperty(m_pszQuestText);
+   AddClientProperty(m_nQuestType);
+   AddClientProperty(m_hSubquests);
+   AddClientProperty(m_bHidden);
+   AddClientProperty(m_bCompleted);
+   AddClientProperty(m_bWinIfCompleted);
+   AddClientProperty(m_bLoseIfCompleted);
+   AddClientProperty(m_pszGameEndText);
+   AddClientProperty(m_pnTextReplaceValuesCDotaQuest);
+   AddClientProperty(m_pszTextReplaceString);
+   AddClientProperty(m_nTextReplaceValueVersion);
+EndClientClass();
+
+BeginClientClass(CDotaQuestBase, DT_DotaQuestBase);
+EndClientClass();
+
+BeginClientClass(CDOTASpecGraphPlayerData, DT_DotaSpecGraphPlayerData);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_rgGoldPerMinute);
+   AddClientProperty(m_rgXPPerMinute);
+   AddClientProperty(m_nCreatedByPlayerID);
+EndClientClass();
+
+BeginClientStruct(DT_DOTASpectatorGraphManager);
+   AddClientProperty(m_rgPlayerGraphData);
+   AddClientProperty(m_rgRadiantTotalEarnedGold);
+   AddClientProperty(m_rgDireTotalEarnedGold);
+   AddClientProperty(m_rgRadiantTotalEarnedXP);
+   AddClientProperty(m_rgDireTotalEarnedXP);
+   AddClientProperty(m_rgRadiantNetWorth);
+   AddClientProperty(m_rgDireNetWorth);
+   AddClientProperty(m_flTotalEarnedGoldStartTime);
+   AddClientProperty(m_flTotalEarnedGoldEndTime);
+   AddClientProperty(m_nGoldGraphVersion);
+EndClientStruct();
+
+BeginClientClass(CDOTASpectatorGraphManagerProxy, DT_DOTASpectatorGraphManagerProxy);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(dota_spectator_graph_manager_data);
+EndClientClass();
+
+BeginClientClass(CDotaSubquestBase, DT_DotaSubquestBase);
+   AddClientProperty(m_pszSubquestText);
+   AddClientProperty(m_bHidden);
+   AddClientProperty(m_bCompleted);
+   AddClientProperty(m_bShowProgressBar);
+   AddClientProperty(m_nProgressBarHueShift);
+   AddClientProperty(m_pnTextReplaceValuesCDotaSubquestBase);
+   AddClientProperty(m_pszTextReplaceString);
+   AddClientProperty(m_nTextReplaceValueVersion);
+EndClientClass();
+
+BeginClientClass(CDOTATeam, DT_DOTATeam);
+   ClientBaseClass(CTeam);
+   AddClientProperty(m_iHeroKills);
+   AddClientProperty(m_iTowerKills);
+   AddClientProperty(m_iBarracksKills);
+   AddClientProperty(m_unTournamentTeamID);
+   AddClientProperty(m_ulTeamLogo);
+   AddClientProperty(m_ulTeamBaseLogo);
+   AddClientProperty(m_ulTeamBannerLogo);
+   AddClientProperty(m_szTag);
+   AddClientProperty(m_bTeamComplete);
+EndClientClass();
+
+BeginClientStruct(DT_SpeechBubbleInfo);
+   AddClientProperty(m_LocalizationStr);
+   AddClientProperty(m_hNPC);
+   AddClientProperty(m_flLifetime);
+EndClientStruct();
+
+BeginClientClass(CDotaTutorialNetworker, DT_DotaTutorialNetworker);
+   AddClientProperty(m_nTutorialState);
+   AddClientProperty(m_nTaskProgress);
+   AddClientProperty(m_nTaskSteps);
+   AddClientProperty(m_nTaskSecondsRemianing);
+   AddClientProperty(m_nUIState);
+   AddClientProperty(m_TargetLocation);
+   AddClientProperty(m_SpeechBubbles);
+   AddClientProperty(m_nLocationID);
+EndClientClass();
+
+BeginClientClass(CDOTAWearableItem, DT_DOTAWearableItem);
+   ClientBaseClass(CEconWearable);
+   AddClientProperty(m_bOwnerModelChanged);
+EndClientClass();
+
+BeginClientClass(CDynamicLight, DT_DynamicLight);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_Flags);
+   AddClientProperty(m_LightStyle);
+   AddClientProperty(m_Radius);
+   AddClientProperty(m_Exponent);
+   AddClientProperty(m_InnerAngle);
+   AddClientProperty(m_OuterAngle);
+   AddClientProperty(m_SpotRadius);
+EndClientClass();
+
+BeginClientClass(CDynamicProp, DT_DynamicProp);
+   ClientBaseClass(CBreakableProp);
+   AddClientProperty(m_bUseHitboxesForRenderBox);
+EndClientClass();
+
+BeginClientClass(CEconEntity, DT_EconEntity);
+   ClientBaseClass(CBaseFlex);
+   AddClientProperty(m_AttributeManager);
+EndClientClass();
+
+BeginClientClass(CEconWearable, DT_WearableItem);
+   ClientBaseClass(CEconEntity);
+EndClientClass();
+
+BeginClientClass(CEntityDissolve, DT_EntityDissolve);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flStartTime);
+   AddClientProperty(m_flFadeInStart);
+   AddClientProperty(m_flFadeInLength);
+   AddClientProperty(m_flFadeOutModelStart);
+   AddClientProperty(m_flFadeOutModelLength);
+   AddClientProperty(m_flFadeOutStart);
+   AddClientProperty(m_flFadeOutLength);
+   AddClientProperty(m_nDissolveType);
+   AddClientProperty(m_vDissolverOrigin);
+   AddClientProperty(m_nMagnitude);
+EndClientClass();
+
+BeginClientClass(CEntityFlame, DT_EntityFlame);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_hEntAttached);
+   AddClientProperty(m_bCheapEffect);
+EndClientClass();
+
+BeginClientClass(CEntityFreezing, DT_EntityFreezing);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_vFreezingOrigin);
+   AddClientProperty(m_flFrozenPerHitbox);
+   AddClientProperty(m_flFrozen);
+   AddClientProperty(m_bFinishFreezing);
+EndClientClass();
+
+BeginClientStruct(DT_EntityParticleTrailInfo);
+   AddClientProperty(m_flLifetime);
+   AddClientProperty(m_flStartSize);
+   AddClientProperty(m_flEndSize);
+EndClientStruct();
+
+BeginClientClass(CEntityParticleTrail, DT_EntityParticleTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_iMaterialName);
+   AddClientProperty(m_Info);
+   AddClientProperty(m_hConstraintEntity);
+EndClientClass();
+
+BeginClientClass(CEnvAmbientLight, DT_EnvAmbientLight);
+   ClientBaseClass(CSpatialEntity);
+   AddClientProperty(m_vecColor);
+EndClientClass();
+
+BeginClientClass(CEnvDeferredLight, DT_EnvDeferredLight);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_LightColor);
+   AddClientProperty(m_flIntensity);
+   AddClientProperty(m_flLightSize);
+   AddClientProperty(m_flSpotFoV);
+   AddClientProperty(m_vLightDirection);
+   AddClientProperty(m_flStartFalloff);
+   AddClientProperty(m_flDistanceFalloff);
+   AddClientProperty(m_nFlags);
+   AddClientProperty(m_ProjectedTextureName);
+EndClientClass();
+
+BeginClientClass(CEnvDetailController, DT_DetailController);
+   AddClientProperty(m_flFadeStartDist);
+   AddClientProperty(m_flFadeEndDist);
+EndClientClass();
+
+BeginClientClass(CEnvDOFController, DT_EnvDOFController);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bDOFEnabled);
+   AddClientProperty(m_flNearBlurDepth);
+   AddClientProperty(m_flNearFocusDepth);
+   AddClientProperty(m_flFarFocusDepth);
+   AddClientProperty(m_flFarBlurDepth);
+   AddClientProperty(m_flNearBlurRadius);
+   AddClientProperty(m_flFarBlurRadius);
+EndClientClass();
+
+BeginClientClass(CEnvParticleScript, DT_EnvParticleScript);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_flSequenceScale);
+EndClientClass();
+
+BeginClientClass(CEnvProjectedTexture, DT_EnvProjectedTexture);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_hTargetEntity);
+   AddClientProperty(m_bState);
+   AddClientProperty(m_bAlwaysUpdate);
+   AddClientProperty(m_flLightFOV);
+   AddClientProperty(m_bEnableShadows);
+   AddClientProperty(m_bSimpleProjection);
+   AddClientProperty(m_bLightOnlyTarget);
+   AddClientProperty(m_bLightWorld);
+   AddClientProperty(m_bCameraSpace);
+   AddClientProperty(m_flBrightnessScale);
+   AddClientProperty(m_LightColor);
+   AddClientProperty(m_flFarZ);
+   AddClientProperty(m_flColorTransitionTime);
+   AddClientProperty(m_flAmbient);
+   AddClientProperty(m_SpotlightTextureName);
+   AddClientProperty(m_nSpotlightTextureFrame);
+   AddClientProperty(m_flNearZ);
+   AddClientProperty(m_nShadowQuality);
+   AddClientProperty(m_flProjectionSize);
+   AddClientProperty(m_flRotation);
+EndClientClass();
+
+BeginClientClass(CEnvQuadraticBeam, DT_QuadraticBeam);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_targetPosition);
+   AddClientProperty(m_controlPosition);
+   AddClientProperty(m_scrollRate);
+   AddClientProperty(m_flWidth);
+EndClientClass();
+
+BeginClientClass(CEnvScreenEffect, DT_EnvScreenEffect);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flDuration);
+   AddClientProperty(m_nType);
+EndClientClass();
+
+BeginClientClass(CEnvScreenOverlay, DT_EnvScreenOverlay);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_iszOverlayNames);
+   AddClientProperty(m_flOverlayTimes);
+   AddClientProperty(m_flStartTime);
+   AddClientProperty(m_iDesiredOverlay);
+   AddClientProperty(m_bIsActive);
+EndClientClass();
+
+BeginClientClass(CEnvTonemapController, DT_EnvTonemapController);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bUseCustomAutoExposureMin);
+   AddClientProperty(m_bUseCustomAutoExposureMax);
+   AddClientProperty(m_bUseCustomBloomScale);
+   AddClientProperty(m_flCustomAutoExposureMin);
+   AddClientProperty(m_flCustomAutoExposureMax);
+   AddClientProperty(m_flCustomBloomScale);
+   AddClientProperty(m_flCustomBloomScaleMinimum);
+   AddClientProperty(m_flBloomExponent);
+   AddClientProperty(m_flBloomSaturation);
+EndClientClass();
+
+BeginClientStruct(DT_EnvWindShared);
+   AddClientProperty(m_iMinWind);
+   AddClientProperty(m_iMaxWind);
+   AddClientProperty(m_iMinGust);
+   AddClientProperty(m_iMaxGust);
+   AddClientProperty(m_windRadius);
+   AddClientProperty(m_flMinGustDelay);
+   AddClientProperty(m_flMaxGustDelay);
+   AddClientProperty(m_iGustDirChange);
+   AddClientProperty(m_iWindSeed);
+   AddClientProperty(m_iInitialWindDir);
+   AddClientProperty(m_flInitialWindSpeed);
+   AddClientProperty(m_flStartTime);
+   AddClientProperty(m_flGustDuration);
+EndClientStruct();
+
+BeginClientClass(CEnvWind, DT_EnvWind);
+   AddClientProperty(m_EnvWindShared);
+EndClientClass();
+
+BeginClientClass(CFireSmoke, DT_FireSmoke);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flStartScale);
+   AddClientProperty(m_flScale);
+   AddClientProperty(m_flScaleTime);
+   AddClientProperty(m_nFlags);
+   AddClientProperty(m_nFlameModelIndex);
+   AddClientProperty(m_nFlameFromAboveModelIndex);
+EndClientClass();
+
+BeginClientClass(CFireTrail, DT_FireTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_nAttachment);
+   AddClientProperty(m_flLifetime);
+EndClientClass();
+
+BeginClientClass(CFish, DT_CFish);
+   AddClientProperty(m_poolOrigin);
+   AddClientProperty(m_angle);
+   AddClientProperty(m_x);
+   AddClientProperty(m_y);
+   AddClientProperty(m_z);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_lifeState);
+   AddClientProperty(m_waterLevel);
+EndClientClass();
+
+BeginClientClass(CFogController, DT_FogController);
+   AddClientProperty(m_fog.enable);
+   AddClientProperty(m_fog.blend);
+   AddClientProperty(m_fog.dirPrimary);
+   AddClientProperty(m_fog.colorPrimary);
+   AddClientProperty(m_fog.colorSecondary);
+   AddClientProperty(m_fog.start);
+   AddClientProperty(m_fog.end);
+   AddClientProperty(m_fog.maxdensity);
+   AddClientProperty(m_fog.farz);
+   AddClientProperty(m_fog.colorPrimaryLerpTo);
+   AddClientProperty(m_fog.colorSecondaryLerpTo);
+   AddClientProperty(m_fog.startLerpTo);
+   AddClientProperty(m_fog.endLerpTo);
+   AddClientProperty(m_fog.maxdensityLerpTo);
+   AddClientProperty(m_fog.lerptime);
+   AddClientProperty(m_fog.duration);
+   AddClientProperty(m_fog.HDRColorScale);
+   AddClientProperty(m_fog.m_bNoReflectionFog);
+EndClientClass();
+
+BeginClientClass(CFunc_Dust, DT_Func_Dust);
+   AddClientProperty(m_Color);
+   AddClientProperty(m_SpawnRate);
+   AddClientProperty(m_SpeedMax);
+   AddClientProperty(m_flSizeMin);
+   AddClientProperty(m_flSizeMax);
+   AddClientProperty(m_DistMax);
+   AddClientProperty(m_LifetimeMin);
+   AddClientProperty(m_LifetimeMax);
+   AddClientProperty(m_DustFlags);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_FallSpeed);
+   AddClientProperty(m_Collision);
+EndClientClass();
+
+BeginClientClass(CFunc_LOD, DT_Func_LOD);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nDisappearMinDist);
+   AddClientProperty(m_nDisappearMaxDist);
+EndClientClass();
+
+BeginClientClass(CFuncAreaPortalWindow, DT_FuncAreaPortalWindow);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flFadeDist);
+   AddClientProperty(m_flFadeStartDist);
+   AddClientProperty(m_flTranslucencyLimit);
+   AddClientProperty(m_iBackgroundModelIndex);
+EndClientClass();
+
+BeginClientClass(CFuncBrush, DT_FuncBrush);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CFuncConveyor, DT_FuncConveyor);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flConveyorSpeed);
+EndClientClass();
+
+BeginClientClass(CFuncLadder, DT_FuncLadder);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_vecPlayerMountPositionTop);
+   AddClientProperty(m_vecPlayerMountPositionBottom);
+   AddClientProperty(m_vecLadderDir);
+   AddClientProperty(m_bFakeLadder);
+EndClientClass();
+
+BeginClientClass(CFuncMoveLinear, DT_FuncMoveLinear);
+   ClientBaseClass(CBaseToggle);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_fFlags);
+EndClientClass();
+
+BeginClientClass(CFuncOccluder, DT_FuncOccluder);
+   AddClientProperty(m_bActive);
+   AddClientProperty(m_nOccluderIndex);
+EndClientClass();
+
+BeginClientClass(CFuncReflectiveGlass, DT_FuncReflectiveGlass);
+   ClientBaseClass(CFuncBrush);
+EndClientClass();
+
+BeginClientClass(CFuncRotating, DT_FuncRotating);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_flSimulationTime);
+EndClientClass();
+
+BeginClientClass(CFuncSmokeVolume, DT_FuncSmokeVolume);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_Color1);
+   AddClientProperty(m_Color2);
+   AddClientProperty(m_MaterialName);
+   AddClientProperty(m_ParticleDrawWidth);
+   AddClientProperty(m_ParticleSpacingDistance);
+   AddClientProperty(m_DensityRampSpeed);
+   AddClientProperty(m_RotationSpeed);
+   AddClientProperty(m_MovementSpeed);
+   AddClientProperty(m_Density);
+   AddClientProperty(m_maxDrawDistance);
+   AddClientProperty(m_spawnflags);
+EndClientClass();
+
+BeginClientClass(CFuncTrackTrain, DT_FuncTrackTrain);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CGameRulesProxy, DT_GameRulesProxy);
+EndClientClass();
+
+BeginClientClass(CHandleTest, DT_HandleTest);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_Handle);
+   AddClientProperty(m_bSendHandle);
+EndClientClass();
+
+BeginClientClass(CInfoLadderDismount, DT_InfoLadderDismount);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CInfoOverlayAccessor, DT_InfoOverlayAccessor);
+   AddClientProperty(m_iTextureFrameIndex);
+   AddClientProperty(m_iOverlayID);
+EndClientClass();
+
+BeginClientClass(CLightGlow, DT_LightGlow);
+   AddClientProperty(m_clrRender);
+   AddClientProperty(m_nHorizontalSize);
+   AddClientProperty(m_nVerticalSize);
+   AddClientProperty(m_nMinDist);
+   AddClientProperty(m_nMaxDist);
+   AddClientProperty(m_nOuterMaxDist);
+   AddClientProperty(m_spawnflags);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(moveparent);
+   AddClientProperty(m_flGlowProxySize);
+   AddClientProperty(HDRColorScale);
+EndClientClass();
+
+BeginClientClass(CMaterialModifyControl, DT_MaterialModifyControl);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_szMaterialName);
+   AddClientProperty(m_szMaterialVar);
+   AddClientProperty(m_szMaterialVarValue);
+   AddClientProperty(m_iFrameStart);
+   AddClientProperty(m_iFrameEnd);
+   AddClientProperty(m_bWrap);
+   AddClientProperty(m_flFramerate);
+   AddClientProperty(m_bNewAnimCommandsSemaphore);
+   AddClientProperty(m_flFloatLerpStartValue);
+   AddClientProperty(m_flFloatLerpEndValue);
+   AddClientProperty(m_flFloatLerpTransitionTime);
+   AddClientProperty(m_nModifyMode);
+EndClientClass();
+
+BeginClientClass(CMovieDisplay, DT_MovieDisplay);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bEnabled);
+   AddClientProperty(m_bLooping);
+   AddClientProperty(m_szMovieFilename);
+   AddClientProperty(m_szGroupName);
+EndClientClass();
+
+BeginClientClass(CParticleFire, DT_ParticleFire);
+   AddClientProperty(m_vOrigin);
+   AddClientProperty(m_vDirection);
+EndClientClass();
+
+BeginClientClass(CParticlePerformanceMonitor, DT_ParticlePerformanceMonitor);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bDisplayPerf);
+   AddClientProperty(m_bMeasurePerf);
+EndClientClass();
+
+BeginClientClass(CParticleSystem, DT_ParticleSystem);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_flStartTime);
+   AddClientProperty(m_iEffectIndex);
+   AddClientProperty(m_bActive);
+   AddClientProperty(m_hOwnerEntity);
+   AddClientProperty(moveparent);
+   AddClientProperty(m_iParentAttachment);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_nStopType);
+   AddClientProperty(m_szSnapshotFileName);
+   AddClientProperty(m_vServerControlPoints);
+   AddClientProperty(m_iServerControlPointAssignments);
+   AddClientProperty(m_hControlPointEnts);
+   AddClientProperty(m_iControlPointParents);
+EndClientClass();
+
+BeginClientClass(CPhysBox, DT_PhysBox);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CPhysBoxMultiplayer, DT_PhysBoxMultiplayer);
+   ClientBaseClass(CPhysBox);
+   AddClientProperty(m_iPhysicsMode);
+   AddClientProperty(m_fMass);
+EndClientClass();
+
+BeginClientClass(CPhysicsProp, DT_PhysicsProp);
+   ClientBaseClass(CBreakableProp);
+   AddClientProperty(m_bAwake);
+EndClientClass();
+
+BeginClientClass(CPhysicsPropMultiplayer, DT_PhysicsPropMultiplayer);
+   ClientBaseClass(CPhysicsProp);
+   AddClientProperty(m_iPhysicsMode);
+   AddClientProperty(m_fMass);
+   AddClientProperty(m_collisionMins);
+   AddClientProperty(m_collisionMaxs);
+EndClientClass();
+
+BeginClientClass(CPhysMagnet, DT_PhysMagnet);
+   ClientBaseClass(CBaseAnimating);
+EndClientClass();
+
+BeginClientClass(CPlasma, DT_Plasma);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flScale);
+   AddClientProperty(m_flScaleTime);
+   AddClientProperty(m_nFlags);
+   AddClientProperty(m_nPlasmaModelIndex);
+   AddClientProperty(m_nPlasmaModelIndex2);
+   AddClientProperty(m_nGlowModelIndex);
+EndClientClass();
+
+BeginClientClass(CPointCamera, DT_PointCamera);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_FOV);
+   AddClientProperty(m_Resolution);
+   AddClientProperty(m_bFogEnable);
+   AddClientProperty(m_FogColor);
+   AddClientProperty(m_flFogStart);
+   AddClientProperty(m_flFogEnd);
+   AddClientProperty(m_flFogMaxDensity);
+   AddClientProperty(m_bActive);
+   AddClientProperty(m_bUseScreenAspectRatio);
+   AddClientProperty(m_bNoSky);
+   AddClientProperty(m_fBrightness);
+EndClientClass();
+
+BeginClientClass(CPointCommentaryNode, DT_PointCommentaryNode);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_bActive);
+   AddClientProperty(m_iszCommentaryFile);
+   AddClientProperty(m_iszCommentaryFileNoHDR);
+   AddClientProperty(m_flStartTime);
+   AddClientProperty(m_iszSpeakers);
+   AddClientProperty(m_iNodeNumber);
+   AddClientProperty(m_iNodeNumberMax);
+   AddClientProperty(m_hViewPosition);
+EndClientClass();
+
+BeginClientClass(CPoseController, DT_PoseController);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_hProps);
+   AddClientProperty(m_chPoseIndex);
+   AddClientProperty(m_bPoseValueParity);
+   AddClientProperty(m_fPoseValue);
+   AddClientProperty(m_fInterpolationTime);
+   AddClientProperty(m_bInterpolationWrap);
+   AddClientProperty(m_fCycleFrequency);
+   AddClientProperty(m_nFModType);
+   AddClientProperty(m_fFModTimeOffset);
+   AddClientProperty(m_fFModRate);
+   AddClientProperty(m_fFModAmplitude);
+EndClientClass();
+
+BeginClientClass(CPostProcessController, DT_PostProcessController);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flPostProcessParameters);
+   AddClientProperty(m_bMaster);
+EndClientClass();
+
+BeginClientClass(CPrecipitation, DT_Precipitation);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nPrecipType);
+EndClientClass();
+
+BeginClientClass(CPrecipitationBlocker, DT_PrecipitationBlocker);
+   ClientBaseClass(CBaseEntity);
+EndClientClass();
+
+BeginClientClass(CProp_Hallucination, DT_Prop_Hallucination);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_bEnabled);
+   AddClientProperty(m_fVisibleTime);
+   AddClientProperty(m_fRechargeTime);
+EndClientClass();
+
+BeginClientClass(CPropDoorRotating, DT_PropDoorRotating);
+   ClientBaseClass(CBasePropDoor);
+EndClientClass();
+
+BeginClientClass(CPropVehicleDriveable, DT_PropVehicleDriveable);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_hPlayer);
+   AddClientProperty(m_nSpeed);
+   AddClientProperty(m_nRPM);
+   AddClientProperty(m_flThrottle);
+   AddClientProperty(m_nBoostTimeLeft);
+   AddClientProperty(m_nHasBoost);
+   AddClientProperty(m_nScannerDisabledWeapons);
+   AddClientProperty(m_nScannerDisabledVehicle);
+   AddClientProperty(m_bEnterAnimOn);
+   AddClientProperty(m_bExitAnimOn);
+   AddClientProperty(m_bUnableToFire);
+   AddClientProperty(m_vecEyeExitEndpoint);
+   AddClientProperty(m_bHasGun);
+   AddClientProperty(m_vecGunCrosshair);
+EndClientClass();
+
+BeginClientClass(CRagdollManager, DT_RagdollManager);
+   AddClientProperty(m_iCurrentMaxRagdollCount);
+EndClientClass();
+
+BeginClientClass(CRagdollProp, DT_Ragdoll);
+   ClientBaseClass(CBaseAnimating);
+   AddClientProperty(m_ragAngles);
+   AddClientProperty(m_ragPos);
+   AddClientProperty(m_hUnragdoll);
+   AddClientProperty(m_flBlendWeight);
+   AddClientProperty(m_nOverlaySequence);
+EndClientClass();
+
+BeginClientClass(CRagdollPropAttached, DT_Ragdoll_Attached);
+   ClientBaseClass(CRagdollProp);
+   AddClientProperty(m_boneIndexAttached);
+   AddClientProperty(m_ragdollAttachedObjectIndex);
+   AddClientProperty(m_attachmentPointBoneSpace);
+   AddClientProperty(m_attachmentPointRagdollSpace);
+EndClientClass();
+
+BeginClientClass(CRopeKeyframe, DT_RopeKeyframe);
+   AddClientProperty(m_hStartPoint);
+   AddClientProperty(m_hEndPoint);
+   AddClientProperty(m_iStartAttachment);
+   AddClientProperty(m_iEndAttachment);
+   AddClientProperty(m_Slack);
+   AddClientProperty(m_RopeLength);
+   AddClientProperty(m_fLockedPoints);
+   AddClientProperty(m_nChangeCount);
+   AddClientProperty(m_RopeFlags);
+   AddClientProperty(m_nSegments);
+   AddClientProperty(m_bConstrainBetweenEndpoints);
+   AddClientProperty(m_iRopeMaterialModelIndex);
+   AddClientProperty(m_Subdiv);
+   AddClientProperty(m_TextureScale);
+   AddClientProperty(m_Width);
+   AddClientProperty(m_flScrollSpeed);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(moveparent);
+   AddClientProperty(m_iParentAttachment);
+   AddClientProperty(m_nMinCPULevel);
+   AddClientProperty(m_nMaxCPULevel);
+   AddClientProperty(m_nMinGPULevel);
+   AddClientProperty(m_nMaxGPULevel);
+EndClientClass();
+
+BeginClientClass(CSceneEntity, DT_SceneEntity);
+   AddClientProperty(m_nSceneStringIndex);
+   AddClientProperty(m_bIsPlayingBack);
+   AddClientProperty(m_bPaused);
+   AddClientProperty(m_bMultiplayer);
+   AddClientProperty(m_flForceClientTime);
+   AddClientProperty(m_hActorList);
+EndClientClass();
+
+BeginClientClass(CShadowControl, DT_ShadowControl);
+   AddClientProperty(m_shadowDirection);
+   AddClientProperty(m_shadowColor);
+   AddClientProperty(m_flShadowMaxDist);
+   AddClientProperty(m_bDisableShadows);
+   AddClientProperty(m_bEnableLocalLightShadows);
+EndClientClass();
+
+BeginClientClass(CSlideshowDisplay, DT_SlideshowDisplay);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_bEnabled);
+   AddClientProperty(m_szDisplayText);
+   AddClientProperty(m_szSlideshowDirectory);
+   AddClientProperty(m_chCurrentSlideLists);
+   AddClientProperty(m_fMinSlideTime);
+   AddClientProperty(m_fMaxSlideTime);
+   AddClientProperty(m_iCycleType);
+   AddClientProperty(m_bNoListRepeats);
+EndClientClass();
+
+BeginClientClass(CSmokeStack, DT_SmokeStack);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_SpreadSpeed);
+   AddClientProperty(m_Speed);
+   AddClientProperty(m_StartSize);
+   AddClientProperty(m_EndSize);
+   AddClientProperty(m_Rate);
+   AddClientProperty(m_JetLength);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_flBaseSpread);
+   AddClientProperty(m_flRollSpeed);
+   AddClientProperty(m_DirLight.m_vPos);
+   AddClientProperty(m_DirLight.m_vColor);
+   AddClientProperty(m_DirLight.m_flIntensity);
+   AddClientProperty(m_AmbientLight.m_vPos);
+   AddClientProperty(m_AmbientLight.m_vColor);
+   AddClientProperty(m_AmbientLight.m_flIntensity);
+   AddClientProperty(m_vWind);
+   AddClientProperty(m_flTwist);
+   AddClientProperty(m_iMaterialModel);
+EndClientClass();
+
+BeginClientClass(CSpatialEntity, DT_SpatialEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_MinFalloff);
+   AddClientProperty(m_MaxFalloff);
+   AddClientProperty(m_flCurWeight);
+   AddClientProperty(m_bEnabled);
+EndClientClass();
+
+BeginClientClass(CSpotlightEnd, DT_SpotlightEnd);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flLightScale);
+   AddClientProperty(m_Radius);
+EndClientClass();
+
+BeginClientClass(CSprite, DT_Sprite);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_hAttachedToEntity);
+   AddClientProperty(m_nAttachment);
+   AddClientProperty(m_flScaleTime);
+   AddClientProperty(m_flSpriteScale);
+   AddClientProperty(m_flGlowProxySize);
+   AddClientProperty(m_flHDRColorScale);
+   AddClientProperty(m_flSpriteFramerate);
+   AddClientProperty(m_flFrame);
+   AddClientProperty(m_flBrightnessTime);
+   AddClientProperty(m_nBrightness);
+   AddClientProperty(m_bWorldSpaceScale);
+EndClientClass();
+
+BeginClientClass(CSpriteOriented, DT_SpriteOriented);
+   ClientBaseClass(CSprite);
+EndClientClass();
+
+BeginClientClass(CSpriteTrail, DT_SpriteTrail);
+   ClientBaseClass(CSprite);
+   AddClientProperty(m_flLifeTime);
+   AddClientProperty(m_flStartWidth);
+   AddClientProperty(m_flEndWidth);
+   AddClientProperty(m_flStartWidthVariance);
+   AddClientProperty(m_flTextureRes);
+   AddClientProperty(m_flMinFadeLength);
+   AddClientProperty(m_vecSkyboxOrigin);
+   AddClientProperty(m_flSkyboxScale);
+EndClientClass();
+
+BeginClientClass(CStatueProp, DT_StatueProp);
+   ClientBaseClass(CPhysicsProp);
+   AddClientProperty(m_hInitBaseAnimating);
+   AddClientProperty(m_bShatter);
+   AddClientProperty(m_nShatterFlags);
+   AddClientProperty(m_vShatterPosition);
+   AddClientProperty(m_vShatterForce);
+EndClientClass();
+
+BeginClientClass(CSteamJet, DT_SteamJet);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_SpreadSpeed);
+   AddClientProperty(m_Speed);
+   AddClientProperty(m_StartSize);
+   AddClientProperty(m_EndSize);
+   AddClientProperty(m_Rate);
+   AddClientProperty(m_JetLength);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_bFaceLeft);
+   AddClientProperty(m_nType);
+   AddClientProperty(m_spawnflags);
+   AddClientProperty(m_flRollSpeed);
+EndClientClass();
+
+BeginClientClass(CSun, DT_Sun);
+   AddClientProperty(m_clrRender);
+   AddClientProperty(m_clrOverlay);
+   AddClientProperty(m_vDirection);
+   AddClientProperty(m_bOn);
+   AddClientProperty(m_nSize);
+   AddClientProperty(m_nOverlaySize);
+   AddClientProperty(m_nMaterial);
+   AddClientProperty(m_nOverlayMaterial);
+   AddClientProperty(HDRColorScale);
+EndClientClass();
+
+BeginClientClass(CSunlightShadowControl, DT_SunlightShadowControl);
+   AddClientProperty(m_shadowDirection);
+   AddClientProperty(m_bEnabled);
+   AddClientProperty(m_TextureName);
+   AddClientProperty(m_LightColor);
+   AddClientProperty(m_flColorTransitionTime);
+   AddClientProperty(m_flSunDistance);
+   AddClientProperty(m_flFOV);
+   AddClientProperty(m_flNearZ);
+   AddClientProperty(m_flNorthOffset);
+   AddClientProperty(m_bEnableShadows);
+EndClientClass();
+
+BeginClientClass(CTeam, DT_Team);
+   AddClientProperty(m_iTeamNum);
+   AddClientProperty(m_iScore);
+   AddClientProperty(m_iRoundsWon);
+   AddClientProperty(m_szTeamname);
+   AddClientProperty(player_array);
+EndClientClass();
+
+BeginClientStruct(DT_ShowcaseData);
+   AddClientProperty(m_hRootEntity);
+   AddClientProperty(m_Slots);
+EndClientStruct();
+
+BeginClientStruct(DT_ShowcaseSlot);
+   AddClientProperty(nType);
+   AddClientProperty(szName);
+   AddClientProperty(vecLocalOrigin);
+   AddClientProperty(angLocalAngles);
+   AddClientProperty(hEntity);
+   AddClientProperty(ulItemID);
+   AddClientProperty(bIsOnlySlotOfThisType);
+EndClientStruct();
+
+BeginClientClass(CTeamShowcaseEditorManager, DT_TeamShowcaseEditorManager);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_nEditorMode);
+   AddClientProperty(m_nCurEditingSlot);
+   AddClientProperty(m_Data);
+EndClientClass();
+
+BeginClientClass(CTeamShowcasePlayer, DT_TeamShowcasePlayer);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_hPlayerEntity);
+   AddClientProperty(m_szCameraAnim);
+   AddClientProperty(m_flTransitionTime);
+EndClientClass();
+
+BeginClientClass(CTEArmorRicochet, DT_TEArmorRicochet);
+   ClientBaseClass(CTEMetalSparks);
+EndClientClass();
+
+BeginClientClass(CTEBaseBeam, DT_BaseBeam);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nHaloIndex);
+   AddClientProperty(m_nStartFrame);
+   AddClientProperty(m_nFrameRate);
+   AddClientProperty(m_fLife);
+   AddClientProperty(m_fWidth);
+   AddClientProperty(m_fEndWidth);
+   AddClientProperty(m_nFadeLength);
+   AddClientProperty(m_fAmplitude);
+   AddClientProperty(m_nSpeed);
+   AddClientProperty(r);
+   AddClientProperty(g);
+   AddClientProperty(b);
+   AddClientProperty(a);
+   AddClientProperty(m_nFlags);
+EndClientClass();
+
+BeginClientClass(CTEBeamEntPoint, DT_TEBeamEntPoint);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_nStartEntity);
+   AddClientProperty(m_nEndEntity);
+   AddClientProperty(m_vecStartPoint);
+   AddClientProperty(m_vecEndPoint);
+EndClientClass();
+
+BeginClientClass(CTEBeamEnts, DT_TEBeamEnts);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_nStartEntity);
+   AddClientProperty(m_nEndEntity);
+EndClientClass();
+
+BeginClientClass(CTEBeamFollow, DT_TEBeamFollow);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_iEntIndex);
+EndClientClass();
+
+BeginClientClass(CTEBeamLaser, DT_TEBeamLaser);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_nStartEntity);
+   AddClientProperty(m_nEndEntity);
+EndClientClass();
+
+BeginClientClass(CTEBeamPoints, DT_TEBeamPoints);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_vecStartPoint);
+   AddClientProperty(m_vecEndPoint);
+EndClientClass();
+
+BeginClientClass(CTEBeamRing, DT_TEBeamRing);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_nStartEntity);
+   AddClientProperty(m_nEndEntity);
+EndClientClass();
+
+BeginClientClass(CTEBeamRingPoint, DT_TEBeamRingPoint);
+   ClientBaseClass(CTEBaseBeam);
+   AddClientProperty(m_vecCenter);
+   AddClientProperty(m_flStartRadius);
+   AddClientProperty(m_flEndRadius);
+EndClientClass();
+
+BeginClientClass(CTEBeamSpline, DT_TEBeamSpline);
+   AddClientProperty(m_nPoints);
+   AddClientProperty(m_vecPoints);
+EndClientClass();
+
+BeginClientClass(CTEBloodSprite, DT_TEBloodSprite);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecDirection);
+   AddClientProperty(r);
+   AddClientProperty(g);
+   AddClientProperty(b);
+   AddClientProperty(a);
+   AddClientProperty(m_nSprayModel);
+   AddClientProperty(m_nDropModel);
+   AddClientProperty(m_nSize);
+EndClientClass();
+
+BeginClientClass(CTEBloodStream, DT_TEBloodStream);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_vecDirection);
+   AddClientProperty(r);
+   AddClientProperty(g);
+   AddClientProperty(b);
+   AddClientProperty(a);
+   AddClientProperty(m_nAmount);
+EndClientClass();
+
+BeginClientClass(CTEBreakModel, DT_TEBreakModel);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_vecSize);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nRandomization);
+   AddClientProperty(m_nCount);
+   AddClientProperty(m_fTime);
+   AddClientProperty(m_nFlags);
+EndClientClass();
+
+BeginClientClass(CTEBSPDecal, DT_TEBSPDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nEntity);
+   AddClientProperty(m_nIndex);
+EndClientClass();
+
+BeginClientClass(CTEBubbles, DT_TEBubbles);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecMins);
+   AddClientProperty(m_vecMaxs);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fHeight);
+   AddClientProperty(m_nCount);
+   AddClientProperty(m_fSpeed);
+EndClientClass();
+
+BeginClientClass(CTEBubbleTrail, DT_TEBubbleTrail);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecMins);
+   AddClientProperty(m_vecMaxs);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_flWaterZ);
+   AddClientProperty(m_nCount);
+   AddClientProperty(m_fSpeed);
+EndClientClass();
+
+BeginClientClass(CTEClientProjectile, DT_TEClientProjectile);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nLifeTime);
+   AddClientProperty(m_hOwner);
+EndClientClass();
+
+BeginClientClass(CTEDecal, DT_TEDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecStart);
+   AddClientProperty(m_nEntity);
+   AddClientProperty(m_nHitbox);
+   AddClientProperty(m_nIndex);
+EndClientClass();
+
+BeginClientClass(CTEDotaBloodImpact, DT_TEDotaBloodImpact);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_hEntity);
+   AddClientProperty(m_flScale);
+   AddClientProperty(m_flXNormal);
+   AddClientProperty(m_flYNormal);
+EndClientClass();
+
+BeginClientClass(CTEDOTAProjectile, DT_TEDOTAProjectile);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_iMoveSpeed);
+   AddClientProperty(m_hSource);
+   AddClientProperty(m_hTarget);
+   AddClientProperty(m_iSourceAttachment);
+   AddClientProperty(m_iParticleSystem);
+   AddClientProperty(m_bDodgeable);
+   AddClientProperty(m_bIsAttack);
+   AddClientProperty(m_bIsEvaded);
+   AddClientProperty(m_flExpireTime);
+EndClientClass();
+
+BeginClientClass(CTEDOTAProjectileLoc, DT_TEDOTAProjectileLoc);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_iMoveSpeed);
+   AddClientProperty(m_vSourceLoc);
+   AddClientProperty(m_vTargetLoc);
+   AddClientProperty(m_hTarget);
+   AddClientProperty(m_iParticleSystem);
+   AddClientProperty(m_bDodgeable);
+   AddClientProperty(m_bIsAttack);
+   AddClientProperty(m_bIsEvaded);
+   AddClientProperty(m_flExpireTime);
+EndClientClass();
+
+BeginClientClass(CTEDust, DT_TEDust);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_flSize);
+   AddClientProperty(m_flSpeed);
+   AddClientProperty(m_vecDirection);
+EndClientClass();
+
+BeginClientClass(CTEDynamicLight, DT_TEDynamicLight);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(r);
+   AddClientProperty(g);
+   AddClientProperty(b);
+   AddClientProperty(exponent);
+   AddClientProperty(m_fRadius);
+   AddClientProperty(m_fTime);
+   AddClientProperty(m_fDecay);
+EndClientClass();
+
+BeginClientStruct(DT_EffectData);
+   AddClientProperty(m_vOrigin.x);
+   AddClientProperty(m_vOrigin.y);
+   AddClientProperty(m_vOrigin.z);
+   AddClientProperty(m_vStart.x);
+   AddClientProperty(m_vStart.y);
+   AddClientProperty(m_vStart.z);
+   AddClientProperty(m_vAngles);
+   AddClientProperty(m_vNormal);
+   AddClientProperty(m_fFlags);
+   AddClientProperty(m_flMagnitude);
+   AddClientProperty(m_flScale);
+   AddClientProperty(m_nAttachmentIndex);
+   AddClientProperty(m_nSurfaceProp);
+   AddClientProperty(m_iEffectName);
+   AddClientProperty(m_nMaterial);
+   AddClientProperty(m_nDamageType);
+   AddClientProperty(m_nHitBox);
+   AddClientProperty(entindex);
+   AddClientProperty(m_nOtherEntIndex);
+   AddClientProperty(m_nColor);
+   AddClientProperty(m_flRadius);
+EndClientStruct();
+
+BeginClientClass(CTEEffectDispatch, DT_TEEffectDispatch);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_EffectData);
+EndClientClass();
+
+BeginClientClass(CTEEnergySplash, DT_TEEnergySplash);
+   AddClientProperty(m_vecPos);
+   AddClientProperty(m_vecDir);
+   AddClientProperty(m_bExplosive);
+EndClientClass();
+
+BeginClientClass(CTEExplosion, DT_TEExplosion);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fScale);
+   AddClientProperty(m_nFrameRate);
+   AddClientProperty(m_nFlags);
+   AddClientProperty(m_vecNormal);
+   AddClientProperty(m_chMaterialType);
+   AddClientProperty(m_nRadius);
+   AddClientProperty(m_nMagnitude);
+EndClientClass();
+
+BeginClientClass(CTEFizz, DT_TEFizz);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_nEntity);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nDensity);
+   AddClientProperty(m_nCurrent);
+EndClientClass();
+
+BeginClientClass(CTEFootprintDecal, DT_TEFootprintDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecDirection);
+   AddClientProperty(m_nEntity);
+   AddClientProperty(m_nIndex);
+   AddClientProperty(m_chMaterialType);
+EndClientClass();
+
+BeginClientClass(CTEFoundryHelpers, DT_TEFoundryHelpers);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_iEntity);
+EndClientClass();
+
+BeginClientClass(CTEGaussExplosion, DT_TEGaussExplosion);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_nType);
+   AddClientProperty(m_vecDirection);
+EndClientClass();
+
+BeginClientClass(CTEGlowSprite, DT_TEGlowSprite);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fScale);
+   AddClientProperty(m_fLife);
+   AddClientProperty(m_nBrightness);
+EndClientClass();
+
+BeginClientClass(CTEImpact, DT_TEImpact);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecNormal);
+   AddClientProperty(m_iType);
+EndClientClass();
+
+BeginClientClass(CTEKillPlayerAttachments, DT_TEKillPlayerAttachments);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_nPlayer);
+EndClientClass();
+
+BeginClientClass(CTELargeFunnel, DT_TELargeFunnel);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nReversed);
+EndClientClass();
+
+BeginClientClass(CTEMetalSparks, DT_TEMetalSparks);
+   AddClientProperty(m_vecPos);
+   AddClientProperty(m_vecDir);
+EndClientClass();
+
+BeginClientClass(CTEMuzzleFlash, DT_TEMuzzleFlash);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecAngles);
+   AddClientProperty(m_flScale);
+   AddClientProperty(m_nType);
+EndClientClass();
+
+BeginClientClass(CTEParticleSystem, DT_TEParticleSystem);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+EndClientClass();
+
+BeginClientClass(CTEPhysicsProp, DT_TEPhysicsProp);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_vecVelocity);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_nSkin);
+   AddClientProperty(m_nFlags);
+   AddClientProperty(m_nEffects);
+EndClientClass();
+
+BeginClientClass(CTEPlayerDecal, DT_TEPlayerDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nEntity);
+   AddClientProperty(m_nPlayer);
+EndClientClass();
+
+BeginClientClass(CTEProjectedDecal, DT_TEProjectedDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(m_flDistance);
+   AddClientProperty(m_nIndex);
+EndClientClass();
+
+BeginClientClass(CTEShatterSurface, DT_TEShatterSurface);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecAngles);
+   AddClientProperty(m_vecForce);
+   AddClientProperty(m_vecForcePos);
+   AddClientProperty(m_flWidth);
+   AddClientProperty(m_flHeight);
+   AddClientProperty(m_flShardSize);
+   AddClientProperty(m_nSurfaceType);
+   AddClientProperty(m_uchFrontColor);
+   AddClientProperty(m_uchBackColor);
+EndClientClass();
+
+BeginClientClass(CTEShowLine, DT_TEShowLine);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_vecEnd);
+EndClientClass();
+
+BeginClientClass(CTesla, DT_Tesla);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_SoundName);
+   AddClientProperty(m_iszSpriteName);
+EndClientClass();
+
+BeginClientClass(CTESmoke, DT_TESmoke);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fScale);
+   AddClientProperty(m_nFrameRate);
+EndClientClass();
+
+BeginClientClass(CTESparks, DT_TESparks);
+   ClientBaseClass(CTEParticleSystem);
+   AddClientProperty(m_nMagnitude);
+   AddClientProperty(m_nTrailLength);
+   AddClientProperty(m_vecDir);
+EndClientClass();
+
+BeginClientClass(CTESprite, DT_TESprite);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fScale);
+   AddClientProperty(m_nBrightness);
+EndClientClass();
+
+BeginClientClass(CTESpriteSpray, DT_TESpriteSpray);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_vecDirection);
+   AddClientProperty(m_nModelIndex);
+   AddClientProperty(m_fNoise);
+   AddClientProperty(m_nSpeed);
+   AddClientProperty(m_nCount);
+EndClientClass();
+
+BeginClientStruct(DT_ProxyToggle_ProxiedData);
+   AddClientProperty(m_WithProxy);
+EndClientStruct();
+
+BeginClientClass(CTest_ProxyToggle_Networkable, DT_ProxyToggle);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(blah);
+EndClientClass();
+
+BeginClientClass(CTestTraceline, DT_TestTraceline);
+   AddClientProperty(m_clrRender);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+   AddClientProperty(moveparent);
+EndClientClass();
+
+BeginClientClass(CTEUnitAnimation, DT_TEUnitAnimation);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_flCastPoint);
+   AddClientProperty(m_hEntity);
+   AddClientProperty(m_flPlaybackRate);
+   AddClientProperty(m_iSequenceIndex);
+   AddClientProperty(m_iType);
+   AddClientProperty(m_Activity);
+EndClientClass();
+
+BeginClientClass(CTEUnitAnimationEnd, DT_TEUnitAnimationEnd);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_hEntity);
+   AddClientProperty(m_bSnap);
+EndClientClass();
+
+BeginClientClass(CTEWorldDecal, DT_TEWorldDecal);
+   ClientBaseClass(CBaseTempEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_nIndex);
+EndClientClass();
+
+BeginClientClass(CTFWearableItem, DT_TFWearableItem);
+   ClientBaseClass(CEconWearable);
+EndClientClass();
+
+BeginClientClass(CTriggerCamera, DT_TriggerCamera);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_vecOrigin);
+   AddClientProperty(m_angRotation);
+EndClientClass();
+
+BeginClientClass(CTriggerPlayerMovement, DT_TriggerPlayerMovement);
+   ClientBaseClass(CBaseTrigger);
+EndClientClass();
+
+BeginClientClass(CVGuiScreen, DT_VGuiScreen);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flWidth);
+   AddClientProperty(m_flHeight);
+   AddClientProperty(m_nAttachmentIndex);
+   AddClientProperty(m_nPanelName);
+   AddClientProperty(m_fScreenFlags);
+   AddClientProperty(m_nOverlayMaterial);
+   AddClientProperty(m_hPlayerOwner);
+EndClientClass();
+
+BeginClientClass(CWaterBullet, DT_WaterBullet);
+   ClientBaseClass(CBaseAnimating);
+EndClientClass();
+
+BeginClientClass(CWaterLODControl, DT_WaterLODControl);
+   AddClientProperty(m_flCheapWaterStartDistance);
+   AddClientProperty(m_flCheapWaterEndDistance);
+EndClientClass();
+
+BeginClientClass(CWorld, DT_WORLD);
+   ClientBaseClass(CBaseEntity);
+   AddClientProperty(m_flWaveHeight);
+   AddClientProperty(m_WorldMins);
+   AddClientProperty(m_WorldMaxs);
+   AddClientProperty(m_bStartDark);
+   AddClientProperty(m_flMaxOccludeeArea);
+   AddClientProperty(m_flMinOccluderArea);
+   AddClientProperty(m_flMaxPropScreenSpaceWidth);
+   AddClientProperty(m_flMinPropScreenSpaceWidth);
+   AddClientProperty(m_iszDetailSpriteMaterial);
+   AddClientProperty(m_bColdWorld);
+EndClientClass();
+
+BeginClientClass(DustTrail, DT_DustTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_SpawnRate);
+   AddClientProperty(m_Color);
+   AddClientProperty(m_ParticleLifetime);
+   AddClientProperty(m_StopEmitTime);
+   AddClientProperty(m_MinSpeed);
+   AddClientProperty(m_MaxSpeed);
+   AddClientProperty(m_MinDirectedSpeed);
+   AddClientProperty(m_MaxDirectedSpeed);
+   AddClientProperty(m_StartSize);
+   AddClientProperty(m_EndSize);
+   AddClientProperty(m_SpawnRadius);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_Opacity);
+EndClientClass();
+
+BeginClientClass(MovieExplosion, DT_MovieExplosion);
+   ClientBaseClass(CBaseParticleEntity);
+EndClientClass();
+
+BeginClientClass(NextBotCombatCharacter, DT_NextBot);
+   ClientBaseClass(CBaseCombatCharacter);
+EndClientClass();
+
+BeginClientClass(ParticleSmokeGrenade, DT_ParticleSmokeGrenade);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_flSpawnTime);
+   AddClientProperty(m_FadeStartTime);
+   AddClientProperty(m_FadeEndTime);
+   AddClientProperty(m_CurrentStage);
+EndClientClass();
+
+BeginClientClass(RocketTrail, DT_RocketTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_SpawnRate);
+   AddClientProperty(m_StartColor);
+   AddClientProperty(m_EndColor);
+   AddClientProperty(m_ParticleLifetime);
+   AddClientProperty(m_StopEmitTime);
+   AddClientProperty(m_MinSpeed);
+   AddClientProperty(m_MaxSpeed);
+   AddClientProperty(m_StartSize);
+   AddClientProperty(m_EndSize);
+   AddClientProperty(m_SpawnRadius);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_nAttachment);
+   AddClientProperty(m_Opacity);
+   AddClientProperty(m_bDamaged);
+   AddClientProperty(m_flFlareScale);
+EndClientClass();
+
+BeginClientClass(SmokeTrail, DT_SmokeTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_SpawnRate);
+   AddClientProperty(m_StartColor);
+   AddClientProperty(m_EndColor);
+   AddClientProperty(m_ParticleLifetime);
+   AddClientProperty(m_StopEmitTime);
+   AddClientProperty(m_MinSpeed);
+   AddClientProperty(m_MaxSpeed);
+   AddClientProperty(m_MinDirectedSpeed);
+   AddClientProperty(m_MaxDirectedSpeed);
+   AddClientProperty(m_StartSize);
+   AddClientProperty(m_EndSize);
+   AddClientProperty(m_SpawnRadius);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_nAttachment);
+   AddClientProperty(m_Opacity);
+EndClientClass();
+
+BeginClientClass(SporeExplosion, DT_SporeExplosion);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_flSpawnRate);
+   AddClientProperty(m_flParticleLifetime);
+   AddClientProperty(m_flStartSize);
+   AddClientProperty(m_flEndSize);
+   AddClientProperty(m_flSpawnRadius);
+   AddClientProperty(m_bEmit);
+   AddClientProperty(m_bDontRemove);
+EndClientClass();
+
+BeginClientClass(SporeTrail, DT_SporeTrail);
+   ClientBaseClass(CBaseParticleEntity);
+   AddClientProperty(m_flSpawnRate);
+   AddClientProperty(m_vecEndColor);
+   AddClientProperty(m_flParticleLifetime);
+   AddClientProperty(m_flStartSize);
+   AddClientProperty(m_flEndSize);
+   AddClientProperty(m_flSpawnRadius);
+   AddClientProperty(m_bEmit);
+EndClientClass();
+
+std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = {
+   { "DT_AI_BaseNPC", ClientClass<CAI_BaseNPC>::InstancePtr },
+   { "DT_BaseAnimating", ClientClass<CBaseAnimating>::InstancePtr },
+   { "DT_BaseAnimatingOverlay", ClientClass<CBaseAnimatingOverlay>::InstancePtr },
+   { "DT_BaseAttributableItem", ClientClass<CBaseAttributableItem>::InstancePtr },
+   { "DT_BaseButton", ClientClass<CBaseButton>::InstancePtr },
+   { "DT_BaseCombatCharacter", ClientClass<CBaseCombatCharacter>::InstancePtr },
+   { "DT_BaseCombatWeapon", ClientClass<CBaseCombatWeapon>::InstancePtr },
+   { "DT_BaseDoor", ClientClass<CBaseDoor>::InstancePtr },
+   { "DT_BaseEntity", ClientClass<CBaseEntity>::InstancePtr },
+   { "DT_BaseFlex", ClientClass<CBaseFlex>::InstancePtr },
+   { "DT_BaseGrenade", ClientClass<CBaseGrenade>::InstancePtr },
+   { "DT_BaseParticleEntity", ClientClass<CBaseParticleEntity>::InstancePtr },
+   { "DT_BasePlayer", ClientClass<CBasePlayer>::InstancePtr },
+   { "DT_BasePropDoor", ClientClass<CBasePropDoor>::InstancePtr },
+   { "DT_BaseTempEntity", ClientClass<CBaseTempEntity>::InstancePtr },
+   { "DT_BaseToggle", ClientClass<CBaseToggle>::InstancePtr },
+   { "DT_BaseTrigger", ClientClass<CBaseTrigger>::InstancePtr },
+   { "DT_BaseViewModel", ClientClass<CBaseViewModel>::InstancePtr },
+   { "DT_Beam", ClientClass<CBeam>::InstancePtr },
+   { "DT_BeamSpotlight", ClientClass<CBeamSpotlight>::InstancePtr },
+   { "DT_BoneFollower", ClientClass<CBoneFollower>::InstancePtr },
+   { "DT_BreakableProp", ClientClass<CBreakableProp>::InstancePtr },
+   { "DT_BreakableSurface", ClientClass<CBreakableSurface>::InstancePtr },
+   { "DT_ColorCorrection", ClientClass<CColorCorrection>::InstancePtr },
+   { "DT_ColorCorrectionVolume", ClientClass<CColorCorrectionVolume>::InstancePtr },
+   { "DT_DOTA_Ability_AbyssalUnderlord_DarkRift", ClientClass<CDOTA_Ability_AbyssalUnderlord_DarkRift>::InstancePtr },
+   { "DT_DOTA_Ability_AbyssalUnderlord_Firestorm", ClientClass<CDOTA_Ability_AbyssalUnderlord_Firestorm>::InstancePtr },
+   { "DT_DOTA_Ability_AbyssalUnderlord_PitOfMalice", ClientClass<CDOTA_Ability_AbyssalUnderlord_PitOfMalice>::InstancePtr },
+   { "DT_DOTA_Ability_Alchemist_AcidSpray", ClientClass<CDOTA_Ability_Alchemist_AcidSpray>::InstancePtr },
+   { "DT_DOTA_Ability_AncientApparition_ChillingTouch", ClientClass<CDOTA_Ability_AncientApparition_ChillingTouch>::InstancePtr },
+   { "DT_DOTA_Ability_AncientApparition_ColdFeet", ClientClass<CDOTA_Ability_AncientApparition_ColdFeet>::InstancePtr },
+   { "DT_DOTA_Ability_AncientApparition_RocketFlare", ClientClass<CDOTA_Ability_AncientApparition_IceBlast>::InstancePtr },
+   { "DT_DOTA_Ability_AncientApparition_IceVortex", ClientClass<CDOTA_Ability_AncientApparition_IceVortex>::InstancePtr },
+   { "DT_DOTA_Ability_AntiMage_Blink", ClientClass<CDOTA_Ability_AntiMage_Blink>::InstancePtr },
+   { "DT_DOTA_Ability_AntiMage_ManaVoid", ClientClass<CDOTA_Ability_AntiMage_ManaVoid>::InstancePtr },
+   { "DT_DOTA_Ability_AttributeBonus", ClientClass<CDOTA_Ability_AttributeBonus>::InstancePtr },
+   { "DT_DOTA_Ability_Axe_BerserkersCall", ClientClass<CDOTA_Ability_Axe_BerserkersCall>::InstancePtr },
+   { "DT_DOTA_Ability_Axe_CounterHelix", ClientClass<CDOTA_Ability_Axe_CounterHelix>::InstancePtr },
+   { "DT_DOTA_Ability_Axe_CullingBlade", ClientClass<CDOTA_Ability_Axe_CullingBlade>::InstancePtr },
+   { "DT_DOTA_Ability_Bane_FiendsGrip", ClientClass<CDOTA_Ability_Bane_FiendsGrip>::InstancePtr },
+   { "DT_DOTA_Ability_Batrider_Flamebreak", ClientClass<CDOTA_Ability_Batrider_Flamebreak>::InstancePtr },
+   { "DT_DOTA_Ability_Batrider_StickyNapalm", ClientClass<CDOTA_Ability_Batrider_StickyNapalm>::InstancePtr },
+   { "DT_DOTA_Ability_Beastmaster_PrimalRoar", ClientClass<CDOTA_Ability_Beastmaster_PrimalRoar>::InstancePtr },
+   { "DT_DOTA_Ability_Bloodseeker_Bloodbath", ClientClass<CDOTA_Ability_Bloodseeker_Bloodbath>::InstancePtr },
+   { "DT_DOTA_Ability_BountyHunter_ShurikenToss", ClientClass<CDOTA_Ability_BountyHunter_ShurikenToss>::InstancePtr },
+   { "DT_DOTA_Ability_Brewmaster_DispelMagic", ClientClass<CDOTA_Ability_Brewmaster_DispelMagic>::InstancePtr },
+   { "DT_DOTA_Ability_Brewmaster_DrunkenBrawler", ClientClass<CDOTA_Ability_Brewmaster_DrunkenBrawler>::InstancePtr },
+   { "DT_DOTA_Ability_Brewmaster_DrunkenHaze", ClientClass<CDOTA_Ability_Brewmaster_DrunkenHaze>::InstancePtr },
+   { "DT_DOTA_Ability_Brewmaster_PrimalSplit", ClientClass<CDOTA_Ability_Brewmaster_PrimalSplit>::InstancePtr },
+   { "DT_DOTA_Ability_Bristleback_QuillSpray", ClientClass<CDOTA_Ability_Bristleback_QuillSpray>::InstancePtr },
+   { "DT_DOTA_Ability_Broodmother_SpinWeb", ClientClass<CDOTA_Ability_Broodmother_SpinWeb>::InstancePtr },
+   { "DT_DOTA_Ability_Centaur_Stampede", ClientClass<CDOTA_Ability_Centaur_Stampede>::InstancePtr },
+   { "DT_DOTA_Ability_ChaosKnight_Phantasm", ClientClass<CDOTA_Ability_ChaosKnight_Phantasm>::InstancePtr },
+   { "DT_DOTA_Ability_Chen_HandOfGod", ClientClass<CDOTA_Ability_Chen_HandOfGod>::InstancePtr },
+   { "DT_DOTA_Ability_Chen_HolyPersuasion", ClientClass<CDOTA_Ability_Chen_HolyPersuasion>::InstancePtr },
+   { "DT_DOTA_Ability_Chen_TestOfFaithTeleport", ClientClass<CDOTA_Ability_Chen_TestOfFaithTeleport>::InstancePtr },
+   { "DT_DOTA_Ability_Courier_TakeStashItems", ClientClass<CDOTA_Ability_Courier_TakeStashItems>::InstancePtr },
+   { "DT_DOTA_Ability_Courier_TransferItems", ClientClass<CDOTA_Ability_Courier_TransferItems>::InstancePtr },
+   { "DT_DOTA_Ability_CrystalMaiden_CrystalNova", ClientClass<CDOTA_Ability_CrystalMaiden_CrystalNova>::InstancePtr },
+   { "DT_DOTA_Ability_CrystalMaiden_FreezingField", ClientClass<CDOTA_Ability_CrystalMaiden_FreezingField>::InstancePtr },
+   { "DT_DOTA_Ability_DarkSeer_Vacuum", ClientClass<CDOTA_Ability_DarkSeer_Vacuum>::InstancePtr },
+   { "DT_DOTA_Ability_DataDriven", ClientClass<CDOTA_Ability_DataDriven>::InstancePtr },
+   { "DT_DOTA_Ability_Dazzle_Weave", ClientClass<CDOTA_Ability_Dazzle_Weave>::InstancePtr },
+   { "DT_DOTA_Ability_DeathProphet_CarrionSwarm", ClientClass<CDOTA_Ability_DeathProphet_CarrionSwarm>::InstancePtr },
+   { "DT_DOTA_Ability_DeathProphet_Silence", ClientClass<CDOTA_Ability_DeathProphet_Silence>::InstancePtr },
+   { "DT_DOTA_Ability_Disruptor_KineticField", ClientClass<CDOTA_Ability_Disruptor_KineticField>::InstancePtr },
+   { "DT_DOTA_Ability_Disruptor_StaticStorm", ClientClass<CDOTA_Ability_Disruptor_StaticStorm>::InstancePtr },
+   { "DT_DOTA_Ability_DoomBringer_Devour", ClientClass<CDOTA_Ability_DoomBringer_Devour>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_DragonKnight_BreatheFire", ClientClass<CDOTA_Ability_DragonKnight_BreatheFire>::InstancePtr },
+   { "DT_DOTA_Ability_DrowRanger_Silence", ClientClass<CDOTA_Ability_DrowRanger_Silence>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_DrowRanger_WaveOfSilence", ClientClass<CDOTA_Ability_DrowRanger_WaveOfSilence>::InstancePtr },
+   { "DT_DOTA_Ability_EarthSpirit_BoulderSmash", ClientClass<CDOTA_Ability_EarthSpirit_BoulderSmash>::InstancePtr },
+   { "DT_DOTA_Ability_EarthSpirit_GeomagneticGrip", ClientClass<CDOTA_Ability_EarthSpirit_GeomagneticGrip>::InstancePtr },
+   { "DT_DOTA_Ability_EarthSpirit_Petrify", ClientClass<CDOTA_Ability_EarthSpirit_Petrify>::InstancePtr },
+   { "DT_DOTA_Ability_EarthSpirit_RollingBoulder", ClientClass<CDOTA_Ability_EarthSpirit_RollingBoulder>::InstancePtr },
+   { "DT_DOTA_Ability_EarthSpirit_StoneCaller", ClientClass<CDOTA_Ability_EarthSpirit_StoneCaller>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Elder_Titan_EarthSplitter", ClientClass<CDOTA_Ability_Elder_Titan_EarthSplitter>::InstancePtr },
+   { "DT_DOTA_Ability_EmberSpirit_Activate_FireRemnant", ClientClass<CDOTA_Ability_EmberSpirit_Activate_FireRemnant>::InstancePtr },
+   { "DT_DOTA_Ability_EmberSpirit_FireRemnant", ClientClass<CDOTA_Ability_EmberSpirit_FireRemnant>::InstancePtr },
+   { "DT_DOTA_Ability_EmberSpirit_SearingChains", ClientClass<CDOTA_Ability_EmberSpirit_SearingChains>::InstancePtr },
+   { "DT_DOTA_Ability_EmberSpirit_SleightOfFist", ClientClass<CDOTA_Ability_EmberSpirit_SleightOfFist>::InstancePtr },
+   { "DT_DOTA_Ability_Enchantress_Impetus", ClientClass<CDOTA_Ability_Enchantress_Impetus>::InstancePtr },
+   { "DT_DOTA_Ability_Enchantress_NaturesAttendants", ClientClass<CDOTA_Ability_Enchantress_NaturesAttendants>::InstancePtr },
+   { "DT_DOTA_Ability_Enchantress_Untouchable", ClientClass<CDOTA_Ability_Enchantress_Untouchable>::InstancePtr },
+   { "DT_DOTA_Ability_Enigma_BlackHole", ClientClass<CDOTA_Ability_Enigma_BlackHole>::InstancePtr },
+   { "DT_DOTA_Ability_Enigma_DemonicConversion", ClientClass<CDOTA_Ability_Enigma_DemonicConversion>::InstancePtr },
+   { "DT_DOTA_Ability_Enigma_MidnightPulse", ClientClass<CDOTA_Ability_Enigma_MidnightPulse>::InstancePtr },
+   { "DT_DOTA_Ability_FacelessVoid_Chronosphere", ClientClass<CDOTA_Ability_FacelessVoid_Chronosphere>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_FacelessVoid_TimeWalk", ClientClass<CDOTA_Ability_FacelessVoid_TimeWalk>::InstancePtr },
+   { "DT_DOTA_Ability_Furion_ForceOfNature", ClientClass<CDOTA_Ability_Furion_ForceOfNature>::InstancePtr },
+   { "DT_DOTA_Ability_Furion_Teleportation", ClientClass<CDOTA_Ability_Furion_Teleportation>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_BlackHole", ClientClass<CDOTA_Ability_Greevil_BlackHole>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_BladeFury", ClientClass<CDOTA_Ability_Greevil_BladeFury>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Bloodlust", ClientClass<CDOTA_Ability_Greevil_Bloodlust>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_ColdSnap", ClientClass<CDOTA_Ability_Greevil_ColdSnap>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Decrepify", ClientClass<CDOTA_Ability_Greevil_Decrepify>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Diabolic_Edict", ClientClass<CDOTA_Ability_Greevil_Diabolic_Edict>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_EchoSlam", ClientClass<CDOTA_Ability_Greevil_EchoSlam>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Fatal_Bonds", ClientClass<CDOTA_Ability_Greevil_Fatal_Bonds>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_FleshGolem", ClientClass<CDOTA_Ability_Greevil_FleshGolem>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_IceWall", ClientClass<CDOTA_Ability_Greevil_IceWall>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_LagunaBlade", ClientClass<CDOTA_Ability_Greevil_LagunaBlade>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_LeechSeed", ClientClass<CDOTA_Ability_Greevil_LeechSeed>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Magic_Missile", ClientClass<CDOTA_Ability_Greevil_Magic_Missile>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Maledict", ClientClass<CDOTA_Ability_Greevil_Maledict>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_MeatHook", ClientClass<CDOTA_Ability_Greevil_MeatHook>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Black_BrainSap", ClientClass<CDOTA_Ability_Greevil_Miniboss_Black_BrainSap>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Black_Nightmare", ClientClass<CDOTA_Ability_Greevil_Miniboss_Black_Nightmare>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_White_ColdFeet", ClientClass<CDOTA_Ability_Greevil_Miniboss_Blue_ColdFeet>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_White_IceVortex", ClientClass<CDOTA_Ability_Greevil_Miniboss_Blue_IceVortex>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Green_LivingArmor", ClientClass<CDOTA_Ability_Greevil_Miniboss_Green_LivingArmor>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Green_Overgrowth", ClientClass<CDOTA_Ability_Greevil_Miniboss_Green_Overgrowth>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Orange_DragonSlave", ClientClass<CDOTA_Ability_Greevil_Miniboss_Orange_DragonSlave>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray", ClientClass<CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Purple_PlagueWard", ClientClass<CDOTA_Ability_Greevil_Miniboss_Purple_PlagueWard>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Purple_VenomousGale", ClientClass<CDOTA_Ability_Greevil_Miniboss_Purple_VenomousGale>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Red_Earthshock", ClientClass<CDOTA_Ability_Greevil_Miniboss_Red_Earthshock>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Red_Overpower", ClientClass<CDOTA_Ability_Greevil_Miniboss_Red_Overpower>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Sight", ClientClass<CDOTA_Ability_Greevil_Miniboss_Sight>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_White_Degen_Aura", ClientClass<CDOTA_Ability_Greevil_Miniboss_White_Degen_Aura>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_White_Purification", ClientClass<CDOTA_Ability_Greevil_Miniboss_White_Purification>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Yellow_IonShell", ClientClass<CDOTA_Ability_Greevil_Miniboss_Yellow_IonShell>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Miniboss_Yellow_Surge", ClientClass<CDOTA_Ability_Greevil_Miniboss_Yellow_Surge>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_NaturesAttendants", ClientClass<CDOTA_Ability_Greevil_NaturesAttendants>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_PhantomStrike", ClientClass<CDOTA_Ability_Greevil_PhantomStrike>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_PoisonNova", ClientClass<CDOTA_Ability_Greevil_PoisonNova>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Purification", ClientClass<CDOTA_Ability_Greevil_Purification>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_Rot", ClientClass<CDOTA_Ability_Greevil_Rot>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_ShadowStrike", ClientClass<CDOTA_Ability_Greevil_ShadowStrike>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_ShadowWave", ClientClass<CDOTA_Ability_Greevil_ShadowWave>::InstancePtr },
+   { "DT_DOTA_Ability_Greevil_TimeLock", ClientClass<CDOTA_Ability_Greevil_TimeLock>::InstancePtr },
+   { "DT_DOTA_Ability_Gyrocopter_Call_Down", ClientClass<CDOTA_Ability_Gyrocopter_Call_Down>::InstancePtr },
+   { "DT_DOTA_Ability_Healing_Campfire", ClientClass<CDOTA_Ability_Healing_Campfire>::InstancePtr },
+   { "DT_DOTA_Ability_Holdout_CullingBlade", ClientClass<CDOTA_Ability_Holdout_CullingBlade>::InstancePtr },
+   { "DT_DOTA_Ability_Holdout_GladiatorsUnite", ClientClass<CDOTA_Ability_Holdout_GladiatorsUnite>::InstancePtr },
+   { "DT_DOTA_Ability_Holdout_Multishot", ClientClass<CDOTA_Ability_Holdout_Multishot>::InstancePtr },
+   { "DT_DOTA_Ability_Holdout_Omnislash", ClientClass<CDOTA_Ability_Holdout_Omnislash>::InstancePtr },
+   { "DT_DOTA_Ability_Huskar_Life_Break", ClientClass<CDOTA_Ability_Huskar_Life_Break>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Invoker_DeafeningBlast", ClientClass<CDOTA_Ability_Invoker_DeafeningBlast>::InstancePtr },
+   { "DT_DOTA_Ability_Invoker_EMP", ClientClass<CDOTA_Ability_Invoker_EMP>::InstancePtr },
+   { "DT_DOTA_Ability_Invoker_Invoke", ClientClass<CDOTA_Ability_Invoker_Invoke>::InstancePtr },
+   { "DT_DOTA_Ability_Invoker_InvokedBase", ClientClass<CDOTA_Ability_Invoker_InvokedBase>::InstancePtr },
+   { "DT_DOTA_Ability_Invoker_SunStrike", ClientClass<CDOTA_Ability_Invoker_SunStrike>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Invoker_Tornado", ClientClass<CDOTA_Ability_Invoker_Tornado>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Jakiro_DualBreath", ClientClass<CDOTA_Ability_Jakiro_DualBreath>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Jakiro_IcePath", ClientClass<CDOTA_Ability_Jakiro_IcePath>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Jakiro_Macropyre", ClientClass<CDOTA_Ability_Jakiro_Macropyre>::InstancePtr },
+   { "DT_DOTA_Ability_Juggernaut_HealingWard", ClientClass<CDOTA_Ability_Juggernaut_HealingWard>::InstancePtr },
+   { "DT_DOTA_Ability_Juggernaut_Omnislash", ClientClass<CDOTA_Ability_Juggernaut_Omnislash>::InstancePtr },
+   { "DT_DOTA_Ability_KeeperOfTheLight_BlindingLight", ClientClass<CDOTA_Ability_KeeperOfTheLight_BlindingLight>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_KeeperOfTheLight_Illuminate", ClientClass<CDOTA_Ability_KeeperOfTheLight_Illuminate>::InstancePtr },
+   { "DT_DOTA_Ability_KeeperOfTheLight_Recall", ClientClass<CDOTA_Ability_KeeperOfTheLight_Recall>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Kunkka_GhostShip", ClientClass<CDOTA_Ability_Kunkka_GhostShip>::InstancePtr },
+   { "DT_DOTA_Ability_Kunkka_Tidebringer", ClientClass<CDOTA_Ability_Kunkka_Tidebringer>::InstancePtr },
+   { "DT_DOTA_Ability_Kunkka_Torrent", ClientClass<CDOTA_Ability_Kunkka_Torrent>::InstancePtr },
+   { "DT_DOTA_Ability_Legion_Commander_MomentOfCourage", ClientClass<CDOTA_Ability_Legion_Commander_MomentOfCourage>::InstancePtr },
+   { "DT_DOTA_Ability_Legion_Commander_OverwhelmingOdds", ClientClass<CDOTA_Ability_Legion_Commander_OverwhelmingOdds>::InstancePtr },
+   { "DT_DOTA_Ability_Leshrac_Diabolic_Edict", ClientClass<CDOTA_Ability_Leshrac_Diabolic_Edict>::InstancePtr },
+   { "DT_DOTA_Ability_Leshrac_Pulse_Nova", ClientClass<CDOTA_Ability_Leshrac_Pulse_Nova>::InstancePtr },
+   { "DT_DOTA_Ability_Leshrac_Split_Earth", ClientClass<CDOTA_Ability_Leshrac_Split_Earth>::InstancePtr },
+   { "DT_DOTA_Ability_Lich_ChainFrost", ClientClass<CDOTA_Ability_Lich_ChainFrost>::InstancePtr },
+   { "DT_DOTA_Ability_Lich_FrostNova", ClientClass<CDOTA_Ability_Lich_FrostNova>::InstancePtr },
+   { "DT_DOTA_Ability_Life_Stealer_Infest", ClientClass<CDOTA_Ability_Life_Stealer_Infest>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Lina_DragonSlave", ClientClass<CDOTA_Ability_Lina_DragonSlave>::InstancePtr },
+   { "DT_DOTA_Ability_Lina_LagunaBlade", ClientClass<CDOTA_Ability_Lina_LagunaBlade>::InstancePtr },
+   { "DT_DOTA_Ability_Lina_LightStrikeArray", ClientClass<CDOTA_Ability_Lina_LightStrikeArray>::InstancePtr },
+   { "DT_DOTA_Ability_Lion_FingerOfDeath", ClientClass<CDOTA_Ability_Lion_FingerOfDeath>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Lion_Impale", ClientClass<CDOTA_Ability_Lion_Impale>::InstancePtr },
+   { "DT_DOTA_Ability_Lion_ManaDrain", ClientClass<CDOTA_Ability_Lion_ManaDrain>::InstancePtr },
+   { "DT_DOTA_Ability_LoneDruid_Rabid", ClientClass<CDOTA_Ability_LoneDruid_Rabid>::InstancePtr },
+   { "DT_DOTA_Ability_LoneDruid_SpiritBear", ClientClass<CDOTA_Ability_LoneDruid_SpiritBear>::InstancePtr },
+   { "DT_DOTA_Ability_LoneDruid_SpiritBear_Return", ClientClass<CDOTA_Ability_LoneDruid_SpiritBear_Return>::InstancePtr },
+   { "DT_DOTA_Ability_LoneDruid_TrueForm_BattleCry", ClientClass<CDOTA_Ability_LoneDruid_TrueForm_BattleCry>::InstancePtr },
+   { "DT_DOTA_Ability_LoneDruid_TrueForm_Druid", ClientClass<CDOTA_Ability_LoneDruid_TrueForm_Druid>::InstancePtr },
+   { "DT_DOTA_Ability_Luna_Eclipse", ClientClass<CDOTA_Ability_Luna_Eclipse>::InstancePtr },
+   { "DT_DOTA_Ability_Luna_LunarBlessing", ClientClass<CDOTA_Ability_Luna_LunarBlessing>::InstancePtr },
+   { "DT_DOTA_Ability_Lycan_Howl", ClientClass<CDOTA_Ability_Lycan_Howl>::InstancePtr },
+   { "DT_DOTA_Ability_Lycan_SummonWolves", ClientClass<CDOTA_Ability_Lycan_SummonWolves>::InstancePtr },
+   { "DT_DOTA_Ability_Magnataur_ReversePolarity", ClientClass<CDOTA_Ability_Magnataur_ReversePolarity>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Magnataur_Shockwave", ClientClass<CDOTA_Ability_Magnataur_Shockwave>::InstancePtr },
+   { "DT_DOTA_Ability_Meepo_DividedWeStand", ClientClass<CDOTA_Ability_Meepo_DividedWeStand>::InstancePtr },
+   { "DT_DOTA_Ability_Meepo_Earthbind", ClientClass<CDOTA_Ability_Meepo_Earthbind>::InstancePtr },
+   { "DT_DOTA_Ability_Meepo_Poof", ClientClass<CDOTA_Ability_Meepo_Poof>::InstancePtr },
+   { "DT_DOTA_Ability_Morphling_Replicate", ClientClass<CDOTA_Ability_Morphling_Replicate>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Morphling_Waveform", ClientClass<CDOTA_Ability_Morphling_Waveform>::InstancePtr },
+   { "DT_DOTA_Ability_NagaSiren_MirrorImage", ClientClass<CDOTA_Ability_NagaSiren_MirrorImage>::InstancePtr },
+   { "DT_DOTA_Ability_NagaSiren_RipTide", ClientClass<CDOTA_Ability_NagaSiren_RipTide>::InstancePtr },
+   { "DT_DOTA_Ability_Necrolyte_Death_Pulse", ClientClass<CDOTA_Ability_Necrolyte_Death_Pulse>::InstancePtr },
+   { "DT_DOTA_Ability_Necrolyte_ReapersScythe", ClientClass<CDOTA_Ability_Necrolyte_ReapersScythe>::InstancePtr },
+   { "DT_Ability_Nevermore_Requiem", ClientClass<CDOTA_Ability_Nevermore_Requiem>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Apocalypse", ClientClass<CDOTA_Ability_Nian_Apocalypse>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Eruption", ClientClass<CDOTA_Ability_Nian_Eruption>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Frenzy", ClientClass<CDOTA_Ability_Nian_Frenzy>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Hurricane", ClientClass<CDOTA_Ability_Nian_Hurricane>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Roar", ClientClass<CDOTA_Ability_Nian_Roar>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Sigils", ClientClass<CDOTA_Ability_Nian_Sigils>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Tail_Swipe", ClientClass<CDOTA_Ability_Nian_Tail_Swipe>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Waterball", ClientClass<CDOTA_Ability_Nian_Waterball>::InstancePtr },
+   { "DT_DOTA_Ability_Nian_Whirlpool", ClientClass<CDOTA_Ability_Nian_Whirlpool>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Nyx_Assassin_Impale", ClientClass<CDOTA_Ability_Nyx_Assassin_Impale>::InstancePtr },
+   { "DT_DOTA_Ability_Obsidian_Destroyer_ArcaneOrb", ClientClass<CDOTA_Ability_Obsidian_Destroyer_ArcaneOrb>::InstancePtr },
+   { "DT_DOTA_Ability_Obsidian_Destroyer_AstralImprisonment", ClientClass<CDOTA_Ability_Obsidian_Destroyer_AstralImprisonment>::InstancePtr },
+   { "DT_Ability_Obsidian_Destroyer_SanityEclipse", ClientClass<CDOTA_Ability_Obsidian_Destroyer_SanityEclipse>::InstancePtr },
+   { "DT_DOTA_Ability_Ogre_Magi_Bloodlust", ClientClass<CDOTA_Ability_Ogre_Magi_Bloodlust>::InstancePtr },
+   { "DT_DOTA_Ability_Ogre_Magi_Fireblast", ClientClass<CDOTA_Ability_Ogre_Magi_Fireblast>::InstancePtr },
+   { "DT_DOTA_Ability_Ogre_Magi_Multicast", ClientClass<CDOTA_Ability_Ogre_Magi_Multicast>::InstancePtr },
+   { "DT_DOTA_Ability_Ogre_Magi_Unrefined_Fireblast", ClientClass<CDOTA_Ability_Ogre_Magi_Unrefined_Fireblast>::InstancePtr },
+   { "DT_DOTA_Ability_Oracle_FortunesEnd", ClientClass<CDOTA_Ability_Oracle_FortunesEnd>::InstancePtr },
+   { "DT_DOTA_Ability_PhantomAssassin_PhantomStrike", ClientClass<CDOTA_Ability_PhantomAssassin_PhantomStrike>::InstancePtr },
+   { "DT_DOTA_Ability_PhantomLancer_Doppelwalk", ClientClass<CDOTA_Ability_PhantomLancer_Doppelwalk>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Phoenix_LaunchFireSpirit", ClientClass<CDOTA_Ability_Phoenix_LaunchFireSpirit>::InstancePtr },
+   { "DT_DOTA_Ability_Phoenix_Supernova", ClientClass<CDOTA_Ability_Phoenix_Supernova>::InstancePtr },
+   { "DT_DOTA_Ability_Puck_DreamCoil", ClientClass<CDOTA_Ability_Puck_DreamCoil>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Puck_IllusoryOrb", ClientClass<CDOTA_Ability_Puck_IllusoryOrb>::InstancePtr },
+   { "DT_DOTA_Ability_Puck_WaningRift", ClientClass<CDOTA_Ability_Puck_WaningRift>::InstancePtr },
+   { "DT_DOTA_Ability_Pudge_Dismember", ClientClass<CDOTA_Ability_Pudge_Dismember>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Pudge_MeatHook", ClientClass<CDOTA_Ability_Pudge_MeatHook>::InstancePtr },
+   { "DT_DOTA_Ability_Pugna_Decrepify", ClientClass<CDOTA_Ability_Pugna_Decrepify>::InstancePtr },
+   { "DT_DOTA_Ability_Pugna_LifeDrain", ClientClass<CDOTA_Ability_Pugna_LifeDrain>::InstancePtr },
+   { "DT_DOTA_Ability_Pugna_NetherBlast", ClientClass<CDOTA_Ability_Pugna_NetherBlast>::InstancePtr },
+   { "DT_DOTA_Ability_QueenOfPain_Blink", ClientClass<CDOTA_Ability_QueenOfPain_Blink>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_QueenOfPain_SonicWave", ClientClass<CDOTA_Ability_QueenOfPain_SonicWave>::InstancePtr },
+   { "DT_DOTA_Ability_Rattletrap_BatteryAssault", ClientClass<CDOTA_Ability_Rattletrap_BatteryAssault>::InstancePtr },
+   { "DT_DOTA_Ability_Rattletrap_Hookshot", ClientClass<CDOTA_Ability_Rattletrap_Hookshot>::InstancePtr },
+   { "DT_DOTA_Ability_Rattletrap_RocketFlare", ClientClass<CDOTA_Ability_Rattletrap_RocketFlare>::InstancePtr },
+   { "DT_DOTA_Ability_Razor_PlasmaField", ClientClass<CDOTA_Ability_Razor_PlasmaField>::InstancePtr },
+   { "DT_DOTA_Ability_Riki_BlinkStrike", ClientClass<CDOTA_Ability_Riki_BlinkStrike>::InstancePtr },
+   { "DT_DOTA_Ability_Riki_SmokeScreen", ClientClass<CDOTA_Ability_Riki_SmokeScreen>::InstancePtr },
+   { "DT_DOTA_Ability_Roshan_Halloween_Apocalypse", ClientClass<CDOTA_Ability_Roshan_Halloween_Apocalypse>::InstancePtr },
+   { "DT_DOTA_Ability_Roshan_Halloween_Burn", ClientClass<CDOTA_Ability_Roshan_Halloween_Burn>::InstancePtr },
+   { "DT_DOTA_Ability_Roshan_Halloween_Fireball", ClientClass<CDOTA_Ability_Roshan_Halloween_Fireball>::InstancePtr },
+   { "DT_DOTA_Ability_Roshan_Toss", ClientClass<CDOTA_Ability_Roshan_Toss>::InstancePtr },
+   { "DT_DOTA_Ability_Roshan_WaveOfForce", ClientClass<CDOTA_Ability_Roshan_WaveOfForce>::InstancePtr },
+   { "DT_DOTA_Ability_Rubick_SpellSteal", ClientClass<CDOTA_Ability_Rubick_SpellSteal>::InstancePtr },
+   { "DT_DOTA_Ability_Rubick_TelekinesisLand", ClientClass<CDOTA_Ability_Rubick_TelekinesisLand>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_SandKing_BurrowStrike", ClientClass<CDOTA_Ability_SandKing_BurrowStrike>::InstancePtr },
+   { "DT_DOTA_Ability_SandKing_Epicenter", ClientClass<CDOTA_Ability_SandKing_Epicenter>::InstancePtr },
+   { "DT_DOTA_Ability_SatyrTrickster_Purge", ClientClass<CDOTA_Ability_SatyrTrickster_Purge>::InstancePtr },
+   { "DT_DOTA_Ability_Shadow_Demon_Disruption", ClientClass<CDOTA_Ability_Shadow_Demon_Disruption>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Shadow_Demon_Shadow_Poison", ClientClass<CDOTA_Ability_Shadow_Demon_Shadow_Poison>::InstancePtr },
+   { "DT_DOTA_Ability_Shadow_Demon_Soul_Catcher", ClientClass<CDOTA_Ability_Shadow_Demon_Soul_Catcher>::InstancePtr },
+   { "DT_DOTA_Ability_Shredder_Chakram", ClientClass<CDOTA_Ability_Shredder_Chakram>::InstancePtr },
+   { "DT_DOTA_Ability_Shredder_TimberChain", ClientClass<CDOTA_Ability_Shredder_TimberChain>::InstancePtr },
+   { "DT_DOTA_Ability_Silencer_CurseOfTheSilent", ClientClass<CDOTA_Ability_Silencer_CurseOfTheSilent>::InstancePtr },
+   { "DT_DOTA_Ability_Silencer_GlaivesOfWisdom", ClientClass<CDOTA_Ability_Silencer_GlaivesOfWisdom>::InstancePtr },
+   { "DT_DOTA_Ability_Skywrath_Mage_Mystic_Flare", ClientClass<CDOTA_Ability_Skywrath_Mage_Mystic_Flare>::InstancePtr },
+   { "DT_DOTA_Ability_Slardar_Slithereen_Crush", ClientClass<CDOTA_Ability_Slardar_Slithereen_Crush>::InstancePtr },
+   { "DT_DOTA_Ability_Slark_EssenceShift", ClientClass<CDOTA_Ability_Slark_EssenceShift>::InstancePtr },
+   { "DT_DOTA_Ability_Sniper_Shrapnel", ClientClass<CDOTA_Ability_Sniper_Shrapnel>::InstancePtr },
+   { "DT_DOTA_Ability_SpiritBreaker_NetherStrike", ClientClass<CDOTA_Ability_SpiritBreaker_NetherStrike>::InstancePtr },
+   { "DT_DOTA_Ability_StormSpirit_BallLightning", ClientClass<CDOTA_Ability_StormSpirit_BallLightning>::InstancePtr },
+   { "DT_DOTA_Ability_Sven_StormBolt", ClientClass<CDOTA_Ability_Sven_StormBolt>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_FocusedDetonate", ClientClass<CDOTA_Ability_Techies_FocusedDetonate>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_LandMines", ClientClass<CDOTA_Ability_Techies_LandMines>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_Minefield_Sign", ClientClass<CDOTA_Ability_Techies_Minefield_Sign>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_RemoteMines", ClientClass<CDOTA_Ability_Techies_RemoteMines>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_RemoteMines_SelfDetonate", ClientClass<CDOTA_Ability_Techies_RemoteMines_SelfDetonate>::InstancePtr },
+   { "DT_DOTA_Ability_Techies_StasisTrap", ClientClass<CDOTA_Ability_Techies_StasisTrap>::InstancePtr },
+   { "DT_DOTA_Ability_Terrorblade_Sunder", ClientClass<CDOTA_Ability_Terrorblade_Sunder>::InstancePtr },
+   { "DT_DOTA_Ability_Throw_Coal", ClientClass<CDOTA_Ability_Throw_Coal>::InstancePtr },
+   { "DT_DOTA_Ability_Throw_Snowball", ClientClass<CDOTA_Ability_Throw_Snowball>::InstancePtr },
+   { "DT_DOTA_Ability_Tidehunter_AnchorSmash", ClientClass<CDOTA_Ability_Tidehunter_AnchorSmash>::InstancePtr },
+   { "DT_DOTA_Ability_Tidehunter_Ravage", ClientClass<CDOTA_Ability_Tidehunter_Ravage>::InstancePtr },
+   { "DT_DOTA_Ability_Tiny_Avalanche", ClientClass<CDOTA_Ability_Tiny_Avalanche>::InstancePtr },
+   { "DT_DOTA_Ability_Tiny_CraggyExterior", ClientClass<CDOTA_Ability_Tiny_CraggyExterior>::InstancePtr },
+   { "DT_DOTA_Ability_Tiny_Toss", ClientClass<CDOTA_Ability_Tiny_Toss>::InstancePtr },
+   { "DT_DOTA_Ability_Treant_EyesInTheForest", ClientClass<CDOTA_Ability_Treant_EyesInTheForest>::InstancePtr },
+   { "DT_DOTA_Ability_Treant_Overgrowth", ClientClass<CDOTA_Ability_Treant_Overgrowth>::InstancePtr },
+   { "DT_DOTA_Ability_TrollWarlord_BerserkersRage", ClientClass<CDOTA_Ability_TrollWarlord_BerserkersRage>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_TrollWarlord_WhirlingAxes_Ranged", ClientClass<CDOTA_Ability_TrollWarlord_WhirlingAxes_Ranged>::InstancePtr },
+   { "DT_DOTA_Ability_Tusk_FrozenSigil", ClientClass<CDOTA_Ability_Tusk_FrozenSigil>::InstancePtr },
+   { "DT_DOTA_Ability_Undying_Decay", ClientClass<CDOTA_Ability_Undying_Decay>::InstancePtr },
+   { "DT_DOTA_Ability_Undying_SoulRip", ClientClass<CDOTA_Ability_Undying_SoulRip>::InstancePtr },
+   { "DT_DOTA_Ability_VengefulSpirit_Nether_Swap", ClientClass<CDOTA_Ability_VengefulSpirit_Nether_Swap>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_VengefulSpirit_WaveOfTerror", ClientClass<CDOTA_Ability_VengefulSpirit_WaveOfTerror>::InstancePtr },
+   { "DT_DOTA_Ability_Venomancer_PoisonNova", ClientClass<CDOTA_Ability_Venomancer_PoisonNova>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Venomancer_VenomousGale", ClientClass<CDOTA_Ability_Venomancer_VenomousGale>::InstancePtr },
+   { "DT_DOTA_Ability_Viper_ViperStrike", ClientClass<CDOTA_Ability_Viper_ViperStrike>::InstancePtr },
+   { "DT_DOTA_Ability_Visage_SummonFamiliars", ClientClass<CDOTA_Ability_Visage_SummonFamiliars>::InstancePtr },
+   { "DT_DOTA_Ability_Visage_SummonFamiliars_StoneForm", ClientClass<CDOTA_Ability_Visage_SummonFamiliars_StoneForm>::InstancePtr },
+   { "DT_DOTA_Ability_Warlock_RainOfChaos", ClientClass<CDOTA_Ability_Warlock_RainOfChaos>::InstancePtr },
+   { "DT_DOTA_Ability_Warlock_Shadow_Word", ClientClass<CDOTA_Ability_Warlock_Shadow_Word>::InstancePtr },
+   { "DT_DOTA_Ability_Warlock_Upheaval", ClientClass<CDOTA_Ability_Warlock_Upheaval>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Weaver_TheSwarm", ClientClass<CDOTA_Ability_Weaver_TheSwarm>::InstancePtr },
+   { "DT_DOTA_Ability_Windrunner_FocusFire", ClientClass<CDOTA_Ability_Windrunner_FocusFire>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Windrunner_Powershot", ClientClass<CDOTA_Ability_Windrunner_Powershot>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Winter_Wyvern_Arctic_Burn", ClientClass<CDOTA_Ability_Winter_Wyvern_Arctic_Burn>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Winter_Wyvern_Cold_Embrace", ClientClass<CDOTA_Ability_Winter_Wyvern_Cold_Embrace>::InstancePtr },
+   { "DT_DOTA_Unit_Ability_Winter_Wyvern_Winters_Curse", ClientClass<CDOTA_Ability_Winter_Wyvern_Winters_Curse>::InstancePtr },
+   { "DT_DOTA_Ability_Wisp_Overcharge", ClientClass<CDOTA_Ability_Wisp_Overcharge>::InstancePtr },
+   { "DT_DOTA_Ability_Wisp_Relocate", ClientClass<CDOTA_Ability_Wisp_Relocate>::InstancePtr },
+   { "DT_DOTA_Ability_Wisp_Spirits", ClientClass<CDOTA_Ability_Wisp_Spirits>::InstancePtr },
+   { "DT_DOTA_Ability_Wisp_Tether", ClientClass<CDOTA_Ability_Wisp_Tether>::InstancePtr },
+   { "DT_DOTA_Ability_WitchDoctor_Maledict", ClientClass<CDOTA_Ability_WitchDoctor_Maledict>::InstancePtr },
+   { "DT_DOTA_Ability_WitchDoctor_ParalyzingCask", ClientClass<CDOTA_Ability_WitchDoctor_ParalyzingCask>::InstancePtr },
+   { "DT_DOTA_Ability_WitchDoctor_VoodooRestoration", ClientClass<CDOTA_Ability_WitchDoctor_VoodooRestoration>::InstancePtr },
+   { "DT_DOTA_BaseNPC", ClientClass<CDOTA_BaseNPC>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Additive", ClientClass<CDOTA_BaseNPC_Additive>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Barracks", ClientClass<CDOTA_BaseNPC_Barracks>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Building", ClientClass<CDOTA_BaseNPC_Building>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creature", ClientClass<CDOTA_BaseNPC_Creature>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep", ClientClass<CDOTA_BaseNPC_Creep>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_Diretide", ClientClass<CDOTA_BaseNPC_Creep_Diretide>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_Lane", ClientClass<CDOTA_BaseNPC_Creep_Lane>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_LootGreevil", ClientClass<CDOTA_BaseNPC_Creep_LootGreevil>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_Neutral", ClientClass<CDOTA_BaseNPC_Creep_Neutral>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_Siege", ClientClass<CDOTA_BaseNPC_Creep_Siege>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Creep_Talking", ClientClass<CDOTA_BaseNPC_Creep_Talking>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Fort", ClientClass<CDOTA_BaseNPC_Fort>::InstancePtr },
+   { "DT_DOTA_BaseNPC_HallofFame", ClientClass<CDOTA_BaseNPC_HallofFame>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Hero", ClientClass<CDOTA_BaseNPC_Hero>::InstancePtr },
+   { "DT_DOTA_BaseNPC_HoldoutTower", ClientClass<CDOTA_BaseNPC_HoldoutTower>::InstancePtr },
+   { "DT_DOTA_BaseNPC_HoldoutTower_HeavySlow", ClientClass<CDOTA_BaseNPC_HoldoutTower_HeavySlow>::InstancePtr },
+   { "DT_DOTA_BaseNPC_HoldoutTower_LightFast", ClientClass<CDOTA_BaseNPC_HoldoutTower_LightFast>::InstancePtr },
+   { "DT_DOTA_BaseNPC_HoldoutTower_ReduceSpeed", ClientClass<CDOTA_BaseNPC_HoldoutTower_ReduceSpeed>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Invoker_Forged_Spirit", ClientClass<CDOTA_BaseNPC_Invoker_Forged_Spirit>::InstancePtr },
+   { "DT_DOTA_BaseNPC_ShadowShaman_SerpentWard", ClientClass<CDOTA_BaseNPC_ShadowShaman_SerpentWard>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Shop", ClientClass<CDOTA_BaseNPC_Shop>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Tower", ClientClass<CDOTA_BaseNPC_Tower>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Tusk_Sigil", ClientClass<CDOTA_BaseNPC_Tusk_Sigil>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Venomancer_PlagueWard", ClientClass<CDOTA_BaseNPC_Venomancer_PlagueWard>::InstancePtr },
+   { "DT_DOTA_BaseNPC_Warlock_Golem", ClientClass<CDOTA_BaseNPC_Warlock_Golem>::InstancePtr },
+   { "DT_DOTA_Beastmaster_Axe", ClientClass<CDOTA_Beastmaster_Axe>::InstancePtr },
+   { "DT_DOTA_DataDire", ClientClass<CDOTA_DataDire>::InstancePtr },
+   { "DT_DOTA_DataNonSpectator", ClientClass<CDOTA_DataNonSpectator>::InstancePtr },
+   { "DT_DOTA_DataRadiant", ClientClass<CDOTA_DataRadiant>::InstancePtr },
+   { "DT_DOTA_DataSpectator", ClientClass<CDOTA_DataSpectator>::InstancePtr },
+   { "DT_DOTA_DeathProphet_Exorcism_Spirit", ClientClass<CDOTA_DeathProphet_Exorcism_Spirit>::InstancePtr },
+   { "DT_DOTA_DisplacementVisibility", ClientClass<CDOTA_DisplacementVisibility>::InstancePtr },
+   { "DT_DOTA_Halloween_CandyBucket", ClientClass<CDOTA_Halloween_CandyBucket>::InstancePtr },
+   { "DT_DOTA_Halloween_CandyBucketDire", ClientClass<CDOTA_Halloween_CandyBucketDire>::InstancePtr },
+   { "DT_DOTA_Halloween_CandyBucketRadiant", ClientClass<CDOTA_Halloween_CandyBucketRadiant>::InstancePtr },
+   { "DT_DOTA_Hero_Recorder", ClientClass<CDOTA_Hero_Recorder>::InstancePtr },
+   { "DT_DOTA_Item", ClientClass<CDOTA_Item>::InstancePtr },
+   { "DT_DOTA_Item_Ancient_Janggo", ClientClass<CDOTA_Item_Ancient_Janggo>::InstancePtr },
+   { "DT_DOTA_Item_Armlet", ClientClass<CDOTA_Item_Armlet>::InstancePtr },
+   { "DT_DOTA_Item_Battlefury", ClientClass<CDOTA_Item_Battlefury>::InstancePtr },
+   { "DT_DOTA_Item_BlinkDagger", ClientClass<CDOTA_Item_BlinkDagger>::InstancePtr },
+   { "DT_DOTA_Item_Bloodstone", ClientClass<CDOTA_Item_Bloodstone>::InstancePtr },
+   { "DT_DOTA_Item_BootsOfTravel", ClientClass<CDOTA_Item_BootsOfTravel>::InstancePtr },
+   { "DT_DOTA_Item_Cyclone", ClientClass<CDOTA_Item_Cyclone>::InstancePtr },
+   { "DT_DOTA_Item_Cyclone_2", ClientClass<CDOTA_Item_Cyclone_2>::InstancePtr },
+   { "DT_DOTA_Item_DataDriven", ClientClass<CDOTA_Item_DataDriven>::InstancePtr },
+   { "DT_DOTA_Item_Diffusal_Blade", ClientClass<CDOTA_Item_Diffusal_Blade>::InstancePtr },
+   { "DT_DOTA_Item_Diffusal_Blade_Level2", ClientClass<CDOTA_Item_Diffusal_Blade_Level2>::InstancePtr },
+   { "DT_DOTA_Item_EmptyBottle", ClientClass<CDOTA_Item_EmptyBottle>::InstancePtr },
+   { "DT_DOTA_Item_Ethereal_Blade", ClientClass<CDOTA_Item_Ethereal_Blade>::InstancePtr },
+   { "DT_DOTA_Item_ForceStaff", ClientClass<CDOTA_Item_ForceStaff>::InstancePtr },
+   { "DT_DOTA_Item_Greevil_Blink", ClientClass<CDOTA_Item_Greevil_Blink>::InstancePtr },
+   { "DT_DOTA_Item_Greevil_Whistle", ClientClass<CDOTA_Item_Greevil_Whistle>::InstancePtr },
+   { "DT_DOTA_Item_Greevil_WhistleToggle", ClientClass<CDOTA_Item_Greevil_WhistleToggle>::InstancePtr },
+   { "DT_DOTA_Item_MantaStyle", ClientClass<CDOTA_Item_MantaStyle>::InstancePtr },
+   { "DT_DOTA_Item_Medallion_Of_Courage", ClientClass<CDOTA_Item_Medallion_Of_Courage>::InstancePtr },
+   { "DT_DOTA_Item_Mystery_Toss", ClientClass<CDOTA_Item_Mystery_Toss>::InstancePtr },
+   { "DT_DOTA_Item_Mystery_Vacuum", ClientClass<CDOTA_Item_Mystery_Vacuum>::InstancePtr },
+   { "DT_DOTA_Item_Necronomicon", ClientClass<CDOTA_Item_Necronomicon>::InstancePtr },
+   { "DT_DOTA_Item_Necronomicon_Level2", ClientClass<CDOTA_Item_Necronomicon_Level2>::InstancePtr },
+   { "DT_DOTA_Item_Necronomicon_Level3", ClientClass<CDOTA_Item_Necronomicon_Level3>::InstancePtr },
+   { "DT_DOTA_Item_Nian_Flag_Trap", ClientClass<CDOTA_Item_Nian_Flag_Trap>::InstancePtr },
+   { "DT_DOTA_Item_ObserverWard", ClientClass<CDOTA_Item_ObserverWard>::InstancePtr },
+   { "DT_DOTA_Item_Physical", ClientClass<CDOTA_Item_Physical>::InstancePtr },
+   { "DT_DOTA_Item_PlaceBuilding", ClientClass<CDOTA_Item_PlaceBuilding>::InstancePtr },
+   { "DT_DOTA_Item_PlaceBuilding_Free", ClientClass<CDOTA_Item_PlaceBuilding_Free>::InstancePtr },
+   { "DT_DOTA_Item_PlaceBuilding_Grid", ClientClass<CDOTA_Item_PlaceBuilding_Grid>::InstancePtr },
+   { "DT_DOTA_Item_PowerTreads", ClientClass<CDOTA_Item_PowerTreads>::InstancePtr },
+   { "DT_DOTA_Item_QuellingBlade", ClientClass<CDOTA_Item_QuellingBlade>::InstancePtr },
+   { "DT_DOTA_Item_Radiance", ClientClass<CDOTA_Item_Radiance>::InstancePtr },
+   { "DT_DOTA_Item_Recipe_Veil_Of_Discord", ClientClass<CDOTA_Item_Recipe_Veil_Of_Discord>::InstancePtr },
+   { "DT_DOTA_Item_Ring_Of_Basilius", ClientClass<CDOTA_Item_Ring_Of_Basilius>::InstancePtr },
+   { "DT_DOTA_Item_RingOfAquila", ClientClass<CDOTA_Item_RingOfAquila>::InstancePtr },
+   { "DT_DOTA_Item_Rune", ClientClass<CDOTA_Item_Rune>::InstancePtr },
+   { "DT_DOTA_Item_SentryWard", ClientClass<CDOTA_Item_SentryWard>::InstancePtr },
+   { "DT_DOTA_Item_Tango", ClientClass<CDOTA_Item_Tango>::InstancePtr },
+   { "DT_DOTA_Item_TeleportScroll", ClientClass<CDOTA_Item_TeleportScroll>::InstancePtr },
+   { "DT_DOTA_Item_TranquilBoots", ClientClass<CDOTA_Item_TranquilBoots>::InstancePtr },
+   { "DT_DOTA_Item_Urn_Of_Shadows", ClientClass<CDOTA_Item_Urn_Of_Shadows>::InstancePtr },
+   { "DT_DOTA_Item_Veil_Of_Discord", ClientClass<CDOTA_Item_Veil_Of_Discord>::InstancePtr },
+   { "DT_DOTA_NeutralSpawner", ClientClass<CDOTA_NeutralSpawner>::InstancePtr },
+   { "DT_DOTA_NPC_DataDriven", ClientClass<CDOTA_NPC_DataDriven>::InstancePtr },
+   { "DT_DOTA_NPC_Observer_Ward", ClientClass<CDOTA_NPC_Observer_Ward>::InstancePtr },
+   { "DT_DOTA_NPC_Observer_Ward_TrueSight", ClientClass<CDOTA_NPC_Observer_Ward_TrueSight>::InstancePtr },
+   { "DT_DOTA_NPC_Techies_Minefield_Sign", ClientClass<CDOTA_NPC_Techies_Minefield_Sign>::InstancePtr },
+   { "DT_DOTA_NPC_TechiesMines", ClientClass<CDOTA_NPC_TechiesMines>::InstancePtr },
+   { "DT_DOTA_NPC_Treant_EyesInTheForest", ClientClass<CDOTA_NPC_Treant_EyesInTheForest>::InstancePtr },
+   { "DT_DOTA_NPC_WitchDoctor_Ward", ClientClass<CDOTA_NPC_WitchDoctor_Ward>::InstancePtr },
+   { "DT_DOTA_PhantomAssassin_Gravestone", ClientClass<CDOTA_PhantomAssassin_Gravestone>::InstancePtr },
+   { "DT_DOTA_PlayerResource", ClientClass<CDOTA_PlayerResource>::InstancePtr },
+   { "DT_DOTA_RoshanSpawner", ClientClass<CDOTA_RoshanSpawner>::InstancePtr },
+   { "DT_DOTA_TempTree", ClientClass<CDOTA_TempTree>::InstancePtr },
+   { "DT_DOTA_Tiny_ScepterTree", ClientClass<CDOTA_Tiny_ScepterTree>::InstancePtr },
+   { "DT_DOTA_Unit_Announcer", ClientClass<CDOTA_Unit_Announcer>::InstancePtr },
+   { "DT_DOTA_Unit_Announcer_Killing_Spree", ClientClass<CDOTA_Unit_Announcer_Killing_Spree>::InstancePtr },
+   { "DT_DOTA_Unit_Brewmaster_PrimalEarth", ClientClass<CDOTA_Unit_Brewmaster_PrimalEarth>::InstancePtr },
+   { "DT_DOTA_Unit_Brewmaster_PrimalFire", ClientClass<CDOTA_Unit_Brewmaster_PrimalFire>::InstancePtr },
+   { "DT_DOTA_Unit_Brewmaster_PrimalStorm", ClientClass<CDOTA_Unit_Brewmaster_PrimalStorm>::InstancePtr },
+   { "DT_DOTA_Unit_Broodmother_Spiderling", ClientClass<CDOTA_Unit_Broodmother_Spiderling>::InstancePtr },
+   { "DT_DOTA_Unit_Broodmother_Web", ClientClass<CDOTA_Unit_Broodmother_Web>::InstancePtr },
+   { "DT_DOTA_Unit_Courier", ClientClass<CDOTA_Unit_Courier>::InstancePtr },
+   { "DT_DOTA_Unit_Earth_Spirit_Stone", ClientClass<CDOTA_Unit_Earth_Spirit_Stone>::InstancePtr },
+   { "DT_DOTA_Unit_Elder_Titan_AncestralSpirit", ClientClass<CDOTA_Unit_Elder_Titan_AncestralSpirit>::InstancePtr },
+   { "DT_DOTA_Unit_Fountain", ClientClass<CDOTA_Unit_Fountain>::InstancePtr },
+   { "DT_DOTA_Unit_Greevil", ClientClass<CDOTA_Unit_Greevil>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Abaddon", ClientClass<CDOTA_Unit_Hero_Abaddon>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_AbyssalUnderlord", ClientClass<CDOTA_Unit_Hero_AbyssalUnderlord>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Alchemist", ClientClass<CDOTA_Unit_Hero_Alchemist>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_AncientApparition", ClientClass<CDOTA_Unit_Hero_AncientApparition>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_AntiMage", ClientClass<CDOTA_Unit_Hero_AntiMage>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Axe", ClientClass<CDOTA_Unit_Hero_Axe>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Bane", ClientClass<CDOTA_Unit_Hero_Bane>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Batrider", ClientClass<CDOTA_Unit_Hero_Batrider>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Beastmaster", ClientClass<CDOTA_Unit_Hero_Beastmaster>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Beastmaster_Beasts", ClientClass<CDOTA_Unit_Hero_Beastmaster_Beasts>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Beastmaster_Boar", ClientClass<CDOTA_Unit_Hero_Beastmaster_Boar>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Beastmaster_Hawk", ClientClass<CDOTA_Unit_Hero_Beastmaster_Hawk>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Bloodseeker", ClientClass<CDOTA_Unit_Hero_Bloodseeker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_BountyHunter", ClientClass<CDOTA_Unit_Hero_BountyHunter>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Brewmaster", ClientClass<CDOTA_Unit_Hero_Brewmaster>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Bristleback", ClientClass<CDOTA_Unit_Hero_Bristleback>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Broodmother", ClientClass<CDOTA_Unit_Hero_Broodmother>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Centaur", ClientClass<CDOTA_Unit_Hero_Centaur>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_ChaosKnight", ClientClass<CDOTA_Unit_Hero_ChaosKnight>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Chen", ClientClass<CDOTA_Unit_Hero_Chen>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Clinkz", ClientClass<CDOTA_Unit_Hero_Clinkz>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_CrystalMaiden", ClientClass<CDOTA_Unit_Hero_CrystalMaiden>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_DarkSeer", ClientClass<CDOTA_Unit_Hero_DarkSeer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Dazzle", ClientClass<CDOTA_Unit_Hero_Dazzle>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_DeathProphet", ClientClass<CDOTA_Unit_Hero_DeathProphet>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Disruptor", ClientClass<CDOTA_Unit_Hero_Disruptor>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_DoomBringer", ClientClass<CDOTA_Unit_Hero_DoomBringer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_DragonKnight", ClientClass<CDOTA_Unit_Hero_DragonKnight>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_DrowRanger", ClientClass<CDOTA_Unit_Hero_DrowRanger>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Earthshaker", ClientClass<CDOTA_Unit_Hero_Earthshaker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_EarthSpirit", ClientClass<CDOTA_Unit_Hero_EarthSpirit>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Elder_Titan", ClientClass<CDOTA_Unit_Hero_Elder_Titan>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_EmberSpirit", ClientClass<CDOTA_Unit_Hero_EmberSpirit>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Enchantress", ClientClass<CDOTA_Unit_Hero_Enchantress>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Enigma", ClientClass<CDOTA_Unit_Hero_Enigma>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_FacelessVoid", ClientClass<CDOTA_Unit_Hero_FacelessVoid>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Furion", ClientClass<CDOTA_Unit_Hero_Furion>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Gyrocopter", ClientClass<CDOTA_Unit_Hero_Gyrocopter>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Huskar", ClientClass<CDOTA_Unit_Hero_Huskar>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Invoker", ClientClass<CDOTA_Unit_Hero_Invoker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Jakiro", ClientClass<CDOTA_Unit_Hero_Jakiro>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Juggernaut", ClientClass<CDOTA_Unit_Hero_Juggernaut>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_KeeperOfTheLight", ClientClass<CDOTA_Unit_Hero_KeeperOfTheLight>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Kunkka", ClientClass<CDOTA_Unit_Hero_Kunkka>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Legion_Commander", ClientClass<CDOTA_Unit_Hero_Legion_Commander>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Leshrac", ClientClass<CDOTA_Unit_Hero_Leshrac>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Lich", ClientClass<CDOTA_Unit_Hero_Lich>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Life_Stealer", ClientClass<CDOTA_Unit_Hero_Life_Stealer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Lina", ClientClass<CDOTA_Unit_Hero_Lina>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Lion", ClientClass<CDOTA_Unit_Hero_Lion>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_LoneDruid", ClientClass<CDOTA_Unit_Hero_LoneDruid>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Luna", ClientClass<CDOTA_Unit_Hero_Luna>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Lycan", ClientClass<CDOTA_Unit_Hero_Lycan>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Magnataur", ClientClass<CDOTA_Unit_Hero_Magnataur>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Medusa", ClientClass<CDOTA_Unit_Hero_Medusa>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Meepo", ClientClass<CDOTA_Unit_Hero_Meepo>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Mirana", ClientClass<CDOTA_Unit_Hero_Mirana>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Morphling", ClientClass<CDOTA_Unit_Hero_Morphling>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Naga_Siren", ClientClass<CDOTA_Unit_Hero_Naga_Siren>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Necrolyte", ClientClass<CDOTA_Unit_Hero_Necrolyte>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Nevermore", ClientClass<CDOTA_Unit_Hero_Nevermore>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_NightStalker", ClientClass<CDOTA_Unit_Hero_NightStalker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Nyx_Assassin", ClientClass<CDOTA_Unit_Hero_Nyx_Assassin>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Obsidian_Destroyer", ClientClass<CDOTA_Unit_Hero_Obsidian_Destroyer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Ogre_Magi", ClientClass<CDOTA_Unit_Hero_Ogre_Magi>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Omniknight", ClientClass<CDOTA_Unit_Hero_Omniknight>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Oracle", ClientClass<CDOTA_Unit_Hero_Oracle>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_PhantomAssassin", ClientClass<CDOTA_Unit_Hero_PhantomAssassin>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_PhantomLancer", ClientClass<CDOTA_Unit_Hero_PhantomLancer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Phoenix", ClientClass<CDOTA_Unit_Hero_Phoenix>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Puck", ClientClass<CDOTA_Unit_Hero_Puck>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Pudge", ClientClass<CDOTA_Unit_Hero_Pudge>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Pugna", ClientClass<CDOTA_Unit_Hero_Pugna>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_QueenOfPain", ClientClass<CDOTA_Unit_Hero_QueenOfPain>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Rattletrap", ClientClass<CDOTA_Unit_Hero_Rattletrap>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Razor", ClientClass<CDOTA_Unit_Hero_Razor>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Riki", ClientClass<CDOTA_Unit_Hero_Riki>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Rubick", ClientClass<CDOTA_Unit_Hero_Rubick>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_SandKing", ClientClass<CDOTA_Unit_Hero_SandKing>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Shadow_Demon", ClientClass<CDOTA_Unit_Hero_Shadow_Demon>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_ShadowShaman", ClientClass<CDOTA_Unit_Hero_ShadowShaman>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Shredder", ClientClass<CDOTA_Unit_Hero_Shredder>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Silencer", ClientClass<CDOTA_Unit_Hero_Silencer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_SkeletonKing", ClientClass<CDOTA_Unit_Hero_SkeletonKing>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Skywrath_Mage", ClientClass<CDOTA_Unit_Hero_Skywrath_Mage>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Slardar", ClientClass<CDOTA_Unit_Hero_Slardar>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Slark", ClientClass<CDOTA_Unit_Hero_Slark>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Sniper", ClientClass<CDOTA_Unit_Hero_Sniper>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Spectre", ClientClass<CDOTA_Unit_Hero_Spectre>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_SpiritBreaker", ClientClass<CDOTA_Unit_Hero_SpiritBreaker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_StormSpirit", ClientClass<CDOTA_Unit_Hero_StormSpirit>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Sven", ClientClass<CDOTA_Unit_Hero_Sven>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Techies", ClientClass<CDOTA_Unit_Hero_Techies>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_TemplarAssassin", ClientClass<CDOTA_Unit_Hero_TemplarAssassin>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Terrorblade", ClientClass<CDOTA_Unit_Hero_Terrorblade>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Tidehunter", ClientClass<CDOTA_Unit_Hero_Tidehunter>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Tinker", ClientClass<CDOTA_Unit_Hero_Tinker>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Tiny", ClientClass<CDOTA_Unit_Hero_Tiny>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Treant", ClientClass<CDOTA_Unit_Hero_Treant>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_TrollWarlord", ClientClass<CDOTA_Unit_Hero_TrollWarlord>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Tusk", ClientClass<CDOTA_Unit_Hero_Tusk>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Undying", ClientClass<CDOTA_Unit_Hero_Undying>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Ursa", ClientClass<CDOTA_Unit_Hero_Ursa>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_VengefulSpirit", ClientClass<CDOTA_Unit_Hero_VengefulSpirit>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Venomancer", ClientClass<CDOTA_Unit_Hero_Venomancer>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Viper", ClientClass<CDOTA_Unit_Hero_Viper>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Visage", ClientClass<CDOTA_Unit_Hero_Visage>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Warlock", ClientClass<CDOTA_Unit_Hero_Warlock>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Weaver", ClientClass<CDOTA_Unit_Hero_Weaver>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Windrunner", ClientClass<CDOTA_Unit_Hero_Windrunner>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Winter_Wyvern", ClientClass<CDOTA_Unit_Hero_Winter_Wyvern>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Wisp", ClientClass<CDOTA_Unit_Hero_Wisp>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_WitchDoctor", ClientClass<CDOTA_Unit_Hero_WitchDoctor>::InstancePtr },
+   { "DT_DOTA_Unit_Hero_Zuus", ClientClass<CDOTA_Unit_Hero_Zuus>::InstancePtr },
+   { "DT_DOTA_Unit_LoopingSound", ClientClass<CDOTA_Unit_LoopingSound>::InstancePtr },
+   { "DT_DOTA_Unit_Nian", ClientClass<CDOTA_Unit_Nian>::InstancePtr },
+   { "DT_DOTA_Unit_Roquelaire", ClientClass<CDOTA_Unit_Roquelaire>::InstancePtr },
+   { "DT_DOTA_Unit_Roshan", ClientClass<CDOTA_Unit_Roshan>::InstancePtr },
+   { "DT_DOTA_Unit_Roshan_Halloween", ClientClass<CDOTA_Unit_Roshan_Halloween>::InstancePtr },
+   { "DT_DOTA_Unit_SpiritBear", ClientClass<CDOTA_Unit_SpiritBear>::InstancePtr },
+   { "DT_DOTA_Unit_TargetDummy", ClientClass<CDOTA_Unit_TargetDummy>::InstancePtr },
+   { "DT_DOTA_Unit_Undying_Tombstone", ClientClass<CDOTA_Unit_Undying_Tombstone>::InstancePtr },
+   { "DT_DOTA_Unit_Undying_Zombie", ClientClass<CDOTA_Unit_Undying_Zombie>::InstancePtr },
+   { "DT_DOTA_Unit_VisageFamiliar", ClientClass<CDOTA_Unit_VisageFamiliar>::InstancePtr },
+   { "DT_DOTA_Wisp_Spirit", ClientClass<CDOTA_Wisp_Spirit>::InstancePtr },
+   { "DT_DOTABaseAbility", ClientClass<CDOTABaseAbility>::InstancePtr },
+   { "DT_DOTABaseGameMode", ClientClass<CDOTABaseGameMode>::InstancePtr },
+   { "DT_DOTACameraBounds", ClientClass<CDOTACameraBounds>::InstancePtr },
+   { "DT_DOTAFogOfWarTempViewers", ClientClass<CDOTAFogOfWarTempViewers>::InstancePtr },
+   { "DT_DOTAFogOfWarWasVisible", ClientClass<CDOTAFogOfWarWasVisible>::InstancePtr },
+   { "DT_DOTAGameManagerProxy", ClientClass<CDOTAGameManagerProxy>::InstancePtr },
+   { "DT_DOTAGamerulesProxy", ClientClass<CDOTAGamerulesProxy>::InstancePtr },
+   { "DT_DOTA_HoldoutNetworker", ClientClass<CDOTAHoldoutNetworker>::InstancePtr },
+   { "DT_DOTAMinimapBoundary", ClientClass<CDOTAMinimapBoundary>::InstancePtr },
+   { "DT_DOTAPlayer", ClientClass<CDOTAPlayer>::InstancePtr },
+   { "DT_DOTAPropCustomTexture", ClientClass<CDOTAPropCustomTexture>::InstancePtr },
+   { "DT_DotaQuest", ClientClass<CDotaQuest>::InstancePtr },
+   { "DT_DotaQuestBase", ClientClass<CDotaQuestBase>::InstancePtr },
+   { "DT_DotaSpecGraphPlayerData", ClientClass<CDOTASpecGraphPlayerData>::InstancePtr },
+   { "DT_DOTASpectatorGraphManagerProxy", ClientClass<CDOTASpectatorGraphManagerProxy>::InstancePtr },
+   { "DT_DotaSubquestBase", ClientClass<CDotaSubquestBase>::InstancePtr },
+   { "DT_DOTATeam", ClientClass<CDOTATeam>::InstancePtr },
+   { "DT_DotaTutorialNetworker", ClientClass<CDotaTutorialNetworker>::InstancePtr },
+   { "DT_DOTAWearableItem", ClientClass<CDOTAWearableItem>::InstancePtr },
+   { "DT_DynamicLight", ClientClass<CDynamicLight>::InstancePtr },
+   { "DT_DynamicProp", ClientClass<CDynamicProp>::InstancePtr },
+   { "DT_EconEntity", ClientClass<CEconEntity>::InstancePtr },
+   { "DT_WearableItem", ClientClass<CEconWearable>::InstancePtr },
+   { "DT_EntityDissolve", ClientClass<CEntityDissolve>::InstancePtr },
+   { "DT_EntityFlame", ClientClass<CEntityFlame>::InstancePtr },
+   { "DT_EntityFreezing", ClientClass<CEntityFreezing>::InstancePtr },
+   { "DT_EntityParticleTrail", ClientClass<CEntityParticleTrail>::InstancePtr },
+   { "DT_EnvAmbientLight", ClientClass<CEnvAmbientLight>::InstancePtr },
+   { "DT_EnvDeferredLight", ClientClass<CEnvDeferredLight>::InstancePtr },
+   { "DT_DetailController", ClientClass<CEnvDetailController>::InstancePtr },
+   { "DT_EnvDOFController", ClientClass<CEnvDOFController>::InstancePtr },
+   { "DT_EnvParticleScript", ClientClass<CEnvParticleScript>::InstancePtr },
+   { "DT_EnvProjectedTexture", ClientClass<CEnvProjectedTexture>::InstancePtr },
+   { "DT_QuadraticBeam", ClientClass<CEnvQuadraticBeam>::InstancePtr },
+   { "DT_EnvScreenEffect", ClientClass<CEnvScreenEffect>::InstancePtr },
+   { "DT_EnvScreenOverlay", ClientClass<CEnvScreenOverlay>::InstancePtr },
+   { "DT_EnvTonemapController", ClientClass<CEnvTonemapController>::InstancePtr },
+   { "DT_EnvWind", ClientClass<CEnvWind>::InstancePtr },
+   { "DT_FireSmoke", ClientClass<CFireSmoke>::InstancePtr },
+   { "DT_FireTrail", ClientClass<CFireTrail>::InstancePtr },
+   { "DT_CFish", ClientClass<CFish>::InstancePtr },
+   { "DT_FogController", ClientClass<CFogController>::InstancePtr },
+   { "DT_Func_Dust", ClientClass<CFunc_Dust>::InstancePtr },
+   { "DT_Func_LOD", ClientClass<CFunc_LOD>::InstancePtr },
+   { "DT_FuncAreaPortalWindow", ClientClass<CFuncAreaPortalWindow>::InstancePtr },
+   { "DT_FuncBrush", ClientClass<CFuncBrush>::InstancePtr },
+   { "DT_FuncConveyor", ClientClass<CFuncConveyor>::InstancePtr },
+   { "DT_FuncLadder", ClientClass<CFuncLadder>::InstancePtr },
+   { "DT_FuncMoveLinear", ClientClass<CFuncMoveLinear>::InstancePtr },
+   { "DT_FuncOccluder", ClientClass<CFuncOccluder>::InstancePtr },
+   { "DT_FuncReflectiveGlass", ClientClass<CFuncReflectiveGlass>::InstancePtr },
+   { "DT_FuncRotating", ClientClass<CFuncRotating>::InstancePtr },
+   { "DT_FuncSmokeVolume", ClientClass<CFuncSmokeVolume>::InstancePtr },
+   { "DT_FuncTrackTrain", ClientClass<CFuncTrackTrain>::InstancePtr },
+   { "DT_GameRulesProxy", ClientClass<CGameRulesProxy>::InstancePtr },
+   { "DT_HandleTest", ClientClass<CHandleTest>::InstancePtr },
+   { "DT_InfoLadderDismount", ClientClass<CInfoLadderDismount>::InstancePtr },
+   { "DT_InfoOverlayAccessor", ClientClass<CInfoOverlayAccessor>::InstancePtr },
+   { "DT_LightGlow", ClientClass<CLightGlow>::InstancePtr },
+   { "DT_MaterialModifyControl", ClientClass<CMaterialModifyControl>::InstancePtr },
+   { "DT_MovieDisplay", ClientClass<CMovieDisplay>::InstancePtr },
+   { "DT_ParticleFire", ClientClass<CParticleFire>::InstancePtr },
+   { "DT_ParticlePerformanceMonitor", ClientClass<CParticlePerformanceMonitor>::InstancePtr },
+   { "DT_ParticleSystem", ClientClass<CParticleSystem>::InstancePtr },
+   { "DT_PhysBox", ClientClass<CPhysBox>::InstancePtr },
+   { "DT_PhysBoxMultiplayer", ClientClass<CPhysBoxMultiplayer>::InstancePtr },
+   { "DT_PhysicsProp", ClientClass<CPhysicsProp>::InstancePtr },
+   { "DT_PhysicsPropMultiplayer", ClientClass<CPhysicsPropMultiplayer>::InstancePtr },
+   { "DT_PhysMagnet", ClientClass<CPhysMagnet>::InstancePtr },
+   { "DT_Plasma", ClientClass<CPlasma>::InstancePtr },
+   { "DT_PointCamera", ClientClass<CPointCamera>::InstancePtr },
+   { "DT_PointCommentaryNode", ClientClass<CPointCommentaryNode>::InstancePtr },
+   { "DT_PoseController", ClientClass<CPoseController>::InstancePtr },
+   { "DT_PostProcessController", ClientClass<CPostProcessController>::InstancePtr },
+   { "DT_Precipitation", ClientClass<CPrecipitation>::InstancePtr },
+   { "DT_PrecipitationBlocker", ClientClass<CPrecipitationBlocker>::InstancePtr },
+   { "DT_Prop_Hallucination", ClientClass<CProp_Hallucination>::InstancePtr },
+   { "DT_PropDoorRotating", ClientClass<CPropDoorRotating>::InstancePtr },
+   { "DT_PropVehicleDriveable", ClientClass<CPropVehicleDriveable>::InstancePtr },
+   { "DT_RagdollManager", ClientClass<CRagdollManager>::InstancePtr },
+   { "DT_Ragdoll", ClientClass<CRagdollProp>::InstancePtr },
+   { "DT_Ragdoll_Attached", ClientClass<CRagdollPropAttached>::InstancePtr },
+   { "DT_RopeKeyframe", ClientClass<CRopeKeyframe>::InstancePtr },
+   { "DT_SceneEntity", ClientClass<CSceneEntity>::InstancePtr },
+   { "DT_ShadowControl", ClientClass<CShadowControl>::InstancePtr },
+   { "DT_SlideshowDisplay", ClientClass<CSlideshowDisplay>::InstancePtr },
+   { "DT_SmokeStack", ClientClass<CSmokeStack>::InstancePtr },
+   { "DT_SpatialEntity", ClientClass<CSpatialEntity>::InstancePtr },
+   { "DT_SpotlightEnd", ClientClass<CSpotlightEnd>::InstancePtr },
+   { "DT_Sprite", ClientClass<CSprite>::InstancePtr },
+   { "DT_SpriteOriented", ClientClass<CSpriteOriented>::InstancePtr },
+   { "DT_SpriteTrail", ClientClass<CSpriteTrail>::InstancePtr },
+   { "DT_StatueProp", ClientClass<CStatueProp>::InstancePtr },
+   { "DT_SteamJet", ClientClass<CSteamJet>::InstancePtr },
+   { "DT_Sun", ClientClass<CSun>::InstancePtr },
+   { "DT_SunlightShadowControl", ClientClass<CSunlightShadowControl>::InstancePtr },
+   { "DT_Team", ClientClass<CTeam>::InstancePtr },
+   { "DT_TeamShowcaseEditorManager", ClientClass<CTeamShowcaseEditorManager>::InstancePtr },
+   { "DT_TeamShowcasePlayer", ClientClass<CTeamShowcasePlayer>::InstancePtr },
+   { "DT_TEArmorRicochet", ClientClass<CTEArmorRicochet>::InstancePtr },
+   { "DT_BaseBeam", ClientClass<CTEBaseBeam>::InstancePtr },
+   { "DT_TEBeamEntPoint", ClientClass<CTEBeamEntPoint>::InstancePtr },
+   { "DT_TEBeamEnts", ClientClass<CTEBeamEnts>::InstancePtr },
+   { "DT_TEBeamFollow", ClientClass<CTEBeamFollow>::InstancePtr },
+   { "DT_TEBeamLaser", ClientClass<CTEBeamLaser>::InstancePtr },
+   { "DT_TEBeamPoints", ClientClass<CTEBeamPoints>::InstancePtr },
+   { "DT_TEBeamRing", ClientClass<CTEBeamRing>::InstancePtr },
+   { "DT_TEBeamRingPoint", ClientClass<CTEBeamRingPoint>::InstancePtr },
+   { "DT_TEBeamSpline", ClientClass<CTEBeamSpline>::InstancePtr },
+   { "DT_TEBloodSprite", ClientClass<CTEBloodSprite>::InstancePtr },
+   { "DT_TEBloodStream", ClientClass<CTEBloodStream>::InstancePtr },
+   { "DT_TEBreakModel", ClientClass<CTEBreakModel>::InstancePtr },
+   { "DT_TEBSPDecal", ClientClass<CTEBSPDecal>::InstancePtr },
+   { "DT_TEBubbles", ClientClass<CTEBubbles>::InstancePtr },
+   { "DT_TEBubbleTrail", ClientClass<CTEBubbleTrail>::InstancePtr },
+   { "DT_TEClientProjectile", ClientClass<CTEClientProjectile>::InstancePtr },
+   { "DT_TEDecal", ClientClass<CTEDecal>::InstancePtr },
+   { "DT_TEDotaBloodImpact", ClientClass<CTEDotaBloodImpact>::InstancePtr },
+   { "DT_TEDOTAProjectile", ClientClass<CTEDOTAProjectile>::InstancePtr },
+   { "DT_TEDOTAProjectileLoc", ClientClass<CTEDOTAProjectileLoc>::InstancePtr },
+   { "DT_TEDust", ClientClass<CTEDust>::InstancePtr },
+   { "DT_TEDynamicLight", ClientClass<CTEDynamicLight>::InstancePtr },
+   { "DT_TEEffectDispatch", ClientClass<CTEEffectDispatch>::InstancePtr },
+   { "DT_TEEnergySplash", ClientClass<CTEEnergySplash>::InstancePtr },
+   { "DT_TEExplosion", ClientClass<CTEExplosion>::InstancePtr },
+   { "DT_TEFizz", ClientClass<CTEFizz>::InstancePtr },
+   { "DT_TEFootprintDecal", ClientClass<CTEFootprintDecal>::InstancePtr },
+   { "DT_TEFoundryHelpers", ClientClass<CTEFoundryHelpers>::InstancePtr },
+   { "DT_TEGaussExplosion", ClientClass<CTEGaussExplosion>::InstancePtr },
+   { "DT_TEGlowSprite", ClientClass<CTEGlowSprite>::InstancePtr },
+   { "DT_TEImpact", ClientClass<CTEImpact>::InstancePtr },
+   { "DT_TEKillPlayerAttachments", ClientClass<CTEKillPlayerAttachments>::InstancePtr },
+   { "DT_TELargeFunnel", ClientClass<CTELargeFunnel>::InstancePtr },
+   { "DT_TEMetalSparks", ClientClass<CTEMetalSparks>::InstancePtr },
+   { "DT_TEMuzzleFlash", ClientClass<CTEMuzzleFlash>::InstancePtr },
+   { "DT_TEParticleSystem", ClientClass<CTEParticleSystem>::InstancePtr },
+   { "DT_TEPhysicsProp", ClientClass<CTEPhysicsProp>::InstancePtr },
+   { "DT_TEPlayerDecal", ClientClass<CTEPlayerDecal>::InstancePtr },
+   { "DT_TEProjectedDecal", ClientClass<CTEProjectedDecal>::InstancePtr },
+   { "DT_TEShatterSurface", ClientClass<CTEShatterSurface>::InstancePtr },
+   { "DT_TEShowLine", ClientClass<CTEShowLine>::InstancePtr },
+   { "DT_Tesla", ClientClass<CTesla>::InstancePtr },
+   { "DT_TESmoke", ClientClass<CTESmoke>::InstancePtr },
+   { "DT_TESparks", ClientClass<CTESparks>::InstancePtr },
+   { "DT_TESprite", ClientClass<CTESprite>::InstancePtr },
+   { "DT_TESpriteSpray", ClientClass<CTESpriteSpray>::InstancePtr },
+   { "DT_ProxyToggle", ClientClass<CTest_ProxyToggle_Networkable>::InstancePtr },
+   { "DT_TestTraceline", ClientClass<CTestTraceline>::InstancePtr },
+   { "DT_TEUnitAnimation", ClientClass<CTEUnitAnimation>::InstancePtr },
+   { "DT_TEUnitAnimationEnd", ClientClass<CTEUnitAnimationEnd>::InstancePtr },
+   { "DT_TEWorldDecal", ClientClass<CTEWorldDecal>::InstancePtr },
+   { "DT_TFWearableItem", ClientClass<CTFWearableItem>::InstancePtr },
+   { "DT_TriggerCamera", ClientClass<CTriggerCamera>::InstancePtr },
+   { "DT_TriggerPlayerMovement", ClientClass<CTriggerPlayerMovement>::InstancePtr },
+   { "DT_VGuiScreen", ClientClass<CVGuiScreen>::InstancePtr },
+   { "DT_WaterBullet", ClientClass<CWaterBullet>::InstancePtr },
+   { "DT_WaterLODControl", ClientClass<CWaterLODControl>::InstancePtr },
+   { "DT_WORLD", ClientClass<CWorld>::InstancePtr },
+   { "DT_DustTrail", ClientClass<DustTrail>::InstancePtr },
+   { "DT_MovieExplosion", ClientClass<MovieExplosion>::InstancePtr },
+   { "DT_NextBot", ClientClass<NextBotCombatCharacter>::InstancePtr },
+   { "DT_ParticleSmokeGrenade", ClientClass<ParticleSmokeGrenade>::InstancePtr },
+   { "DT_RocketTrail", ClientClass<RocketTrail>::InstancePtr },
+   { "DT_SmokeTrail", ClientClass<SmokeTrail>::InstancePtr },
+   { "DT_SporeExplosion", ClientClass<SporeExplosion>::InstancePtr },
+   { "DT_SporeTrail", ClientClass<SporeTrail>::InstancePtr },
+};
 
 }

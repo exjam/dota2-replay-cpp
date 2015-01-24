@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -21,6 +21,6 @@ struct CPointCamera : public CBaseEntity
    float m_fBrightness;
 };
 
-DeclareNetworkClass(CPointCamera);
+DeclareClientClass(CPointCamera);
 
 }

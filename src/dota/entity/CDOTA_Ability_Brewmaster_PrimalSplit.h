@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -13,6 +13,6 @@ struct CDOTA_Ability_Brewmaster_PrimalSplit : public CDOTABaseAbility
    uint32_t m_hTertiary;
 };
 
-DeclareNetworkClass(CDOTA_Ability_Brewmaster_PrimalSplit);
+DeclareClientClass(CDOTA_Ability_Brewmaster_PrimalSplit);
 
 }

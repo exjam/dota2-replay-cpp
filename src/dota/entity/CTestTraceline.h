@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 
@@ -15,6 +15,6 @@ struct CTestTraceline
    uint32_t moveparent;
 };
 
-DeclareNetworkClass(CTestTraceline);
+DeclareClientClass(CTestTraceline);
 
 }

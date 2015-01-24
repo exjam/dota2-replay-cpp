@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CTeam.h"
 
@@ -20,6 +20,6 @@ struct CDOTATeam : public CTeam
    uint32_t m_bTeamComplete;
 };
 
-DeclareNetworkClass(CDOTATeam);
+DeclareClientClass(CDOTATeam);
 
 }

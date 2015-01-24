@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include "NextBotCombatCharacter.h"
@@ -57,7 +57,7 @@ struct CDOTA_BaseNPC : public NextBotCombatCharacter
    uint32_t m_iCurShop;
    int32_t m_anglediff;
    uint32_t m_fFlags;
-   Vector2f m_vecOrigin;
+   Vector3f m_vecOrigin;
    uint32_t m_cellX;
    uint32_t m_cellY;
    uint32_t m_cellZ;
@@ -70,8 +70,8 @@ struct CDOTA_BaseNPC : public NextBotCombatCharacter
    int64_t m_nTotalDamageTaken;
 };
 
-DeclareNetworkStruct(DT_DOTA_UnitInventory);
-DeclareNetworkStruct(DT_DOTA_ModifierManager);
-DeclareNetworkClass(CDOTA_BaseNPC);
+DeclareClientStruct(DT_DOTA_UnitInventory);
+DeclareClientStruct(DT_DOTA_ModifierManager);
+DeclareClientClass(CDOTA_BaseNPC);
 
 }

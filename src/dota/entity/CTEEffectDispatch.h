@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -41,7 +41,7 @@ struct CTEEffectDispatch : public CBaseTempEntity
    DT_EffectData m_EffectData;
 };
 
-DeclareNetworkStruct(DT_EffectData);
-DeclareNetworkClass(CTEEffectDispatch);
+DeclareClientStruct(DT_EffectData);
+DeclareClientClass(CTEEffectDispatch);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CGameRulesProxy.h"
 
@@ -149,10 +149,10 @@ struct CDOTAGamerulesProxy : public CGameRulesProxy
    DT_DOTAGamerules dota_gamerules_data;
 };
 
-DeclareNetworkStruct(DT_DOTA_ItemStockInfo);
-DeclareNetworkStruct(DT_DOTA_AssassinMinigameNetworkState);
-DeclareNetworkStruct(DT_DOTA_AbilityDraftAbilityState);
-DeclareNetworkStruct(DT_DOTAGamerules);
-DeclareNetworkClass(CDOTAGamerulesProxy);
+DeclareClientStruct(DT_DOTA_ItemStockInfo);
+DeclareClientStruct(DT_DOTA_AssassinMinigameNetworkState);
+DeclareClientStruct(DT_DOTA_AbilityDraftAbilityState);
+DeclareClientStruct(DT_DOTAGamerules);
+DeclareClientClass(CDOTAGamerulesProxy);
 
 }

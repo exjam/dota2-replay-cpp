@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseFlex.h"
 
 namespace dota
@@ -18,7 +18,7 @@ struct CBaseCombatCharacter : public CBaseFlex
    uint32_t m_hActiveWeapon;
 };
 
-DeclareNetworkStruct(DT_BCCLocalPlayerExclusive);
-DeclareNetworkClass(CBaseCombatCharacter);
+DeclareClientStruct(DT_BCCLocalPlayerExclusive);
+DeclareClientClass(CBaseCombatCharacter);
 
 }

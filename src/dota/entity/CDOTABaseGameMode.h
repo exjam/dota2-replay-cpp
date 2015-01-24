@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -25,6 +25,6 @@ struct CDOTABaseGameMode
    uint32_t m_nCustomXPRequiredToReachNextLevel[99];
 };
 
-DeclareNetworkClass(CDOTABaseGameMode);
+DeclareClientClass(CDOTABaseGameMode);
 
 }

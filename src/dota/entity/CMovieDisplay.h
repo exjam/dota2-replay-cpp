@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -15,6 +15,6 @@ struct CMovieDisplay : public CBaseEntity
    std::string m_szGroupName;
 };
 
-DeclareNetworkClass(CMovieDisplay);
+DeclareClientClass(CMovieDisplay);
 
 }

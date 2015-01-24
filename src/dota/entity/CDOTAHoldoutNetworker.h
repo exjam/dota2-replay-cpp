@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -16,6 +16,6 @@ struct CDOTAHoldoutNetworker
    int32_t m_nGoldBagsExpired;
 };
 
-DeclareNetworkClass(CDOTAHoldoutNetworker);
+DeclareClientClass(CDOTAHoldoutNetworker);
 
 }

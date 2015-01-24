@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
@@ -15,6 +15,6 @@ struct CFuncRotating : public CBaseEntity
    uint32_t m_flSimulationTime;
 };
 
-DeclareNetworkClass(CFuncRotating);
+DeclareClientClass(CFuncRotating);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CSprite.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CSpriteOriented : public CSprite
 {
 };
 
-DeclareNetworkClass(CSpriteOriented);
+DeclareClientClass(CSpriteOriented);
 
 }

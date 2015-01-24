@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CDOTA_BaseNPC_Additive.h"
 
@@ -13,6 +13,6 @@ struct CDOTA_Unit_LoopingSound : public CDOTA_BaseNPC_Additive
    uint32_t m_nLoopingSoundParity;
 };
 
-DeclareNetworkClass(CDOTA_Unit_LoopingSound);
+DeclareClientClass(CDOTA_Unit_LoopingSound);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseParticleEntity.h"
 
@@ -22,6 +22,6 @@ struct CFuncSmokeVolume : public CBaseParticleEntity
    uint32_t m_spawnflags;
 };
 
-DeclareNetworkClass(CFuncSmokeVolume);
+DeclareClientClass(CFuncSmokeVolume);
 
 }

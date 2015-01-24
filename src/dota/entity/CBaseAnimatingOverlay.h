@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseAnimating.h"
 
 namespace dota
@@ -25,8 +25,8 @@ struct CBaseAnimatingOverlay : public CBaseAnimating
    DT_OverlayVars overlay_vars;
 };
 
-DeclareNetworkStruct(DT_Animationlayer);
-DeclareNetworkStruct(DT_OverlayVars);
-DeclareNetworkClass(CBaseAnimatingOverlay);
+DeclareClientStruct(DT_Animationlayer);
+DeclareClientStruct(DT_OverlayVars);
+DeclareClientClass(CBaseAnimatingOverlay);
 
 }

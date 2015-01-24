@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -31,6 +31,6 @@ struct CEnvProjectedTexture : public CBaseEntity
    float m_flRotation;
 };
 
-DeclareNetworkClass(CEnvProjectedTexture);
+DeclareClientClass(CEnvProjectedTexture);
 
 }

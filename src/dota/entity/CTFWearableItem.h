@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CEconWearable.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CTFWearableItem : public CEconWearable
 {
 };
 
-DeclareNetworkClass(CTFWearableItem);
+DeclareClientClass(CTFWearableItem);
 
 }

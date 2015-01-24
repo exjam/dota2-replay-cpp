@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_BaseNPC_Creep.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Unit_Undying_Zombie : public CDOTA_BaseNPC_Creep
 {
 };
 
-DeclareNetworkClass(CDOTA_Unit_Undying_Zombie);
+DeclareClientClass(CDOTA_Unit_Undying_Zombie);
 
 }

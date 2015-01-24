@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include <string>
@@ -24,7 +24,7 @@ struct DT_ClientQuickBuyItemState
 struct DT_DOTACommentatorTable
 {
    uint32_t m_cellbits;
-   Vector2f m_vecOrigin;
+   Vector3f m_vecOrigin;
    uint32_t m_cellX;
    uint32_t m_cellY;
    uint32_t m_cellZ;
@@ -62,9 +62,9 @@ struct CDOTAPlayer : public CBasePlayer
    uint32_t m_bUsingAssistedCameraOperator;
 };
 
-DeclareNetworkStruct(DT_DOTACompendiumData);
-DeclareNetworkStruct(DT_ClientQuickBuyItemState);
-DeclareNetworkStruct(DT_DOTACommentatorTable);
-DeclareNetworkClass(CDOTAPlayer);
+DeclareClientStruct(DT_DOTACompendiumData);
+DeclareClientStruct(DT_ClientQuickBuyItemState);
+DeclareClientStruct(DT_DOTACommentatorTable);
+DeclareClientClass(CDOTAPlayer);
 
 }

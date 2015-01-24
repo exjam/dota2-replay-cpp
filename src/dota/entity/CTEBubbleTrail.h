@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -17,6 +17,6 @@ struct CTEBubbleTrail : public CBaseTempEntity
    float m_fSpeed;
 };
 
-DeclareNetworkClass(CTEBubbleTrail);
+DeclareClientClass(CTEBubbleTrail);
 
 }

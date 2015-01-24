@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseAnimating.h"
 
 namespace dota
@@ -13,6 +13,6 @@ struct CProp_Hallucination : public CBaseAnimating
    float m_fRechargeTime;
 };
 
-DeclareNetworkClass(CProp_Hallucination);
+DeclareClientClass(CProp_Hallucination);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Ability_Lion_FingerOfDeath : public CDOTABaseAbility
 {
 };
 
-DeclareNetworkClass(CDOTA_Ability_Lion_FingerOfDeath);
+DeclareClientClass(CDOTA_Ability_Lion_FingerOfDeath);
 
 }

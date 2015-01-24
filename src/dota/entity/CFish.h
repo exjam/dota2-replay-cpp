@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -18,6 +18,6 @@ struct CFish
    float m_waterLevel;
 };
 
-DeclareNetworkClass(CFish);
+DeclareClientClass(CFish);
 
 }

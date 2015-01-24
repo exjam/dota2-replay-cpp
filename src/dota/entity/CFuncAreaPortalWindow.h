@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -14,6 +14,6 @@ struct CFuncAreaPortalWindow : public CBaseEntity
    int32_t m_iBackgroundModelIndex;
 };
 
-DeclareNetworkClass(CFuncAreaPortalWindow);
+DeclareClientClass(CFuncAreaPortalWindow);
 
 }

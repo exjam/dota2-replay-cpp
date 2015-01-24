@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseAnimatingOverlay.h"
 
@@ -14,6 +14,6 @@ struct CBaseFlex : public CBaseAnimatingOverlay
    Vector3f m_viewtarget;
 };
 
-DeclareNetworkClass(CBaseFlex);
+DeclareClientClass(CBaseFlex);
 
 }

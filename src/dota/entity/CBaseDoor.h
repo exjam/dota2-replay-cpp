@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseToggle.h"
 
 namespace dota
@@ -11,6 +11,6 @@ struct CBaseDoor : public CBaseToggle
    float m_flWaveHeight;
 };
 
-DeclareNetworkClass(CBaseDoor);
+DeclareClientClass(CBaseDoor);
 
 }

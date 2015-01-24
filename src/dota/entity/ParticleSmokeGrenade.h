@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -14,6 +14,6 @@ struct ParticleSmokeGrenade : public CBaseParticleEntity
    uint32_t m_CurrentStage;
 };
 
-DeclareNetworkClass(ParticleSmokeGrenade);
+DeclareClientClass(ParticleSmokeGrenade);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 
 namespace dota
@@ -12,6 +12,6 @@ struct CColorCorrectionVolume
    std::string m_lookupFilename;
 };
 
-DeclareNetworkClass(CColorCorrectionVolume);
+DeclareClientClass(CColorCorrectionVolume);
 
 }

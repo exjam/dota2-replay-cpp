@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include <string>
 
@@ -23,6 +23,6 @@ struct CColorCorrection
    uint32_t m_bExclusive;
 };
 
-DeclareNetworkClass(CColorCorrection);
+DeclareClientClass(CColorCorrection);
 
 }

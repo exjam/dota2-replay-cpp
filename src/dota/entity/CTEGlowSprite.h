@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -16,6 +16,6 @@ struct CTEGlowSprite : public CBaseTempEntity
    uint32_t m_nBrightness;
 };
 
-DeclareNetworkClass(CTEGlowSprite);
+DeclareClientClass(CTEGlowSprite);
 
 }

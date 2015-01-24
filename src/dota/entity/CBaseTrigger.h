@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseToggle.h"
 
 namespace dota
@@ -12,6 +12,6 @@ struct CBaseTrigger : public CBaseToggle
    int32_t m_spawnflags;
 };
 
-DeclareNetworkClass(CBaseTrigger);
+DeclareClientClass(CBaseTrigger);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -19,6 +19,6 @@ struct CSlideshowDisplay : public CBaseEntity
    uint32_t m_bNoListRepeats;
 };
 
-DeclareNetworkClass(CSlideshowDisplay);
+DeclareClientClass(CSlideshowDisplay);
 
 }

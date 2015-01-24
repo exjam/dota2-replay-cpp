@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 
 namespace dota
@@ -18,6 +18,6 @@ struct CDotaSubquestBase
    int32_t m_nTextReplaceValueVersion;
 };
 
-DeclareNetworkClass(CDotaSubquestBase);
+DeclareClientClass(CDotaSubquestBase);
 
 }

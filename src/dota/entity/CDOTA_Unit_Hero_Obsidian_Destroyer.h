@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_BaseNPC_Hero.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Unit_Hero_Obsidian_Destroyer : public CDOTA_BaseNPC_Hero
 {
 };
 
-DeclareNetworkClass(CDOTA_Unit_Hero_Obsidian_Destroyer);
+DeclareClientClass(CDOTA_Unit_Hero_Obsidian_Destroyer);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include <string>
@@ -22,6 +22,6 @@ struct CDOTA_BaseNPC_Building : public CDOTA_BaseNPC
    int32_t m_iHeroStatueOwnerPlayerID;
 };
 
-DeclareNetworkClass(CDOTA_BaseNPC_Building);
+DeclareClientClass(CDOTA_BaseNPC_Building);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -14,6 +14,6 @@ struct CDOTA_Ability_Meepo_DividedWeStand : public CDOTABaseAbility
    int32_t m_nNumDividedWeStand;
 };
 
-DeclareNetworkClass(CDOTA_Ability_Meepo_DividedWeStand);
+DeclareClientClass(CDOTA_Ability_Meepo_DividedWeStand);
 
 }

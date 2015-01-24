@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseAnimating.h"
 
@@ -19,6 +19,6 @@ struct CPointCommentaryNode : public CBaseAnimating
    uint32_t m_hViewPosition;
 };
 
-DeclareNetworkClass(CPointCommentaryNode);
+DeclareClientClass(CPointCommentaryNode);
 
 }

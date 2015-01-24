@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_Ability_Axe_CullingBlade.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Ability_Holdout_CullingBlade : public CDOTA_Ability_Axe_CullingBlad
 {
 };
 
-DeclareNetworkClass(CDOTA_Ability_Holdout_CullingBlade);
+DeclareClientClass(CDOTA_Ability_Holdout_CullingBlade);
 
 }

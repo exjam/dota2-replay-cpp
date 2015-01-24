@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CRagdollProp.h"
 
@@ -15,6 +15,6 @@ struct CRagdollPropAttached : public CRagdollProp
    Vector3f m_attachmentPointRagdollSpace;
 };
 
-DeclareNetworkClass(CRagdollPropAttached);
+DeclareClientClass(CRagdollPropAttached);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 
 namespace dota
@@ -34,6 +34,6 @@ struct CBeam
    uint32_t moveparent;
 };
 
-DeclareNetworkClass(CBeam);
+DeclareClientClass(CBeam);
 
 }

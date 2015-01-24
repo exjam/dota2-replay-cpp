@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseEntity.h"
 
@@ -35,7 +35,7 @@ struct CBaseAnimating : public CBaseEntity
    float m_flFrozen;
 };
 
-DeclareNetworkStruct(DT_ServerAnimationData);
-DeclareNetworkClass(CBaseAnimating);
+DeclareClientStruct(DT_ServerAnimationData);
+DeclareClientClass(CBaseAnimating);
 
 }

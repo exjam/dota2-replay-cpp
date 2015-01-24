@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_Unit_Hero_Beastmaster_Beasts.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Unit_Hero_Beastmaster_Boar : public CDOTA_Unit_Hero_Beastmaster_Bea
 {
 };
 
-DeclareNetworkClass(CDOTA_Unit_Hero_Beastmaster_Boar);
+DeclareClientClass(CDOTA_Unit_Hero_Beastmaster_Boar);
 
 }

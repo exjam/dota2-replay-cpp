@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
@@ -21,6 +21,6 @@ struct CTEBreakModel : public CBaseTempEntity
    uint32_t m_nFlags;
 };
 
-DeclareNetworkClass(CTEBreakModel);
+DeclareClientClass(CTEBreakModel);
 
 }

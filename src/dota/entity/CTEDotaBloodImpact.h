@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseTempEntity.h"
 
 namespace dota
@@ -14,6 +14,6 @@ struct CTEDotaBloodImpact : public CBaseTempEntity
    float m_flYNormal;
 };
 
-DeclareNetworkClass(CTEDotaBloodImpact);
+DeclareClientClass(CTEDotaBloodImpact);
 
 }

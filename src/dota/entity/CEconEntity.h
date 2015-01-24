@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseAttributableItem.h"
 #include "CBaseFlex.h"
 
@@ -12,6 +12,6 @@ struct CEconEntity : public CBaseFlex
    DT_AttributeContainer m_AttributeManager;
 };
 
-DeclareNetworkClass(CEconEntity);
+DeclareClientClass(CEconEntity);
 
 }

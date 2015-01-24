@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -13,6 +13,6 @@ struct CTEWorldDecal : public CBaseTempEntity
    uint32_t m_nIndex;
 };
 
-DeclareNetworkClass(CTEWorldDecal);
+DeclareClientClass(CTEWorldDecal);
 
 }

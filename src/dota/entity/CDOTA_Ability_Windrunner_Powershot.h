@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_Ability_Windrunner_Powershot : public CDOTABaseAbility
 {
 };
 
-DeclareNetworkClass(CDOTA_Ability_Windrunner_Powershot);
+DeclareClientClass(CDOTA_Ability_Windrunner_Powershot);
 
 }

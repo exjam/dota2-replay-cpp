@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -17,6 +17,6 @@ struct SporeExplosion : public CBaseParticleEntity
    uint32_t m_bDontRemove;
 };
 
-DeclareNetworkClass(SporeExplosion);
+DeclareClientClass(SporeExplosion);
 
 }

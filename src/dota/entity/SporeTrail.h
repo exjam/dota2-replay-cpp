@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseParticleEntity.h"
 
@@ -18,6 +18,6 @@ struct SporeTrail : public CBaseParticleEntity
    uint32_t m_bEmit;
 };
 
-DeclareNetworkClass(SporeTrail);
+DeclareClientClass(SporeTrail);
 
 }

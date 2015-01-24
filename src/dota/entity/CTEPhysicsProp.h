@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector2f.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
@@ -19,6 +19,6 @@ struct CTEPhysicsProp : public CBaseTempEntity
    uint32_t m_nEffects;
 };
 
-DeclareNetworkClass(CTEPhysicsProp);
+DeclareClientClass(CTEPhysicsProp);
 
 }

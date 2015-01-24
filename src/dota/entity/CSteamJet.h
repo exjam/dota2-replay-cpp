@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseParticleEntity.h"
 
 namespace dota
@@ -21,6 +21,6 @@ struct CSteamJet : public CBaseParticleEntity
    float m_flRollSpeed;
 };
 
-DeclareNetworkClass(CSteamJet);
+DeclareClientClass(CSteamJet);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -27,7 +27,7 @@ struct CEnvWind
    DT_EnvWindShared m_EnvWindShared;
 };
 
-DeclareNetworkStruct(DT_EnvWindShared);
-DeclareNetworkClass(CEnvWind);
+DeclareClientStruct(DT_EnvWindShared);
+DeclareClientClass(CEnvWind);
 
 }

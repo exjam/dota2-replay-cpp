@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_BaseNPC_Creep.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_BaseNPC_Warlock_Golem : public CDOTA_BaseNPC_Creep
 {
 };
 
-DeclareNetworkClass(CDOTA_BaseNPC_Warlock_Golem);
+DeclareClientClass(CDOTA_BaseNPC_Warlock_Golem);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -21,6 +21,6 @@ struct CSprite : public CBaseEntity
    uint32_t m_bWorldSpaceScale;
 };
 
-DeclareNetworkClass(CSprite);
+DeclareClientClass(CSprite);
 
 }

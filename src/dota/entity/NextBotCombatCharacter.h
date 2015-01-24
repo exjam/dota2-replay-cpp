@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseCombatCharacter.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct NextBotCombatCharacter : public CBaseCombatCharacter
 {
 };
 
-DeclareNetworkClass(NextBotCombatCharacter);
+DeclareClientClass(NextBotCombatCharacter);
 
 }

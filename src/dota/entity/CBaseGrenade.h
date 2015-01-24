@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseCombatCharacter.h"
 
@@ -17,6 +17,6 @@ struct CBaseGrenade : public CBaseCombatCharacter
    uint32_t m_fFlags;
 };
 
-DeclareNetworkClass(CBaseGrenade);
+DeclareClientClass(CBaseGrenade);
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseAnimating.h"
 
 namespace dota
@@ -33,8 +33,8 @@ struct CBaseCombatWeapon : public CBaseAnimating
    uint32_t m_hOwner;
 };
 
-DeclareNetworkStruct(DT_LocalWeaponData);
-DeclareNetworkStruct(DT_LocalActiveWeaponData);
-DeclareNetworkClass(CBaseCombatWeapon);
+DeclareClientStruct(DT_LocalWeaponData);
+DeclareClientStruct(DT_LocalActiveWeaponData);
+DeclareClientClass(CBaseCombatWeapon);
 
 }

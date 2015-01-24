@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTABaseAbility.h"
 
 namespace dota
@@ -28,6 +28,6 @@ struct CDOTA_Item : public CDOTABaseAbility
    uint32_t m_bPurchasedWhileDead;
 };
 
-DeclareNetworkClass(CDOTA_Item);
+DeclareClientClass(CDOTA_Item);
 
 }

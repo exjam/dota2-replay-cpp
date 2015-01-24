@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseParticleEntity.h"
 
@@ -33,6 +33,6 @@ struct CSmokeStack : public CBaseParticleEntity
    uint32_t m_iMaterialModel;
 };
 
-DeclareNetworkClass(CSmokeStack);
+DeclareClientClass(CSmokeStack);
 
 }

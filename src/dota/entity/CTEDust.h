@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CTEParticleSystem.h"
 
@@ -14,6 +14,6 @@ struct CTEDust : public CTEParticleSystem
    Vector3f m_vecDirection;
 };
 
-DeclareNetworkClass(CTEDust);
+DeclareClientClass(CTEDust);
 
 }

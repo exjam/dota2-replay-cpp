@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 
 namespace dota
 {
@@ -11,6 +11,6 @@ struct CEnvDetailController
    float m_flFadeEndDist;
 };
 
-DeclareNetworkClass(CEnvDetailController);
+DeclareClientClass(CEnvDetailController);
 
 }

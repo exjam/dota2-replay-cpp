@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseTempEntity.h"
 
@@ -21,6 +21,6 @@ struct CTEShatterSurface : public CBaseTempEntity
    uint32_t m_uchBackColor[3];
 };
 
-DeclareNetworkClass(CTEShatterSurface);
+DeclareClientClass(CTEShatterSurface);
 
 }

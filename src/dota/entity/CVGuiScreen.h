@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseEntity.h"
 
 namespace dota
@@ -17,6 +17,6 @@ struct CVGuiScreen : public CBaseEntity
    uint32_t m_hPlayerOwner;
 };
 
-DeclareNetworkClass(CVGuiScreen);
+DeclareClientClass(CVGuiScreen);
 
 }

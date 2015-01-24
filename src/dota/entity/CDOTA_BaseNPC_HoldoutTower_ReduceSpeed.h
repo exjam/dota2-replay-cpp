@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CDOTA_BaseNPC_HoldoutTower.h"
 
 namespace dota
@@ -10,6 +10,6 @@ struct CDOTA_BaseNPC_HoldoutTower_ReduceSpeed : public CDOTA_BaseNPC_HoldoutTowe
 {
 };
 
-DeclareNetworkClass(CDOTA_BaseNPC_HoldoutTower_ReduceSpeed);
+DeclareClientClass(CDOTA_BaseNPC_HoldoutTower_ReduceSpeed);
 
 }

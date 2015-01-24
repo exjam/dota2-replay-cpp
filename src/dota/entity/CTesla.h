@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include <string>
 #include "CBaseEntity.h"
 
@@ -13,6 +13,6 @@ struct CTesla : public CBaseEntity
    std::string m_iszSpriteName;
 };
 
-DeclareNetworkClass(CTesla);
+DeclareClientClass(CTesla);
 
 }

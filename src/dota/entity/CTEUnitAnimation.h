@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "CBaseTempEntity.h"
 
 namespace dota
@@ -16,6 +16,6 @@ struct CTEUnitAnimation : public CBaseTempEntity
    int32_t m_Activity;
 };
 
-DeclareNetworkClass(CTEUnitAnimation);
+DeclareClientClass(CTEUnitAnimation);
 
 }

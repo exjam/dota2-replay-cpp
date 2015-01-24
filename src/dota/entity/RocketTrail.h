@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "networkclass.h"
+#include "clientclass.h"
 #include "vector3f.h"
 #include "CBaseParticleEntity.h"
 
@@ -26,6 +26,6 @@ struct RocketTrail : public CBaseParticleEntity
    float m_flFlareScale;
 };
 
-DeclareNetworkClass(RocketTrail);
+DeclareClientClass(RocketTrail);
 
 }
