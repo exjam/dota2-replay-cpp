@@ -1,9 +1,9 @@
 import qbs
 
 CppApplication {
-   name: "inspector"
+   name: "class-inspector"
    type: "application"
-   consoleApplication: true
+   consoleApplication: false
 
    Depends {
       name: "libdota"
@@ -27,9 +27,11 @@ CppApplication {
    files: [
         "abstracttreemodel.cpp",
         "abstracttreemodel.h",
+        "classtreeitem.h",
         "main.cpp",
         "mainwindow.cpp",
         "mainwindow.h",
         "mainwindow.ui",
+        "propertytreeitem.h",
     ]
 }

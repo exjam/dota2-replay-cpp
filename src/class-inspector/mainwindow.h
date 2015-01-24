@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "abstracttreemodel.h"
+#include "demoparser.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,11 +18,17 @@ public:
 
 public slots:
    void classClicked(const QModelIndex &index);
+   void onOpen();
+   void onClose();
+   void onExit();
+
+protected:
+   void showClassTreeList();
+   void addClassProperties(class AbstractTreeItem *parent, std::vector<dota::Property> &properties);
 
 private:
    Ui::MainWindow *ui;
-   AbstractTreeModel *mClassTreeModel;
-   AbstractTreeModel *mDataTreeModel;
+   dota::DemoParser *mDemoParser;
 };
 
 #endif // MAINWINDOW_H
