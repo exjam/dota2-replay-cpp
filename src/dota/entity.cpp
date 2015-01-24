@@ -3,18 +3,48 @@
 
 #include "proto/netmessages.pb.h"
 
+#include "entity/CDOTAPlayer.h"
+#include "entity/CDOTA_PlayerResource.h"
+
 #include "bitstream.h"
+#include "clientclass.h"
 #include "demoparser.h"
 #include "util.h"
 
 namespace dota
 {
 
-using EntityPropList = std::vector<std::size_t>;
-
-static EntityPropList parseEntityPropList(BitStream &in)
+Entity::~Entity()
 {
-   auto propList = EntityPropList { };
+   if (clientEntity && classInfo && classInfo->clientClass) {
+      classInfo->clientClass->destroy(clientEntity);
+      clientEntity = nullptr;
+   }
+}
+
+EntityClass::~EntityClass()
+{
+   if (baseInstance && clientClass) {
+      clientClass->destroy(baseInstance);
+      baseInstance = nullptr;
+   }
+}
+
+std::string EntityClass::getBaseClass() const
+{
+   if (sendTable) {
+      for (auto &&prop : sendTable->properties) {
+         if (prop.varName.compare("baseclass") == 0) {
+            return prop.dtName;
+         }
+      }
+   }
+
+   return { };
+}
+
+bool DemoParser::parseEntityPropList(BitStream &in, EntityPropList &props)
+{
    auto offset = 0;
    auto index = -1;
 
@@ -31,10 +61,48 @@ static EntityPropList parseEntityPropList(BitStream &in)
          index += offset + 1;
       }
 
-      propList.push_back(static_cast<std::size_t>(index));
+      props.push_back(static_cast<std::size_t>(index));
    }
 
-   return propList;
+   return true;
+}
+
+void DemoParser::onEntityEnter(Entity &entity)
+{
+   if (mEventListeners.onEntityEnter) {
+      mEventListeners.onEntityEnter(&entity);
+   }
+}
+
+void DemoParser::onEntityPreserve(Entity &entity)
+{
+   if (mEventListeners.onEntityPreserve) {
+      mEventListeners.onEntityPreserve(&entity);
+   }
+}
+
+void DemoParser::onEntityLeave(Entity &entity)
+{
+   if (mEventListeners.onEntityLeave) {
+      mEventListeners.onEntityLeave(&entity);
+   }
+}
+
+void DemoParser::onEntityDelete(Entity &entity)
+{
+   if (mEventListeners.onEntityDelete) {
+      mEventListeners.onEntityDelete(&entity);
+   }
+
+   auto id = entity.id;
+   entity.~Entity();
+   mEntities[id] = Entity { };
+}
+
+bool DemoParser::parseTempEntities(const CSVCMsg_TempEntities &msg)
+{
+   // TODO: Temp entities
+   return false;
 }
 
 bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
@@ -62,96 +130,82 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
       }
 
       index += indexOffset + 1;
+      Entity &entity = mEntities[index];
 
       switch(static_cast<EntityPVS>(in.read<unsigned>(2))) {
       case EntityPVS::Preserve:
       {
-         //std::cout << "Preserve Entity " << index << std::endl;
-         Entity &entity = mEntities[index];
          entity.pvs = EntityPVS::Preserve;
          assert(entity.classInfo);
+         assert(entity.clientEntity);
 
-         auto &recvTable = entity.classInfo->receiveTable;
-         auto entityPropList = parseEntityPropList(in);
-
-         //std::cout << "Entity Properties" << std::endl;
-         for (auto &&propID : entityPropList) {
-            auto &prop = recvTable.properties[propID];
-            auto &value = entity.state.properties[propID];
-            parsePropertyVariant(in, *prop.sendProp, value);
-            //std::cout << prop.varName << " = " << value << std::endl;
-         }
+         auto propList = EntityPropList {};
+         parseEntityPropList(in, propList);
+         parseEntityProperties(in, *entity.classInfo, entity.clientEntity, propList);
+         onEntityPreserve(entity);
          break;
       }
       break;
       case EntityPVS::Leave:
       {
-         //std::cout << "Leave Entity " << index << std::endl;
          Entity &entity = mEntities[index];
          entity.pvs = EntityPVS::Leave;
+         onEntityLeave(entity);
          break;
       }
       case EntityPVS::Enter:
       {
-         //std::cout << "Enter Entity " << index << std::endl;
-
          auto classId = in.read<std::size_t>(classBits);
-         auto classIdStr = std::to_string(classId);
          auto serial = in.read<unsigned>(10);
-         auto &classInfo = mClassInfo[classId];
-         auto &recvTable = classInfo.receiveTable;
-         auto &baselineTable = mStringTables["instancebaseline"];
+         auto &entityClass = mClassList[classId];
          auto &entity = mEntities[index];
 
-         if (entity.serial != serial) {
-            entity = Entity { };
+         if (entity.pvs != EntityPVS::Delete && entity.serial != serial) {
+            onEntityDelete(entity);
          }
 
+         entity.id = index;
          entity.serial = serial;
-         entity.classInfo = &classInfo;
+         entity.classInfo = &entityClass;
          entity.pvs = EntityPVS::Enter;
-         entity.state.properties.resize(recvTable.properties.size());
 
-
-         auto baselineItr = baselineTable.keyMap.find(classIdStr);
-         if (baselineItr != baselineTable.keyMap.end()) {
-            auto baseline = baselineItr->second;
-            auto baselineStream = std::istringstream { baseline->userData };
-            auto baselineBinary = BinaryStream { baselineStream };
-            auto baselineIn = BitStream { baselineBinary };
-
-            //std::cout << "Baseline Properties" << std::endl;
-            auto baselinePropList = parseEntityPropList(baselineIn);
-
-            for (auto &&propID : baselinePropList) {
-               auto &prop = recvTable.properties[propID];
-               auto &value = entity.state.properties[propID];
-               parsePropertyVariant(baselineIn, *prop.sendProp, value);
-               //std::cout << (baselineIn.mOffset - 8 + 8 * (unsigned)baselineStream.tellg()) << " " << prop.varName << " = " << value << std::endl;
+         if (entityClass.clientClass) {
+            if (entityClass.baseInstance) {
+               entity.clientEntity = entityClass.clientClass->create(entityClass.baseInstance);
+            } else {
+               entity.clientEntity = entityClass.clientClass->create();
             }
          } else {
-            std::cout << "Warning: no baseline properties found for " << classInfo.tableName << std::endl;
+            // TODO: Use slow entity with dynamic properties
+            entity.clientEntity = nullptr;
          }
 
-         //std::cout << "Entity Properties" << std::endl;
-         auto entityPropList = parseEntityPropList(in);
-
-         for (auto &&propID : entityPropList) {
-            auto &prop = recvTable.properties[propID];
-            auto &value = entity.state.properties[propID];
-            parsePropertyVariant(in, *prop.sendProp, value);
-            //std::cout << (baselineIn.mOffset - 8 + 8 * (unsigned)stream.tellg()) << " " << prop.varName << " = " << value << std::endl;
-         }
+         auto propList = EntityPropList {};
+         parseEntityPropList(in, propList);
+         parseEntityProperties(in, entityClass, entity.clientEntity, propList);
+         onEntityEnter(entity);
          break;
       }
       case EntityPVS::Delete:
-         //std::cout << "Delete Entity " << index << std::endl;
-         mEntities[index] = { };
-         mEntities[index].pvs = EntityPVS::Delete;
+         Entity &entity = mEntities[index];
+         entity.pvs = EntityPVS::Delete;
+         onEntityDelete(entity);
          break;
       }
    }
 
+   if (msg.is_delta()) {
+      while (in.readBit()) {
+         int index = in.read<std::size_t>(11);
+         Entity &entity = mEntities[index];
+         entity.pvs = EntityPVS::Delete;
+         onEntityDelete(entity);
+      }
+   }
+
+   auto pos = static_cast<std::size_t>(stream.tellg());
+   auto len = msg.entity_data().size();
+   assert(pos == len);
    return true;
 }
 

@@ -18,14 +18,15 @@ bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t
    auto format = in.readBit();
 
    for (std::size_t i = 0; i < entries; ++i) {
+      auto strData = std::string {};
+      auto userData = std::string {};
+
       // Read index
       if (in.readBit()) {
          index++;
       } else {
          index = in.read<uint32_t>(indexBits);
       }
-
-      auto &entry = table.entries[index];
 
       // Read str_data
       if (in.readBit()) {
@@ -38,21 +39,21 @@ bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t
             auto length = in.read<std::size_t>(5);
 
             if (historyIndex > history.size()) {
-               entry.strData = in.readNullTerminatedString(MAX_STRING_SIZE);
+               strData = in.readNullTerminatedString(MAX_STRING_SIZE);
             } else {
                assert(length <= history[historyIndex].size());
-               entry.strData = history[historyIndex].substr(0, length);
-               entry.strData += in.readNullTerminatedString(MAX_STRING_SIZE);
+               strData = history[historyIndex].substr(0, length);
+               strData += in.readNullTerminatedString(MAX_STRING_SIZE);
             }
          } else {
-            entry.strData = in.readNullTerminatedString(MAX_STRING_SIZE);
+            strData = in.readNullTerminatedString(MAX_STRING_SIZE);
          }
 
          if (history.size() >= STRING_HISTORY_SIZE) {
             history.pop_front();
          }
 
-         history.emplace_back(entry.strData);
+         history.emplace_back(strData);
       }
 
       // Read user_data
@@ -63,14 +64,13 @@ bool DemoParser::parseStringTable(StringTable &table, BitStream &in, std::size_t
             length = in.read<std::size_t>(14) * 8;
          }
 
-         entry.userData = in.readBits(length);
+         userData = in.readBits(length);
       }
 
-      if (entry.strData.size() && entry.userData.size()) {
-         table.keyMap[entry.strData] = &entry;
-      }
+      table.setEntry(index, strData, userData);
    }
 
+   table.lastUpdate = mTick;
    return true;
 }
 

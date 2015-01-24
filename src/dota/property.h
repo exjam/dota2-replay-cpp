@@ -3,6 +3,10 @@
 #include <cassert>
 #include <string>
 #include <vector>
+#include "vector2f.h"
+#include "vector3f.h"
+
+class BitStream;
 
 namespace dota
 {
@@ -44,6 +48,16 @@ enum class PropertyFlag
    ChangesOften            = 1 << 18,
    EncodedAgainstTickCount = 1 << 19
 };
+
+struct Property;
+struct ElementGetter;
+
+using PropertyInt = int32_t;
+using PropertyInt64 = int64_t;
+using PropertyFloat = float;
+using PropertyVector = Vector3f;
+using PropertyVectorXY = Vector2f;
+using PropertyString = std::string;
 
 static inline std::size_t operator&(const PropertyFlag &lhs, const PropertyFlag &rhs)
 {
