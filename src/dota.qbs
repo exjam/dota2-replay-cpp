@@ -6,7 +6,7 @@ Project {
       "util/libutil.qbs",
       "replay/replay.qbs",
       "inspector/inspector.qbs",
-      "classdumper/classdumper.qbs"
+      "client-class-generator/client-class-generator.qbs",
    ]
 }
 

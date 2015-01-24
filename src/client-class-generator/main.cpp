@@ -35,11 +35,12 @@ void split(const std::string &s, char delim, std::vector<std::string> &elems) {
 // Find a class by its table name
 std::string getClassName(std::string dtName)
 {
-   auto itr = demo.mClassMap.find(dtName);
-   if (itr == demo.mClassMap.end()) {
-      return {};
+   auto entityClass = demo.findClassByTableName(dtName);
+
+   if (entityClass) {
+      return entityClass->name;
    } else {
-      return itr->second->name;
+      return "";
    }
 }
 
@@ -95,19 +96,19 @@ int isPropertyFixedArray(dota::Property &prop)
 
    if (prop.dtName.find("_ST_" + prop.varName) == 0) {
       // It's a lengthproxy based array
-      dota::SendTable &sendTable = demo.mSendTables[prop.dtName];
-      assert(sendTable.properties.size() > 1);
-      assert(sendTable.properties[0].varName.compare("lengthproxy") == 0);
-      assert(sendTable.properties[1].varName.compare("0000") == 0);
-      return sendTable.properties.size() - 1;
+      auto sendTable = demo.findSendTableByName(prop.dtName);
+      assert(sendTable->properties.size() > 1);
+      assert(sendTable->properties[0].varName.compare("lengthproxy") == 0);
+      assert(sendTable->properties[1].varName.compare("0000") == 0);
+      return sendTable->properties.size() - 1;
    }
 
    if (prop.varName.compare(prop.dtName) == 0) {
       // It's a static array
-      dota::SendTable &sendTable = demo.mSendTables[prop.dtName];
-      assert(sendTable.properties.size());
-      assert(sendTable.properties[0].varName.compare("0000") == 0);
-      return sendTable.properties.size();
+      auto sendTable = demo.findSendTableByName(prop.dtName);
+      assert(sendTable->properties.size());
+      assert(sendTable->properties[0].varName.compare("0000") == 0);
+      return sendTable->properties.size();
    }
 
    return 0;
@@ -149,8 +150,8 @@ void findDependencies(dota::SendTable *table, std::set<std::string> &structDeps,
       }
 
       if (isPropertyFixedArray(prop)) {
-         dota::SendTable &sendTable = demo.mSendTables[prop.dtName];
-         dota::Property &arrayType = sendTable.properties.back();
+         auto sendTable = demo.findSendTableByName(prop.dtName);
+         auto &arrayType = sendTable->properties.back();
 
          if (arrayType.isDataTable()) {
             auto className = getClassName(arrayType.dtName);
@@ -159,7 +160,7 @@ void findDependencies(dota::SendTable *table, std::set<std::string> &structDeps,
                classDeps.insert(className);
             } else {
                structDeps.insert(arrayType.dtName);
-               findDependencies(&demo.mSendTables[arrayType.dtName], structDeps, classDeps, headers);
+               findDependencies(demo.findSendTableByName(arrayType.dtName), structDeps, classDeps, headers);
             }
          }
 
@@ -172,7 +173,7 @@ void findDependencies(dota::SendTable *table, std::set<std::string> &structDeps,
             classDeps.insert(className);
          } else {
             structDeps.insert(prop.dtName);
-            findDependencies(&demo.mSendTables[prop.dtName], structDeps, classDeps, headers);
+            findDependencies(demo.findSendTableByName(prop.dtName), structDeps, classDeps, headers);
          }
       }
    }
@@ -272,36 +273,41 @@ void dumpStructure(std::ostream &out, dota::SendTable *table)
          continue;
       }
 
-      if (prop.isVectorElement()) {
+      auto vecItr = vectors.find(prop.varName);
+      if (prop.isVectorElement() || vecItr != vectors.end()) {
          std::smatch match;
          std::regex_match(prop.varName, match, std::regex("([^[]*)\\[([0-9])\\]"));
+         auto index = 0;
+         auto name = prop.varName;
 
          if (match.size() == 3) {
-            auto name = match.str(1);
-            auto index = std::atoi(match.str(2).c_str());
-            auto itr = vectors.find(name);
+            name = match.str(1);
+            index = std::atoi(match.str(2).c_str());
 
-            if (itr != vectors.end()) {
-               if (index != 0) {
-                  // Only print on the first element
-                  continue;
-               }
-
-               // Print the correct type
-               index = itr->second;
-
-               if (index == 1) {
-                  out << activeIndent << "Vector2f " << name;
-               } else if (index == 2) {
-                  out << activeIndent << "Vector3f " << name;
-               } else {
-                  assert(false);//BAD
-               }
+            if (vecItr == vectors.end()) {
+               vecItr = vectors.find(name);
             }
          }
+
+         if (index != 0) {
+            // Only print on the first element
+            continue;
+         }
+
+         // Print the correct size
+         assert (vecItr != vectors.end());
+         index = vecItr->second;
+
+         if (index == 1) {
+            out << activeIndent << "Vector2f " << name;
+         } else if (index == 2) {
+            out << activeIndent << "Vector3f " << name;
+         } else {
+            assert(false);//BAD
+         }
       } else if (int arrayLength = isPropertyFixedArray(prop)) {
-         dota::SendTable &sendTable = demo.mSendTables[prop.dtName];
-         out << activeIndent << getPropertyValueTypename(sendTable.properties.back());
+         auto sendTable = demo.findSendTableByName(prop.dtName);
+         out << activeIndent << getPropertyValueTypename(sendTable->properties.back());
          out << " " << makeSafeVarName(prop.varName);
          out << "[" << arrayLength << "]";
       } else {
@@ -373,6 +379,8 @@ void dumpStructure(std::ostream &out, dota::SendTable *table)
          // Do a vector template type std::vector<ArrayType>
          if (prop.isArray()) {
             assert(!!arrayType);
+            // We do not support std::vector<DT_Type>
+            assert(arrayType->type != dota::PropertyType::DataTable);
             out << "<" << getPropertyValueTypename(*arrayType) << ">";
             arrayType = nullptr;
          }
@@ -406,9 +414,9 @@ void dumpStructure(std::ostream &out, dota::SendTable *table)
    }
 }
 
-bool doesDependOnStruct(dota::SendTable &sendTable, std::string name)
+bool doesDependOnStruct(dota::SendTable *sendTable, std::string name)
 {
-   for (dota::Property &prop : sendTable.properties) {
+   for (dota::Property &prop : sendTable->properties) {
       if (prop.isDataTable()) {
          if (prop.dtName.compare(name) == 0) {
             return true;
@@ -416,8 +424,8 @@ bool doesDependOnStruct(dota::SendTable &sendTable, std::string name)
       }
 
       if (isPropertyFixedArray(prop)) {
-         dota::SendTable &arrayTable = demo.mSendTables[prop.dtName];
-         dota::Property &arrayType = arrayTable.properties.back();
+         auto arrayTable = demo.findSendTableByName(prop.dtName);
+         auto &arrayType = arrayTable->properties.back();
 
          if (arrayType.isDataTable()) {
             if (arrayType.dtName.compare(name) == 0) {
@@ -433,7 +441,7 @@ bool doesDependOnStruct(dota::SendTable &sendTable, std::string name)
 void orderStructDependencies(std::set<std::string> &structDeps, std::vector<std::string> &ordered)
 {
    for (auto &dep : structDeps) {
-      dota::SendTable &sendTable = demo.mSendTables[dep];
+      auto sendTable = demo.findSendTableByName(dep);
       int earliestPos = 0;
 
       for (auto i = 0; i < ordered.size(); ++i) {
@@ -447,13 +455,13 @@ void orderStructDependencies(std::set<std::string> &structDeps, std::vector<std:
 }
 
 // Write the class.h file
-void writeEntityDeclaration(dota::EntityClass &entityClass, std::ofstream &out)
+void writeEntityDeclaration(const dota::EntityClass &entityClass, std::ofstream &out)
 {
    auto sendTable = entityClass.sendTable;
 
    // Find all dependencies
    std::set<std::string> structDeps, classDeps, headers;
-   headers.insert("\"networkclass.h\"");
+   headers.insert("\"clientclass.h\"");
    findDependencies(sendTable, structDeps, classDeps, headers);
 
    // Filter out any DT_ structs which have been declared in other files
@@ -496,7 +504,7 @@ void writeEntityDeclaration(dota::EntityClass &entityClass, std::ofstream &out)
    for (auto &dep : orderedStructDeps) {
       out << "struct " << dep << std::endl;
       out << "{" << std::endl;
-      dumpStructure(out, &demo.mSendTables[dep]);
+      dumpStructure(out, demo.findSendTableByName(dep));
       out << "};" << std::endl;
       out << std::endl;
    }
@@ -526,9 +534,9 @@ void writeEntityDeclaration(dota::EntityClass &entityClass, std::ofstream &out)
 
    out << std::endl;
    for (auto &dep : orderedStructDeps) {
-      out << "DeclareNetworkStruct(" << dep << ");" << std::endl;
+      out << "DeclareClientStruct(" << dep << ");" << std::endl;
    }
-   out << "DeclareNetworkClass(" << entityClass.name << ");" << std::endl;
+   out << "DeclareClientClass(" << entityClass.name << ");" << std::endl;
 
    out << std::endl;
    out << "}" << std::endl;
@@ -564,12 +572,12 @@ void dumpNetworkStructure(dota::SendTable *sendTable, std::ofstream &out)
          varName = match.str(1);
       }
 
-      out << "   " << "NetworkProperty(" << makeSafeVarName(varName) << ");" << std::endl;
+      out << "   " << "AddClientProperty(" << makeSafeVarName(varName) << ");" << std::endl;
    }
 }
 
 // Write the class.cpp file
-void writeEntityDefinition(dota::EntityClass &entityClass, std::ofstream &out)
+void writeEntityDefinition(const dota::EntityClass &entityClass, std::ofstream &out)
 {
    std::set<std::string> structDeps;
    findDependencies(entityClass.sendTable, structDeps, std::set<std::string> {}, std::set<std::string> {});
@@ -590,14 +598,14 @@ void writeEntityDefinition(dota::EntityClass &entityClass, std::ofstream &out)
 
    // Define our DT_ structs
    for (auto &dep : structDeps) {
-      out << "BeginNetworkStruct(" << dep << ");" << std::endl;
-      dumpNetworkStructure(&demo.mSendTables[dep], out);
-      out << "EndNetworkStruct();" << std::endl;
+      out << "BeginClientStruct(" << dep << ");" << std::endl;
+      dumpNetworkStructure(demo.findSendTableByName(dep), out);
+      out << "EndClientStruct();" << std::endl;
       out << std::endl;
    }
 
    // Dump our class!
-   out << "BeginNetworkClass(" << entityClass.name << ", " << entityClass.tableName << ");" << std::endl;
+   out << "BeginClientClass(" << entityClass.name << ", " << entityClass.tableName << ");" << std::endl;
 
    auto baseClass = entityClass.getBaseClass();
 
@@ -607,11 +615,11 @@ void writeEntityDefinition(dota::EntityClass &entityClass, std::ofstream &out)
          baseClass = className;
       }
 
-      out << "   " << "NetworkBaseClass(" << baseClass << ");" << std::endl;
+      out << "   " << "ClientBaseClass(" << baseClass << ");" << std::endl;
    }
 
    dumpNetworkStructure(entityClass.sendTable, out);
-   out << "EndNetworkClass();" << std::endl;
+   out << "EndClientClass();" << std::endl;
    out << std::endl;
 }
 
@@ -619,12 +627,12 @@ int main()
 {
    auto file = std::ifstream { "1151921935.dem", std::ifstream::binary };
    auto in = BinaryStream { file };
-   demo.parse(in);
+   demo.parse(in, dota::ParseProfile::SendTables);
 
    std::ofstream source;
    source.open("src/dota/entity/definitions.cpp");
 
-   for (auto &&entityClass : demo.mClassInfo) {
+   for (auto &&entityClass : demo.classList()) {
       source << "#include \"" << entityClass.name << ".h\"" << std::endl;
    }
 
@@ -633,7 +641,7 @@ int main()
    source << "{" << std::endl;
    source << std::endl;
 
-   for (auto &&entityClass : demo.mClassInfo) {
+   for (auto &&entityClass : demo.classList()) {
       if (!entityClass.sendTable) {
          continue;
       }
@@ -645,6 +653,23 @@ int main()
 
       writeEntityDefinition(entityClass, source);
    }
+
+   source << "std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = {" << std::endl;
+
+   for (auto &&entityClass : demo.classList()) {
+      if (!entityClass.sendTable) {
+         continue;
+      }
+
+      source << "   { "
+             << "\"" << entityClass.tableName << "\", "
+             << "ClientClass<" << entityClass.name << ">::InstancePtr"
+             << " },"
+             << std::endl;
+   }
+
+   source << "};" << std::endl;
+   source << std::endl;
 
    source << "}" << std::endl;
    source.close();

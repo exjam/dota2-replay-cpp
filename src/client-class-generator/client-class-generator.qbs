@@ -1,7 +1,7 @@
 import qbs
 
 CppApplication {
-   name: "class-dumper"
+   name: "client-class-generator"
    type: "application"
    consoleApplication: true
 
