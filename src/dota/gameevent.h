@@ -12,7 +12,7 @@ namespace dota
 {
 
 using GameEventID = std::size_t;
-struct GameEventBase;
+class GameEventBase;
 
 enum class GameEventType
 {
