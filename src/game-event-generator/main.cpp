@@ -6,6 +6,13 @@
 #include "demoparser.h"
 #include "gameevent.h"
 
+// We build without libdotaevent and libdotaentity, so define empty maps
+namespace dota
+{
+std::map<std::string, const GameEventBase*> GameEventList::mGameEventMap = { };
+std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = { };
+};
+
 std::string getSafeVarName(std::string name)
 {
    // player_class.class
@@ -24,7 +31,7 @@ void dumpDeclaration(std::ostream &out, const dota::GameEventDescriptor *event)
    for (auto &&prop : event->properties) {
       out << "   ";
 
-      switch (prop.type) {
+      switch (static_cast<dota::GameEventType>(prop.type)) {
       case dota::GameEventType::String:
          out << "std::string ";
          break;
@@ -70,7 +77,7 @@ void dumpDefinition(std::ostream &out, const dota::GameEventDescriptor *event)
 void getRequiredIncludes(const dota::GameEventDescriptor *event, std::set<std::string> &headers)
 {
    for (auto &&prop : event->properties) {
-      switch (prop.type) {
+      switch (static_cast<dota::GameEventType>(prop.type)) {
       case dota::GameEventType::String:
          headers.insert("<string>");
          break;
@@ -109,6 +116,8 @@ int main()
 
       std::ofstream header;
       header.open("src/dota/event/" + evpair.first + ".h");
+      std::cout << evpair.first << ".h" << std::endl;
+
       header << "#pragma once" << std::endl;
 
       for (auto &&include : includes) {
@@ -135,6 +144,7 @@ int main()
 
    std::ofstream source;
    source.open("src/dota/event/definitions.cpp");
+   std::cout << "definitions.cpp" << std::endl;
 
    for (auto &&evpair : events) {
       source << "#include \"" << evpair.first << ".h\"" << std::endl;
