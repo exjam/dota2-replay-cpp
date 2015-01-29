@@ -91,8 +91,8 @@ private:
    std::chrono::seconds mInGameTime;
    dota::Tick mTick;
    dota::DemoParser mDemo;
-   dota::CDOTA_PlayerResource *mPlayerResource;
-   dota::CDOTAGamerulesProxy *mGameRules;
+   dota::CDOTA_PlayerResource *mPlayerResource = nullptr;
+   dota::CDOTAGamerulesProxy *mGameRules = nullptr;
 };
 
 // TODO: Find the HUGE memory leaks!!
