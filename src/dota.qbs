@@ -7,7 +7,8 @@ Project {
       "replay/replay.qbs",
       "class-inspector/class-inspector.qbs",
       "client-class-generator/client-class-generator.qbs",
-      "game-event-generator/game-event-generator.qbs"
+      "game-event-generator/game-event-generator.qbs",
+      "proxy/proxy.qbs"
    ]
 }
 
