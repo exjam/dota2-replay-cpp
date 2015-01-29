@@ -11,6 +11,13 @@
 #include "binarystream.h"
 #include "demoparser.h"
 
+// We build without libdotaevent and libdotaentity, so define empty maps
+namespace dota
+{
+   std::map<std::string, const GameEventBase*> GameEventList::mGameEventMap = {};
+   std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = {};
+};
+
 // I am lazy
 dota::DemoParser demo;
 std::map<std::string, std::string> dtDefinition;
@@ -629,8 +636,21 @@ int main()
    auto in = BinaryStream { file };
    demo.parse(in, dota::ParseProfile::SendTables);
 
+   for (auto &&entityClass : demo.classList()) {
+      if (!entityClass.sendTable) {
+         continue;
+      }
+
+      std::ofstream header;
+      header.open("src/dota/entity/" + entityClass.name + ".h");
+      std::cout << entityClass.name << ".h" << std::endl;
+      writeEntityDeclaration(entityClass, header);
+      header.close();
+   }
+
    std::ofstream source;
    source.open("src/dota/entity/definitions.cpp");
+   std::cout << "definitions.cpp" << std::endl;
 
    for (auto &&entityClass : demo.classList()) {
       source << "#include \"" << entityClass.name << ".h\"" << std::endl;
@@ -645,11 +665,6 @@ int main()
       if (!entityClass.sendTable) {
          continue;
       }
-
-      std::ofstream header;
-      header.open("src/dota/entity/" + entityClass.name + ".h");
-      writeEntityDeclaration(entityClass, header);
-      header.close();
 
       writeEntityDefinition(entityClass, source);
    }
