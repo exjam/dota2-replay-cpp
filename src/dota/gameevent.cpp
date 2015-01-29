@@ -54,8 +54,7 @@ bool DemoParser::parseGameEvent(const CSVCMsg_GameEvent &event)
          }
       }
 
-      mEventListeners.onGameEvent(event.eventid(), gameEvent);
-      descriptor.gameEventClass->destroy(gameEvent);
+      mTickData.gameEvents.push_back(std::make_pair(&descriptor, gameEvent));
    } else {
       // TODO: Fall back to slow dynamic game event!
    }

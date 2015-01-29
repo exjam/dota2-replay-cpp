@@ -35,45 +35,22 @@ bool DemoParser::parse(BinaryStream &in, const ParseProfile *profile)
 void DemoParser::onTick(Tick tick)
 {
    if (mEventListeners.onTick) {
-      mEventListeners.onTick(tick);
+      mEventListeners.onTick(tick, mTickData);
    }
-}
 
-void DemoParser::onGameEvent(dota::GameEventID type, const dota::GameEvent *event)
-{
-   if (mEventListeners.onGameEvent) {
-      mEventListeners.onGameEvent(type, event);
+   // Clean up any data acquired this tick
+   for (auto &&evpair : mTickData.gameEvents) {
+      evpair.first->gameEventClass->destroy(evpair.second);
    }
+
+   mTickData.gameEvents.clear();
+   mTickData.enterEntity.clear();
+   mTickData.deleteEntity.clear();
 }
 
 void DemoParser::setOnTickEventListener(TickEventListener listener)
 {
    mEventListeners.onTick = listener;
-}
-
-void DemoParser::setOnGameEventListener(GameEventListener listener)
-{
-   mEventListeners.onGameEvent = listener;
-}
-
-void DemoParser::setOnEntityEnterListener(EntityEventListener listener)
-{
-   mEventListeners.onEntityEnter = listener;
-}
-
-void DemoParser::setOnEntityLeaveListener(EntityEventListener listener)
-{
-   mEventListeners.onEntityLeave = listener;
-}
-
-void DemoParser::setOnEntityPreserveListener(EntityEventListener listener)
-{
-   mEventListeners.onEntityPreserve = listener;
-}
-
-void DemoParser::setOnEntityDeleteListener(EntityEventListener listener)
-{
-   mEventListeners.onEntityDelete = listener;
 }
 
 const ServerInfo &DemoParser::serverInfo() const

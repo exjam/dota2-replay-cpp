@@ -245,16 +245,19 @@ struct SignonStateInfo
    SignonState state;
 };
 
+struct TickData
+{
+   std::vector<std::pair<GameEventDescriptor *, GameEvent *>> gameEvents;
+   std::vector<Entity *> enterEntity;
+   std::vector<EntityHandle> deleteEntity;
+};
+
 using SendTableMap = std::map<std::string, SendTable>;
 using EntityPropList = std::vector<std::size_t>;
 using ClassList = std::vector<EntityClass>;
 using GameEventDescriptorList = std::vector<GameEventDescriptor>;
 
-using TickEventListener = std::function<void(Tick)>;
-
-// TODO: Unify gameevent/entity style
-using GameEventListener = std::function<void(GameEventID, const GameEvent*)>;
-using EntityEventListener = std::function<void(const Entity*)>;
+using TickEventListener = std::function<void(Tick,TickData&)>;
 
 class DemoParser
 {
@@ -274,11 +277,6 @@ public:
    EntityClass *findClassByTableName(const std::string &name);
 
    void setOnTickEventListener(TickEventListener listener);
-   void setOnGameEventListener(GameEventListener listener);
-   void setOnEntityEnterListener(EntityEventListener listener);
-   void setOnEntityLeaveListener(EntityEventListener listener);
-   void setOnEntityPreserveListener(EntityEventListener listener);
-   void setOnEntityDeleteListener(EntityEventListener listener);
 
 protected:
    bool parseMessage(BinaryStream &in);
@@ -309,11 +307,8 @@ protected:
    }
 
    void onTick(Tick tick);
-   void onEntityLeave(Entity &entity);
-   void onEntityPreserve(Entity &entity);
    void onEntityEnter(Entity &entity);
    void onEntityDelete(Entity &entity);
-   void onGameEvent(dota::GameEventID type, const dota::GameEvent *event);
 
    bool addEntityClass(std::size_t id, std::string name, std::string tableName);
 
@@ -440,12 +435,9 @@ protected:
 
    struct {
       TickEventListener onTick;
-      GameEventListener onGameEvent;
-      EntityEventListener onEntityEnter;
-      EntityEventListener onEntityLeave;
-      EntityEventListener onEntityPreserve;
-      EntityEventListener onEntityDelete;
    } mEventListeners;
+
+   TickData mTickData;
 };
 
 }

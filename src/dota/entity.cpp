@@ -69,30 +69,12 @@ bool DemoParser::parseEntityPropList(BitStream &in, EntityPropList &props)
 
 void DemoParser::onEntityEnter(Entity &entity)
 {
-   if (mEventListeners.onEntityEnter) {
-      mEventListeners.onEntityEnter(&entity);
-   }
-}
-
-void DemoParser::onEntityPreserve(Entity &entity)
-{
-   if (mEventListeners.onEntityPreserve) {
-      mEventListeners.onEntityPreserve(&entity);
-   }
-}
-
-void DemoParser::onEntityLeave(Entity &entity)
-{
-   if (mEventListeners.onEntityLeave) {
-      mEventListeners.onEntityLeave(&entity);
-   }
+   mTickData.enterEntity.push_back(&entity);
 }
 
 void DemoParser::onEntityDelete(Entity &entity)
 {
-   if (mEventListeners.onEntityDelete) {
-      mEventListeners.onEntityDelete(&entity);
-   }
+   mTickData.deleteEntity.push_back(std::make_pair(entity.id, entity.serial));
 
    auto id = entity.id;
    entity.~Entity();
@@ -142,7 +124,6 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
          auto propList = EntityPropList {};
          parseEntityPropList(in, propList);
          parseEntityProperties(in, *entity.classInfo, entity.clientEntity, propList);
-         onEntityPreserve(entity);
          break;
       }
       break;
@@ -150,7 +131,6 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
       {
          Entity &entity = mEntities[index];
          entity.pvs = EntityPVS::Leave;
-         onEntityLeave(entity);
          break;
       }
       case EntityPVS::Enter:

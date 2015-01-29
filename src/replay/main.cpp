@@ -14,12 +14,7 @@ class ReplayAnalyser
 public:
    ReplayAnalyser()
    {
-      mDemo.setOnTickEventListener(std::bind(&ReplayAnalyser::onDemoTick, this, std::placeholders::_1));
-      mDemo.setOnGameEventListener(std::bind(&ReplayAnalyser::onGameEvent, this, std::placeholders::_1, std::placeholders::_2));
-      mDemo.setOnEntityEnterListener(std::bind(&ReplayAnalyser::onEntityEnter, this, std::placeholders::_1));
-      mDemo.setOnEntityLeaveListener(std::bind(&ReplayAnalyser::onEntityLeave, this, std::placeholders::_1));
-      mDemo.setOnEntityPreserveListener(std::bind(&ReplayAnalyser::onEntityPreserve, this, std::placeholders::_1));
-      mDemo.setOnEntityDeleteListener(std::bind(&ReplayAnalyser::onEntityDelete, this, std::placeholders::_1));
+      mDemo.setOnTickEventListener(std::bind(&ReplayAnalyser::onDemoTick, this, std::placeholders::_1, std::placeholders::_2));
    }
 
    void analyse(std::string filename)
@@ -31,8 +26,20 @@ public:
       mDemo.parse(in, dota::ParseProfile::FullReplay);
    }
 
-   void onDemoTick(dota::Tick tick)
+   void onDemoTick(dota::Tick tick, dota::TickData &data)
    {
+      for (auto &&enterEntity : data.enterEntity) {
+         onEntityEnter(enterEntity);
+      }
+
+      for (auto &&deleteEntity : data.deleteEntity) {
+         onEntityDelete(deleteEntity);
+      }
+
+      for (auto &&gameEvent : data.gameEvents) {
+         onGameEvent(gameEvent.first->id, gameEvent.second);
+      }
+
       if (mGameRules && mGameRules->dota_gamerules_data.m_flGameStartTime > 0.0f) {
          auto dt = mGameRules->dota_gamerules_data.m_fGameTime - mGameRules->dota_gamerules_data.m_flGameStartTime;
          auto time = std::chrono::seconds(static_cast<long long>(dt));
@@ -68,16 +75,9 @@ public:
       }
    }
 
-   void onEntityLeave(const dota::Entity *entity)
+   void onEntityDelete(const dota::EntityHandle &handle)
    {
-   }
-
-   void onEntityPreserve(const dota::Entity *entity)
-   {
-   }
-
-   void onEntityDelete(const dota::Entity *entity)
-   {
+      // Remove mPlayerResource and mGameRules when matches handle
    }
 
 private:

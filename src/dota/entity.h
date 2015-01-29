@@ -44,12 +44,16 @@ struct EntityClass
 
 };
 
+using EntityID = uint32_t;
+using EntitySerial = uint32_t;
+using EntityHandle = std::pair<EntityID, EntitySerial>;
+
 struct Entity
 {
    ~Entity();
 
-   uint32_t id = 0;
-   uint32_t serial = 0;
+   EntityID id = 0;
+   EntitySerial serial = 0;
    EntityPVS pvs = EntityPVS::Delete;
    EntityClass *classInfo = nullptr;
    ClientEntity *clientEntity = nullptr;

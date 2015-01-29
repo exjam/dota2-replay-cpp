@@ -249,16 +249,15 @@ struct ContainerElementGetter<std::vector<Type>> : public ElementGetter
    {
       std::vector<Type> &vec = *reinterpret_cast<std::vector<Type>*>(container);
 
-      // Only allow elem to push_back 1
       if (vec.size() == elem) {
          vec.resize(elem + 1);
       }
+
       assert(elem < vec.size());
       return reinterpret_cast<std::ptrdiff_t>(&vec[elem]);
    }
 };
 
-// Get an element getter for any type
 template<typename Type>
 struct get_element_getter
 {
