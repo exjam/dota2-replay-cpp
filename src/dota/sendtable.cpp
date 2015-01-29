@@ -261,6 +261,7 @@ bool DemoParser::updateEntityClass(EntityClass &entityClass)
    auto &propertyMap = entityClass.propertyMap;
    auto exclusions = SendTableExclusions {};
    auto &sendTableMap = mSendTables;
+   auto clientClass = ClientClassList::get(sendTable.name);
 
    if (!getExclusions(sendTableMap, sendTable, exclusions)) {
       return false;
@@ -277,6 +278,10 @@ bool DemoParser::updateEntityClass(EntityClass &entityClass)
    // Add all properties to propertyMap
    for (auto i = 0; i < properties.size(); ++i) {
       propertyMap[properties[i].varName] = &properties[i];
+   }
+
+   if (!clientClass) {
+      return true;
    }
 
    if (!mapClientClass(sendTableMap, ClientClassList::get(sendTable.name), properties, propertyMap, "", 0)) {
