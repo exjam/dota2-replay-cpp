@@ -79,42 +79,42 @@ struct Property
 
    bool isExcluded() const
    {
-      return flags & PropertyFlag::Exclude;
+      return !!(flags & PropertyFlag::Exclude);
    }
 
    bool isCollapsible() const
    {
-      return flags & PropertyFlag::Collapsible;
+      return !!(flags & PropertyFlag::Collapsible);
    }
 
    bool isChangedOften() const
    {
-      return flags & PropertyFlag::ChangesOften;
+      return !!(flags & PropertyFlag::ChangesOften);
    }
 
    bool isEncodedAgainstTickCount() const
    {
-      return flags & PropertyFlag::EncodedAgainstTickCount;
+      return !!(flags & PropertyFlag::EncodedAgainstTickCount);
    }
 
    bool isUnsigned() const
    {
-      return flags & PropertyFlag::Unsigned;
+      return !!(flags & PropertyFlag::Unsigned);
    }
 
    bool isNormal() const
    {
-      return flags & PropertyFlag::Normal;
+      return !!(flags & PropertyFlag::Normal);
    }
 
    bool isInsideArray() const
    {
-      return flags & PropertyFlag::InsideArray;
+      return !!(flags & PropertyFlag::InsideArray);
    }
 
    bool isVectorElement() const
    {
-      return flags & PropertyFlag::VectorElem;
+      return !!(flags & PropertyFlag::VectorElem);
    }
 
    bool isArray() const
