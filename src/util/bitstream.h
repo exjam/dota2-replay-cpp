@@ -134,7 +134,7 @@ public:
    template<>
    int64_t read<int64_t>(std::size_t bits)
    {
-      auto value = read<uint32_t>(bits);
+      auto value = read<uint64_t>(bits);
       auto mask = 1ULL << (bits - 1);
       value = (value ^ mask) - mask;
       return value;
