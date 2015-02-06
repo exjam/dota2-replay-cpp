@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="definitions.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CAI_BaseNPC.h" />
+    <ClInclude Include="CBaseAnimating.h" />
+    <ClInclude Include="CBaseAnimatingOverlay.h" />
+    <ClInclude Include="CBaseAttributableItem.h" />
+    <ClInclude Include="CBaseButton.h" />
+    <ClInclude Include="CBaseCombatCharacter.h" />
+    <ClInclude Include="CBaseCombatWeapon.h" />
+    <ClInclude Include="CBaseDoor.h" />
+    <ClInclude Include="CBaseEntity.h" />
+    <ClInclude Include="CBaseFlex.h" />
+    <ClInclude Include="CBaseGrenade.h" />
+    <ClInclude Include="CBaseParticleEntity.h" />
+    <ClInclude Include="CBasePlayer.h" />
+    <ClInclude Include="CBasePropDoor.h" />
+    <ClInclude Include="CBaseTempEntity.h" />
+    <ClInclude Include="CBaseToggle.h" />
+    <ClInclude Include="CBaseTrigger.h" />
+    <ClInclude Include="CBaseViewModel.h" />
+    <ClInclude Include="CBeam.h" />
+    <ClInclude Include="CBeamSpotlight.h" />
+    <ClInclude Include="CBoneFollower.h" />
+    <ClInclude Include="CBreakableProp.h" />
+    <ClInclude Include="CBreakableSurface.h" />
+    <ClInclude Include="CColorCorrection.h" />
+    <ClInclude Include="CColorCorrectionVolume.h" />
+    <ClInclude Include="CDOTABaseAbility.h" />
+    <ClInclude Include="CDOTABaseGameMode.h" />
+    <ClInclude Include="CDOTACameraBounds.h" />
+    <ClInclude Include="CDOTAFogOfWarTempViewers.h" />
+    <ClInclude Include="CDOTAFogOfWarWasVisible.h" />
+    <ClInclude Include="CDOTAGameManagerProxy.h" />
+    <ClInclude Include="CDOTAGamerulesProxy.h" />
+    <ClInclude Include="CDOTAHoldoutNetworker.h" />
+    <ClInclude Include="CDOTAMinimapBoundary.h" />
+    <ClInclude Include="CDOTAPlayer.h" />
+    <ClInclude Include="CDOTAPropCustomTexture.h" />
+    <ClInclude Include="CDotaQuest.h" />
+    <ClInclude Include="CDotaQuestBase.h" />
+    <ClInclude Include="CDOTASpecGraphPlayerData.h" />
+    <ClInclude Include="CDOTASpectatorGraphManagerProxy.h" />
+    <ClInclude Include="CDotaSubquestBase.h" />
+    <ClInclude Include="CDOTATeam.h" />
+    <ClInclude Include="CDotaTutorialNetworker.h" />
+    <ClInclude Include="CDOTAWearableItem.h" />
+    <ClInclude Include="CDOTA_Ability_AbyssalUnderlord_DarkRift.h" />
+    <ClInclude Include="CDOTA_Ability_AbyssalUnderlord_Firestorm.h" />
+    <ClInclude Include="CDOTA_Ability_AbyssalUnderlord_PitOfMalice.h" />
+    <ClInclude Include="CDOTA_Ability_Alchemist_AcidSpray.h" />
+    <ClInclude Include="CDOTA_Ability_AncientApparition_ChillingTouch.h" />
+    <ClInclude Include="CDOTA_Ability_AncientApparition_ColdFeet.h" />
+    <ClInclude Include="CDOTA_Ability_AncientApparition_IceBlast.h" />
+    <ClInclude Include="CDOTA_Ability_AncientApparition_IceVortex.h" />
+    <ClInclude Include="CDOTA_Ability_AntiMage_Blink.h" />
+    <ClInclude Include="CDOTA_Ability_AntiMage_ManaVoid.h" />
+    <ClInclude Include="CDOTA_Ability_AttributeBonus.h" />
+    <ClInclude Include="CDOTA_Ability_Axe_BerserkersCall.h" />
+    <ClInclude Include="CDOTA_Ability_Axe_CounterHelix.h" />
+    <ClInclude Include="CDOTA_Ability_Axe_CullingBlade.h" />
+    <ClInclude Include="CDOTA_Ability_Bane_FiendsGrip.h" />
+    <ClInclude Include="CDOTA_Ability_Batrider_Flamebreak.h" />
+    <ClInclude Include="CDOTA_Ability_Batrider_StickyNapalm.h" />
+    <ClInclude Include="CDOTA_Ability_Beastmaster_PrimalRoar.h" />
+    <ClInclude Include="CDOTA_Ability_Bloodseeker_Bloodbath.h" />
+    <ClInclude Include="CDOTA_Ability_BountyHunter_ShurikenToss.h" />
+    <ClInclude Include="CDOTA_Ability_Brewmaster_DispelMagic.h" />
+    <ClInclude Include="CDOTA_Ability_Brewmaster_DrunkenBrawler.h" />
+    <ClInclude Include="CDOTA_Ability_Brewmaster_DrunkenHaze.h" />
+    <ClInclude Include="CDOTA_Ability_Brewmaster_PrimalSplit.h" />
+    <ClInclude Include="CDOTA_Ability_Bristleback_QuillSpray.h" />
+    <ClInclude Include="CDOTA_Ability_Broodmother_SpinWeb.h" />
+    <ClInclude Include="CDOTA_Ability_Centaur_Stampede.h" />
+    <ClInclude Include="CDOTA_Ability_ChaosKnight_Phantasm.h" />
+    <ClInclude Include="CDOTA_Ability_Chen_HandOfGod.h" />
+    <ClInclude Include="CDOTA_Ability_Chen_HolyPersuasion.h" />
+    <ClInclude Include="CDOTA_Ability_Chen_TestOfFaithTeleport.h" />
+    <ClInclude Include="CDOTA_Ability_Courier_TakeStashItems.h" />
+    <ClInclude Include="CDOTA_Ability_Courier_TransferItems.h" />
+    <ClInclude Include="CDOTA_Ability_CrystalMaiden_CrystalNova.h" />
+    <ClInclude Include="CDOTA_Ability_CrystalMaiden_FreezingField.h" />
+    <ClInclude Include="CDOTA_Ability_DarkSeer_Vacuum.h" />
+    <ClInclude Include="CDOTA_Ability_DataDriven.h" />
+    <ClInclude Include="CDOTA_Ability_Dazzle_Weave.h" />
+    <ClInclude Include="CDOTA_Ability_DeathProphet_CarrionSwarm.h" />
+    <ClInclude Include="CDOTA_Ability_DeathProphet_Silence.h" />
+    <ClInclude Include="CDOTA_Ability_Disruptor_KineticField.h" />
+    <ClInclude Include="CDOTA_Ability_Disruptor_StaticStorm.h" />
+    <ClInclude Include="CDOTA_Ability_DoomBringer_Devour.h" />
+    <ClInclude Include="CDOTA_Ability_DragonKnight_BreatheFire.h" />
+    <ClInclude Include="CDOTA_Ability_DrowRanger_Silence.h" />
+    <ClInclude Include="CDOTA_Ability_DrowRanger_WaveOfSilence.h" />
+    <ClInclude Include="CDOTA_Ability_EarthSpirit_BoulderSmash.h" />
+    <ClInclude Include="CDOTA_Ability_EarthSpirit_GeomagneticGrip.h" />
+    <ClInclude Include="CDOTA_Ability_EarthSpirit_Petrify.h" />
+    <ClInclude Include="CDOTA_Ability_EarthSpirit_RollingBoulder.h" />
+    <ClInclude Include="CDOTA_Ability_EarthSpirit_StoneCaller.h" />
+    <ClInclude Include="CDOTA_Ability_Elder_Titan_EarthSplitter.h" />
+    <ClInclude Include="CDOTA_Ability_EmberSpirit_Activate_FireRemnant.h" />
+    <ClInclude Include="CDOTA_Ability_EmberSpirit_FireRemnant.h" />
+    <ClInclude Include="CDOTA_Ability_EmberSpirit_SearingChains.h" />
+    <ClInclude Include="CDOTA_Ability_EmberSpirit_SleightOfFist.h" />
+    <ClInclude Include="CDOTA_Ability_Enchantress_Impetus.h" />
+    <ClInclude Include="CDOTA_Ability_Enchantress_NaturesAttendants.h" />
+    <ClInclude Include="CDOTA_Ability_Enchantress_Untouchable.h" />
+    <ClInclude Include="CDOTA_Ability_Enigma_BlackHole.h" />
+    <ClInclude Include="CDOTA_Ability_Enigma_DemonicConversion.h" />
+    <ClInclude Include="CDOTA_Ability_Enigma_MidnightPulse.h" />
+    <ClInclude Include="CDOTA_Ability_FacelessVoid_Chronosphere.h" />
+    <ClInclude Include="CDOTA_Ability_FacelessVoid_TimeWalk.h" />
+    <ClInclude Include="CDOTA_Ability_Furion_ForceOfNature.h" />
+    <ClInclude Include="CDOTA_Ability_Furion_Teleportation.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_BlackHole.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_BladeFury.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Bloodlust.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_ColdSnap.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Decrepify.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Diabolic_Edict.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_EchoSlam.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Fatal_Bonds.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_FleshGolem.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_IceWall.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_LagunaBlade.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_LeechSeed.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Magic_Missile.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Maledict.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_MeatHook.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Black_BrainSap.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Black_Nightmare.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Blue_ColdFeet.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Blue_IceVortex.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Green_LivingArmor.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Green_Overgrowth.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Orange_DragonSlave.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Orange_LightStrikeArray.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Purple_PlagueWard.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Purple_VenomousGale.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Red_Earthshock.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Red_Overpower.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Sight.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_White_Degen_Aura.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_White_Purification.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Yellow_IonShell.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Miniboss_Yellow_Surge.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_NaturesAttendants.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_PhantomStrike.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_PoisonNova.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Purification.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_Rot.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_ShadowStrike.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_ShadowWave.h" />
+    <ClInclude Include="CDOTA_Ability_Greevil_TimeLock.h" />
+    <ClInclude Include="CDOTA_Ability_Gyrocopter_Call_Down.h" />
+    <ClInclude Include="CDOTA_Ability_Healing_Campfire.h" />
+    <ClInclude Include="CDOTA_Ability_Holdout_CullingBlade.h" />
+    <ClInclude Include="CDOTA_Ability_Holdout_GladiatorsUnite.h" />
+    <ClInclude Include="CDOTA_Ability_Holdout_Multishot.h" />
+    <ClInclude Include="CDOTA_Ability_Holdout_Omnislash.h" />
+    <ClInclude Include="CDOTA_Ability_Huskar_Life_Break.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_DeafeningBlast.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_EMP.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_Invoke.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_InvokedBase.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_SunStrike.h" />
+    <ClInclude Include="CDOTA_Ability_Invoker_Tornado.h" />
+    <ClInclude Include="CDOTA_Ability_Jakiro_DualBreath.h" />
+    <ClInclude Include="CDOTA_Ability_Jakiro_IcePath.h" />
+    <ClInclude Include="CDOTA_Ability_Jakiro_Macropyre.h" />
+    <ClInclude Include="CDOTA_Ability_Juggernaut_HealingWard.h" />
+    <ClInclude Include="CDOTA_Ability_Juggernaut_Omnislash.h" />
+    <ClInclude Include="CDOTA_Ability_KeeperOfTheLight_BlindingLight.h" />
+    <ClInclude Include="CDOTA_Ability_KeeperOfTheLight_Illuminate.h" />
+    <ClInclude Include="CDOTA_Ability_KeeperOfTheLight_Recall.h" />
+    <ClInclude Include="CDOTA_Ability_Kunkka_GhostShip.h" />
+    <ClInclude Include="CDOTA_Ability_Kunkka_Tidebringer.h" />
+    <ClInclude Include="CDOTA_Ability_Kunkka_Torrent.h" />
+    <ClInclude Include="CDOTA_Ability_Legion_Commander_MomentOfCourage.h" />
+    <ClInclude Include="CDOTA_Ability_Legion_Commander_OverwhelmingOdds.h" />
+    <ClInclude Include="CDOTA_Ability_Leshrac_Diabolic_Edict.h" />
+    <ClInclude Include="CDOTA_Ability_Leshrac_Pulse_Nova.h" />
+    <ClInclude Include="CDOTA_Ability_Leshrac_Split_Earth.h" />
+    <ClInclude Include="CDOTA_Ability_Lich_ChainFrost.h" />
+    <ClInclude Include="CDOTA_Ability_Lich_FrostNova.h" />
+    <ClInclude Include="CDOTA_Ability_Life_Stealer_Infest.h" />
+    <ClInclude Include="CDOTA_Ability_Lina_DragonSlave.h" />
+    <ClInclude Include="CDOTA_Ability_Lina_LagunaBlade.h" />
+    <ClInclude Include="CDOTA_Ability_Lina_LightStrikeArray.h" />
+    <ClInclude Include="CDOTA_Ability_Lion_FingerOfDeath.h" />
+    <ClInclude Include="CDOTA_Ability_Lion_Impale.h" />
+    <ClInclude Include="CDOTA_Ability_Lion_ManaDrain.h" />
+    <ClInclude Include="CDOTA_Ability_LoneDruid_Rabid.h" />
+    <ClInclude Include="CDOTA_Ability_LoneDruid_SpiritBear.h" />
+    <ClInclude Include="CDOTA_Ability_LoneDruid_SpiritBear_Return.h" />
+    <ClInclude Include="CDOTA_Ability_LoneDruid_TrueForm_BattleCry.h" />
+    <ClInclude Include="CDOTA_Ability_LoneDruid_TrueForm_Druid.h" />
+    <ClInclude Include="CDOTA_Ability_Luna_Eclipse.h" />
+    <ClInclude Include="CDOTA_Ability_Luna_LunarBlessing.h" />
+    <ClInclude Include="CDOTA_Ability_Lycan_Howl.h" />
+    <ClInclude Include="CDOTA_Ability_Lycan_SummonWolves.h" />
+    <ClInclude Include="CDOTA_Ability_Magnataur_ReversePolarity.h" />
+    <ClInclude Include="CDOTA_Ability_Magnataur_Shockwave.h" />
+    <ClInclude Include="CDOTA_Ability_Meepo_DividedWeStand.h" />
+    <ClInclude Include="CDOTA_Ability_Meepo_Earthbind.h" />
+    <ClInclude Include="CDOTA_Ability_Meepo_Poof.h" />
+    <ClInclude Include="CDOTA_Ability_Morphling_Replicate.h" />
+    <ClInclude Include="CDOTA_Ability_Morphling_Waveform.h" />
+    <ClInclude Include="CDOTA_Ability_NagaSiren_MirrorImage.h" />
+    <ClInclude Include="CDOTA_Ability_NagaSiren_RipTide.h" />
+    <ClInclude Include="CDOTA_Ability_Necrolyte_Death_Pulse.h" />
+    <ClInclude Include="CDOTA_Ability_Necrolyte_ReapersScythe.h" />
+    <ClInclude Include="CDOTA_Ability_Nevermore_Requiem.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Apocalypse.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Eruption.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Frenzy.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Hurricane.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Roar.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Sigils.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Tail_Swipe.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Waterball.h" />
+    <ClInclude Include="CDOTA_Ability_Nian_Whirlpool.h" />
+    <ClInclude Include="CDOTA_Ability_Nyx_Assassin_Impale.h" />
+    <ClInclude Include="CDOTA_Ability_Obsidian_Destroyer_ArcaneOrb.h" />
+    <ClInclude Include="CDOTA_Ability_Obsidian_Destroyer_AstralImprisonment.h" />
+    <ClInclude Include="CDOTA_Ability_Obsidian_Destroyer_SanityEclipse.h" />
+    <ClInclude Include="CDOTA_Ability_Ogre_Magi_Bloodlust.h" />
+    <ClInclude Include="CDOTA_Ability_Ogre_Magi_Fireblast.h" />
+    <ClInclude Include="CDOTA_Ability_Ogre_Magi_Multicast.h" />
+    <ClInclude Include="CDOTA_Ability_Ogre_Magi_Unrefined_Fireblast.h" />
+    <ClInclude Include="CDOTA_Ability_Oracle_FortunesEnd.h" />
+    <ClInclude Include="CDOTA_Ability_PhantomAssassin_PhantomStrike.h" />
+    <ClInclude Include="CDOTA_Ability_PhantomLancer_Doppelwalk.h" />
+    <ClInclude Include="CDOTA_Ability_Phoenix_LaunchFireSpirit.h" />
+    <ClInclude Include="CDOTA_Ability_Phoenix_Supernova.h" />
+    <ClInclude Include="CDOTA_Ability_Puck_DreamCoil.h" />
+    <ClInclude Include="CDOTA_Ability_Puck_IllusoryOrb.h" />
+    <ClInclude Include="CDOTA_Ability_Puck_WaningRift.h" />
+    <ClInclude Include="CDOTA_Ability_Pudge_Dismember.h" />
+    <ClInclude Include="CDOTA_Ability_Pudge_MeatHook.h" />
+    <ClInclude Include="CDOTA_Ability_Pugna_Decrepify.h" />
+    <ClInclude Include="CDOTA_Ability_Pugna_LifeDrain.h" />
+    <ClInclude Include="CDOTA_Ability_Pugna_NetherBlast.h" />
+    <ClInclude Include="CDOTA_Ability_QueenOfPain_Blink.h" />
+    <ClInclude Include="CDOTA_Ability_QueenOfPain_SonicWave.h" />
+    <ClInclude Include="CDOTA_Ability_Rattletrap_BatteryAssault.h" />
+    <ClInclude Include="CDOTA_Ability_Rattletrap_Hookshot.h" />
+    <ClInclude Include="CDOTA_Ability_Rattletrap_RocketFlare.h" />
+    <ClInclude Include="CDOTA_Ability_Razor_PlasmaField.h" />
+    <ClInclude Include="CDOTA_Ability_Riki_BlinkStrike.h" />
+    <ClInclude Include="CDOTA_Ability_Riki_SmokeScreen.h" />
+    <ClInclude Include="CDOTA_Ability_Roshan_Halloween_Apocalypse.h" />
+    <ClInclude Include="CDOTA_Ability_Roshan_Halloween_Burn.h" />
+    <ClInclude Include="CDOTA_Ability_Roshan_Halloween_Fireball.h" />
+    <ClInclude Include="CDOTA_Ability_Roshan_Toss.h" />
+    <ClInclude Include="CDOTA_Ability_Roshan_WaveOfForce.h" />
+    <ClInclude Include="CDOTA_Ability_Rubick_SpellSteal.h" />
+    <ClInclude Include="CDOTA_Ability_Rubick_TelekinesisLand.h" />
+    <ClInclude Include="CDOTA_Ability_SandKing_BurrowStrike.h" />
+    <ClInclude Include="CDOTA_Ability_SandKing_Epicenter.h" />
+    <ClInclude Include="CDOTA_Ability_SatyrTrickster_Purge.h" />
+    <ClInclude Include="CDOTA_Ability_Shadow_Demon_Disruption.h" />
+    <ClInclude Include="CDOTA_Ability_Shadow_Demon_Shadow_Poison.h" />
+    <ClInclude Include="CDOTA_Ability_Shadow_Demon_Soul_Catcher.h" />
+    <ClInclude Include="CDOTA_Ability_Shredder_Chakram.h" />
+    <ClInclude Include="CDOTA_Ability_Shredder_TimberChain.h" />
+    <ClInclude Include="CDOTA_Ability_Silencer_CurseOfTheSilent.h" />
+    <ClInclude Include="CDOTA_Ability_Silencer_GlaivesOfWisdom.h" />
+    <ClInclude Include="CDOTA_Ability_Skywrath_Mage_Mystic_Flare.h" />
+    <ClInclude Include="CDOTA_Ability_Slardar_Slithereen_Crush.h" />
+    <ClInclude Include="CDOTA_Ability_Slark_EssenceShift.h" />
+    <ClInclude Include="CDOTA_Ability_Sniper_Shrapnel.h" />
+    <ClInclude Include="CDOTA_Ability_SpiritBreaker_NetherStrike.h" />
+    <ClInclude Include="CDOTA_Ability_StormSpirit_BallLightning.h" />
+    <ClInclude Include="CDOTA_Ability_Sven_StormBolt.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_FocusedDetonate.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_LandMines.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_Minefield_Sign.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_RemoteMines.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_RemoteMines_SelfDetonate.h" />
+    <ClInclude Include="CDOTA_Ability_Techies_StasisTrap.h" />
+    <ClInclude Include="CDOTA_Ability_Terrorblade_Sunder.h" />
+    <ClInclude Include="CDOTA_Ability_Throw_Coal.h" />
+    <ClInclude Include="CDOTA_Ability_Throw_Snowball.h" />
+    <ClInclude Include="CDOTA_Ability_Tidehunter_AnchorSmash.h" />
+    <ClInclude Include="CDOTA_Ability_Tidehunter_Ravage.h" />
+    <ClInclude Include="CDOTA_Ability_Tiny_Avalanche.h" />
+    <ClInclude Include="CDOTA_Ability_Tiny_CraggyExterior.h" />
+    <ClInclude Include="CDOTA_Ability_Tiny_Toss.h" />
+    <ClInclude Include="CDOTA_Ability_Treant_EyesInTheForest.h" />
+    <ClInclude Include="CDOTA_Ability_Treant_Overgrowth.h" />
+    <ClInclude Include="CDOTA_Ability_TrollWarlord_BerserkersRage.h" />
+    <ClInclude Include="CDOTA_Ability_TrollWarlord_WhirlingAxes_Ranged.h" />
+    <ClInclude Include="CDOTA_Ability_Tusk_FrozenSigil.h" />
+    <ClInclude Include="CDOTA_Ability_Undying_Decay.h" />
+    <ClInclude Include="CDOTA_Ability_Undying_SoulRip.h" />
+    <ClInclude Include="CDOTA_Ability_VengefulSpirit_Nether_Swap.h" />
+    <ClInclude Include="CDOTA_Ability_VengefulSpirit_WaveOfTerror.h" />
+    <ClInclude Include="CDOTA_Ability_Venomancer_PoisonNova.h" />
+    <ClInclude Include="CDOTA_Ability_Venomancer_VenomousGale.h" />
+    <ClInclude Include="CDOTA_Ability_Viper_ViperStrike.h" />
+    <ClInclude Include="CDOTA_Ability_Visage_SummonFamiliars.h" />
+    <ClInclude Include="CDOTA_Ability_Visage_SummonFamiliars_StoneForm.h" />
+    <ClInclude Include="CDOTA_Ability_Warlock_RainOfChaos.h" />
+    <ClInclude Include="CDOTA_Ability_Warlock_Shadow_Word.h" />
+    <ClInclude Include="CDOTA_Ability_Warlock_Upheaval.h" />
+    <ClInclude Include="CDOTA_Ability_Weaver_TheSwarm.h" />
+    <ClInclude Include="CDOTA_Ability_Windrunner_FocusFire.h" />
+    <ClInclude Include="CDOTA_Ability_Windrunner_Powershot.h" />
+    <ClInclude Include="CDOTA_Ability_Winter_Wyvern_Arctic_Burn.h" />
+    <ClInclude Include="CDOTA_Ability_Winter_Wyvern_Cold_Embrace.h" />
+    <ClInclude Include="CDOTA_Ability_Winter_Wyvern_Winters_Curse.h" />
+    <ClInclude Include="CDOTA_Ability_Wisp_Overcharge.h" />
+    <ClInclude Include="CDOTA_Ability_Wisp_Relocate.h" />
+    <ClInclude Include="CDOTA_Ability_Wisp_Spirits.h" />
+    <ClInclude Include="CDOTA_Ability_Wisp_Tether.h" />
+    <ClInclude Include="CDOTA_Ability_WitchDoctor_Maledict.h" />
+    <ClInclude Include="CDOTA_Ability_WitchDoctor_ParalyzingCask.h" />
+    <ClInclude Include="CDOTA_Ability_WitchDoctor_VoodooRestoration.h" />
+    <ClInclude Include="CDOTA_BaseNPC.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Additive.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Barracks.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Building.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creature.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_Diretide.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_Lane.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_LootGreevil.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_Neutral.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_Siege.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Creep_Talking.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Fort.h" />
+    <ClInclude Include="CDOTA_BaseNPC_HallofFame.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Hero.h" />
+    <ClInclude Include="CDOTA_BaseNPC_HoldoutTower.h" />
+    <ClInclude Include="CDOTA_BaseNPC_HoldoutTower_HeavySlow.h" />
+    <ClInclude Include="CDOTA_BaseNPC_HoldoutTower_LightFast.h" />
+    <ClInclude Include="CDOTA_BaseNPC_HoldoutTower_ReduceSpeed.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Invoker_Forged_Spirit.h" />
+    <ClInclude Include="CDOTA_BaseNPC_ShadowShaman_SerpentWard.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Shop.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Tower.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Tusk_Sigil.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Venomancer_PlagueWard.h" />
+    <ClInclude Include="CDOTA_BaseNPC_Warlock_Golem.h" />
+    <ClInclude Include="CDOTA_Beastmaster_Axe.h" />
+    <ClInclude Include="CDOTA_DataDire.h" />
+    <ClInclude Include="CDOTA_DataNonSpectator.h" />
+    <ClInclude Include="CDOTA_DataRadiant.h" />
+    <ClInclude Include="CDOTA_DataSpectator.h" />
+    <ClInclude Include="CDOTA_DeathProphet_Exorcism_Spirit.h" />
+    <ClInclude Include="CDOTA_DisplacementVisibility.h" />
+    <ClInclude Include="CDOTA_Halloween_CandyBucket.h" />
+    <ClInclude Include="CDOTA_Halloween_CandyBucketDire.h" />
+    <ClInclude Include="CDOTA_Halloween_CandyBucketRadiant.h" />
+    <ClInclude Include="CDOTA_Hero_Recorder.h" />
+    <ClInclude Include="CDOTA_Item.h" />
+    <ClInclude Include="CDOTA_Item_Ancient_Janggo.h" />
+    <ClInclude Include="CDOTA_Item_Armlet.h" />
+    <ClInclude Include="CDOTA_Item_Battlefury.h" />
+    <ClInclude Include="CDOTA_Item_BlinkDagger.h" />
+    <ClInclude Include="CDOTA_Item_Bloodstone.h" />
+    <ClInclude Include="CDOTA_Item_BootsOfTravel.h" />
+    <ClInclude Include="CDOTA_Item_Cyclone.h" />
+    <ClInclude Include="CDOTA_Item_Cyclone_2.h" />
+    <ClInclude Include="CDOTA_Item_DataDriven.h" />
+    <ClInclude Include="CDOTA_Item_Diffusal_Blade.h" />
+    <ClInclude Include="CDOTA_Item_Diffusal_Blade_Level2.h" />
+    <ClInclude Include="CDOTA_Item_EmptyBottle.h" />
+    <ClInclude Include="CDOTA_Item_Ethereal_Blade.h" />
+    <ClInclude Include="CDOTA_Item_ForceStaff.h" />
+    <ClInclude Include="CDOTA_Item_Greevil_Blink.h" />
+    <ClInclude Include="CDOTA_Item_Greevil_Whistle.h" />
+    <ClInclude Include="CDOTA_Item_Greevil_WhistleToggle.h" />
+    <ClInclude Include="CDOTA_Item_MantaStyle.h" />
+    <ClInclude Include="CDOTA_Item_Medallion_Of_Courage.h" />
+    <ClInclude Include="CDOTA_Item_Mystery_Toss.h" />
+    <ClInclude Include="CDOTA_Item_Mystery_Vacuum.h" />
+    <ClInclude Include="CDOTA_Item_Necronomicon.h" />
+    <ClInclude Include="CDOTA_Item_Necronomicon_Level2.h" />
+    <ClInclude Include="CDOTA_Item_Necronomicon_Level3.h" />
+    <ClInclude Include="CDOTA_Item_Nian_Flag_Trap.h" />
+    <ClInclude Include="CDOTA_Item_ObserverWard.h" />
+    <ClInclude Include="CDOTA_Item_Physical.h" />
+    <ClInclude Include="CDOTA_Item_PlaceBuilding.h" />
+    <ClInclude Include="CDOTA_Item_PlaceBuilding_Free.h" />
+    <ClInclude Include="CDOTA_Item_PlaceBuilding_Grid.h" />
+    <ClInclude Include="CDOTA_Item_PowerTreads.h" />
+    <ClInclude Include="CDOTA_Item_QuellingBlade.h" />
+    <ClInclude Include="CDOTA_Item_Radiance.h" />
+    <ClInclude Include="CDOTA_Item_Recipe_Veil_Of_Discord.h" />
+    <ClInclude Include="CDOTA_Item_RingOfAquila.h" />
+    <ClInclude Include="CDOTA_Item_Ring_Of_Basilius.h" />
+    <ClInclude Include="CDOTA_Item_Rune.h" />
+    <ClInclude Include="CDOTA_Item_SentryWard.h" />
+    <ClInclude Include="CDOTA_Item_Tango.h" />
+    <ClInclude Include="CDOTA_Item_TeleportScroll.h" />
+    <ClInclude Include="CDOTA_Item_TranquilBoots.h" />
+    <ClInclude Include="CDOTA_Item_Urn_Of_Shadows.h" />
+    <ClInclude Include="CDOTA_Item_Veil_Of_Discord.h" />
+    <ClInclude Include="CDOTA_NeutralSpawner.h" />
+    <ClInclude Include="CDOTA_NPC_DataDriven.h" />
+    <ClInclude Include="CDOTA_NPC_Observer_Ward.h" />
+    <ClInclude Include="CDOTA_NPC_Observer_Ward_TrueSight.h" />
+    <ClInclude Include="CDOTA_NPC_TechiesMines.h" />
+    <ClInclude Include="CDOTA_NPC_Techies_Minefield_Sign.h" />
+    <ClInclude Include="CDOTA_NPC_Treant_EyesInTheForest.h" />
+    <ClInclude Include="CDOTA_NPC_WitchDoctor_Ward.h" />
+    <ClInclude Include="CDOTA_PhantomAssassin_Gravestone.h" />
+    <ClInclude Include="CDOTA_PlayerResource.h" />
+    <ClInclude Include="CDOTA_RoshanSpawner.h" />
+    <ClInclude Include="CDOTA_TempTree.h" />
+    <ClInclude Include="CDOTA_Tiny_ScepterTree.h" />
+    <ClInclude Include="CDOTA_Unit_Announcer.h" />
+    <ClInclude Include="CDOTA_Unit_Announcer_Killing_Spree.h" />
+    <ClInclude Include="CDOTA_Unit_Brewmaster_PrimalEarth.h" />
+    <ClInclude Include="CDOTA_Unit_Brewmaster_PrimalFire.h" />
+    <ClInclude Include="CDOTA_Unit_Brewmaster_PrimalStorm.h" />
+    <ClInclude Include="CDOTA_Unit_Broodmother_Spiderling.h" />
+    <ClInclude Include="CDOTA_Unit_Broodmother_Web.h" />
+    <ClInclude Include="CDOTA_Unit_Courier.h" />
+    <ClInclude Include="CDOTA_Unit_Earth_Spirit_Stone.h" />
+    <ClInclude Include="CDOTA_Unit_Elder_Titan_AncestralSpirit.h" />
+    <ClInclude Include="CDOTA_Unit_Fountain.h" />
+    <ClInclude Include="CDOTA_Unit_Greevil.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Abaddon.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_AbyssalUnderlord.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Alchemist.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_AncientApparition.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_AntiMage.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Axe.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Bane.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Batrider.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Beastmaster.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Beastmaster_Beasts.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Beastmaster_Boar.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Beastmaster_Hawk.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Bloodseeker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_BountyHunter.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Brewmaster.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Bristleback.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Broodmother.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Centaur.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_ChaosKnight.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Chen.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Clinkz.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_CrystalMaiden.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_DarkSeer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Dazzle.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_DeathProphet.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Disruptor.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_DoomBringer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_DragonKnight.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_DrowRanger.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Earthshaker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_EarthSpirit.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Elder_Titan.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_EmberSpirit.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Enchantress.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Enigma.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_FacelessVoid.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Furion.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Gyrocopter.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Huskar.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Invoker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Jakiro.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Juggernaut.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_KeeperOfTheLight.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Kunkka.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Legion_Commander.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Leshrac.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Lich.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Life_Stealer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Lina.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Lion.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_LoneDruid.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Luna.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Lycan.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Magnataur.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Medusa.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Meepo.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Mirana.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Morphling.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Naga_Siren.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Necrolyte.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Nevermore.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_NightStalker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Nyx_Assassin.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Obsidian_Destroyer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Ogre_Magi.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Omniknight.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Oracle.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_PhantomAssassin.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_PhantomLancer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Phoenix.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Puck.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Pudge.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Pugna.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_QueenOfPain.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Rattletrap.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Razor.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Riki.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Rubick.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_SandKing.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_ShadowShaman.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Shadow_Demon.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Shredder.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Silencer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_SkeletonKing.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Skywrath_Mage.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Slardar.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Slark.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Sniper.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Spectre.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_SpiritBreaker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_StormSpirit.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Sven.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Techies.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_TemplarAssassin.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Terrorblade.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Tidehunter.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Tinker.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Tiny.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Treant.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_TrollWarlord.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Tusk.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Undying.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Ursa.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_VengefulSpirit.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Venomancer.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Viper.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Visage.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Warlock.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Weaver.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Windrunner.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Winter_Wyvern.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Wisp.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_WitchDoctor.h" />
+    <ClInclude Include="CDOTA_Unit_Hero_Zuus.h" />
+    <ClInclude Include="CDOTA_Unit_LoopingSound.h" />
+    <ClInclude Include="CDOTA_Unit_Nian.h" />
+    <ClInclude Include="CDOTA_Unit_Roquelaire.h" />
+    <ClInclude Include="CDOTA_Unit_Roshan.h" />
+    <ClInclude Include="CDOTA_Unit_Roshan_Halloween.h" />
+    <ClInclude Include="CDOTA_Unit_SpiritBear.h" />
+    <ClInclude Include="CDOTA_Unit_TargetDummy.h" />
+    <ClInclude Include="CDOTA_Unit_Undying_Tombstone.h" />
+    <ClInclude Include="CDOTA_Unit_Undying_Zombie.h" />
+    <ClInclude Include="CDOTA_Unit_VisageFamiliar.h" />
+    <ClInclude Include="CDOTA_Wisp_Spirit.h" />
+    <ClInclude Include="CDynamicLight.h" />
+    <ClInclude Include="CDynamicProp.h" />
+    <ClInclude Include="CEconEntity.h" />
+    <ClInclude Include="CEconWearable.h" />
+    <ClInclude Include="CEntityDissolve.h" />
+    <ClInclude Include="CEntityFlame.h" />
+    <ClInclude Include="CEntityFreezing.h" />
+    <ClInclude Include="CEntityParticleTrail.h" />
+    <ClInclude Include="CEnvAmbientLight.h" />
+    <ClInclude Include="CEnvDeferredLight.h" />
+    <ClInclude Include="CEnvDetailController.h" />
+    <ClInclude Include="CEnvDOFController.h" />
+    <ClInclude Include="CEnvParticleScript.h" />
+    <ClInclude Include="CEnvProjectedTexture.h" />
+    <ClInclude Include="CEnvQuadraticBeam.h" />
+    <ClInclude Include="CEnvScreenEffect.h" />
+    <ClInclude Include="CEnvScreenOverlay.h" />
+    <ClInclude Include="CEnvTonemapController.h" />
+    <ClInclude Include="CEnvWind.h" />
+    <ClInclude Include="CFireSmoke.h" />
+    <ClInclude Include="CFireTrail.h" />
+    <ClInclude Include="CFish.h" />
+    <ClInclude Include="CFogController.h" />
+    <ClInclude Include="CFuncAreaPortalWindow.h" />
+    <ClInclude Include="CFuncBrush.h" />
+    <ClInclude Include="CFuncConveyor.h" />
+    <ClInclude Include="CFuncLadder.h" />
+    <ClInclude Include="CFuncMoveLinear.h" />
+    <ClInclude Include="CFuncOccluder.h" />
+    <ClInclude Include="CFuncReflectiveGlass.h" />
+    <ClInclude Include="CFuncRotating.h" />
+    <ClInclude Include="CFuncSmokeVolume.h" />
+    <ClInclude Include="CFuncTrackTrain.h" />
+    <ClInclude Include="CFunc_Dust.h" />
+    <ClInclude Include="CFunc_LOD.h" />
+    <ClInclude Include="CGameRulesProxy.h" />
+    <ClInclude Include="CHandleTest.h" />
+    <ClInclude Include="CInfoLadderDismount.h" />
+    <ClInclude Include="CInfoOverlayAccessor.h" />
+    <ClInclude Include="CLightGlow.h" />
+    <ClInclude Include="CMaterialModifyControl.h" />
+    <ClInclude Include="CMovieDisplay.h" />
+    <ClInclude Include="CParticleFire.h" />
+    <ClInclude Include="CParticlePerformanceMonitor.h" />
+    <ClInclude Include="CParticleSystem.h" />
+    <ClInclude Include="CPhysBox.h" />
+    <ClInclude Include="CPhysBoxMultiplayer.h" />
+    <ClInclude Include="CPhysicsProp.h" />
+    <ClInclude Include="CPhysicsPropMultiplayer.h" />
+    <ClInclude Include="CPhysMagnet.h" />
+    <ClInclude Include="CPlasma.h" />
+    <ClInclude Include="CPointCamera.h" />
+    <ClInclude Include="CPointCommentaryNode.h" />
+    <ClInclude Include="CPoseController.h" />
+    <ClInclude Include="CPostProcessController.h" />
+    <ClInclude Include="CPrecipitation.h" />
+    <ClInclude Include="CPrecipitationBlocker.h" />
+    <ClInclude Include="CPropDoorRotating.h" />
+    <ClInclude Include="CPropVehicleDriveable.h" />
+    <ClInclude Include="CProp_Hallucination.h" />
+    <ClInclude Include="CRagdollManager.h" />
+    <ClInclude Include="CRagdollProp.h" />
+    <ClInclude Include="CRagdollPropAttached.h" />
+    <ClInclude Include="CRopeKeyframe.h" />
+    <ClInclude Include="CSceneEntity.h" />
+    <ClInclude Include="CShadowControl.h" />
+    <ClInclude Include="CSlideshowDisplay.h" />
+    <ClInclude Include="CSmokeStack.h" />
+    <ClInclude Include="CSpatialEntity.h" />
+    <ClInclude Include="CSpotlightEnd.h" />
+    <ClInclude Include="CSprite.h" />
+    <ClInclude Include="CSpriteOriented.h" />
+    <ClInclude Include="CSpriteTrail.h" />
+    <ClInclude Include="CStatueProp.h" />
+    <ClInclude Include="CSteamJet.h" />
+    <ClInclude Include="CSun.h" />
+    <ClInclude Include="CSunlightShadowControl.h" />
+    <ClInclude Include="CTeam.h" />
+    <ClInclude Include="CTeamShowcaseEditorManager.h" />
+    <ClInclude Include="CTeamShowcasePlayer.h" />
+    <ClInclude Include="CTEArmorRicochet.h" />
+    <ClInclude Include="CTEBaseBeam.h" />
+    <ClInclude Include="CTEBeamEntPoint.h" />
+    <ClInclude Include="CTEBeamEnts.h" />
+    <ClInclude Include="CTEBeamFollow.h" />
+    <ClInclude Include="CTEBeamLaser.h" />
+    <ClInclude Include="CTEBeamPoints.h" />
+    <ClInclude Include="CTEBeamRing.h" />
+    <ClInclude Include="CTEBeamRingPoint.h" />
+    <ClInclude Include="CTEBeamSpline.h" />
+    <ClInclude Include="CTEBloodSprite.h" />
+    <ClInclude Include="CTEBloodStream.h" />
+    <ClInclude Include="CTEBreakModel.h" />
+    <ClInclude Include="CTEBSPDecal.h" />
+    <ClInclude Include="CTEBubbles.h" />
+    <ClInclude Include="CTEBubbleTrail.h" />
+    <ClInclude Include="CTEClientProjectile.h" />
+    <ClInclude Include="CTEDecal.h" />
+    <ClInclude Include="CTEDotaBloodImpact.h" />
+    <ClInclude Include="CTEDOTAProjectile.h" />
+    <ClInclude Include="CTEDOTAProjectileLoc.h" />
+    <ClInclude Include="CTEDust.h" />
+    <ClInclude Include="CTEDynamicLight.h" />
+    <ClInclude Include="CTEEffectDispatch.h" />
+    <ClInclude Include="CTEEnergySplash.h" />
+    <ClInclude Include="CTEExplosion.h" />
+    <ClInclude Include="CTEFizz.h" />
+    <ClInclude Include="CTEFootprintDecal.h" />
+    <ClInclude Include="CTEFoundryHelpers.h" />
+    <ClInclude Include="CTEGaussExplosion.h" />
+    <ClInclude Include="CTEGlowSprite.h" />
+    <ClInclude Include="CTEImpact.h" />
+    <ClInclude Include="CTEKillPlayerAttachments.h" />
+    <ClInclude Include="CTELargeFunnel.h" />
+    <ClInclude Include="CTEMetalSparks.h" />
+    <ClInclude Include="CTEMuzzleFlash.h" />
+    <ClInclude Include="CTEParticleSystem.h" />
+    <ClInclude Include="CTEPhysicsProp.h" />
+    <ClInclude Include="CTEPlayerDecal.h" />
+    <ClInclude Include="CTEProjectedDecal.h" />
+    <ClInclude Include="CTEShatterSurface.h" />
+    <ClInclude Include="CTEShowLine.h" />
+    <ClInclude Include="CTesla.h" />
+    <ClInclude Include="CTESmoke.h" />
+    <ClInclude Include="CTESparks.h" />
+    <ClInclude Include="CTESprite.h" />
+    <ClInclude Include="CTESpriteSpray.h" />
+    <ClInclude Include="CTestTraceline.h" />
+    <ClInclude Include="CTest_ProxyToggle_Networkable.h" />
+    <ClInclude Include="CTEUnitAnimation.h" />
+    <ClInclude Include="CTEUnitAnimationEnd.h" />
+    <ClInclude Include="CTEWorldDecal.h" />
+    <ClInclude Include="CTFWearableItem.h" />
+    <ClInclude Include="CTriggerCamera.h" />
+    <ClInclude Include="CTriggerPlayerMovement.h" />
+    <ClInclude Include="CVGuiScreen.h" />
+    <ClInclude Include="CWaterBullet.h" />
+    <ClInclude Include="CWaterLODControl.h" />
+    <ClInclude Include="CWorld.h" />
+    <ClInclude Include="DustTrail.h" />
+    <ClInclude Include="MovieExplosion.h" />
+    <ClInclude Include="NextBotCombatCharacter.h" />
+    <ClInclude Include="ParticleSmokeGrenade.h" />
+    <ClInclude Include="RocketTrail.h" />
+    <ClInclude Include="SmokeTrail.h" />
+    <ClInclude Include="SporeExplosion.h" />
+    <ClInclude Include="SporeTrail.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F9848080-3199-4942-8741-6E31CCD838CE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libdotaentity</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -20,9 +20,19 @@ public:
    void analyse(std::string filename)
    {
       auto file = std::ifstream { filename, std::ifstream::binary };
-      auto in = BinaryStream { file };
+      file.seekg(0, file.end);
+
+      auto size = static_cast<std::size_t>(file.tellg());
+      file.seekg(0, file.beg);
+      
+      auto data = std::vector<char> {};
+      data.resize(size);
+      file.read(data.data(), size);
+
       mInGameTime = std::chrono::seconds(0);
       mTick = 0;
+
+      auto in = BinaryStream { data.data(), size };
       mDemo.parse(in, dota::ParseProfile::FullReplay);
    }
 
@@ -46,7 +56,7 @@ public:
 
          if (time != mInGameTime) {
             if (mPlayerResource) {
-               for (auto i = 0; i < mPlayerSamples.size(); ++i) {
+               for (auto i = 0u; i < mPlayerSamples.size(); ++i) {
                   SampleData &sample = mPlayerSamples[i];
                   sample.lastHits.push_back(mPlayerResource->m_iLastHitCount[i]);
                   sample.denies.push_back(mPlayerResource->m_iDenyCount[i]);

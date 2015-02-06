@@ -7,8 +7,7 @@ namespace dota
 
 bool DemoParser::parse(BinaryStream &in, const ParseProfile *profile)
 {
-   auto header = in.readString(8);
-   header.resize(7);
+   auto header = in.readStringView(8);
 
    if (header.compare("PBUFDEM") != 0) {
       return 0;

@@ -141,7 +141,7 @@ mapClientClass(const SendTableMap &sendTableMap,
          // Add all arraySize props!
          if (prop.dataTable) {
             // For datatable element type we must recurse in
-            for (int i = 0; i < prop.arraySize; ++i) {
+            for (auto i = 0u; i < prop.arraySize; ++i) {
                // Find all with name.%04d.
                sprintf_s(buffer, 256, "%s.%04d.", name.c_str(), i);
                mapClientClass(sendTableMap, prop.dataTable, recvProperties, recvPropertyMap, buffer, offset);
@@ -152,7 +152,7 @@ mapClientClass(const SendTableMap &sendTableMap,
             }
          } else {
             // Array values can be in form name[%d] or name.%04d.
-            for (int i = 0; i < prop.arraySize; ++i) {
+            for (auto i = 0u; i < prop.arraySize; ++i) {
                sprintf_s(buffer, 256, "%s.%04d", name.c_str(), i);
 
                auto itr = recvPropertyMap.find(buffer);
@@ -276,7 +276,7 @@ bool DemoParser::updateEntityClass(EntityClass &entityClass)
    }
 
    // Add all properties to propertyMap
-   for (auto i = 0; i < properties.size(); ++i) {
+   for (auto i = 0u; i < properties.size(); ++i) {
       propertyMap[properties[i].varName] = &properties[i];
    }
 

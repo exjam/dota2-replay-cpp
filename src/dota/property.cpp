@@ -1,8 +1,9 @@
-#include "bitstream.h"
+#include "bitview.h"
 #include "demoparser.h"
 #include "property.h"
 #include "clientclass.h"
 #include "util.h"
+#include <iostream>
 
 namespace dota
 {
@@ -24,25 +25,25 @@ const auto NORMAL_RESOLUTION = (1.0f / NORMAL_DENOMINATOR);
 const auto DT_MAX_STRING_BITS = 9;
 const auto DT_MAX_STRING_BUFFERSIZE = 1 << DT_MAX_STRING_BITS;
 
-bool parsePropertyValue(BitStream &in, const Property &sendProp, std::ptrdiff_t valuePtr, ElementGetter *elemGetter);
-void parsePropertyArray(BitStream &in, const Property &prop, std::ptrdiff_t containerPtr, ElementGetter *elemGetter);
-PropertyInt parsePropertyInt(BitStream &in, const Property &prop);
-PropertyInt64 parsePropertyInt64(BitStream &in, const Property &prop);
-PropertyString parsePropertyString(BitStream &in, const Property &prop);
-PropertyVector parsePropertyVector(BitStream &in, const Property &prop);
-PropertyVectorXY parsePropertyVectorXY(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloat(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatDefault(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCellCoordIntegral(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCellCoord(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatNormal(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatNoScale(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCoordMpIntegral(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCoordMp(BitStream &in, const Property &prop);
-PropertyFloat parsePropertyFloatCoord(BitStream &in, const Property &prop);
+bool parsePropertyValue(BitView &in, const Property &sendProp, std::ptrdiff_t valuePtr, ElementGetter *elemGetter);
+void parsePropertyArray(BitView &in, const Property &prop, std::ptrdiff_t containerPtr, ElementGetter *elemGetter);
+PropertyInt parsePropertyInt(BitView &in, const Property &prop);
+PropertyInt64 parsePropertyInt64(BitView &in, const Property &prop);
+PropertyString parsePropertyString(BitView &in, const Property &prop);
+PropertyVector parsePropertyVector(BitView &in, const Property &prop);
+PropertyVectorXY parsePropertyVectorXY(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloat(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatDefault(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCellCoordIntegral(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCellCoord(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatNormal(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatNoScale(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCoordMpIntegral(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCoordMp(BitView &in, const Property &prop);
+PropertyFloat parsePropertyFloatCoord(BitView &in, const Property &prop);
 
-bool DemoParser::parseEntityProperties(BitStream &in, EntityClass &entityClass, ClientEntity *entity, EntityPropList &propList)
+bool DemoParser::parseEntityProperties(BitView &in, EntityClass &entityClass, ClientEntity *entity, EntityPropList &propList)
 {
    auto baseOffset = reinterpret_cast<std::ptrdiff_t>(entity);
 
@@ -61,7 +62,7 @@ bool DemoParser::parseEntityProperties(BitStream &in, EntityClass &entityClass, 
    return true;
 }
 
-bool parsePropertyValue(BitStream &in, const Property &sendProp, std::ptrdiff_t valuePtr, ElementGetter *elemGetter)
+bool parsePropertyValue(BitView &in, const Property &sendProp, std::ptrdiff_t valuePtr, ElementGetter *elemGetter)
 {
    switch (sendProp.type) {
    case PropertyType::Int:
@@ -119,7 +120,7 @@ bool parsePropertyValue(BitStream &in, const Property &sendProp, std::ptrdiff_t 
       auto value = parsePropertyString(in, sendProp);
 
       if (valuePtr != -1) {
-         *reinterpret_cast<std::string*>(valuePtr) = value;
+         *reinterpret_cast<std::string*>(valuePtr) = std::move(value);
       }
 
       break;
@@ -136,10 +137,10 @@ bool parsePropertyValue(BitStream &in, const Property &sendProp, std::ptrdiff_t 
    return true;
 }
 
-void parsePropertyArray(BitStream &in, const Property &prop, std::ptrdiff_t containerPtr, ElementGetter *elemGetter)
+void parsePropertyArray(BitView &in, const Property &prop, std::ptrdiff_t containerPtr, ElementGetter *elemGetter)
 {
    auto numBits = getRequiredBits(prop.numElements);
-   auto count = in.read<std::size_t>(numBits);
+   auto count = in.readUint32(numBits);
    auto type = prop.arrayElementType;
    assert(prop.arrayElementType);
 
@@ -155,30 +156,29 @@ void parsePropertyArray(BitStream &in, const Property &prop, std::ptrdiff_t cont
    }
 }
 
-PropertyInt parsePropertyInt(BitStream &in, const Property &prop)
+PropertyInt parsePropertyInt(BitView &in, const Property &prop)
 {
    auto value = PropertyInt { 0 };
 
    if (prop.isEncodedAgainstTickCount()) {
       // TODO: Encoding against tick count
-      value = in.readVarInt();
+      value = in.readVarUint32();
    } else if (prop.isUnsigned()) {
-      value = in.read<uint32_t>(prop.numBits);
+      value = in.readUint32(prop.numBits);
    } else {
-      value = in.read<int32_t>(prop.numBits);
-      value = (value << (32 - prop.numBits)) >> (32 - prop.numBits);
+      value = in.readInt32(prop.numBits);
    }
 
    return value;
 }
 
-PropertyInt64 parsePropertyInt64(BitStream &in, const Property &prop)
+PropertyInt64 parsePropertyInt64(BitView &in, const Property &prop)
 {
    auto value = PropertyInt64 { 0 };
 
    if (prop.isEncodedAgainstTickCount()) {
       // TODO: Encoding against tick count
-      return in.readVarInt();
+      return in.readVarUint64();
    }
 
    auto sign = 0;
@@ -189,11 +189,11 @@ PropertyInt64 parsePropertyInt64(BitStream &in, const Property &prop)
       bits--;
    }
 
-   value = in.read<uint64_t>(bits);
+   value = in.readInt64(bits);
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatCoord(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCoord(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
    auto hasIntegral = in.readBit();
@@ -208,18 +208,18 @@ PropertyFloat parsePropertyFloatCoord(BitStream &in, const Property &prop)
    auto fractional = 0.0f;
 
    if (hasIntegral) {
-      integral = static_cast<float>(in.read<uint32_t>(COORD_INTEGER_BITS) + 1);
+      integral = static_cast<float>(in.readUint32(COORD_INTEGER_BITS) + 1);
    }
 
    if (hasFractional) {
-      fractional = static_cast<float>(in.read<uint32_t>(COORD_FRACTIONAL_BITS));
+      fractional = static_cast<float>(in.readUint32(COORD_FRACTIONAL_BITS));
    }
 
    value = integral + fractional * COORD_RESOLUTION;
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatCoordMp(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCoordMp(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
    auto inBounds = !!in.readBit();
@@ -228,38 +228,38 @@ PropertyFloat parsePropertyFloatCoordMp(BitStream &in, const Property &prop)
    auto integral = 0.0f;
 
    if (hasInt) {
-     if (inBounds) {
-       integral = static_cast<PropertyFloat>(in.read<uint32_t>(COORD_INTEGER_BITS_MP) + 1);
-     } else {
-       integral = static_cast<PropertyFloat>(in.read<uint32_t>(COORD_INTEGER_BITS) + 1);
-     }
+      if (inBounds) {
+         integral = static_cast<PropertyFloat>(in.readUint32(COORD_INTEGER_BITS_MP) + 1);
+      } else {
+         integral = static_cast<PropertyFloat>(in.readUint32(COORD_INTEGER_BITS) + 1);
+      }
    }
 
-   auto fractional = static_cast<PropertyFloat>(in.read<uint32_t>(COORD_FRACTIONAL_BITS));
+   auto fractional = static_cast<PropertyFloat>(in.readUint32(COORD_FRACTIONAL_BITS));
    value = integral + (fractional * COORD_RESOLUTION);
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatCoordMpIntegral(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCoordMpIntegral(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
    auto sign = 0;
    auto inBounds = !!in.readBit();
 
    if (in.readBit()) {
-     sign = in.readBit();
+      sign = in.readBit();
 
-     if (inBounds) {
-       value = static_cast<PropertyFloat>(in.read<uint32_t>(COORD_INTEGER_BITS_MP) + 1);
-     } else {
-       value = static_cast<PropertyFloat>(in.read<uint32_t>(COORD_INTEGER_BITS) + 1);
-     }
+      if (inBounds) {
+         value = static_cast<PropertyFloat>(in.readUint32(COORD_INTEGER_BITS_MP) + 1);
+      } else {
+         value = static_cast<PropertyFloat>(in.readUint32(COORD_INTEGER_BITS) + 1);
+      }
    }
 
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
    auto inBounds = !!in.readBit();
@@ -268,58 +268,58 @@ PropertyFloat parsePropertyFloatCoordMpLowPrecision(BitStream &in, const Propert
    auto integral = 0.0f;
 
    if (hasInt) {
-     if (inBounds) {
-       integral = static_cast<float>(in.read<uint32_t>(COORD_INTEGER_BITS_MP) + 1);
-     } else {
-       integral = static_cast<float>(in.read<uint32_t>(COORD_INTEGER_BITS) + 1);
-     }
+      if (inBounds) {
+         integral = static_cast<float>(in.readUint32(COORD_INTEGER_BITS_MP) + 1);
+      } else {
+         integral = static_cast<float>(in.readUint32(COORD_INTEGER_BITS) + 1);
+      }
    }
 
-   auto fractional = static_cast<float>(in.read<uint32_t>(COORD_FRACTIONAL_BITS_MP_LOWPRECISION));
+   auto fractional = static_cast<float>(in.readUint32(COORD_FRACTIONAL_BITS_MP_LOWPRECISION));
    value = integral + (fractional * COORD_RESOLUTION_LOWPRECISION);
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatNoScale(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatNoScale(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
-   value = in.read<float>(32);
+   value = in.readFloat();
    return value;
 }
 
-PropertyFloat parsePropertyFloatNormal(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatNormal(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
    auto sign = in.readBit();
-   value = static_cast<PropertyFloat>(in.read<uint32_t>(NORMAL_FRACTIONAL_BITS));
+   value = static_cast<PropertyFloat>(in.readUint32(NORMAL_FRACTIONAL_BITS));
    value *= NORMAL_RESOLUTION;
    return sign ? -value : value;
 }
 
-PropertyFloat parsePropertyFloatCellCoord(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCellCoord(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
-   value = static_cast<PropertyFloat>(in.read<uint32_t>(prop.numBits));
-   value += COORD_RESOLUTION * static_cast<PropertyFloat>(in.read<uint32_t>(COORD_FRACTIONAL_BITS));
+   value = static_cast<PropertyFloat>(in.readUint32(prop.numBits));
+   value += COORD_RESOLUTION * static_cast<PropertyFloat>(in.readUint32(COORD_FRACTIONAL_BITS));
    return value;
 }
 
-PropertyFloat parsePropertyFloatCellCoordIntegral(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatCellCoordIntegral(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
-   value = static_cast<PropertyFloat>(in.read<uint32_t>(prop.numBits));
+   value = static_cast<PropertyFloat>(in.readUint32(prop.numBits));
    return value;
 }
 
-PropertyFloat parsePropertyFloatDefault(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloatDefault(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
-   value = static_cast<PropertyFloat>(in.read<uint32_t>(prop.numBits));
+   value = static_cast<PropertyFloat>(in.readUint32(prop.numBits));
    value /= (1 << prop.numBits) - 1;
    return value * (prop.highValue - prop.lowValue) + prop.lowValue;
 }
 
-PropertyFloat parsePropertyFloat(BitStream &in, const Property &prop)
+PropertyFloat parsePropertyFloat(BitView &in, const Property &prop)
 {
    auto value = PropertyFloat { 0 };
 
@@ -346,7 +346,7 @@ PropertyFloat parsePropertyFloat(BitStream &in, const Property &prop)
    return value;
 }
 
-PropertyVector parsePropertyVector(BitStream &in, const Property &prop)
+PropertyVector parsePropertyVector(BitView &in, const Property &prop)
 {
    auto value = PropertyVector { };
    value.x = parsePropertyFloat(in, prop);
@@ -354,7 +354,7 @@ PropertyVector parsePropertyVector(BitStream &in, const Property &prop)
 
    if (prop.isNormal()) {
       auto d = value.x * value.x + value.y * value.y;
-      value.z = (d >= 1.0) ? 0.0 : std::sqrt(1.0 - d);
+      value.z = (d >= 1.0f) ? 0.0f : std::sqrt(1.0f - d);
 
       if (in.readBit()) {
          value.z = -value.z;
@@ -366,7 +366,7 @@ PropertyVector parsePropertyVector(BitStream &in, const Property &prop)
    return value;
 }
 
-PropertyVectorXY parsePropertyVectorXY(BitStream &in, const Property &prop)
+PropertyVectorXY parsePropertyVectorXY(BitView &in, const Property &prop)
 {
    auto value = PropertyVectorXY { };
    value.x = parsePropertyFloat(in, prop);
@@ -374,16 +374,17 @@ PropertyVectorXY parsePropertyVectorXY(BitStream &in, const Property &prop)
    return value;
 }
 
-PropertyString parsePropertyString(BitStream &in, const Property &prop)
+PropertyString parsePropertyString(BitView &in, const Property &prop)
 {
    auto value = PropertyString { };
-   auto length = in.read<std::size_t>(DT_MAX_STRING_BITS);
+   auto length = in.readUint32(DT_MAX_STRING_BITS);
 
-   if (length >= DT_MAX_STRING_BUFFERSIZE) {
-      length = DT_MAX_STRING_BUFFERSIZE - 1;
+   if (length > DT_MAX_STRING_BUFFERSIZE) {
+      length = DT_MAX_STRING_BUFFERSIZE;
    }
 
-   value = in.readStringLength(length);
+   value.resize(length);
+   in.readString(const_cast<char*>(value.data()), length);
    return value;
 }
 

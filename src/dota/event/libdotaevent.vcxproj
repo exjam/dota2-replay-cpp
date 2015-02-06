@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="account_all_hero_challenge_changed.h" />
+    <ClInclude Include="account_trophies_changed.h" />
+    <ClInclude Include="achievement_earned.h" />
+    <ClInclude Include="achievement_event.h" />
+    <ClInclude Include="achievement_write_failed.h" />
+    <ClInclude Include="antiaddiction_toast.h" />
+    <ClInclude Include="antiaddiction_update.h" />
+    <ClInclude Include="bindpanel_close.h" />
+    <ClInclude Include="bindpanel_open.h" />
+    <ClInclude Include="bonus_updated.h" />
+    <ClInclude Include="booster_state_updated.h" />
+    <ClInclude Include="break_breakable.h" />
+    <ClInclude Include="break_prop.h" />
+    <ClInclude Include="cart_updated.h" />
+    <ClInclude Include="chat_members_changed.h" />
+    <ClInclude Include="chat_new_message.h" />
+    <ClInclude Include="community_cached_names_updated.h" />
+    <ClInclude Include="compendium_event_actions_loaded.h" />
+    <ClInclude Include="compendium_selections_loaded.h" />
+    <ClInclude Include="compendium_set_selection_failed.h" />
+    <ClInclude Include="custom_game_difficulty.h" />
+    <ClInclude Include="dashboard_caches_cleared.h" />
+    <ClInclude Include="dashboard_switched_section.h" />
+    <ClInclude Include="defeated.h" />
+    <ClInclude Include="demo_stop.h" />
+    <ClInclude Include="difficulty_changed.h" />
+    <ClInclude Include="dota_ability_changed.h" />
+    <ClInclude Include="dota_ability_channel_finished.h" />
+    <ClInclude Include="dota_action_item.h" />
+    <ClInclude Include="dota_action_success.h" />
+    <ClInclude Include="dota_barracks_kill.h" />
+    <ClInclude Include="dota_chase_hero.h" />
+    <ClInclude Include="dota_chat_assassin_announce.h" />
+    <ClInclude Include="dota_chat_assassin_denied.h" />
+    <ClInclude Include="dota_chat_assassin_success.h" />
+    <ClInclude Include="dota_chat_ban_notification.h" />
+    <ClInclude Include="dota_chat_event.h" />
+    <ClInclude Include="dota_chat_first_blood.h" />
+    <ClInclude Include="dota_chat_informational.h" />
+    <ClInclude Include="dota_chat_kill_streak.h" />
+    <ClInclude Include="dota_chat_timed_reward.h" />
+    <ClInclude Include="dota_combatlog.h" />
+    <ClInclude Include="dota_courier_lost.h" />
+    <ClInclude Include="dota_courier_respawned.h" />
+    <ClInclude Include="dota_courier_transfer_item.h" />
+    <ClInclude Include="dota_effigy_kill.h" />
+    <ClInclude Include="dota_enemy_money_changed.h" />
+    <ClInclude Include="dota_favorite_heroes_updated.h" />
+    <ClInclude Include="dota_force_portrait_update.h" />
+    <ClInclude Include="dota_game_state_change.h" />
+    <ClInclude Include="dota_glyph_used.h" />
+    <ClInclude Include="dota_hero_random.h" />
+    <ClInclude Include="dota_hero_swap.h" />
+    <ClInclude Include="dota_holdout_revive_complete.h" />
+    <ClInclude Include="dota_hud_error_message.h" />
+    <ClInclude Include="dota_hud_skin_changed.h" />
+    <ClInclude Include="dota_inventory_changed.h" />
+    <ClInclude Include="dota_inventory_changed_query_unit.h" />
+    <ClInclude Include="dota_inventory_item_added.h" />
+    <ClInclude Include="dota_inventory_item_changed.h" />
+    <ClInclude Include="dota_inventory_player_got_item.h" />
+    <ClInclude Include="dota_item_auto_purchase.h" />
+    <ClInclude Include="dota_item_drag_begin.h" />
+    <ClInclude Include="dota_item_drag_end.h" />
+    <ClInclude Include="dota_item_gifted.h" />
+    <ClInclude Include="dota_item_picked_up.h" />
+    <ClInclude Include="dota_item_purchase.h" />
+    <ClInclude Include="dota_item_purchased.h" />
+    <ClInclude Include="dota_item_spotted.h" />
+    <ClInclude Include="dota_item_used.h" />
+    <ClInclude Include="dota_link_clicked.h" />
+    <ClInclude Include="dota_local_quickbuy_changed.h" />
+    <ClInclude Include="dota_match_done.h" />
+    <ClInclude Include="dota_match_done_client.h" />
+    <ClInclude Include="dota_match_signout.h" />
+    <ClInclude Include="dota_money_changed.h" />
+    <ClInclude Include="dota_non_player_used_ability.h" />
+    <ClInclude Include="dota_no_battle_points.h" />
+    <ClInclude Include="dota_pause_event.h" />
+    <ClInclude Include="dota_player_deny.h" />
+    <ClInclude Include="dota_player_gained_level.h" />
+    <ClInclude Include="dota_player_kill.h" />
+    <ClInclude Include="dota_player_killed.h" />
+    <ClInclude Include="dota_player_learned_ability.h" />
+    <ClInclude Include="dota_player_pick_hero.h" />
+    <ClInclude Include="dota_player_shop_changed.h" />
+    <ClInclude Include="dota_player_show_killcam.h" />
+    <ClInclude Include="dota_player_show_minikillcam.h" />
+    <ClInclude Include="dota_player_take_tower_damage.h" />
+    <ClInclude Include="dota_player_update_hero_selection.h" />
+    <ClInclude Include="dota_player_update_killcam_unit.h" />
+    <ClInclude Include="dota_player_update_query_unit.h" />
+    <ClInclude Include="dota_player_update_selected_unit.h" />
+    <ClInclude Include="dota_player_used_ability.h" />
+    <ClInclude Include="dota_portrait_ability_layout_changed.h" />
+    <ClInclude Include="dota_portrait_unit_modifiers_changed.h" />
+    <ClInclude Include="dota_portrait_unit_stats_changed.h" />
+    <ClInclude Include="dota_quest_completed.h" />
+    <ClInclude Include="dota_quest_started.h" />
+    <ClInclude Include="dota_quick_buy_changed.h" />
+    <ClInclude Include="dota_rd_chat_turn.h" />
+    <ClInclude Include="dota_reset_suggested_items.h" />
+    <ClInclude Include="dota_roshan_kill.h" />
+    <ClInclude Include="dota_rubick_ability_steal.h" />
+    <ClInclude Include="dota_rune_activated_server.h" />
+    <ClInclude Include="dota_rune_pickup.h" />
+    <ClInclude Include="dota_rune_spotted.h" />
+    <ClInclude Include="dota_set_quick_buy.h" />
+    <ClInclude Include="dota_shop_item_drag_begin.h" />
+    <ClInclude Include="dota_shop_item_drag_end.h" />
+    <ClInclude Include="dota_spectate_hero.h" />
+    <ClInclude Include="dota_starting_position_changed.h" />
+    <ClInclude Include="dota_super_creeps.h" />
+    <ClInclude Include="dota_tournament_item_event.h" />
+    <ClInclude Include="dota_tower_kill.h" />
+    <ClInclude Include="dota_tutorial_lesson_start.h" />
+    <ClInclude Include="dota_unit_event.h" />
+    <ClInclude Include="dota_workshop_filecanceled.h" />
+    <ClInclude Include="dota_workshop_fileselected.h" />
+    <ClInclude Include="drop_rate_modified.h" />
+    <ClInclude Include="entity_hurt.h" />
+    <ClInclude Include="entity_killed.h" />
+    <ClInclude Include="event_points_updated.h" />
+    <ClInclude Include="event_ticket_modified.h" />
+    <ClInclude Include="fantasy_league_changed.h" />
+    <ClInclude Include="fantasy_score_info_changed.h" />
+    <ClInclude Include="fantasy_updated.h" />
+    <ClInclude Include="file_downloaded.h" />
+    <ClInclude Include="finale_start.h" />
+    <ClInclude Include="flare_ignite_npc.h" />
+    <ClInclude Include="frosty_points_updated.h" />
+    <ClInclude Include="full_ui_unlocked.h" />
+    <ClInclude Include="gameinstructor_draw.h" />
+    <ClInclude Include="gameinstructor_nodraw.h" />
+    <ClInclude Include="gameui_activated.h" />
+    <ClInclude Include="gameui_hidden.h" />
+    <ClInclude Include="game_end.h" />
+    <ClInclude Include="game_end_visible.h" />
+    <ClInclude Include="game_init.h" />
+    <ClInclude Include="game_message.h" />
+    <ClInclude Include="game_newmap.h" />
+    <ClInclude Include="game_rules_state_change.h" />
+    <ClInclude Include="game_start.h" />
+    <ClInclude Include="gc_chat_channel_list_updated.h" />
+    <ClInclude Include="gc_connected.h" />
+    <ClInclude Include="gc_mismatched_version.h" />
+    <ClInclude Include="gc_user_session_created.h" />
+    <ClInclude Include="guild_data_updated.h" />
+    <ClInclude Include="guild_open_parties_updated.h" />
+    <ClInclude Include="halloween_high_score_received.h" />
+    <ClInclude Include="halloween_high_score_request_failed.h" />
+    <ClInclude Include="halloween_phase_end.h" />
+    <ClInclude Include="helicopter_grenade_punt_miss.h" />
+    <ClInclude Include="hero_picker_hidden.h" />
+    <ClInclude Include="hero_picker_shown.h" />
+    <ClInclude Include="hero_selector_preview_set.h" />
+    <ClInclude Include="hide_highlight_hud_element.h" />
+    <ClInclude Include="highlight_hud_element.h" />
+    <ClInclude Include="hltv_cameraman.h" />
+    <ClInclude Include="hltv_chase.h" />
+    <ClInclude Include="hltv_chat.h" />
+    <ClInclude Include="hltv_fixed.h" />
+    <ClInclude Include="hltv_message.h" />
+    <ClInclude Include="hltv_rank_camera.h" />
+    <ClInclude Include="hltv_rank_entity.h" />
+    <ClInclude Include="hltv_status.h" />
+    <ClInclude Include="hltv_title.h" />
+    <ClInclude Include="hltv_versioninfo.h" />
+    <ClInclude Include="hostname_changed.h" />
+    <ClInclude Include="hud_flip_changed.h" />
+    <ClInclude Include="ingame_events_changed.h" />
+    <ClInclude Include="instructor_server_hint_create.h" />
+    <ClInclude Include="instructor_server_hint_stop.h" />
+    <ClInclude Include="intro_video_finished.h" />
+    <ClInclude Include="inventory_updated.h" />
+    <ClInclude Include="item_preview_closed.h" />
+    <ClInclude Include="item_purchased.h" />
+    <ClInclude Include="item_schema_initialized.h" />
+    <ClInclude Include="joined_chat_channel.h" />
+    <ClInclude Include="keybind_changed.h" />
+    <ClInclude Include="last_hit.h" />
+    <ClInclude Include="left_chat_channel.h" />
+    <ClInclude Include="live_games_updated.h" />
+    <ClInclude Include="lobby_updated.h" />
+    <ClInclude Include="local_player_event_points.h" />
+    <ClInclude Include="map_location_updated.h" />
+    <ClInclude Include="map_shutdown.h" />
+    <ClInclude Include="map_transition.h" />
+    <ClInclude Include="matchmaking_status_visibility_changed.h" />
+    <ClInclude Include="match_details_updated.h" />
+    <ClInclude Include="match_history_updated.h" />
+    <ClInclude Include="microtransaction_success.h" />
+    <ClInclude Include="modifier_event.h" />
+    <ClInclude Include="news_updated.h" />
+    <ClInclude Include="nommed_tree.h" />
+    <ClInclude Include="npc_replaced.h" />
+    <ClInclude Include="npc_spawned.h" />
+    <ClInclude Include="party_updated.h" />
+    <ClInclude Include="persona_updated.h" />
+    <ClInclude Include="physgun_pickup.h" />
+    <ClInclude Include="player_activate.h" />
+    <ClInclude Include="player_changename.h" />
+    <ClInclude Include="player_chat.h" />
+    <ClInclude Include="player_class.h" />
+    <ClInclude Include="player_completed_game.h" />
+    <ClInclude Include="player_connect.h" />
+    <ClInclude Include="player_connect_full.h" />
+    <ClInclude Include="player_death.h" />
+    <ClInclude Include="player_disconnect.h" />
+    <ClInclude Include="player_fullyjoined.h" />
+    <ClInclude Include="player_full_update.h" />
+    <ClInclude Include="player_hintmessage.h" />
+    <ClInclude Include="player_hurt.h" />
+    <ClInclude Include="player_info.h" />
+    <ClInclude Include="player_info_updated.h" />
+    <ClInclude Include="player_is_experienced.h" />
+    <ClInclude Include="player_is_notexperienced.h" />
+    <ClInclude Include="player_reconnected.h" />
+    <ClInclude Include="player_report_counts_updated.h" />
+    <ClInclude Include="player_say.h" />
+    <ClInclude Include="player_score.h" />
+    <ClInclude Include="player_shoot.h" />
+    <ClInclude Include="player_spawn.h" />
+    <ClInclude Include="player_stats_updated.h" />
+    <ClInclude Include="player_team.h" />
+    <ClInclude Include="player_use.h" />
+    <ClInclude Include="practice_lobby_visibility_changed.h" />
+    <ClInclude Include="prizepool_received.h" />
+    <ClInclude Include="profile_closed.h" />
+    <ClInclude Include="profile_opened.h" />
+    <ClInclude Include="ragdoll_dissolved.h" />
+    <ClInclude Include="recent_matches_updated.h" />
+    <ClInclude Include="reset_defeated.h" />
+    <ClInclude Include="richpresence_custom_updated.h" />
+    <ClInclude Include="rich_presence_updated.h" />
+    <ClInclude Include="round_end.h" />
+    <ClInclude Include="round_start.h" />
+    <ClInclude Include="round_start_pre_entity.h" />
+    <ClInclude Include="scaleform_file_download_complete.h" />
+    <ClInclude Include="server_addban.h" />
+    <ClInclude Include="server_cvar.h" />
+    <ClInclude Include="server_message.h" />
+    <ClInclude Include="server_pre_shutdown.h" />
+    <ClInclude Include="server_removeban.h" />
+    <ClInclude Include="server_shutdown.h" />
+    <ClInclude Include="server_spawn.h" />
+    <ClInclude Include="set_instructor_group_enabled.h" />
+    <ClInclude Include="show_center_message.h" />
+    <ClInclude Include="spec_aegis_reclaim_time.h" />
+    <ClInclude Include="spec_item_pickup.h" />
+    <ClInclude Include="store_pricesheet_updated.h" />
+    <ClInclude Include="teamplay_broadcast_audio.h" />
+    <ClInclude Include="teamplay_round_start.h" />
+    <ClInclude Include="team_data_updated.h" />
+    <ClInclude Include="team_info.h" />
+    <ClInclude Include="team_score.h" />
+    <ClInclude Include="team_showcase_ui_update.h" />
+    <ClInclude Include="today_messages_updated.h" />
+    <ClInclude Include="tournament_state_updated.h" />
+    <ClInclude Include="tree_cut.h" />
+    <ClInclude Include="ugc_details_arrived.h" />
+    <ClInclude Include="ugc_subscribed.h" />
+    <ClInclude Include="ugc_unsubscribed.h" />
+    <ClInclude Include="user_data_downloaded.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="definitions.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8E7D1AAD-3058-4DDA-9B47-03D62D4C110C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libdotaevent</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

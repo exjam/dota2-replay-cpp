@@ -1,90 +1,98 @@
 #pragma once
 #include <cassert>
 #include <cstdint>
-#include <istream>
 #include <string>
 #include <vector>
+#include "arrayview.h"
+#include "stringview.h"
 
+// TODO: Rename BufferView?
 class BinaryStream
 {
 public:
-   BinaryStream(std::istream &stream) :
-      mStream(stream)
+   BinaryStream(const char *buffer, std::size_t size) :
+      mBuffer(buffer),
+      mSize(size),
+      mPosition(0)
    {
    }
 
-   void seek(std::istream::pos_type pos)
+   BinaryStream(const std::string &str) :
+      mBuffer(str.c_str()),
+      mSize(str.size()),
+      mPosition(0)
    {
-      mStream.seekg(pos, mStream.beg);
+   }
+
+   void seek(std::size_t pos)
+   {
+      mPosition = pos;
    }
 
    void skip(std::size_t bytes)
    {
-      mStream.seekg(bytes, mStream.cur);
+      mPosition += bytes;
    }
 
-   std::istream::pos_type tell()
+   std::size_t tell() const
    {
-      return mStream.tellg();
+      return mPosition;
    }
 
-   bool eof()
+   bool eof() const
    {
-      return mStream.peek() == EOF;
+      return mPosition == mSize;
    }
 
-   template<typename T>
-   T read()
+   template<typename ValueType>
+   ValueType read()
    {
-      assert(!eof());
-      T value = 0;
-      mStream.read(reinterpret_cast<char*>(&value), sizeof(value));
+      assert(checkRemainingSpace(sizeof(ValueType)));
+      auto pos = mPosition;
+      mPosition += sizeof(ValueType);
+      return *reinterpret_cast<const ValueType*>(mBuffer + pos);
+   }
+
+   std::size_t readVarInt()
+   {
+      auto ptr = reinterpret_cast<const uint8_t*>(mBuffer + mPosition);
+      auto value = std::size_t { 0 };
+      auto bytes = 0u;
+
+      do {
+         value |= (*ptr & 0x7f) << (bytes * 7);
+         bytes++;
+      } while (*(ptr++) & 0x80);
+
+      mPosition += bytes;
       return value;
    }
 
-   template<typename T>
-   T readVarint()
+   template<typename Type>
+   ArrayView<Type> readArrayView(std::size_t length)
    {
-      T value = 0;
-
-      for (unsigned bytes = 0, byte = 0x80; bytes < 9 && (byte & 0x80); ++bytes) {
-         byte = read<uint8_t>();
-         value |= (byte & 0x7f) << (7 * bytes);
-      }
-
-      return value;
+      assert(checkRemainingSpace(length));
+      auto pos = mPosition;
+      mPosition += length;
+      return { reinterpret_cast<const Type*>(mBuffer + pos), length };
    }
 
-   void readBytes(std::size_t length, std::vector<uint8_t> &value)
+   StringView readStringView(std::size_t length)
    {
-      if (length) {
-         value.resize(length);
-         mStream.read(reinterpret_cast<char*>(value.data()), length);
-      }
-   }
-
-   std::vector<uint8_t> readBytes(std::size_t length)
-   {
-      std::vector<uint8_t> value;
-      readBytes(length, value);
-      return value;
-   }
-
-   void readString(std::size_t length, std::string &value)
-   {
-      if (length) {
-         value.resize(length);
-         mStream.read(&value[0], length);
-      }
-   }
-
-   std::string readString(std::size_t length)
-   {
-      std::string value;
-      readString(length, value);
-      return value;
+      assert(checkRemainingSpace(length));
+      auto pos = mPosition;
+      mPosition += length;
+      return { reinterpret_cast<const StringView::ElementType*>(mBuffer + pos), length };
    }
 
 private:
-   std::istream &mStream;
+   bool checkRemainingSpace(std::size_t bytes) const
+   {
+      return mPosition + bytes <= mSize;
+   }
+
+private:
+   const char *mBuffer;
+   std::size_t mSize;
+   std::size_t mPosition;
 };

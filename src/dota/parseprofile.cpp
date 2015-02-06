@@ -96,15 +96,15 @@ ParseProfile::ParseProfile(std::vector<const ParseProfile *> bases) :
    ParseProfile()
 {
    for (auto &base : bases) {
-      for (auto i = 0; i < msg.size(); ++i) {
+      for (auto i = 0u; i < msg.size(); ++i) {
          msg[i] = msg[i] | base->msg[i];
       }
 
-      for (auto i = 0; i < sub.size(); ++i) {
+      for (auto i = 0u; i < sub.size(); ++i) {
          sub[i] = sub[i] | base->sub[i];
       }
 
-      for (auto i = 0; i < usr.size(); ++i) {
+      for (auto i = 0u; i < usr.size(); ++i) {
          usr[i] = usr[i] | base->usr[i];
       }
    }

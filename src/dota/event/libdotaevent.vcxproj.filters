@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="account_all_hero_challenge_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="account_trophies_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="achievement_earned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="achievement_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="achievement_write_failed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="antiaddiction_toast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="antiaddiction_update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bindpanel_close.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bindpanel_open.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bonus_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="booster_state_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="break_breakable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="break_prop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cart_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chat_members_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chat_new_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="community_cached_names_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compendium_event_actions_loaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compendium_selections_loaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compendium_set_selection_failed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="custom_game_difficulty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dashboard_caches_cleared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dashboard_switched_section.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defeated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo_stop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="difficulty_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_ability_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_ability_channel_finished.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_action_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_action_success.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_barracks_kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chase_hero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_assassin_announce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_assassin_denied.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_assassin_success.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_ban_notification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_first_blood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_informational.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_kill_streak.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_chat_timed_reward.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_combatlog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_courier_lost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_courier_respawned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_courier_transfer_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_effigy_kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_enemy_money_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_favorite_heroes_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_force_portrait_update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_game_state_change.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_glyph_used.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_hero_random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_hero_swap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_holdout_revive_complete.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_hud_error_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_hud_skin_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_inventory_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_inventory_changed_query_unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_inventory_item_added.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_inventory_item_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_inventory_player_got_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_auto_purchase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_drag_begin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_drag_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_gifted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_picked_up.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_purchase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_purchased.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_spotted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_item_used.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_link_clicked.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_local_quickbuy_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_match_done.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_match_done_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_match_signout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_money_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_no_battle_points.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_non_player_used_ability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_pause_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_deny.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_gained_level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_killed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_learned_ability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_pick_hero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_shop_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_show_killcam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_show_minikillcam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_take_tower_damage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_update_hero_selection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_update_killcam_unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_update_query_unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_update_selected_unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_player_used_ability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_portrait_ability_layout_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_portrait_unit_modifiers_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_portrait_unit_stats_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_quest_completed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_quest_started.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_quick_buy_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_rd_chat_turn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_reset_suggested_items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_roshan_kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_rubick_ability_steal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_rune_activated_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_rune_pickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_rune_spotted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_set_quick_buy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_shop_item_drag_begin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_shop_item_drag_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_spectate_hero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_starting_position_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_super_creeps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_tournament_item_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_tower_kill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_tutorial_lesson_start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_unit_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_workshop_filecanceled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_workshop_fileselected.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drop_rate_modified.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_hurt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_killed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="event_points_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="event_ticket_modified.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fantasy_league_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fantasy_score_info_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fantasy_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_downloaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="finale_start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flare_ignite_npc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="frosty_points_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="full_ui_unlocked.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_end_visible.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_newmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_rules_state_change.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameinstructor_draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameinstructor_nodraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameui_activated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameui_hidden.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gc_chat_channel_list_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gc_connected.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gc_mismatched_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gc_user_session_created.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="guild_data_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="guild_open_parties_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halloween_high_score_received.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halloween_high_score_request_failed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halloween_phase_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helicopter_grenade_punt_miss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hero_picker_hidden.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hero_picker_shown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hero_selector_preview_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hide_highlight_hud_element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="highlight_hud_element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_cameraman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_chase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_chat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_fixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_rank_camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_rank_entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_status.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_title.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hltv_versioninfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hostname_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hud_flip_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ingame_events_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instructor_server_hint_create.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instructor_server_hint_stop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="intro_video_finished.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item_preview_closed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item_purchased.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item_schema_initialized.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="joined_chat_channel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keybind_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="last_hit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="left_chat_channel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="live_games_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lobby_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="local_player_event_points.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map_location_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map_shutdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map_transition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="match_details_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="match_history_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matchmaking_status_visibility_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="microtransaction_success.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modifier_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="news_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nommed_tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npc_replaced.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npc_spawned.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="party_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="persona_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physgun_pickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_activate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_changename.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_chat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_completed_game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_connect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_connect_full.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_death.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_disconnect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_full_update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_fullyjoined.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_hintmessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_hurt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_info_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_is_experienced.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_is_notexperienced.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_reconnected.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_report_counts_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_say.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_score.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_shoot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_spawn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_stats_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_team.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_use.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="practice_lobby_visibility_changed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prizepool_received.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="profile_closed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="profile_opened.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ragdoll_dissolved.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="recent_matches_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reset_defeated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rich_presence_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="richpresence_custom_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="round_end.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="round_start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="round_start_pre_entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scaleform_file_download_complete.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_addban.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_cvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_pre_shutdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_removeban.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_shutdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server_spawn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="set_instructor_group_enabled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="show_center_message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spec_aegis_reclaim_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spec_item_pickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="store_pricesheet_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="team_data_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="team_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="team_score.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="team_showcase_ui_update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teamplay_broadcast_audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teamplay_round_start.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="today_messages_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tournament_state_updated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_cut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ugc_details_arrived.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ugc_subscribed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ugc_unsubscribed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="user_data_downloaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="definitions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

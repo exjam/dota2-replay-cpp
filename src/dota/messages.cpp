@@ -13,7 +13,7 @@
 #include "proto/usermessages.pb.h"
 
 #include "binarystream.h"
-#include "bitstream.h"
+#include "bitview.h"
 #include "clientclass.h"
 #include "demoparser.h"
 #include "util.h"
@@ -23,11 +23,14 @@ namespace dota
 
 bool DemoParser::parseMessage(BinaryStream &in)
 {
-   auto kind = in.readVarint<int>();
+   auto kind = in.readVarInt();
    auto comp = !!(kind & DEM_IsCompressed);
-   auto tick = in.readVarint<Tick>();
-   auto size = in.readVarint<std::size_t>();
-   auto data = std::vector<uint8_t> { };
+   auto tick = in.readVarInt();
+   auto size = in.readVarInt();
+   auto data = in.readArrayView<uint8_t>(size);
+
+   // TODO: Reuse the decomp buffer so we don't have to reallocate every time
+   auto decomp = std::vector<uint8_t> { };
 
    // Update tick?
    if (tick != mTick && kind != DEM_FileInfo) {
@@ -44,25 +47,25 @@ bool DemoParser::parseMessage(BinaryStream &in)
       return true;
    }
 
+
    // Decompress with Snappy if needed
    if (comp) {
-      auto compressed = in.readBytes(size);
-
-      if (!snappy::GetUncompressedLength(reinterpret_cast<const char*>(compressed.data()),
-                                         compressed.size(),
+      if (!snappy::GetUncompressedLength(reinterpret_cast<const char*>(data.data()),
+                                         data.size(),
                                          &size)) {
          return false;
       }
 
-      data.resize(size);
+      decomp.resize(size);
 
-      if (!snappy::RawUncompress(reinterpret_cast<const char*>(compressed.data()),
-                                 compressed.size(),
-                                 reinterpret_cast<char*>(data.data()))) {
+      if (!snappy::RawUncompress(reinterpret_cast<const char*>(data.data()),
+                                 data.size(),
+                                 reinterpret_cast<char*>(decomp.data()))) {
          return false;
       }
-   } else {
-      data = in.readBytes(size);
+
+      // Update our ArrayView to point to decompressed data
+      data = decomp;
    }
 
    switch (kind) {
@@ -111,15 +114,15 @@ bool DemoParser::parseMessage(BinaryStream &in)
 bool DemoParser::parseSubMessage(BinaryStream &in)
 {
    while (!in.eof()) {
-      auto kind = in.readVarint<int>();
-      auto size = in.readVarint<std::size_t>();
+      auto kind = in.readVarInt();
+      auto size = in.readVarInt();
 
       if (mParseProfile && !mParseProfile->sub[kind]) {
          in.skip(size);
          continue;
       }
 
-      auto data = in.readBytes(size);
+      auto data = in.readArrayView<uint8_t>(size);
 
       switch (kind) {
       case net_SetConVar:
@@ -195,13 +198,20 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
    return true;
 }
 
+struct static_string_buf : public std::streambuf
+{
+   static_string_buf(const static_string &str)
+   {
+      setg(str.data(), str.data(), str.data() + str.size());
+   }
+};
+
 bool DemoParser::updateInstanceBaseline(EntityClass &entityClass, StringTable::Entry &baseline)
 {
-   auto stream = std::istringstream { baseline.userData };
-   auto binary = BinaryStream { stream };
-   auto in = BitStream { binary };
+   auto in = BitView { baseline.userData.data(), baseline.userData.size() };
    auto propList = EntityPropList {};
    auto clientClass = entityClass.clientClass;
+   propList.reserve(128);
 
    if (!clientClass) {
       // TODO: Slow path, dynamic entity with string map properties
@@ -217,7 +227,7 @@ bool DemoParser::updateInstanceBaseline(EntityClass &entityClass, StringTable::E
    parseEntityPropList(in, propList);
    parseEntityProperties(in, entityClass, entityClass.baseInstance, propList);
 
-   auto pos = (std::size_t)stream.tellg();
+   auto pos = in.getBufferPosition();
    auto length = baseline.userData.size();
    assert(pos + 1 >= length);
    return true;
@@ -307,6 +317,7 @@ bool DemoParser::handleDemoSyncTick(const CDemoSyncTick &msg)
    auto &baseline = mStringTables["instancebaseline"];
    auto updateBaseline = (baseline.lastUpdate == mTick);
 
+   // TODO: Lazy decode
    for (auto &&entityClass : mClassList) {
       if (entityClass.sendTable && entityClass.sendTable->needsDecode) {
          updateEntityClass(entityClass);
@@ -434,11 +445,10 @@ bool DemoParser::handleCreateStringTable(const CSVCMsg_CreateStringTable &msg)
    table.flags = msg.flags();
    table.entries.resize(table.maxEntries);
 
-   auto stream = std::istringstream { msg.string_data() };
-   auto binary = BinaryStream { stream };
-   auto in = BitStream { binary };
+   auto &stringData = msg.string_data();
+   auto in = BitView { stringData.data(), stringData.size() };
    auto result = parseStringTable(table, in, msg.num_entries());
-   assert(binary.eof());
+   assert(in.getBufferPosition() == stringData.size());
    return result;
 }
 
@@ -448,32 +458,11 @@ bool DemoParser::handleUpdateStringTable(const CSVCMsg_UpdateStringTable &msg)
    auto stringTable = findStringTableByID(id);
    assert(stringTable);
 
-   auto stream = std::istringstream { msg.string_data() };
-   auto binary = BinaryStream { stream };
-   auto in = BitStream { binary };
+   auto &stringData = msg.string_data();
+   auto in = BitView { stringData.data(), stringData.size() };
    auto result = parseStringTable(*stringTable, in, msg.num_changed_entries());
-   assert(binary.eof());
+   assert(in.getBufferPosition() == stringData.size());
    return result;
-}
-
-bool DemoParser::handleDemoStringTables(const CDemoStringTables &stringTables)
-{
-   for (auto i = 0; i < stringTables.tables_size(); ++i) {
-      auto &table = stringTables.tables(i);
-      auto name = table.table_name();
-      auto itr = mStringTables.find(name);
-      assert(itr != mStringTables.end());
-      auto &stringTable = itr->second;
-
-      for (auto j = 0; j < table.items_size(); ++j) {
-         auto &item = table.items(j);
-         stringTable.setEntry(j, item.str(), item.data());
-      }
-
-      stringTable.lastUpdate = mTick;
-   }
-
-   return true;
 }
 
 bool DemoParser::handleServerInfo(const CSVCMsg_ServerInfo &info)
@@ -502,31 +491,29 @@ bool DemoParser::handleServerInfo(const CSVCMsg_ServerInfo &info)
    return true;
 }
 
-bool DemoParser::handleDemoPacket(const CDemoPacket &packet)
+bool DemoParser::handleDemoPacket(const CDemoPacket &msg)
 {
-   auto stream = std::istringstream { packet.data() };
-   auto in = BinaryStream { stream };
-   return parseSubMessage(in);
+   auto binary = BinaryStream { msg.data().data(), msg.data().size() };
+   return parseSubMessage(binary);
 }
 
-bool DemoParser::handleDemoFullPacket(const CDemoFullPacket &packet)
+bool DemoParser::handleDemoFullPacket(const CDemoFullPacket &msg)
 {
    bool success = true;
-   success &= handleDemoPacket(packet.packet());
+   success &= handleDemoPacket(msg.packet());
 
    if (mParseProfile && !mParseProfile->msg[DEM_StringTables]) {
       return success;
    }
 
-   success &= handleDemoStringTables(packet.string_table());
+   success &= handleDemoStringTables(msg.string_table());
    return success;
 }
 
-bool DemoParser::handleDemoSendTables(const CDemoSendTables &sendTables)
+bool DemoParser::handleDemoSendTables(const CDemoSendTables &msg)
 {
-   auto stream = std::istringstream { sendTables.data() };
-   auto in = BinaryStream { stream };
-   return parseSubMessage(in);
+   auto binary = BinaryStream { msg.data().data(), msg.data().size() };
+   return parseSubMessage(binary);
 }
 
 }

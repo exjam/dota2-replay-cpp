@@ -10,9 +10,10 @@
 #include "sendtable.h"
 #include "stringtable.h"
 #include "types.h"
+#include "binarystream.h"
 
 class BinaryStream;
-class BitStream;
+class BitView;
 
 class CDemoClassInfo;
 class CDemoConsoleCmd;
@@ -196,7 +197,7 @@ struct GameInfo {
 
    std::size_t ticks;
    std::size_t frames;
-   std::size_t seconds;
+   float seconds;
    uint32_t matchID;
    uint32_t gameMode; // DOTA_GameMode ?
    TeamID gameWinner;
@@ -282,12 +283,12 @@ protected:
    bool parseMessage(BinaryStream &in);
    bool parseSubMessage(BinaryStream &in);
 
-   template<typename Type, typename Handler>
-   bool decodeMessage(const std::vector<uint8_t> &array, Handler handler)
+   template<typename MessageType, typename MessageHandler>
+   bool decodeMessage(const ArrayView<uint8_t> &array, MessageHandler handler)
    {
-      Type message;
+      MessageType message;
 
-      if (!message.ParseFromArray(array.data(), array.size())) {
+      if (!message.ParseFromArray(array.data(), static_cast<int>(array.size()))) {
          return false;
       }
 
@@ -315,9 +316,9 @@ protected:
    bool updateEntityClass(EntityClass &entityClass);
    bool updateInstanceBaseline(EntityClass &entityClass, StringTable::Entry &baseline);
 
-   bool parseStringTable(StringTable &table, BitStream &in, std::size_t entries);
-   bool parseEntityPropList(BitStream &in, EntityPropList &props);
-   bool parseEntityProperties(BitStream &in, EntityClass &entityClass, ClientEntity *entity, EntityPropList &propList);
+   bool parseStringTable(StringTable &table, BitView &in, std::size_t entries);
+   bool parseEntityPropList(BitView &in, EntityPropList &props);
+   bool parseEntityProperties(BitView &in, EntityClass &entityClass, ClientEntity *entity, EntityPropList &propList);
 
    bool handleDemoClassInfo(const CDemoClassInfo &info);
    bool handleDemoConsoleCmd(const CDemoConsoleCmd &cmd);

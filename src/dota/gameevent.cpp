@@ -7,10 +7,25 @@
 #include "event/dota_combatlog.h"
 
 #include "demoparser.h"
+#include "binarystream.h"
 
 namespace dota
 {
 // DOTA_COMBATLOG_TYPES
+
+class ProtoBufStream
+{
+public:
+private:
+};
+
+bool parseProtobufMessage(BinaryStream &in)
+{
+   auto tag = in.read<uint8_t>();
+   auto field = tag >> 3;
+   auto type = tag & 0x7;
+   return true;
+}
 
 bool DemoParser::parseGameEvent(const CSVCMsg_GameEvent &event)
 {
@@ -66,7 +81,7 @@ bool DemoParser::handleGameEventList(const CSVCMsg_GameEventList &list)
 {
    for (auto i = 0; i < list.descriptors_size(); ++i) {
       auto &desc = list.descriptors(i);
-      auto id = desc.eventid();
+      auto id = static_cast<std::size_t>(desc.eventid());
 
       if (mGameEventDescriptors.size() <= id) {
          mGameEventDescriptors.resize(id + 1);

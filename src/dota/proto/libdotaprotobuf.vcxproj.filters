@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\google">
+      <UniqueIdentifier>{5dca30ce-dbdc-4bee-8ccb-86c062e6c5b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\google\protobuf">
+      <UniqueIdentifier>{09576d17-faa5-42ab-a268-ebb62b820314}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ai_activity.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="base_gcmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_broadcastmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_clientmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_commonmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_client.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_client_fantasy.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_common.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_server.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_modifiers.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_usermessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="econ_gcmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gcsdk_gcmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gcsystemmsgs.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netmessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="network_connection.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="networkbasetypes.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steammessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usermessages.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ai_activity.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base_gcmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_broadcastmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_clientmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_commonmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_client.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_client_fantasy.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_common.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_server.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_modifiers.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_usermessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="econ_gcmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gcsdk_gcmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gcsystemmsgs.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="netmessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="network_connection.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="networkbasetypes.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steammessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="usermessages.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ai_activity.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="base_gcmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="demo.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_broadcastmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_clientmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_commonmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_gcmessages_client.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_gcmessages_client_fantasy.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_gcmessages_common.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_gcmessages_server.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_modifiers.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="dota_usermessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="econ_gcmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gcsdk_gcmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gcsystemmsgs.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="netmessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="network_connection.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="networkbasetypes.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="steammessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="usermessages.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="google\protobuf\descriptor.proto">
+      <Filter>Resource Files\google\protobuf</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="list.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
