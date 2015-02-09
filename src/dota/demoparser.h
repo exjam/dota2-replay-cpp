@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <functional>
+#include <string_view.h>
 
 #include "entity.h"
 #include "gameevent.h"
@@ -10,104 +11,103 @@
 #include "sendtable.h"
 #include "stringtable.h"
 #include "types.h"
-#include "binarystream.h"
 
-class BinaryStream;
 class BitView;
+class ByteView;
 
-class CDemoClassInfo;
-class CDemoConsoleCmd;
-class CDemoFileHeader;
-class CDemoFileInfo;
-class CDemoFullPacket;
-class CDemoPacket;
-class CDemoSendTables;
-class CDemoStringTables;
-class CDemoSyncTick;
+struct CDemoClassInfo;
+struct CDemoConsoleCmd;
+struct CDemoFileHeader;
+struct CDemoFileInfo;
+struct CDemoFullPacket;
+struct CDemoPacket;
+struct CDemoSendTables;
+struct CDemoStringTables;
+struct CDemoSyncTick;
 
-class CNETMsg_SetConVar;
-class CNETMsg_SignonState;
-class CNETMsg_StringCmd;
-class CNETMsg_Tick;
+struct CNETMsg_SetConVar;
+struct CNETMsg_SignonState;
+struct CNETMsg_StringCmd;
+struct CNETMsg_Tick;
 
-class CSVCMsg_CreateStringTable;
-class CSVCMsg_UpdateStringTable;
-class CSVCMsg_PacketEntities;
-class CSVCMsg_TempEntities;
-class CSVCMsg_ServerInfo;
-class CSVCMsg_SendTable;
-class CSVCMsg_UserMessage;
-class CSVCMsg_ClassInfo;
-class CSVCMsg_GameEvent;
-class CSVCMsg_GameEventList;
+struct CSVCMsg_CreateStringTable;
+struct CSVCMsg_UpdateStringTable;
+struct CSVCMsg_PacketEntities;
+struct CSVCMsg_TempEntities;
+struct CSVCMsg_ServerInfo;
+struct CSVCMsg_SendTable;
+struct CSVCMsg_UserMessage;
+struct CSVCMsg_ClassInfo;
+struct CSVCMsg_GameEvent;
+struct CSVCMsg_GameEventList;
 
-class CUserMsg_SayText2;
+struct CUserMsg_SayText2;
 
-class CDOTAUserMsg_AbilitySteal;
-class CDOTAUserMsg_AbilityPing;
-class CDOTAUserMsg_AIDebugLine;
-class CDOTAUserMsg_BoosterState;
-class CDOTAUserMsg_BotChat;
-class CDOTAUserMsg_BuyBackStateAlert;
-class CDOTAUserMsg_ChatEvent;
-class CDOTAUserMsg_ChatWheel;
-class CDOTAUserMsg_ClientLoadGridNav;
-class CDOTAUserMsg_CoachHUDPing;
-class CDOTAUserMsg_CombatHeroPositions;
-class CDOTAUserMsg_CombatLogShowDeath;
-class CDOTAUserMsg_CourierKilledAlert;
-class CDOTAUserMsg_CreateLinearProjectile;
-class CDOTAUserMsg_CustomMsg;
-class CDOTAUserMsg_DestroyLinearProjectile;
-class CDOTAUserMsg_DodgeTrackingProjectiles;
-class CDOTAUserMsg_EnemyItemAlert;
-class CDOTA_UM_GamerulesStateChanged;
-class CDOTAUserMsg_GlobalLightColor;
-class CDOTAUserMsg_GlobalLightDirection;
-class CDOTAUserMsg_HalloweenDrops;
-class CDOTAUserMsg_HudError;
-class CDOTAUserMsg_InvalidCommand;
-class CDOTAUserMsg_ItemAlert;
-class CDOTAUserMsg_ItemFound;
-class CDOTAUserMsg_ItemPurchased;
-class CDOTAUserMsg_LocationPing;
-class CDOTAUserMsg_MapLine;
-class CDOTAUserMsg_MiniKillCamInfo;
-class CDOTAUserMsg_MinimapDebugPoint;
-class CDOTAUserMsg_MinimapEvent;
-class CDOTAUserMsg_MiniTaunt;
-class CDOTAUserMsg_NevermoreRequiem;
-class CDOTAUserMsg_OverheadEvent;
-class CDOTAUserMsg_ParticleManager;
-class CDOTAUserMsg_Ping;
-class CDOTAUserMsg_PlayerMMR;
-class CDOTAUserMsg_PredictionResult;
-class CDOTAUserMsg_QuickBuyAlert;
-class CDOTAUserMsg_ReceivedXmasGift;
-class CDOTAUserMsg_SendFinalGold;
-class CDOTAUserMsg_SendGenericToolTip;
-class CDOTAUserMsg_SendRoshanPopup;
-class CDOTAUserMsg_SendStatPopup;
-class CDOTAUserMsg_SetNextAutobuyItem;
-class CDOTAUserMsg_SharedCooldown;
-class CDOTAUserMsg_ShowGenericPopup;
-class CDOTAUserMsg_ShowSurvey;
-class CDOTAUserMsg_SpectatorPlayerClick;
-class CDOTAUserMsg_StatsMatchDetails;
-class CDOTAUserMsg_SwapVerify;
-class CDOTAUserMsg_TutorialFade;
-class CDOTAUserMsg_TutorialFinish;
-class CDOTAUserMsg_TutorialMinimapPosition;
-class CDOTAUserMsg_TutorialPingMinimap;
-class CDOTAUserMsg_TutorialRequestExp;
-class CDOTAUserMsg_TutorialTipInfo;
-class CDOTAUserMsg_UnitEvent;
-class CDOTAUserMsg_UpdateSharedContent;
-class CDOTAUserMsg_VoteEnd;
-class CDOTAUserMsg_VoteStart;
-class CDOTAUserMsg_VoteUpdate;
-class CDOTAUserMsg_WillPurchaseAlert;
-class CDOTAUserMsg_WorldLine;
+struct CDOTAUserMsg_AbilitySteal;
+struct CDOTAUserMsg_AbilityPing;
+struct CDOTAUserMsg_AIDebugLine;
+struct CDOTAUserMsg_BoosterState;
+struct CDOTAUserMsg_BotChat;
+struct CDOTAUserMsg_BuyBackStateAlert;
+struct CDOTAUserMsg_ChatEvent;
+struct CDOTAUserMsg_ChatWheel;
+struct CDOTAUserMsg_ClientLoadGridNav;
+struct CDOTAUserMsg_CoachHUDPing;
+struct CDOTAUserMsg_CombatHeroPositions;
+struct CDOTAUserMsg_CombatLogShowDeath;
+struct CDOTAUserMsg_CourierKilledAlert;
+struct CDOTAUserMsg_CreateLinearProjectile;
+struct CDOTAUserMsg_CustomMsg;
+struct CDOTAUserMsg_DestroyLinearProjectile;
+struct CDOTAUserMsg_DodgeTrackingProjectiles;
+struct CDOTAUserMsg_EnemyItemAlert;
+struct CDOTA_UM_GamerulesStateChanged;
+struct CDOTAUserMsg_GlobalLightColor;
+struct CDOTAUserMsg_GlobalLightDirection;
+struct CDOTAUserMsg_HalloweenDrops;
+struct CDOTAUserMsg_HudError;
+struct CDOTAUserMsg_InvalidCommand;
+struct CDOTAUserMsg_ItemAlert;
+struct CDOTAUserMsg_ItemFound;
+struct CDOTAUserMsg_ItemPurchased;
+struct CDOTAUserMsg_LocationPing;
+struct CDOTAUserMsg_MapLine;
+struct CDOTAUserMsg_MiniKillCamInfo;
+struct CDOTAUserMsg_MinimapDebugPoint;
+struct CDOTAUserMsg_MinimapEvent;
+struct CDOTAUserMsg_MiniTaunt;
+struct CDOTAUserMsg_NevermoreRequiem;
+struct CDOTAUserMsg_OverheadEvent;
+struct CDOTAUserMsg_ParticleManager;
+struct CDOTAUserMsg_Ping;
+struct CDOTAUserMsg_PlayerMMR;
+struct CDOTAUserMsg_PredictionResult;
+struct CDOTAUserMsg_QuickBuyAlert;
+struct CDOTAUserMsg_ReceivedXmasGift;
+struct CDOTAUserMsg_SendFinalGold;
+struct CDOTAUserMsg_SendGenericToolTip;
+struct CDOTAUserMsg_SendRoshanPopup;
+struct CDOTAUserMsg_SendStatPopup;
+struct CDOTAUserMsg_SetNextAutobuyItem;
+struct CDOTAUserMsg_SharedCooldown;
+struct CDOTAUserMsg_ShowGenericPopup;
+struct CDOTAUserMsg_ShowSurvey;
+struct CDOTAUserMsg_SpectatorPlayerClick;
+struct CDOTAUserMsg_StatsMatchDetails;
+struct CDOTAUserMsg_SwapVerify;
+struct CDOTAUserMsg_TutorialFade;
+struct CDOTAUserMsg_TutorialFinish;
+struct CDOTAUserMsg_TutorialMinimapPosition;
+struct CDOTAUserMsg_TutorialPingMinimap;
+struct CDOTAUserMsg_TutorialRequestExp;
+struct CDOTAUserMsg_TutorialTipInfo;
+struct CDOTAUserMsg_UnitEvent;
+struct CDOTAUserMsg_UpdateSharedContent;
+struct CDOTAUserMsg_VoteEnd;
+struct CDOTAUserMsg_VoteStart;
+struct CDOTAUserMsg_VoteUpdate;
+struct CDOTAUserMsg_WillPurchaseAlert;
+struct CDOTAUserMsg_WorldLine;
 
 namespace dota
 {
@@ -263,7 +263,7 @@ using TickEventListener = std::function<void(Tick,TickData&)>;
 class DemoParser
 {
 public:
-   bool parse(BinaryStream &in, const ParseProfile *profile = nullptr);
+   bool parse(ByteView &in, const ParseProfile *profile = nullptr);
 
    const ServerInfo &serverInfo() const;
    const GameInfo &gameInfo() const;
@@ -280,27 +280,15 @@ public:
    void setOnTickEventListener(TickEventListener listener);
 
 protected:
-   bool parseMessage(BinaryStream &in);
-   bool parseSubMessage(BinaryStream &in);
+   bool parseMessage(ByteView &in);
+   bool parseSubMessage(ByteView &in);
 
    template<typename MessageType, typename MessageHandler>
-   bool decodeMessage(const ArrayView<uint8_t> &array, MessageHandler handler)
+   bool decodeMessage(const std::string_view &data, MessageHandler handler)
    {
       MessageType message;
 
-      if (!message.ParseFromArray(array.data(), static_cast<int>(array.size()))) {
-         return false;
-      }
-
-      return (this->*handler)(message);
-   }
-
-   template<typename Type, typename Handler>
-   bool decodeMessage(const std::string &string, Handler handler)
-   {
-      Type message;
-
-      if (!message.ParseFromString(string)) {
+      if (!message.parse(data)) {
          return false;
       }
 
@@ -320,15 +308,15 @@ protected:
    bool parseEntityPropList(BitView &in, EntityPropList &props);
    bool parseEntityProperties(BitView &in, EntityClass &entityClass, ClientEntity *entity, EntityPropList &propList);
 
-   bool handleDemoClassInfo(const CDemoClassInfo &info);
-   bool handleDemoConsoleCmd(const CDemoConsoleCmd &cmd);
-   bool handleDemoFileInfo(const CDemoFileInfo &info);
+   bool handleDemoClassInfo(const CDemoClassInfo &msg);
+   bool handleDemoConsoleCmd(const CDemoConsoleCmd &msg);
+   bool handleDemoFileInfo(const CDemoFileInfo &msg);
    bool handleDemoSyncTick(const CDemoSyncTick &msg);
-   bool handleDemoFileHeader(const CDemoFileHeader &header);
+   bool handleDemoFileHeader(const CDemoFileHeader &msg);
    bool handleDemoPacket(const CDemoPacket &packet);
-   bool handleDemoFullPacket(const CDemoFullPacket &packet);
-   bool handleDemoSendTables(const CDemoSendTables &sendTables);
-   bool handleDemoStringTables(const CDemoStringTables &stringTables);
+   bool handleDemoFullPacket(const CDemoFullPacket &msg);
+   bool handleDemoSendTables(const CDemoSendTables &msg);
+   bool handleDemoStringTables(const CDemoStringTables &msg);
 
    bool handleSignonState(const CNETMsg_SignonState &msg);
    bool handleTick(const CNETMsg_Tick &msg);
@@ -336,16 +324,16 @@ protected:
    bool handleSetConVar(const CNETMsg_SetConVar &msg);
 
    bool parseUserMessage(const CSVCMsg_UserMessage &message);
-   bool parseGameEvent(const CSVCMsg_GameEvent &event);
    bool parsePacketEntities(const CSVCMsg_PacketEntities &msg);
    bool parseTempEntities(const CSVCMsg_TempEntities &msg);
 
-   bool handleSendTable(const CSVCMsg_SendTable &msg);
-   bool handleClassInfo(const CSVCMsg_ClassInfo &msg);
    bool handleCreateStringTable(const CSVCMsg_CreateStringTable &msg);
    bool handleUpdateStringTable(const CSVCMsg_UpdateStringTable &msg);
-   bool handleServerInfo(const CSVCMsg_ServerInfo &info);
-   bool handleGameEventList(const CSVCMsg_GameEventList &list);
+   bool handleSendTable(const CSVCMsg_SendTable &msg);
+   bool handleClassInfo(const CSVCMsg_ClassInfo &msg);
+   bool handleServerInfo(const CSVCMsg_ServerInfo &msg);
+   bool handleGameEvent(const CSVCMsg_GameEvent &msg);
+   bool handleGameEventList(const CSVCMsg_GameEventList &msg);
 
    bool handleSayText2(const CUserMsg_SayText2 &msg);
 

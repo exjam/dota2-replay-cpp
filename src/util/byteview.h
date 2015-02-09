@@ -3,33 +3,38 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include "arrayview.h"
-#include "stringview.h"
+#include <string_view.h>
 
-// TODO: Rename BufferView?
-class BinaryStream
+class ByteView
 {
 public:
-   BinaryStream(const char *buffer, std::size_t size) :
+   ByteView(const char *buffer, size_t size) :
       mBuffer(buffer),
       mSize(size),
       mPosition(0)
    {
    }
 
-   BinaryStream(const std::string &str) :
+   ByteView(const std::string &str) :
       mBuffer(str.c_str()),
       mSize(str.size()),
       mPosition(0)
    {
    }
 
-   void seek(std::size_t pos)
+   ByteView(const std::string_view &str) :
+      mBuffer(str.data()),
+      mSize(str.size()),
+      mPosition(0)
+   {
+   }
+
+   void seek(size_t pos)
    {
       mPosition = pos;
    }
 
-   void skip(std::size_t bytes)
+   void skip(size_t bytes)
    {
       mPosition += bytes;
    }
@@ -53,46 +58,52 @@ public:
       return *reinterpret_cast<const ValueType*>(mBuffer + pos);
    }
 
-   std::size_t readVarInt()
+   uint32_t readVarint32()
    {
       auto ptr = reinterpret_cast<const uint8_t*>(mBuffer + mPosition);
-      auto value = std::size_t { 0 };
+      auto value = 0u;
       auto bytes = 0u;
 
       do {
-         value |= (*ptr & 0x7f) << (bytes * 7);
+         value |= (*ptr & 0x7f) << (bytes * 7u);
          bytes++;
-      } while (*(ptr++) & 0x80);
+      } while (*(ptr++) & 0x80 && bytes <= 5);
 
       mPosition += bytes;
       return value;
    }
 
-   template<typename Type>
-   ArrayView<Type> readArrayView(std::size_t length)
+   uint64_t readVarint64()
    {
-      assert(checkRemainingSpace(length));
-      auto pos = mPosition;
-      mPosition += length;
-      return { reinterpret_cast<const Type*>(mBuffer + pos), length };
+      auto ptr = reinterpret_cast<const uint8_t*>(mBuffer + mPosition);
+      auto value = 0ull;
+      auto bytes = 0;
+
+      do {
+         value |= (*ptr & 0x7f) << (bytes * 7ull);
+         bytes++;
+      } while (*(ptr++) & 0x80 && bytes <= 5);
+
+      mPosition += bytes;
+      return value;
    }
 
-   StringView readStringView(std::size_t length)
+   std::string_view readStringView(size_t length)
    {
       assert(checkRemainingSpace(length));
       auto pos = mPosition;
       mPosition += length;
-      return { reinterpret_cast<const StringView::ElementType*>(mBuffer + pos), length };
+      return { reinterpret_cast<std::string_view::pointer>(mBuffer + pos), length };
    }
 
 private:
-   bool checkRemainingSpace(std::size_t bytes) const
+   bool checkRemainingSpace(size_t bytes) const
    {
       return mPosition + bytes <= mSize;
    }
 
 private:
    const char *mBuffer;
-   std::size_t mSize;
-   std::size_t mPosition;
+   size_t mSize;
+   size_t mPosition;
 };

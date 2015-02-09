@@ -1,9 +1,9 @@
 #include "parseprofile.h"
 
-#include "proto/demo.pb.h"
-#include "proto/dota_usermessages.pb.h"
-#include "proto/netmessages.pb.h"
-#include "proto/usermessages.pb.h"
+#include "proto/demo.pbsl.h"
+#include "proto/dota_usermessages.pbsl.h"
+#include "proto/netmessages.pbsl.h"
+#include "proto/usermessages.pbsl.h"
 
 namespace dota
 {

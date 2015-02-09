@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <cassert>
+#include <cstring>
 
 class BitView
 {
@@ -15,6 +16,11 @@ public:
       mPosition(0)
    {
       grabNextWord();
+   }
+
+   bool eof()
+   {
+      return mPosition == mSize;
    }
 
    uint32_t readBit()
@@ -176,14 +182,14 @@ public:
       return *(reinterpret_cast<float*>(&value));
    }
 
+   size_t getReadPosition() const
+   {
+      return 8 * (mPosition - WordBytes) + (32 - mBitsRemaining);
+   }
+
    size_t getBufferPosition()
    {
       return mPosition;
-   }
-
-   size_t getBitPosition()
-   {
-      return WordBits - mBitsRemaining;
    }
 
    size_t getBufferSize()
@@ -194,29 +200,23 @@ public:
 protected:
    void grabNextWord()
    {
-      auto readBytes = WordBytes;
+      auto readBytes = mSize - mPosition;
 
-      if (mPosition + WordBytes <= mSize) {
+      if (readBytes >= WordBytes) {
          mCurrentWord = *reinterpret_cast<const WordType*>(mBuffer + mPosition);
+         readBytes = WordBytes;
       } else {
-         readBytes = mSize - mPosition;
-
-         if (readBytes >= 2) {
-            mCurrentWord = *reinterpret_cast<const uint16_t*>(mBuffer + mPosition);
-         } else if (readBytes == 1) {
-            mCurrentWord = *reinterpret_cast<const uint8_t*>(mBuffer + mPosition);
-         } else {
-            assert(0 && "Read past end of buffer!");
-         }
+         mCurrentWord = 0;
+         std::memcpy(&mCurrentWord, mBuffer + mPosition, readBytes);
       }
 
-      // Read word
       mBitsRemaining = readBytes * 8;
       mPosition += readBytes;
    }
 
    void consumeBits(size_t bits)
    {
+      assert(mBitsRemaining);
       mCurrentWord >>= bits;
       mBitsRemaining -= bits;
 

@@ -21,130 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ai_activity.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="base_gcmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_broadcastmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_clientmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_commonmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_gcmessages_client.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_gcmessages_client_fantasy.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_gcmessages_common.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_gcmessages_server.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_modifiers.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dota_usermessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="econ_gcmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gcsdk_gcmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gcsystemmsgs.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="netmessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="network_connection.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="networkbasetypes.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="steammessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="usermessages.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ai_activity.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="base_gcmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_broadcastmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_clientmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_commonmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_gcmessages_client.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_gcmessages_client_fantasy.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_gcmessages_common.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_gcmessages_server.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_modifiers.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dota_usermessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="econ_gcmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gcsdk_gcmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gcsystemmsgs.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="netmessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="network_connection.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="networkbasetypes.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="steammessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="usermessages.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ai_activity.proto">
       <Filter>Resource Files</Filter>
     </None>
@@ -213,5 +89,120 @@
     <Text Include="list.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="base_gcmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_broadcastmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_clientmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_commonmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_client.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_client_fantasy.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_common.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_gcmessages_server.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_modifiers.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dota_usermessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="econ_gcmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gcsdk_gcmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netmessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="networkbasetypes.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steammessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usermessages.pbsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ai_activity.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base_gcmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_broadcastmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_clientmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_commonmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_client.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_client_fantasy.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_common.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_gcmessages_server.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_modifiers.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dota_usermessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="econ_gcmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gcsdk_gcmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gcsystemmsgs.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="netmessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="network_connection.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="networkbasetypes.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steammessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="usermessages.pbsl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

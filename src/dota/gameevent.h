@@ -6,8 +6,6 @@
 
 #include "stringtable.h"
 
-class CSVCMsg_GameEvent;
-
 namespace dota
 {
 
@@ -30,7 +28,7 @@ struct GameEventDescriptor
 {
    struct Property
    {
-      std::size_t type;
+      GameEventType type;
       std::string name;
       std::ptrdiff_t offset;
    };

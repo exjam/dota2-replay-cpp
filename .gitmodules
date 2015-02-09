@@ -1,6 +1,9 @@
-[submodule "lib/protobuf"]
-	path = lib/protobuf
-	url = https://github.com/exjam/protobuf.git
 [submodule "lib/snappy"]
 	path = lib/snappy
 	url = https://github.com/google/snappy.git
+[submodule "lib/protobufsuperlite"]
+	path = lib/protobufsuperlite
+	url = https://github.com/exjam/protobufsuperlite.git
+[submodule "lib/string_view"]
+	path = lib/string_view
+	url = https://github.com/exjam/string_view.git

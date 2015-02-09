@@ -2,21 +2,22 @@
 
 #include "demoparser.h"
 
-#include "proto/usermessages.pb.h"
-#include "proto/dota_usermessages.pb.h"
+#include "proto/usermessages.pbsl.h"
+#include "proto/dota_usermessages.pbsl.h"
 
 namespace dota
 {
 
 bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
 {
-   auto kind = message.msg_type();
+   auto kind = message.msg_type;
 
+   // Skip filtered user messages
    if (mParseProfile && !mParseProfile->usr[kind]) {
       return true;
    }
 
-   auto data = message.msg_data();
+   auto &data = message.msg_data;
 
    switch (kind) {
    case UM_SayText2:
@@ -263,27 +264,8 @@ bool DemoParser::parseUserMessage(const CSVCMsg_UserMessage &message)
    return true;
 }
 
-// TODO: Do something with user messages!
-namespace msg {
-struct SayText2 {
-  bool chat;
-  uint32_t client;
-  std::string format;
-  std::string location;
-  std::string prefix;
-  std::string text;
-};
-};
-
 bool DemoParser::handleSayText2(const CUserMsg_SayText2 &msg)
 {
-   msg::SayText2 say;
-   say.chat = msg.chat();
-   say.client = msg.client();
-   say.format = msg.format();
-   say.location = msg.location();
-   say.prefix = msg.prefix();
-   say.text = msg.text();
    return false;
 }
 
@@ -349,10 +331,6 @@ bool DemoParser::handleCombatLogShowDeath(const CDOTAUserMsg_CombatLogShowDeath&
 
 bool DemoParser::handleCourierKilledAlert(const CDOTAUserMsg_CourierKilledAlert &msg)
 {
-   auto entity = msg.entity_handle();
-   auto value = msg.gold_value();
-   auto team = msg.team();
-   auto timestamp = msg.timestamp();
    return true;
 }
 

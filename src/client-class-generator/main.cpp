@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "binarystream.h"
+#include "byteview.h"
 #include "demoparser.h"
 
 // We build without libdotaevent and libdotaentity, so define empty maps
@@ -326,7 +326,7 @@ void dumpStructure(std::ostream &out, dota::SendTable *table)
             path.erase(path.end() - 1);
 
             // Find where it matches the current patch
-            int samePath = 0;
+            auto samePath = 0u;
 
             for (samePath = 0; samePath < activePath.size() && samePath < path.size(); ++samePath) {
                if (activePath[samePath].compare(path[samePath]) != 0) {
@@ -335,13 +335,13 @@ void dumpStructure(std::ostream &out, dota::SendTable *table)
             }
 
             // Pop out of activePath until we reach the common path
-            for (int i = activePath.size() - 1; i >= samePath; --i) {
+            for (auto i = activePath.size() - 1; i >= samePath; --i) {
                activeIndent.erase(activeIndent.begin(), activeIndent.begin() + indent.size());
                out << activeIndent << "} " << activePath[i] << ";" << std::endl;
             }
 
             // Open new structs from common path until we reach the new path
-            for (int i = samePath; i < path.size(); ++i) {
+            for (auto i = samePath; i < path.size(); ++i) {
                out << activeIndent << "struct {" << std::endl;
                activeIndent += indent;
             }
@@ -451,7 +451,7 @@ void orderStructDependencies(std::set<std::string> &structDeps, std::vector<std:
       auto sendTable = demo.findSendTableByName(dep);
       int earliestPos = 0;
 
-      for (auto i = 0; i < ordered.size(); ++i) {
+      for (auto i = 0u; i < ordered.size(); ++i) {
          if (doesDependOnStruct(sendTable, ordered[i])) {
             earliestPos = i + 1;
          }
@@ -633,7 +633,16 @@ void writeEntityDefinition(const dota::EntityClass &entityClass, std::ofstream &
 int main()
 {
    auto file = std::ifstream { "1151921935.dem", std::ifstream::binary };
-   auto in = BinaryStream { file };
+   file.seekg(0, file.end);
+
+   auto size = static_cast<std::size_t>(file.tellg());
+   file.seekg(0, file.beg);
+
+   auto data = std::vector<char> {};
+   data.resize(size);
+   file.read(data.data(), size);
+
+   auto in = ByteView { data.data(), data.size() };
    demo.parse(in, dota::ParseProfile::SendTables);
 
    for (auto &&entityClass : demo.classList()) {

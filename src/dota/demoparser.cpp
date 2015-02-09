@@ -1,11 +1,11 @@
-#include "binarystream.h"
+#include "byteview.h"
 #include "demoparser.h"
 #include "entity/CBaseEntity.h"
 
 namespace dota
 {
 
-bool DemoParser::parse(BinaryStream &in, const ParseProfile *profile)
+bool DemoParser::parse(ByteView &in, const ParseProfile *profile)
 {
    auto header = in.readStringView(8);
 

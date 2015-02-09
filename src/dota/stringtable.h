@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
+#include <string_view.h>
 #include <vector>
 #include <cassert>
 #include "types.h"
@@ -12,6 +13,13 @@ public:
    fixed_string()
    {
       mData[0] = 0;
+   }
+
+   fixed_string &operator=(const std::string_view &other)
+   {
+      assert(other.size() < Size);
+      strncpy_s(mData, Size, other.data(), other.size());
+      return *this;
    }
 
    fixed_string &operator=(const std::string &other)
@@ -79,6 +87,15 @@ public:
    }
 
    static_string &operator=(const std::string &other)
+   {
+      auto size = other.length();
+      auto value = new char[size];
+      memcpy(value, other.data(), size);
+      set(value, size);
+      return *this;
+   }
+
+   static_string &operator=(const std::string_view &other)
    {
       auto size = other.length();
       auto value = new char[size];

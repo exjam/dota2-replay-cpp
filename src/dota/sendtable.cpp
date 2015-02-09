@@ -70,6 +70,7 @@ buildHeirarchy(const SendTableMap &sendTableMap,
                std::string path)
 {
    auto recvProps = ReceiveProperties {};
+   recvProps.reserve(32);
    buildHeirarchyProperties(sendTableMap, exclusions, sendTable, properties, recvProps, path);
    properties.insert(properties.end(), recvProps.begin(), recvProps.end());
    return true;
@@ -288,31 +289,39 @@ bool DemoParser::updateEntityClass(EntityClass &entityClass)
       return false;
    }
 
+   // Update the instance baseline
+   auto &baseline = mStringTables["instancebaseline"];
+   auto baselineEntry = baseline.findEntry(std::to_string(entityClass.id));
+
+   if (baselineEntry) {
+      updateInstanceBaseline(entityClass, *baselineEntry);
+   }
+
+#if 1
    // Debug print fields that dont match up to our client class!
-   if (1) {
-      bool printedName = false;
-      auto size = ClientClassList::get(sendTable.name)->getSize();
+   bool printedName = false;
+   auto size = ClientClassList::get(sendTable.name)->getSize();
 
-      for (auto &&prop : properties) {
-         if (prop.offset == -1) {
-            // We ignore lengthproxy and lengthprop for now
-            if (prop.varName.find("lengthproxy") != std::string::npos) {
-               continue;
-            }
-
-            if (prop.varName.find("lengthprop") != std::string::npos) {
-               continue;
-            }
-
-            if (!printedName) {
-               std::cout << sendTable.name << std::endl;
-               printedName = true;
-            }
-
-            std::cout << prop.offset << " " << prop.varName << std::endl;
+   for (auto &&prop : properties) {
+      if (prop.offset == -1) {
+         // We ignore lengthproxy and lengthprop for now
+         if (prop.varName.find("lengthproxy") != std::string::npos) {
+            continue;
          }
+
+         if (prop.varName.find("lengthprop") != std::string::npos) {
+            continue;
+         }
+
+         if (!printedName) {
+            std::cout << sendTable.name << std::endl;
+            printedName = true;
+         }
+
+         std::cout << prop.offset << " " << prop.varName << std::endl;
       }
    }
+#endif
 
    return true;
 }

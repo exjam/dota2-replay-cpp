@@ -15,19 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="binarystream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="arrayview.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stringview.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="bitview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="byteview.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

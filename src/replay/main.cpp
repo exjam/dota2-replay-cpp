@@ -5,7 +5,7 @@
 #include "entity/CDOTA_PlayerResource.h"
 #include "entity/CDOTAGamerulesProxy.h"
 
-#include "binarystream.h"
+#include "byteview.h"
 #include "demoparser.h"
 #include "clientclass.h"
 
@@ -32,7 +32,7 @@ public:
       mInGameTime = std::chrono::seconds(0);
       mTick = 0;
 
-      auto in = BinaryStream { data.data(), size };
+      auto in = ByteView { data.data(), size };
       mDemo.parse(in, dota::ParseProfile::FullReplay);
    }
 
@@ -105,7 +105,6 @@ private:
    dota::CDOTAGamerulesProxy *mGameRules = nullptr;
 };
 
-// TODO: Find the HUGE memory leaks!!
 int main()
 {
    std::chrono::time_point<std::chrono::system_clock> start, end, destruct;

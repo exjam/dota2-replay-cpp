@@ -4,7 +4,7 @@
 #include "demoparser.h"
 #include "util.h"
 
-#include "proto/demo.pb.h"
+#include "proto/demo.pbsl.h"
 
 namespace dota
 {
@@ -13,15 +13,14 @@ static const unsigned STRING_HISTORY_SIZE = 32;
 
 bool DemoParser::handleDemoStringTables(const CDemoStringTables &stringTables)
 {
-   for (auto i = 0; i < stringTables.tables_size(); ++i) {
-      auto &table = stringTables.tables(i);
-      auto name = table.table_name();
-      auto itr = mStringTables.find(name);
+   for (auto i = 0u; i < stringTables.tables.size(); ++i) {
+      auto &table = stringTables.tables[i];
+      auto itr = mStringTables.find(table.table_name.to_string());
       assert(itr != mStringTables.end());
       auto &stringTable = itr->second;
 
-      for (auto j = 0; j < table.items_size(); ++j) {
-         auto &item = table.items(j);
+      for (auto j = 0u; j < table.items.size(); ++j) {
+         auto &item = table.items[j];
          auto &entry = stringTable.entries[j];
 
          // Remove from keymap
@@ -30,8 +29,9 @@ bool DemoParser::handleDemoStringTables(const CDemoStringTables &stringTables)
          }
 
          // Set values
-         entry.strData = item.str();
-         entry.userData = item.data();
+         // TODO: pbsl change to std::string_view
+         entry.strData = item.str;
+         entry.userData = item.data;
 
          // Add to keymap
          if (entry.strData && entry.userData) {

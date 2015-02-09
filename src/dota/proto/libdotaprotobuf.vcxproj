@@ -19,50 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ai_activity.pb.cc" />
-    <ClCompile Include="base_gcmessages.pb.cc" />
-    <ClCompile Include="demo.pb.cc" />
-    <ClCompile Include="dota_broadcastmessages.pb.cc" />
-    <ClCompile Include="dota_clientmessages.pb.cc" />
-    <ClCompile Include="dota_commonmessages.pb.cc" />
-    <ClCompile Include="dota_gcmessages_client.pb.cc" />
-    <ClCompile Include="dota_gcmessages_client_fantasy.pb.cc" />
-    <ClCompile Include="dota_gcmessages_common.pb.cc" />
-    <ClCompile Include="dota_gcmessages_server.pb.cc" />
-    <ClCompile Include="dota_modifiers.pb.cc" />
-    <ClCompile Include="dota_usermessages.pb.cc" />
-    <ClCompile Include="econ_gcmessages.pb.cc" />
-    <ClCompile Include="gcsdk_gcmessages.pb.cc" />
-    <ClCompile Include="gcsystemmsgs.pb.cc" />
-    <ClCompile Include="netmessages.pb.cc" />
-    <ClCompile Include="networkbasetypes.pb.cc" />
-    <ClCompile Include="network_connection.pb.cc" />
-    <ClCompile Include="steammessages.pb.cc" />
-    <ClCompile Include="usermessages.pb.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ai_activity.pb.h" />
-    <ClInclude Include="base_gcmessages.pb.h" />
-    <ClInclude Include="demo.pb.h" />
-    <ClInclude Include="dota_broadcastmessages.pb.h" />
-    <ClInclude Include="dota_clientmessages.pb.h" />
-    <ClInclude Include="dota_commonmessages.pb.h" />
-    <ClInclude Include="dota_gcmessages_client.pb.h" />
-    <ClInclude Include="dota_gcmessages_client_fantasy.pb.h" />
-    <ClInclude Include="dota_gcmessages_common.pb.h" />
-    <ClInclude Include="dota_gcmessages_server.pb.h" />
-    <ClInclude Include="dota_modifiers.pb.h" />
-    <ClInclude Include="dota_usermessages.pb.h" />
-    <ClInclude Include="econ_gcmessages.pb.h" />
-    <ClInclude Include="gcsdk_gcmessages.pb.h" />
-    <ClInclude Include="gcsystemmsgs.pb.h" />
-    <ClInclude Include="netmessages.pb.h" />
-    <ClInclude Include="networkbasetypes.pb.h" />
-    <ClInclude Include="network_connection.pb.h" />
-    <ClInclude Include="steammessages.pb.h" />
-    <ClInclude Include="usermessages.pb.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ai_activity.proto" />
     <None Include="base_gcmessages.proto" />
     <None Include="demo.proto" />
@@ -87,6 +43,47 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="list.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="base_gcmessages.pbsl.cpp" />
+    <ClCompile Include="demo.pbsl.cpp" />
+    <ClCompile Include="dota_broadcastmessages.pbsl.cpp" />
+    <ClCompile Include="dota_clientmessages.pbsl.cpp" />
+    <ClCompile Include="dota_commonmessages.pbsl.cpp" />
+    <ClCompile Include="dota_gcmessages_client.pbsl.cpp" />
+    <ClCompile Include="dota_gcmessages_client_fantasy.pbsl.cpp" />
+    <ClCompile Include="dota_gcmessages_common.pbsl.cpp" />
+    <ClCompile Include="dota_gcmessages_server.pbsl.cpp" />
+    <ClCompile Include="dota_modifiers.pbsl.cpp" />
+    <ClCompile Include="dota_usermessages.pbsl.cpp" />
+    <ClCompile Include="econ_gcmessages.pbsl.cpp" />
+    <ClCompile Include="gcsdk_gcmessages.pbsl.cpp" />
+    <ClCompile Include="netmessages.pbsl.cpp" />
+    <ClCompile Include="networkbasetypes.pbsl.cpp" />
+    <ClCompile Include="steammessages.pbsl.cpp" />
+    <ClCompile Include="usermessages.pbsl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ai_activity.pbsl.h" />
+    <ClInclude Include="base_gcmessages.pbsl.h" />
+    <ClInclude Include="demo.pbsl.h" />
+    <ClInclude Include="dota_broadcastmessages.pbsl.h" />
+    <ClInclude Include="dota_clientmessages.pbsl.h" />
+    <ClInclude Include="dota_commonmessages.pbsl.h" />
+    <ClInclude Include="dota_gcmessages_client.pbsl.h" />
+    <ClInclude Include="dota_gcmessages_client_fantasy.pbsl.h" />
+    <ClInclude Include="dota_gcmessages_common.pbsl.h" />
+    <ClInclude Include="dota_gcmessages_server.pbsl.h" />
+    <ClInclude Include="dota_modifiers.pbsl.h" />
+    <ClInclude Include="dota_usermessages.pbsl.h" />
+    <ClInclude Include="econ_gcmessages.pbsl.h" />
+    <ClInclude Include="gcsdk_gcmessages.pbsl.h" />
+    <ClInclude Include="gcsystemmsgs.pbsl.h" />
+    <ClInclude Include="netmessages.pbsl.h" />
+    <ClInclude Include="networkbasetypes.pbsl.h" />
+    <ClInclude Include="network_connection.pbsl.h" />
+    <ClInclude Include="steammessages.pbsl.h" />
+    <ClInclude Include="usermessages.pbsl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{621ABE5B-0D90-4352-A789-844557209C24}</ProjectGuid>
@@ -139,10 +136,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(OutDir)\$(ProjectName)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
@@ -159,12 +158,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -189,7 +192,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

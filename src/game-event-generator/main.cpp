@@ -2,7 +2,7 @@
 #include <fstream>
 #include <set>
 
-#include "binarystream.h"
+#include "byteview.h"
 #include "demoparser.h"
 #include "gameevent.h"
 
@@ -95,7 +95,16 @@ void getRequiredIncludes(const dota::GameEventDescriptor *event, std::set<std::s
 int main()
 {
    auto file = std::ifstream { "1151921935.dem", std::ifstream::binary };
-   auto in = BinaryStream { file };
+   file.seekg(0, file.end);
+
+   auto size = static_cast<std::size_t>(file.tellg());
+   file.seekg(0, file.beg);
+
+   auto data = std::vector<char> {};
+   data.resize(size);
+   file.read(data.data(), size);
+
+   auto in = ByteView { data.data(), data.size() };
    auto demo = dota::DemoParser { };
    demo.parse(in, dota::ParseProfile::GameEventDescriptors);
 

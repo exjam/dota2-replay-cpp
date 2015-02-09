@@ -2,17 +2,17 @@
 #include <snappy.h>
 #include <sstream>
 
-#include "proto/ai_activity.pb.h"
-#include "proto/demo.pb.h"
-#include "proto/dota_commonmessages.pb.h"
-#include "proto/dota_modifiers.pb.h"
-#include "proto/dota_usermessages.pb.h"
-#include "proto/netmessages.pb.h"
-#include "proto/network_connection.pb.h"
-#include "proto/networkbasetypes.pb.h"
-#include "proto/usermessages.pb.h"
+#include "proto/ai_activity.pbsl.h"
+#include "proto/demo.pbsl.h"
+#include "proto/dota_commonmessages.pbsl.h"
+#include "proto/dota_modifiers.pbsl.h"
+#include "proto/dota_usermessages.pbsl.h"
+#include "proto/netmessages.pbsl.h"
+#include "proto/network_connection.pbsl.h"
+#include "proto/networkbasetypes.pbsl.h"
+#include "proto/usermessages.pbsl.h"
 
-#include "binarystream.h"
+#include "byteview.h"
 #include "bitview.h"
 #include "clientclass.h"
 #include "demoparser.h"
@@ -21,16 +21,14 @@
 namespace dota
 {
 
-bool DemoParser::parseMessage(BinaryStream &in)
-{
-   auto kind = in.readVarInt();
-   auto comp = !!(kind & DEM_IsCompressed);
-   auto tick = in.readVarInt();
-   auto size = in.readVarInt();
-   auto data = in.readArrayView<uint8_t>(size);
+auto decomp = std::vector<char> { };
 
-   // TODO: Reuse the decomp buffer so we don't have to reallocate every time
-   auto decomp = std::vector<uint8_t> { };
+bool DemoParser::parseMessage(ByteView &in)
+{
+   auto kind = in.readVarint32();
+   auto comp = !!(kind & DEM_IsCompressed);
+   auto tick = in.readVarint32();
+   auto size = in.readVarint32();
 
    // Update tick?
    if (tick != mTick && kind != DEM_FileInfo) {
@@ -42,30 +40,29 @@ bool DemoParser::parseMessage(BinaryStream &in)
    kind &= ~DEM_IsCompressed;
 
    // Skip filtered messages
-   if (mParseProfile && !mParseProfile->msg[kind]) {
-      in.skip(size);
-      return true;
+   if (mParseProfile) {
+      if (!mParseProfile->msg[kind]) {
+         in.skip(size);
+         return true;
+      }
    }
 
+   // Read data and decompress with Snappy if needed
+   auto data = in.readStringView(size);
 
-   // Decompress with Snappy if needed
    if (comp) {
-      if (!snappy::GetUncompressedLength(reinterpret_cast<const char*>(data.data()),
-                                         data.size(),
-                                         &size)) {
+      if (!snappy::GetUncompressedLength(data.data(), data.size(), &size)) {
          return false;
       }
 
       decomp.resize(size);
 
-      if (!snappy::RawUncompress(reinterpret_cast<const char*>(data.data()),
-                                 data.size(),
-                                 reinterpret_cast<char*>(decomp.data()))) {
+      if (!snappy::RawUncompress(data.data(), data.size(), decomp.data())) {
          return false;
       }
 
-      // Update our ArrayView to point to decompressed data
-      data = decomp;
+      // Update our string_view to point to decompressed data
+      data = std::string_view { decomp.data(), decomp.size() };
    }
 
    switch (kind) {
@@ -111,18 +108,19 @@ bool DemoParser::parseMessage(BinaryStream &in)
    return true;
 }
 
-bool DemoParser::parseSubMessage(BinaryStream &in)
+bool DemoParser::parseSubMessage(ByteView &in)
 {
    while (!in.eof()) {
-      auto kind = in.readVarInt();
-      auto size = in.readVarInt();
+      auto kind = in.readVarint32();
+      auto size = in.readVarint32();
 
+      // Skip filtered submessages
       if (mParseProfile && !mParseProfile->sub[kind]) {
          in.skip(size);
          continue;
       }
 
-      auto data = in.readArrayView<uint8_t>(size);
+      auto data = in.readStringView(size);
 
       switch (kind) {
       case net_SetConVar:
@@ -162,7 +160,7 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
          decodeMessage<CSVCMsg_GameEventList>(data, &DemoParser::handleGameEventList);
          break;
       case svc_GameEvent:
-         decodeMessage<CSVCMsg_GameEvent>(data, &DemoParser::parseGameEvent);
+         decodeMessage<CSVCMsg_GameEvent>(data, &DemoParser::handleGameEvent);
          break;
       case svc_TempEntities:
          decodeMessage<CSVCMsg_TempEntities>(data, &DemoParser::parseTempEntities);
@@ -198,48 +196,13 @@ bool DemoParser::parseSubMessage(BinaryStream &in)
    return true;
 }
 
-struct static_string_buf : public std::streambuf
-{
-   static_string_buf(const static_string &str)
-   {
-      setg(str.data(), str.data(), str.data() + str.size());
-   }
-};
-
-bool DemoParser::updateInstanceBaseline(EntityClass &entityClass, StringTable::Entry &baseline)
-{
-   auto in = BitView { baseline.userData.data(), baseline.userData.size() };
-   auto propList = EntityPropList {};
-   auto clientClass = entityClass.clientClass;
-   propList.reserve(128);
-
-   if (!clientClass) {
-      // TODO: Slow path, dynamic entity with string map properties
-      assert(false);
-   }
-
-   // Recreate the base instance
-   if (entityClass.baseInstance) {
-      clientClass->destroy(entityClass.baseInstance);
-   }
-
-   entityClass.baseInstance = clientClass->create();
-   parseEntityPropList(in, propList);
-   parseEntityProperties(in, entityClass, entityClass.baseInstance, propList);
-
-   auto pos = in.getBufferPosition();
-   auto length = baseline.userData.size();
-   assert(pos + 1 >= length);
-   return true;
-}
-
 bool DemoParser::addEntityClass(std::size_t id, std::string name, std::string tableName)
 {
    assert(id < mClassList.size());
    auto &entityClass = mClassList[id];
    entityClass.id = id;
-   entityClass.name = name;
-   entityClass.tableName = tableName;
+   entityClass.name = std::move(name);
+   entityClass.tableName = std::move(tableName);
    entityClass.sendTable = findSendTableByName(entityClass.tableName);
    entityClass.clientClass = ClientClassList::get(entityClass.tableName);
    entityClass.clientClassID = entityClass.clientClass ? entityClass.clientClass->classID() : 0;
@@ -249,9 +212,9 @@ bool DemoParser::addEntityClass(std::size_t id, std::string name, std::string ta
 
 bool DemoParser::handleDemoClassInfo(const CDemoClassInfo &msg)
 {
-   for (int i = 0; i < msg.classes_size(); ++i) {
-      auto &cls = msg.classes(i);
-      addEntityClass(cls.class_id(), cls.network_name(), cls.table_name());
+   for (auto i = 0u; i < msg.classes.size(); ++i) {
+      auto &cls = msg.classes[i];
+      addEntityClass(cls.class_id, cls.network_name.to_string(), cls.table_name.to_string());
    }
 
    return true;
@@ -259,9 +222,9 @@ bool DemoParser::handleDemoClassInfo(const CDemoClassInfo &msg)
 
 bool DemoParser::handleClassInfo(const CSVCMsg_ClassInfo &msg)
 {
-   for (int i = 0; i < msg.classes_size(); ++i) {
-      auto &cls = msg.classes(i);
-      addEntityClass(cls.class_id(), cls.class_name(), cls.data_table_name());
+   for (auto i = 0u; i < msg.classes.size(); ++i) {
+      auto &cls = msg.classes[i];
+      addEntityClass(cls.class_id, cls.class_name.to_string(), cls.data_table_name.to_string());
    }
 
    return true;
@@ -269,43 +232,43 @@ bool DemoParser::handleClassInfo(const CSVCMsg_ClassInfo &msg)
 
 bool DemoParser::handleDemoFileInfo(const CDemoFileInfo &info)
 {
-   auto game = info.game_info();
-   auto dota = game.dota();
+   auto &game = info.game_info;
+   auto &dota = game.dota;
 
-   mGameInfo.ticks = info.playback_ticks();
-   mGameInfo.seconds = info.playback_time();
-   mGameInfo.frames = info.playback_frames();
+   mGameInfo.ticks = info.playback_ticks;
+   mGameInfo.seconds = info.playback_time;
+   mGameInfo.frames = info.playback_frames;
 
-   mGameInfo.matchID = dota.match_id();
-   mGameInfo.gameMode = dota.game_mode();
-   mGameInfo.gameWinner = static_cast<TeamID>(dota.game_winner());
-   mGameInfo.leagueID = dota.leagueid();
-   mGameInfo.endTime = dota.end_time();
-   mGameInfo.dire.id = dota.dire_team_id();
-   mGameInfo.dire.tag = dota.dire_team_tag();
-   mGameInfo.radiant.id = dota.radiant_team_id();
-   mGameInfo.radiant.tag = dota.radiant_team_tag();
+   mGameInfo.matchID = dota.match_id;
+   mGameInfo.gameMode = dota.game_mode;
+   mGameInfo.gameWinner = static_cast<TeamID>(dota.game_winner);
+   mGameInfo.leagueID = dota.leagueid;
+   mGameInfo.endTime = dota.end_time;
+   mGameInfo.dire.id = dota.dire_team_id;
+   mGameInfo.dire.tag = dota.dire_team_tag.to_string();
+   mGameInfo.radiant.id = dota.radiant_team_id;
+   mGameInfo.radiant.tag = dota.radiant_team_tag.to_string();
 
    mGameInfo.players.clear();
    mGameInfo.pickBans.clear();
 
-   for (auto i = 0; i < dota.player_info_size(); ++i) {
-      auto &player = dota.player_info(i);
+   for (auto i = 0u; i < dota.player_info.size(); ++i) {
+      auto &player = dota.player_info[i];
       auto playerInfo = GameInfo::Player { };
-      playerInfo.hero = player.hero_name();
-      playerInfo.name = player.player_name();
-      playerInfo.isFakeClient = player.is_fake_client();
-      playerInfo.steamID = player.steamid();
-      playerInfo.team = static_cast<TeamID>(player.game_team());
+      playerInfo.hero = player.hero_name.to_string();
+      playerInfo.name = player.player_name.to_string();
+      playerInfo.isFakeClient = player.is_fake_client;
+      playerInfo.steamID = player.steamid;
+      playerInfo.team = static_cast<TeamID>(player.game_team);
       mGameInfo.players.push_back(playerInfo);
    }
 
-   for (auto i = 0; i < dota.picks_bans_size(); ++i) {
-      auto &pickBan = dota.picks_bans(i);
+   for (auto i = 0u; i < dota.picks_bans.size(); ++i) {
+      auto &pickBan = dota.picks_bans[i];
       auto pickBanInfo = GameInfo::PickBan { };
-      pickBanInfo.hero = pickBan.hero_id();
-      pickBanInfo.team = static_cast<TeamID>(pickBan.team());
-      pickBanInfo.type = static_cast<GameInfo::PickBanType>(pickBan.is_pick());
+      pickBanInfo.hero = pickBan.hero_id;
+      pickBanInfo.team = static_cast<TeamID>(pickBan.team);
+      pickBanInfo.type = static_cast<GameInfo::PickBanType>(pickBan.is_pick);
       mGameInfo.pickBans.push_back(pickBanInfo);
    }
 
@@ -314,25 +277,7 @@ bool DemoParser::handleDemoFileInfo(const CDemoFileInfo &info)
 
 bool DemoParser::handleDemoSyncTick(const CDemoSyncTick &msg)
 {
-   auto &baseline = mStringTables["instancebaseline"];
-   auto updateBaseline = (baseline.lastUpdate == mTick);
-
-   // TODO: Lazy decode
-   for (auto &&entityClass : mClassList) {
-      if (entityClass.sendTable && entityClass.sendTable->needsDecode) {
-         updateEntityClass(entityClass);
-         entityClass.sendTable->needsDecode = false;
-      }
-
-      if (updateBaseline) {
-         auto entry = baseline.findEntry(std::to_string(entityClass.id));
-
-         if (entry) {
-            updateInstanceBaseline(entityClass, *entry);
-         }
-      }
-   }
-
+   // TODO: handleDemoSyncTick
    return true;
 }
 
@@ -350,25 +295,25 @@ bool DemoParser::handleStringCmd(const CNETMsg_StringCmd &msg)
 
 bool DemoParser::handleDemoFileHeader(const CDemoFileHeader &header)
 {
-   mFileHeader.demoFileStamp = header.demo_file_stamp();
-   mFileHeader.networkProtocol = header.network_protocol();
-   mFileHeader.serverName = header.server_name();
-   mFileHeader.clientName = header.client_name();
-   mFileHeader.mapName = header.map_name();
-   mFileHeader.gameDirectory = header.game_directory();
-   mFileHeader.fullpacketsVersion = header.fullpackets_version();
-   mFileHeader.allowClientsideEntities = header.allow_clientside_entities();
-   mFileHeader.allowClientsideParticles = header.allow_clientside_particles();
+   mFileHeader.demoFileStamp = header.demo_file_stamp.to_string();
+   mFileHeader.networkProtocol = header.network_protocol;
+   mFileHeader.serverName = header.server_name.to_string();
+   mFileHeader.clientName = header.client_name.to_string();
+   mFileHeader.mapName = header.map_name.to_string();
+   mFileHeader.gameDirectory = header.game_directory.to_string();
+   mFileHeader.fullpacketsVersion = header.fullpackets_version;
+   mFileHeader.allowClientsideEntities = header.allow_clientside_entities;
+   mFileHeader.allowClientsideParticles = header.allow_clientside_particles;
    return true;
 }
 
 bool DemoParser::handleSetConVar(const CNETMsg_SetConVar &msg)
 {
-   auto &convars = msg.convars();
+   auto &convars = msg.convars;
 
-   for (auto i = 0; i < convars.cvars_size(); ++i) {
-      auto &cvar = convars.cvars(i);
-      mConsoleVars[cvar.name()] = cvar.value();
+   for (auto i = 0u; i < convars.cvars.size(); ++i) {
+      auto &cvar = convars.cvars[i];
+      mConsoleVars[cvar.name.to_string()] = cvar.value.to_string();
    }
 
    return true;
@@ -382,14 +327,14 @@ bool DemoParser::handleTick(const CNETMsg_Tick &msg)
 
 bool DemoParser::handleSignonState(const CNETMsg_SignonState &msg)
 {
-   mSignonState.mapName = msg.map_name();
-   mSignonState.numServerPlayers = msg.num_server_players();
-   mSignonState.spawnCount = msg.spawn_count();
-   mSignonState.state = static_cast<SignonState>(msg.signon_state());
+   mSignonState.mapName = msg.map_name.to_string();
+   mSignonState.numServerPlayers = msg.num_server_players;
+   mSignonState.spawnCount = msg.spawn_count;
+   mSignonState.state = static_cast<SignonState>(msg.signon_state);
    mSignonState.playerNetworkIDs.clear();
 
-   for (auto i = 0; i < msg.players_networkids_size(); ++i) {
-      mSignonState.playerNetworkIDs.push_back(msg.players_networkids(i));
+   for (auto i = 0u; i < msg.players_networkids.size(); ++i) {
+      mSignonState.playerNetworkIDs.push_back(msg.players_networkids[i].to_string());
    }
 
    return true;
@@ -397,27 +342,27 @@ bool DemoParser::handleSignonState(const CNETMsg_SignonState &msg)
 
 bool DemoParser::handleSendTable(const CSVCMsg_SendTable &msg)
 {
-   auto name = msg.net_table_name();
+   auto name = msg.net_table_name.to_string();
    assert(!findSendTableByName(name));
 
    SendTable &table = mSendTables[name];
-   table.name = name;
-   table.needsDecode = msg.needs_decoder();
-   table.properties.resize(msg.props_size());
+   table.name = std::move(name);
+   table.needsDecode = msg.needs_decoder;
+   table.properties.resize(msg.props.size());
 
-   for (int i = 0; i < msg.props_size(); ++i) {
+   for (auto i = 0u; i < msg.props.size(); ++i) {
       auto &sp = table.properties[i];
-      auto &prop = msg.props(i);
+      auto &prop = msg.props[i];
 
-      sp.dtName = prop.dt_name();
-      sp.varName = prop.var_name();
-      sp.priority = prop.priority();
-      sp.numBits = prop.num_bits();
-      sp.numElements = prop.num_elements();
-      sp.lowValue = prop.low_value();
-      sp.highValue = prop.high_value();
-      sp.type = static_cast<PropertyType>(prop.type());
-      sp.flags = static_cast<PropertyFlag>(prop.flags());
+      sp.dtName = prop.dt_name.to_string();
+      sp.varName = prop.var_name.to_string();
+      sp.priority = prop.priority;
+      sp.numBits = prop.num_bits;
+      sp.numElements = prop.num_elements;
+      sp.lowValue = prop.low_value;
+      sp.highValue = prop.high_value;
+      sp.type = static_cast<PropertyType>(prop.type);
+      sp.flags = static_cast<PropertyFlag>(prop.flags);
 
       if (sp.isArray()) {
          assert(i > 0);
@@ -432,88 +377,84 @@ bool DemoParser::handleSendTable(const CSVCMsg_SendTable &msg)
 
 bool DemoParser::handleCreateStringTable(const CSVCMsg_CreateStringTable &msg)
 {
-   auto name = msg.name();
+   auto name = msg.name.to_string();
    assert(!findStringTableByName(name));
 
    auto &table = mStringTables[name];
    table.id = mStringTables.size() - 1;
-   table.name = name;
-   table.maxEntries = msg.max_entries();
-   table.userDataFixedSize = msg.user_data_fixed_size();
-   table.userDataSize = msg.user_data_size();
-   table.userDataSizeBits = msg.user_data_size_bits();
-   table.flags = msg.flags();
+   table.name = std::move(name);
+   table.maxEntries = msg.max_entries;
+   table.userDataFixedSize = msg.user_data_fixed_size;
+   table.userDataSize = msg.user_data_size;
+   table.userDataSizeBits = msg.user_data_size_bits;
+   table.flags = msg.flags;
    table.entries.resize(table.maxEntries);
 
-   auto &stringData = msg.string_data();
-   auto in = BitView { stringData.data(), stringData.size() };
-   auto result = parseStringTable(table, in, msg.num_entries());
-   assert(in.getBufferPosition() == stringData.size());
+   auto in = BitView { msg.string_data.data(), msg.string_data.size() };
+   auto result = parseStringTable(table, in, msg.num_entries);
+   assert(in.eof());
    return result;
 }
 
 bool DemoParser::handleUpdateStringTable(const CSVCMsg_UpdateStringTable &msg)
 {
-   auto id = msg.table_id();
+   auto id = msg.table_id;
    auto stringTable = findStringTableByID(id);
    assert(stringTable);
 
-   auto &stringData = msg.string_data();
-   auto in = BitView { stringData.data(), stringData.size() };
-   auto result = parseStringTable(*stringTable, in, msg.num_changed_entries());
-   assert(in.getBufferPosition() == stringData.size());
+   auto in = BitView { msg.string_data.data(), msg.string_data.size() };
+   auto result = parseStringTable(*stringTable, in, msg.num_changed_entries);
+   assert(in.eof());
    return result;
 }
 
 bool DemoParser::handleServerInfo(const CSVCMsg_ServerInfo &info)
 {
-   mServerInfo.protocol = info.protocol();
-   mServerInfo.serverCount = info.server_count();
-   mServerInfo.isDedicated = info.is_dedicated();
-   mServerInfo.isHLTV = info.is_hltv();
-   mServerInfo.isReplay = info.is_replay();
-   mServerInfo.operatingSystem = static_cast<OperatingSystemType>(info.c_os());
-   mServerInfo.crc.map = info.map_crc();
-   mServerInfo.crc.client = info.client_crc();
-   mServerInfo.crc.stringTable = info.string_table_crc();
-   mServerInfo.maxClients = info.max_clients();
-   mServerInfo.maxClasses = info.max_classes();
-   mServerInfo.playerSlot = info.player_slot();
-   mServerInfo.tickInterval = info.tick_interval();
-   mServerInfo.gameDir = info.game_dir();
-   mServerInfo.mapName = info.map_name();
-   mServerInfo.skyName = info.sky_name();
-   mServerInfo.hostName = info.host_name();
-   mServerInfo.addonName = info.addon_name();
-
+   mServerInfo.protocol = info.protocol;
+   mServerInfo.serverCount = info.server_count;
+   mServerInfo.isDedicated = info.is_dedicated;
+   mServerInfo.isHLTV = info.is_hltv;
+   mServerInfo.isReplay = info.is_replay;
+   mServerInfo.operatingSystem = static_cast<OperatingSystemType>(info.c_os);
+   mServerInfo.crc.map = info.map_crc;
+   mServerInfo.crc.client = info.client_crc;
+   mServerInfo.crc.stringTable = info.string_table_crc;
+   mServerInfo.maxClients = info.max_clients;
+   mServerInfo.maxClasses = info.max_classes;
+   mServerInfo.playerSlot = info.player_slot;
+   mServerInfo.tickInterval = info.tick_interval;
+   mServerInfo.gameDir = info.game_dir.to_string();
+   mServerInfo.mapName = info.map_name.to_string();
+   mServerInfo.skyName = info.sky_name.to_string();
+   mServerInfo.hostName = info.host_name.to_string();
+   mServerInfo.addonName = info.addon_name.to_string();
    mClassList.resize(mServerInfo.maxClasses);
-
    return true;
+}
+
+bool DemoParser::handleDemoSendTables(const CDemoSendTables &msg)
+{
+   ByteView bv { msg.data.data(), msg.data.size() };
+   return parseSubMessage(bv);
 }
 
 bool DemoParser::handleDemoPacket(const CDemoPacket &msg)
 {
-   auto binary = BinaryStream { msg.data().data(), msg.data().size() };
-   return parseSubMessage(binary);
+   ByteView bv { msg.data.data(), msg.data.size() };
+   return parseSubMessage(bv);
 }
 
 bool DemoParser::handleDemoFullPacket(const CDemoFullPacket &msg)
 {
    bool success = true;
-   success &= handleDemoPacket(msg.packet());
+   success &= handleDemoPacket(msg.packet);
 
    if (mParseProfile && !mParseProfile->msg[DEM_StringTables]) {
       return success;
    }
 
-   success &= handleDemoStringTables(msg.string_table());
+   success &= handleDemoStringTables(msg.string_table);
    return success;
-}
-
-bool DemoParser::handleDemoSendTables(const CDemoSendTables &msg)
-{
-   auto binary = BinaryStream { msg.data().data(), msg.data().size() };
-   return parseSubMessage(binary);
 }
 
 }
