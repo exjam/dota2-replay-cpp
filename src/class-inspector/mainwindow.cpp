@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <QFileDialog>
 #include <QMap>
@@ -9,7 +9,7 @@
 #include "classtreeitem.h"
 #include "propertytreeitem.h"
 
-#include "binarystream.h"
+#include "byteview.h"
 #include "demoparser.h"
 #include "parseprofile.h"
 
@@ -40,10 +40,21 @@ void MainWindow::onOpen()
       return;
    }
 
+   file.seekg(0, file.end);
+
+   auto size = static_cast<std::size_t>(file.tellg());
+   file.seekg(0, file.beg);
+
+   auto data = std::vector<char> {};
+   data.resize(size);
+   file.read(data.data(), size);
+
+   auto in = ByteView { data.data(), data.size() };
+
    delete mDemoParser;
    mDemoParser = new dota::DemoParser();
 
-   if (!mDemoParser->parse(BinaryStream { file }, dota::ParseProfile::SendTables)) {
+   if (!mDemoParser->parse(in, dota::ParseProfile::SendTables)) {
       QMessageBox::warning(this, "Error", "Error parsing replay file");
       delete mDemoParser;
       mDemoParser = nullptr;
