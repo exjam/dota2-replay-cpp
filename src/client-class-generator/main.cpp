@@ -14,8 +14,8 @@
 // We build without libdotaevent and libdotaentity, so define empty maps
 namespace dota
 {
-   std::map<std::string, const GameEventBase*> GameEventList::mGameEventMap = {};
-   std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = {};
+std::map<std::string, const ClientEventBase*> ClientEventList::mEventMap = {};
+std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = {};
 };
 
 // I am lazy

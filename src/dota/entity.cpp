@@ -30,6 +30,12 @@ EntityClass::~EntityClass()
    }
 }
 
+ClientClassID ClientClassList::GetUniqueID()
+{
+   static ClientClassID classID = 0;
+   return ++classID;
+}
+
 std::string EntityClass::getBaseClass() const
 {
    if (sendTable) {
@@ -101,9 +107,9 @@ void DemoParser::onEntityEnter(Entity &entity)
 
 void DemoParser::onEntityDelete(Entity &entity)
 {
-   mTickData.deleteEntity.push_back(std::make_pair(entity.id, entity.serial));
+   mTickData.deleteEntity.push_back(entity.handle);
 
-   auto id = entity.id;
+   auto id = entity.handle.id;
    assert(id < mEntities.size());
    entity.~Entity();
    mEntities[id] = Entity { };
@@ -175,12 +181,12 @@ bool DemoParser::parsePacketEntities(const CSVCMsg_PacketEntities &msg)
             entityClass.sendTable->needsDecode = false;
          }
 
-         if (entity.pvs != EntityPVS::Delete && entity.serial != serial) {
+         if (entity.pvs != EntityPVS::Delete && entity.handle.serial != serial) {
             onEntityDelete(entity);
          }
 
-         entity.id = index;
-         entity.serial = serial;
+         entity.handle.id = index;
+         entity.handle.serial = serial;
          entity.classInfo = &entityClass;
          entity.pvs = EntityPVS::Enter;
 

@@ -28,7 +28,7 @@ bool DemoParser::parseMessage(ByteView &in)
    auto kind = in.readVarint32();
    auto comp = !!(kind & DEM_IsCompressed);
    auto tick = in.readVarint32();
-   auto size = in.readVarint32();
+   auto size = static_cast<size_t>(in.readVarint32());
 
    // Update tick?
    if (tick != mTick && kind != DEM_FileInfo) {

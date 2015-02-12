@@ -6,6 +6,7 @@
 #include <cassert>
 #include "types.h"
 
+// Simple string with a static sized buffer
 template<std::size_t Size>
 class fixed_string
 {
@@ -58,6 +59,7 @@ private:
    char mData[Size];
 };
 
+// Simple string owning a dynamically created buffer
 class static_string
 {
 public:

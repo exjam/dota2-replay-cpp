@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "gameevent.h"
+#include "event.h"
 
 namespace dota
 {

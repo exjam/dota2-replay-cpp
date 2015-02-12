@@ -220,7 +220,7 @@ struct ClientClass<Type[N]>
    static const auto InstancePtr = 0;
 };
 
-// Useful for getting elements from a dynamic runtime i dunno wtf is array type
+// Useful for getting elements from an array of unknown type at runtime
 struct ElementGetter
 {
    virtual std::ptrdiff_t getElementPtr(std::ptrdiff_t container, std::size_t elem) const = 0;

@@ -27,8 +27,8 @@ struct ParseProfile
    static const ParseProfile *StringTables;
    static const ParseProfile *Entities;
    static const ParseProfile *TempEntities;
-   static const ParseProfile *GameEvents;
-   static const ParseProfile *GameEventDescriptors;
+   static const ParseProfile *Events;
+   static const ParseProfile *EventDescriptors;
    static const ParseProfile *UserMessages;
    static const ParseProfile *FullReplay;
 };

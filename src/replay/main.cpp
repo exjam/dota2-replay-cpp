@@ -4,6 +4,7 @@
 
 #include "entity/CDOTA_PlayerResource.h"
 #include "entity/CDOTAGamerulesProxy.h"
+#include "event/dota_courier_lost.h"
 
 #include "byteview.h"
 #include "demoparser.h"
@@ -36,7 +37,7 @@ public:
       mDemo.parse(in, dota::ParseProfile::FullReplay);
    }
 
-   void onDemoTick(dota::Tick tick, dota::TickData &data)
+   void onDemoTick(dota::Tick tick, const dota::TickData &data)
    {
       for (auto &&enterEntity : data.enterEntity) {
          onEntityEnter(enterEntity);
@@ -46,16 +47,16 @@ public:
          onEntityDelete(deleteEntity);
       }
 
-      for (auto &&gameEvent : data.gameEvents) {
-         onGameEvent(gameEvent.first->id, gameEvent.second);
+      for (auto &&event : data.events) {
+         onGameEvent(&event);
       }
 
-      if (mGameRules && mGameRules->dota_gamerules_data.m_flGameStartTime > 0.0f) {
+      if (mPlayerResource && mGameRules && mGameRules->dota_gamerules_data.m_flGameStartTime > 0.0f) {
          auto dt = mGameRules->dota_gamerules_data.m_fGameTime - mGameRules->dota_gamerules_data.m_flGameStartTime;
          auto time = std::chrono::seconds(static_cast<long long>(dt));
 
          if (time != mInGameTime) {
-            if (mPlayerResource) {
+            if ((time.count() % 5) == 0) {
                for (auto i = 0u; i < mPlayerSamples.size(); ++i) {
                   SampleData &sample = mPlayerSamples[i];
                   sample.lastHits.push_back(mPlayerResource->m_iLastHitCount[i]);
@@ -70,24 +71,34 @@ public:
       mTick = tick;
    }
 
-   void onGameEvent(dota::GameEventID type, const dota::GameEvent *event)
+   void onGameEvent(const dota::Event *event)
    {
+      if (dota::is_a<dota::event::dota_courier_lost>(event)) {
+         auto courierLost = dota::make_event_ptr<dota::event::dota_courier_lost>(event);
+         std::cout << "Courier Lost: " << courierLost->teamnumber << std::endl;
+      }
    }
 
    void onEntityEnter(const dota::Entity *entity)
    {
-      if (entity->classInfo->clientClassID == dota::ClientClass<dota::CDOTA_PlayerResource>::ClassID) {
-         mPlayerResource = reinterpret_cast<dota::CDOTA_PlayerResource*>(entity->clientEntity);
+      if (dota::is_a<dota::CDOTA_PlayerResource>(entity)) {
+         mPlayerResource = dota::make_entity_ptr<dota::CDOTA_PlayerResource>(entity);
       }
 
-      if (entity->classInfo->clientClassID == dota::ClientClass<dota::CDOTAGamerulesProxy>::ClassID) {
-         mGameRules = reinterpret_cast<dota::CDOTAGamerulesProxy*>(entity->clientEntity);
+      if (dota::is_a<dota::CDOTAGamerulesProxy>(entity)) {
+         mGameRules = dota::make_entity_ptr<dota::CDOTAGamerulesProxy>(entity);
       }
    }
 
    void onEntityDelete(const dota::EntityHandle &handle)
    {
-      // Remove mPlayerResource and mGameRules when matches handle
+      if (mPlayerResource == handle) {
+         mPlayerResource = nullptr;
+      }
+
+      if (mGameRules == handle) {
+         mGameRules = nullptr;
+      }
    }
 
 private:
@@ -101,8 +112,8 @@ private:
    std::chrono::seconds mInGameTime;
    dota::Tick mTick;
    dota::DemoParser mDemo;
-   dota::CDOTA_PlayerResource *mPlayerResource = nullptr;
-   dota::CDOTAGamerulesProxy *mGameRules = nullptr;
+   dota::entity_ptr<dota::CDOTA_PlayerResource> mPlayerResource;
+   dota::entity_ptr<dota::CDOTAGamerulesProxy> mGameRules;
 };
 
 int main()

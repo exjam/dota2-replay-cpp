@@ -15,16 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clientclass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="demoparser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gameevent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="messages.cpp">
@@ -45,6 +39,9 @@
     <ClCompile Include="usermessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clientclass.h">
@@ -54,9 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameevent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parseprofile.h">
@@ -78,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vector3f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clientevent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

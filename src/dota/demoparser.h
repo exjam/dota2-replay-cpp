@@ -5,7 +5,7 @@
 #include <string_view.h>
 
 #include "entity.h"
-#include "gameevent.h"
+#include "event.h"
 #include "parseprofile.h"
 #include "property.h"
 #include "sendtable.h"
@@ -248,17 +248,17 @@ struct SignonStateInfo
 
 struct TickData
 {
-   std::vector<std::pair<GameEventDescriptor *, GameEvent *>> gameEvents;
    std::vector<Entity *> enterEntity;
    std::vector<EntityHandle> deleteEntity;
+   std::vector<Event> events;
 };
 
 using SendTableMap = std::map<std::string, SendTable>;
 using EntityPropList = std::vector<std::size_t>;
 using ClassList = std::vector<EntityClass>;
-using GameEventDescriptorList = std::vector<GameEventDescriptor>;
+using EventDescriptorList = std::vector<EventDescriptor>;
 
-using TickEventListener = std::function<void(Tick,TickData&)>;
+using TickEventListener = std::function<void(Tick, const TickData&)>;
 
 class DemoParser
 {
@@ -270,7 +270,7 @@ public:
    const FileHeader &fileHeader() const;
    const SignonStateInfo &signonState() const;
    const ClassList &classList() const;
-   const GameEventDescriptorList &gameEventDescriptors() const;
+   const EventDescriptorList &eventDescriptors() const;
 
    StringTable *findStringTableByID(int id);
    StringTable *findStringTableByName(const std::string &name);
@@ -419,7 +419,7 @@ protected:
 
    std::array<Entity, 2048> mEntities;
 
-   GameEventDescriptorList mGameEventDescriptors;
+   EventDescriptorList mEventDescriptors;
    std::map<std::string, std::string> mConsoleVars;
 
    struct {

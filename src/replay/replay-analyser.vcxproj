@@ -93,13 +93,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;$(OutDir)\libprotobuf.lib;$(OutDir)\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -112,12 +112,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;$(OutDir)\libprotobuf.lib;$(OutDir)\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -139,7 +139,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;$(OutDir)\libprotobuf.lib;$(OutDir)\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
@@ -152,7 +152,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dota;$(SolutionDir)\src\util;$(SolutionDir)\lib\string_view;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -162,7 +162,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;$(OutDir)\libprotobuf.lib;$(OutDir)\libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(OutDir)\libdota.lib;$(OutDir)\libdotaevent.lib;$(OutDir)\libdotaentity.lib;$(OutDir)\libdotaprotobuf.lib;$(OutDir)\libutil.lib;$(OutDir)\snappy.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>

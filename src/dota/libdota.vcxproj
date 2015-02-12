@@ -19,10 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clientclass.cpp" />
     <ClCompile Include="demoparser.cpp" />
     <ClCompile Include="entity.cpp" />
-    <ClCompile Include="gameevent.cpp" />
+    <ClCompile Include="event.cpp" />
     <ClCompile Include="messages.cpp" />
     <ClCompile Include="parseprofile.cpp" />
     <ClCompile Include="property.cpp" />
@@ -32,9 +31,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clientclass.h" />
+    <ClInclude Include="clientevent.h" />
     <ClInclude Include="demoparser.h" />
     <ClInclude Include="entity.h" />
-    <ClInclude Include="gameevent.h" />
+    <ClInclude Include="event.h" />
     <ClInclude Include="parseprofile.h" />
     <ClInclude Include="property.h" />
     <ClInclude Include="sendtable.h" />
@@ -114,7 +114,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\snappy;$(SolutionDir)\src\util;$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\snappy;$(SolutionDir)\lib;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
@@ -132,7 +132,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib;$(SolutionDir)\lib\protobuf\src;$(SolutionDir)\lib\snappy;$(SolutionDir)\src\util;$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\snappy;$(SolutionDir)\lib;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,7 +148,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\snappy;$(SolutionDir)\src\util;$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\snappy;$(SolutionDir)\lib;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,7 +166,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\lib;$(SolutionDir)\lib\protobuf\src;$(SolutionDir)\lib\snappy;$(SolutionDir)\src\util;$(SolutionDir)\src\dota;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\protobufsuperlite;$(SolutionDir)\lib\string_view;$(SolutionDir)\lib\snappy;$(SolutionDir)\lib;$(SolutionDir)\src\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

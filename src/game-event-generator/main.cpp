@@ -4,12 +4,12 @@
 
 #include "byteview.h"
 #include "demoparser.h"
-#include "gameevent.h"
+#include "event.h"
 
 // We build without libdotaevent and libdotaentity, so define empty maps
 namespace dota
 {
-std::map<std::string, const GameEventBase*> GameEventList::mGameEventMap = { };
+std::map<std::string, const ClientEventBase*> ClientEventList::mEventMap = {};
 std::map<std::string, const ClientClassBase*> ClientClassList::mClassMap = { };
 };
 
@@ -23,7 +23,7 @@ std::string getSafeVarName(std::string name)
    return name;
 }
 
-void dumpDeclaration(std::ostream &out, const dota::GameEventDescriptor *event)
+void dumpDeclaration(std::ostream &out, const dota::EventDescriptor *event)
 {
    out << "struct " << event->name << std::endl;
    out << "{" << std::endl;
@@ -31,26 +31,26 @@ void dumpDeclaration(std::ostream &out, const dota::GameEventDescriptor *event)
    for (auto &&prop : event->properties) {
       out << "   ";
 
-      switch (static_cast<dota::GameEventType>(prop.type)) {
-      case dota::GameEventType::String:
+      switch (static_cast<dota::EventPropertyType>(prop.type)) {
+      case dota::EventPropertyType::String:
          out << "std::string ";
          break;
-      case dota::GameEventType::Float:
+      case dota::EventPropertyType::Float:
          out << "float ";
          break;
-      case dota::GameEventType::Long:
+      case dota::EventPropertyType::Long:
          out << "int32_t ";
          break;
-      case dota::GameEventType::Short:
+      case dota::EventPropertyType::Short:
          out << "int16_t ";
          break;
-      case dota::GameEventType::Byte:
+      case dota::EventPropertyType::Byte:
          out << "uint8_t ";
          break;
-      case dota::GameEventType::Bool:
+      case dota::EventPropertyType::Bool:
          out << "bool ";
          break;
-      case dota::GameEventType::Uint64:
+      case dota::EventPropertyType::Uint64:
          out << "uint64_t ";
          break;
       }
@@ -62,7 +62,7 @@ void dumpDeclaration(std::ostream &out, const dota::GameEventDescriptor *event)
    out << std::endl;
 }
 
-void dumpDefinition(std::ostream &out, const dota::GameEventDescriptor *event)
+void dumpDefinition(std::ostream &out, const dota::EventDescriptor *event)
 {
    out << "BeginGameEvent(" << event->name << ");" << std::endl;
 
@@ -74,17 +74,17 @@ void dumpDefinition(std::ostream &out, const dota::GameEventDescriptor *event)
    out << "EndGameEvent();" << std::endl;
 }
 
-void getRequiredIncludes(const dota::GameEventDescriptor *event, std::set<std::string> &headers)
+void getRequiredIncludes(const dota::EventDescriptor *event, std::set<std::string> &headers)
 {
    for (auto &&prop : event->properties) {
-      switch (static_cast<dota::GameEventType>(prop.type)) {
-      case dota::GameEventType::String:
+      switch (static_cast<dota::EventPropertyType>(prop.type)) {
+      case dota::EventPropertyType::String:
          headers.insert("<string>");
          break;
-      case dota::GameEventType::Long:
-      case dota::GameEventType::Short:
-      case dota::GameEventType::Byte:
-      case dota::GameEventType::Uint64:
+      case dota::EventPropertyType::Long:
+      case dota::EventPropertyType::Short:
+      case dota::EventPropertyType::Byte:
+      case dota::EventPropertyType::Uint64:
          headers.insert("<cstdint>");
          break;
       }
@@ -106,10 +106,10 @@ int main()
 
    auto in = ByteView { data.data(), data.size() };
    auto demo = dota::DemoParser { };
-   demo.parse(in, dota::ParseProfile::GameEventDescriptors);
+   demo.parse(in, dota::ParseProfile::EventDescriptors);
 
-   auto &eventList = demo.gameEventDescriptors();
-   std::map<std::string, const dota::GameEventDescriptor*> events;
+   auto &eventList = demo.eventDescriptors();
+   std::map<std::string, const dota::EventDescriptor*> events;
 
    for (auto &&event : eventList) {
       if (!event.name.size()) {
@@ -133,7 +133,7 @@ int main()
          header << "#include " << include << std::endl;
       }
 
-      header << "#include \"gameevent.h\"" << std::endl;
+      header << "#include \"event.h\"" << std::endl;
 
       header << std::endl;
       header << "namespace dota" << std::endl;
@@ -169,12 +169,12 @@ int main()
       source << std::endl;
    }
 
-   source << "std::map<std::string, const GameEventBase*> GameEventList::mGameEventMap = {" << std::endl;
+   source << "std::map<std::string, const ClientEventBase*> ClientEventList::mEventMap = {" << std::endl;
 
    for (auto &&evpair : events) {
       source << "   { "
              << "\"" << evpair.first << "\", "
-             << "GameEventClass<event::" << evpair.first << ">::InstancePtr"
+             << "ClientEventClass<event::" << evpair.first << ">::InstancePtr"
              << " },"
              << std::endl;
    }

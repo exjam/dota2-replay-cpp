@@ -1,5 +1,5 @@
 #pragma once
-#include "gameevent.h"
+#include "event.h"
 
 namespace dota
 {

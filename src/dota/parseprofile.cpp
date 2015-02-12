@@ -38,19 +38,19 @@ const ParseProfile *ParseProfile::TempEntities = new ParseProfile
    { ParseProfile::SendTables, ParseProfile::StringTables }
 };
 
-const ParseProfile *ParseProfile::GameEventDescriptors = new ParseProfile
+const ParseProfile *ParseProfile::EventDescriptors = new ParseProfile
 {
    { },
    { svc_GameEventList },
    { }
 };
 
-const ParseProfile *ParseProfile::GameEvents = new ParseProfile
+const ParseProfile *ParseProfile::Events = new ParseProfile
 {
    { },
    { svc_GameEvent },
    { },
-   { ParseProfile::GameEventDescriptors }
+   { ParseProfile::EventDescriptors }
 };
 
 const ParseProfile *ParseProfile::UserMessages = new ParseProfile
@@ -66,7 +66,7 @@ const ParseProfile *ParseProfile::FullReplay = new ParseProfile
    { },
    { },
    { },
-   { ParseProfile::UserMessages, ParseProfile::GameEvents, ParseProfile::Entities, ParseProfile::TempEntities }
+   { ParseProfile::UserMessages, ParseProfile::Events, ParseProfile::Entities, ParseProfile::TempEntities }
 };
 
 ParseProfile::ParseProfile()

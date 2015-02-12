@@ -37,14 +37,18 @@ void DemoParser::onTick(Tick tick)
       mEventListeners.onTick(tick, mTickData);
    }
 
-   // Clean up any data acquired this tick
-   for (auto &&evpair : mTickData.gameEvents) {
-      evpair.first->gameEventClass->destroy(evpair.second);
-   }
-
-   mTickData.gameEvents.clear();
+   // Clean up any tick data
    mTickData.enterEntity.clear();
    mTickData.deleteEntity.clear();
+
+   // Destroy the dynamically allocated clientEvents
+   for (auto &event : mTickData.events) {
+      if (event.classInfo && event.classInfo->clientEventClass && event.clientEvent) {
+         event.classInfo->clientEventClass->destroy(event.clientEvent);
+      }
+   }
+
+   mTickData.events.clear();
 }
 
 void DemoParser::setOnTickEventListener(TickEventListener listener)
@@ -77,9 +81,9 @@ const ClassList &DemoParser::classList() const
    return mClassList;
 }
 
-const GameEventDescriptorList &DemoParser::gameEventDescriptors() const
+const EventDescriptorList &DemoParser::eventDescriptors() const
 {
-   return mGameEventDescriptors;
+   return mEventDescriptors;
 }
 
 StringTable *DemoParser::findStringTableByName(const std::string &name)

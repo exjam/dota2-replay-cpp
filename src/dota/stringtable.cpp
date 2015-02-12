@@ -29,7 +29,6 @@ bool DemoParser::handleDemoStringTables(const CDemoStringTables &stringTables)
          }
 
          // Set values
-         // TODO: pbsl change to std::string_view
          entry.strData = item.str;
          entry.userData = item.data;
 
